@@ -1,0 +1,20 @@
+<RCC>
+  <qresource prefix="icons">
+    <file>goTo_goTo.png</file>
+    <file>back_back.png</file>
+    <file>next_next.png</file>
+    <file>bruel4231.png</file>
+    <file>test.png</file>
+    <file>slm_icon.png</file>
+    <file>searchInstruments.png</file>
+    <file>certificate.png</file>
+    <file>open.png</file>
+    <file>save.png</file>
+    <file>play.png</file>
+    <file>pause.png</file>
+    <file>stop.png</file>
+    <file>back.png</file>
+    <file>next.png</file>
+    <file>goTo.png</file>
+  </qresource>
+</RCC>
