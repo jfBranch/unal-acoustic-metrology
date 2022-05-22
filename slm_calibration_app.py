@@ -2250,6 +2250,18 @@ class VideoObject(QtCore.QObject):
 class VideoSaving(QtCore.QObject):
     """
     This is a class used as worker for saving a video in a parallel thread.
+
+    Attributes
+    -----------
+    frames: list
+        The list of the acquired video frames.
+    video_writer: cv.VideoWriter
+        The OpenCV video writer object
+
+    Methods
+    -------
+    save_video()
+        Method for saving the video frames in the hard disk.
     """
     videoSaved = QtCore.pyqtSignal(bool)
 
@@ -2268,23 +2280,60 @@ class VideoSaving(QtCore.QObject):
 
 
 class ImageProcessingThread(QtCore.QThread):
-    real_time_values = QtCore.pyqtSignal(float)
+    """
+    This thread is intended to be used for process and recognize the frames acquired for some calibration point. Then,
+    it constructs the stochastic model based on Markov chains. Finally, it estimates the measurement result as the
+    expected value.
+
+    Attributes
+    ----------
+    realTimeValues: pyqtSignal
+        This signals shares the measurement value computed.
+    _frames_queue: Queue
+        This queue temporally stores the acquired videos, one video for each calibration point. This queue
+        is intended to be used to secure the processing flow.
+    _TESTER: ac.SLMPeriodicTester
+        This is the model used for the periodic calibration of sound level meters.
+    fps: int
+        Frames per second of the camera object
+    _stage: int
+        The current stage of the calibration
+    _current_f: int
+        The current frequency under calibration
+    _fweightings: list
+        This is a list of strings representing the three frequency weightings: A, C and Z.
+    _octave_frequencies: list
+        This is a list of ints representing the nominal central frequency of octave bands.
+
+    Methods
+    _______
+    run()
+        This method executes the parallel processing and recognizing of the video frames. Also constructs the
+        stochastic model.
+    """
+    realTimeValues = QtCore.pyqtSignal(float)
 
     def __init__(self, frames_queue: Queue, tester: ac.SLMPeriodicTester, camera: VideoObject):
         super(ImageProcessingThread, self).__init__()
         self._frames_queue = frames_queue
         self._TESTER = tester
-        self.fps = camera.fps
         self._stage = 0
         self._current_f = 0
         self._fweightings = [*'ACZ']
         self._octave_frequencies = np.array([63, 125, 250, 500, 1e3, 2e3, 4e3, 8e3, 16e3])
+        self.fps = camera.fps
 
     def run(self) -> None:
+        """
+        This method executes the parallel processing and recognizing of the video frames using the model's methods.
+        This method also constructs the stochastic model based on Markov chains from the samples obtained of a
+        downsampled sequence of images corresponding to the "real" samples of the sound level meter screen.
+        :return: None
+        """
         self._stage = self._TESTER.stage
         while self._stage < 8:
-            if not self._frames_queue.empty():
-                logging.info(f'\n-----\nFrequency {int(self._octave_frequencies[self._current_f])} Hz process begins')
+            if not self._frames_queue.empty():  # If there is any video in the queue
+                logging.info(f'\n-----\nFrequency {int(self._octave_frequencies[self._current_f])} Hz process begins.')
                 frames = self._frames_queue.get()
                 frames = np.array([cv.cvtColor(frame, cv.COLOR_BGR2GRAY) for frame in frames])
                 # Recognize first the frames taken while the stabilization time. This is for identifying the frame zero

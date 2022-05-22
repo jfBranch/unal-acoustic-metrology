@@ -1408,10 +1408,10 @@ class StandardsSearcher(QtCore.QObject):
 
     def __init__(self, DMM_model: str, AA_model: str, resources: tuple, resource_manager: ac.visa.ResourceManager):
         super().__init__()
+        self._resource_manager = resource_manager
         self.DMM_model = DMM_model
         self.AA_model = AA_model
         self.resources = resources
-        self._resource_manager = resource_manager
         self.data = {'DMM': {'Brand': '',
                              'S/N': '',
                              'GPIB bus': '',
@@ -1472,7 +1472,7 @@ class SelfTester(QtCore.QObject):
         self._DMM = DMM
         self._AA = AA
 
-    def self_test(self):
+    def self_test(self) -> None:
         dmm_pass = self._DMM.query('*TST?')  # Run self-test on multimeter
         dmm_pass = not bool(int(dmm_pass))
         self.progress.emit(50)

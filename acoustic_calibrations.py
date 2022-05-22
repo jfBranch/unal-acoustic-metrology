@@ -839,6 +839,100 @@ class SLMPeriodicTester(QObject):
 
     Attributes
     ----------
+    measurementProgress: pyqtSignal
+        Signal for updating the measurement progress in function of every stage.
+    calibrationProgress: pyqtSignal
+        Signal for updating the measurement progress in function of every stage.
+    realTimeValues: pyqtSignal
+        Real time values reporting signal.
+    timerStarted: pyqtSignal
+        Signal for indicating the state of a timer related to the frames acquiring.
+    __ldaModel: LinearDiscriminantAnalysis
+        Model for computing LDA for dimensionality reduction of the features vector.
+    __kpcaModel: KernelPCA
+        Model for computing KPCA for dimensionality reduction of the features vector.
+    __gnbClassifier: GaussianNB
+        Gaussian naive Bayes classifier
+    __weightingFactors: pd.DataFrame
+        Data frame with the nominal correction values established on the IEC 61672-1
+        for the three frequency weightings: A, C and Z.
+    _resource_manager: visa.ResourceManager
+        This is the resource manager for current VISA session, with all the available controllable instruments.
+    _AFG: pyvisa.GPIBInstrument
+        This is a GPIBInstrument object that points to the arbitrary function generator and enables the controlling.
+        This also contains the basic information and third part calibration results for traceability.
+    _DMM: pyvisa.GPIBInstrument
+        This is a GPIBInstrument object that points to the digital multimeter generator and enables the controlling.
+        This also contains the basic information and third part calibration results for traceability.
+    _calibration_consecutive: str
+        A string representing the consecutive assigned to the sonometer and its accessories.
+    _dut: SoundLevelMeter
+        This is the SoundLevelMeter object that represents the customer's sonometer that will be under test.
+    _customer_info: dict
+        A dictionary containing all the customer information required for the calibration certificate.
+    _ambient_conditions_values: list
+        A list containing DataFrames with the results values of measured quantities on the
+        standard acoustic calibrator on every level available.
+    _camera: cv.VideoCapture
+        This was the object used for the deprecated method detect_result().
+    _result_box: tuple
+        A tuple of the four coordinates (x1, y1, x2, y2) corresponding to the upper left and lower right corner of
+        the rectangle around the level indicated on the sonometer screen.
+    _calibration_stage: int
+        The current stage of the calibration (see algorithm 4.1.)
+    _calibration_state: int
+        The current state of the calibration process on the current level.
+        This takes the values 0: stopped, 1: running, 2: paused.
+    _power_supply_results: np.array
+        An array with the four measurement values for the stage 0 (power supply verification), according to IEC 61672-3.
+    fweighting_results: dict
+        A dictionary for storing the samples, transition matrices, and measurement values for the stages 5, 6, and 7
+        (frequency weightings with electric signals) according to IEC 61672-3.
+    current_frequency: int
+        Integer that stores the current frequency under calibration for the frequency weighting test.
+    freqtime_1kHz_results: dict
+        A dictionary for storing the samples, transition matrices, and measurement values for the stages 8 and 9
+        (frequency and time weightings at 1 kHz) according to IEC 61672-3.
+    ref_linearity_results: dict
+        A dictionary for storing the samples, transition matrices, and measurement values for the stage 10
+        (linearity in the reference range of levels) according to IEC 61672-3.
+    elect_stab_time: float
+        The stabilization time of the sonometer for the tests with electrical signals.
+
+    Methods
+    -------
+    train()
+        This method read, process and extracts features vectors from a set of training images for the classifier.
+        Then, this fits the Gaussian classifier.
+    run_main_sequence()
+        Method that executes the corresponding process or actions to the current step of the algorithm 4.1.
+        This is the principal method launched in the parallel thread and that emits a signal of calibration progress.
+    check_state()
+        Method for entering a loop while the calibration state is paused. This method is called from other methods
+        when is pertinent suspend the main sequence.
+    set_dut()
+        Method for storing the customer's SoundLevelMeter object.
+    set_customer_info()
+        Method for storing the customer's information.
+    set_consecutive()
+        Method for storing the consecutive assigned to the current calibration and to the DUT.
+    set_standards()
+        Method for storing the standards information and creating the respective GPIBInstruments objects.
+    detect_result()
+        Deprecated method used to detect automatically the result_box applying some electrical signals and detecting the
+        changes on the screen.
+    test_power_supply()
+        This method checks the power supply of the sound level meter measuring DC voltage with the multimeter.
+    test_electrical_fweightings()
+        Method for performing the electrical frequency weightings tests with electrical signals, according to the
+        IEC 61672-3:2013 Art. 13.
+    set_state()
+        Method for setting the current state of the calibration. Maybe 0: stopped, 1:running, 2: paused.
+    read_screen()
+        Method for processing and classifying a given image of the level displayed on the sonometer screen.
+    level2volt()
+        This method returns the voltage value corresponding to the required level in function
+        of the voltage that produces an indication of the reference level.
     """
     measurementProgress = pyqtSignal(int)  # Signal for updating the measurement progress in function of every stage
     calibrationProgress = pyqtSignal(int)  # Signal for updating the general calibration progress
@@ -855,16 +949,16 @@ class SLMPeriodicTester(QObject):
                                       index=np.array([63, 125, 250, 500, 1e3, 2e3, 4e3, 8e3, 16e3], dtype=float),
                                       columns=['A', 'C', 'Z'])
 
-    __slots__ = ['_resource_manager', '_AFG', '_calibration_consecutive', '_dut', '_customer_info',
+    __slots__ = ['_resource_manager', '_AFG', '_DMM', '_calibration_consecutive', '_dut', '_customer_info',
                  '_ambient_conditions_values', '_camera', '_result_box', '_calibration_stage', '_calibration_state',
-                 '_power_supply_results', 'fweighting_results', 'current_frequency']
+                 '_power_supply_results', 'fweighting_results', 'current_frequency', 'elect_stab_time']
 
     def __init__(self):
         super().__init__()
-        self._calibration_consecutive = ''
         self._resource_manager = visa.ResourceManager()  # Open resource manager for VISA Instruments
         self._AFG = object()
         self._DMM = object()
+        self._calibration_consecutive = ''
         self._dut = object()
         self._customer_info = {}
         # self._camera = cv.VideoCapture(0, cv.CAP_MSMF)
@@ -1024,52 +1118,52 @@ class SLMPeriodicTester(QObject):
         for config in dmm_config:
             self._DMM.write(config)
 
-    def detect_result(self):
-        """
-        This method sends some electrical signals to detect automatically the
-        changes in the screen of the sound level meter.
-        :return:
-        """
-        test_levels = np.array([63.3, 134.2, 70.2, 124.9])
-        resolution = (int(self._camera.get(cv.CAP_PROP_FRAME_WIDTH)), int(self._camera.get(cv.CAP_PROP_FRAME_HEIGHT)))
-        screen0 = np.zeros(resolution)
-        sizes = []
-        for test_level, i in zip(test_levels, range(test_levels.shape[0])):
-            self._AFG.write(f':APPL:SIN 1000,{self.level2volt(test_level, self._ref_lev)}')  # Send signal
-            sleep(3.5)  # Stabilization time
-            if i == 0:
-                screen0 = self._camera.read()[1]
-                screen0 = cv.GaussianBlur(cv.cvtColor(screen0, cv.COLOR_BGR2GRAY), ksize=(0, 0), sigmaX=3)
-            else:
-                screen1 = self._camera.read()[1]
-                screen1 = cv.GaussianBlur(cv.cvtColor(screen1, cv.COLOR_BGR2GRAY), ksize=(0, 0), sigmaX=3)
-                (score, diff) = compare_ssim(screen0, screen1, full=True)  # Detect differences
-                diff = (diff * 255).astype("uint8")
-                thresh = cv.threshold(diff, 0, 255, cv.THRESH_BINARY_INV | cv.THRESH_OTSU)[1]
-                plt.imshow(thresh, cmap='gray')
-                plt.show()
-                thresh = cv.morphologyEx(thresh, cv.MORPH_CLOSE,  # Closing morphology operation
-                                         cv.getStructuringElement(cv.MORPH_CROSS, (7, 7)), iterations=5)
-                thresh = cv.dilate(thresh, cv.getStructuringElement(cv.MORPH_CROSS, (7, 7)), iterations=3)  # Dilation
-                plt.imshow(thresh, cmap='gray')
-                plt.show()
-                # Find de possibles bounding rectangles of the results
-                cnts = cv.findContours(thresh.copy(), cv.RETR_EXTERNAL, cv.CHAIN_APPROX_SIMPLE)
-                cnts = imutils.grab_contours(cnts)
-                for c in cnts:
-                    (x, y, w, h) = cv.boundingRect(c)
-                    sizes.append([x, y, w, h])
-                screen0 = screen1
-
-        sizes = np.array(sizes)
-        areas = np.multiply(sizes[:, 2], sizes[:, 3])
-        max_area_idx = np.argmax(areas)  # The rectangle with maximum area
-        self._AFG.write('OUTP OFF')
-        self._result_box = tuple(np.add(sizes[max_area_idx], np.array([-5, -5, 5, 5])))
+    # def detect_result(self):
+    #     """
+    #     This method sends some electrical signals to detect automatically the
+    #     changes in the screen of the sound level meter.
+    #     :return:
+    #     """
+    #     test_levels = np.array([63.3, 134.2, 70.2, 124.9])
+    #     resolution = (int(self._camera.get(cv.CAP_PROP_FRAME_WIDTH)), int(self._camera.get(cv.CAP_PROP_FRAME_HEIGHT)))
+    #     screen0 = np.zeros(resolution)
+    #     sizes = []
+    #     for test_level, i in zip(test_levels, range(test_levels.shape[0])):
+    #         self._AFG.write(f':APPL:SIN 1000,{self.level2volt(test_level, self._ref_lev)}')  # Send signal
+    #         sleep(3.5)  # Stabilization time
+    #         if i == 0:
+    #             screen0 = self._camera.read()[1]
+    #             screen0 = cv.GaussianBlur(cv.cvtColor(screen0, cv.COLOR_BGR2GRAY), ksize=(0, 0), sigmaX=3)
+    #         else:
+    #             screen1 = self._camera.read()[1]
+    #             screen1 = cv.GaussianBlur(cv.cvtColor(screen1, cv.COLOR_BGR2GRAY), ksize=(0, 0), sigmaX=3)
+    #             (score, diff) = compare_ssim(screen0, screen1, full=True)  # Detect differences
+    #             diff = (diff * 255).astype("uint8")
+    #             thresh = cv.threshold(diff, 0, 255, cv.THRESH_BINARY_INV | cv.THRESH_OTSU)[1]
+    #             plt.imshow(thresh, cmap='gray')
+    #             plt.show()
+    #             thresh = cv.morphologyEx(thresh, cv.MORPH_CLOSE,  # Closing morphology operation
+    #                                      cv.getStructuringElement(cv.MORPH_CROSS, (7, 7)), iterations=5)
+    #             thresh = cv.dilate(thresh, cv.getStructuringElement(cv.MORPH_CROSS, (7, 7)), iterations=3)  # Dilation
+    #             plt.imshow(thresh, cmap='gray')
+    #             plt.show()
+    #             # Find de possibles bounding rectangles of the results
+    #             cnts = cv.findContours(thresh.copy(), cv.RETR_EXTERNAL, cv.CHAIN_APPROX_SIMPLE)
+    #             cnts = imutils.grab_contours(cnts)
+    #             for c in cnts:
+    #                 (x, y, w, h) = cv.boundingRect(c)
+    #                 sizes.append([x, y, w, h])
+    #             screen0 = screen1
+    #
+    #     sizes = np.array(sizes)
+    #     areas = np.multiply(sizes[:, 2], sizes[:, 3])
+    #     max_area_idx = np.argmax(areas)  # The rectangle with maximum area
+    #     self._AFG.write('OUTP OFF')
+    #     self._result_box = tuple(np.add(sizes[max_area_idx], np.array([-5, -5, 5, 5])))
 
     def test_power_supply(self):
         """
-        This method checks the power supply of the sound level meter measuring DC voltage with the multimter.
+        This method checks the power supply of the sound level meter measuring DC voltage with the multimeter.
         :return: None
         """
         measurement_progress = 0
@@ -1097,7 +1191,17 @@ class SLMPeriodicTester(QObject):
         self._dut.set_power_supply_values(self._power_supply_results)
         self.measurementProgress.emit(0)
 
-    def test_electrical_fweightings(self, weighting: str):
+    def test_electrical_fweightings(self, weighting: str) -> None:
+        """
+        Method for performing the electrical frequency weightings tests with electrical signals, according to the
+        IEC 61672-3:2013 Art. 13. The weightings checked can be A, C and Z, at the nominal middle frequencies of octave
+        bands.
+        For that purpose, this method starts a timer, sets sine signals of certain amplitude depending on the frequency
+        and weighting, and, after about 25 seconds, finishes the timer. While timer is running, the video frames are
+        acquired and stored.
+        :param weighting: Frequency weighting that will be tested.
+        :return: None
+        """
         measurement_progress = 0
         measuring_time = 25  # Time for capturing video frames (including stabilization time
         total_steps = measuring_time * 10 * self.__weightingFactors.shape[0]
@@ -1151,10 +1255,9 @@ class SLMPeriodicTester(QObject):
 
     def read_screen(self, img: np.ndarray) -> float:
         """
-        This method captures instantaneous images with camera, then crops the results area,
-        segments each digit with threshold Otsu, extracts a features vector based on SIFT
+        This method segments each digit with threshold Otsu, extracts a features vector based on SIFT
         descriptor, reduces the dimensionality by KPCA, and finally classify the samples
-        with a Gaussian naive Bayes classifier
+        with a Gaussian naive Bayes classifier.
         :param img: The matrix representation of the image in uint8 format (OpenCV).
         :return: The results obtained as a float number.
         """
@@ -1202,6 +1305,7 @@ class SLMPeriodicTester(QObject):
         try:
             return float(result)
         except:
+            # For debugging purposes only, here, the wrong recognized frames are stored on disk.
             logging.info(f'Recognized value: {result}')
             self.wrong_frames.append(roi)
             with open('CalibrationResults/ElectricalFrequencyWeightings/wrong_frames.pkl', 'wb') as file:
