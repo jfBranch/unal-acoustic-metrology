@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1320</width>
-    <height>700</height>
+    <height>701</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -61,7 +61,30 @@
       </property>
      </widget>
     </item>
-    <item row="7" column="0" colspan="2">
+    <item row="8" column="0" colspan="2">
+     <widget class="Line" name="line">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="1">
+     <widget class="QLabel" name="videoLabel">
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>VÍDEO</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+    </item>
+    <item row="9" column="0" colspan="2">
      <layout class="QGridLayout" name="gridStatusLayout">
       <item row="1" column="1">
        <widget class="QLabel" name="testLabel">
@@ -175,43 +198,7 @@
       </item>
      </layout>
     </item>
-    <item row="3" column="1">
-     <widget class="QPushButton" name="streamingButton">
-      <property name="font">
-       <font>
-        <weight>75</weight>
-        <bold>true</bold>
-       </font>
-      </property>
-      <property name="text">
-       <string>Iniciar streaming</string>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="1">
-     <widget class="QLabel" name="videoLabel">
-      <property name="font">
-       <font>
-        <weight>75</weight>
-        <bold>true</bold>
-       </font>
-      </property>
-      <property name="text">
-       <string>VÍDEO</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignCenter</set>
-      </property>
-     </widget>
-    </item>
-    <item row="6" column="0" colspan="2">
-     <widget class="Line" name="line">
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="0" rowspan="4">
+    <item row="0" column="0" rowspan="6">
      <widget class="QTabWidget" name="parentTabWidget">
       <property name="minimumSize">
        <size>
@@ -628,6 +615,16 @@
            <item row="2" column="1">
             <widget class="QLineEdit" name="preampSerialLineEdit"/>
            </item>
+           <item row="3" column="0">
+            <widget class="QLabel" name="extCableLabel">
+             <property name="text">
+              <string>Cable de extensión:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="1">
+            <widget class="QCheckBox" name="extCableCheckBox"/>
+           </item>
           </layout>
          </widget>
         </item>
@@ -950,6 +947,37 @@
            </item>
            <item row="2" column="1">
             <widget class="QLineEdit" name="micSerialNumberLineEdit"/>
+           </item>
+           <item row="3" column="0">
+            <widget class="QLabel" name="micRefDirectionLabel">
+             <property name="text">
+              <string>Dirección de referencia:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="1">
+            <widget class="QComboBox" name="micRefDirectionComboBox">
+             <item>
+              <property name="text">
+               <string>0°</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>90°</string>
+              </property>
+             </item>
+            </widget>
+           </item>
+           <item row="4" column="0">
+            <widget class="QLabel" name="micWindscreenLabel">
+             <property name="text">
+              <string>Pantalla antiviento:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="1">
+            <widget class="QCheckBox" name="micWindscreenCheckBox"/>
            </item>
           </layout>
          </widget>
@@ -2120,6 +2148,58 @@
       </widget>
      </widget>
     </item>
+    <item row="4" column="1">
+     <widget class="QListWidget" name="loggingListWidget">
+      <property name="maximumSize">
+       <size>
+        <width>380</width>
+        <height>50</height>
+       </size>
+      </property>
+      <property name="font">
+       <font>
+        <family>JetBrains Mono</family>
+        <pointsize>7</pointsize>
+       </font>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Sunken</enum>
+      </property>
+      <property name="selectionMode">
+       <enum>QAbstractItemView::SingleSelection</enum>
+      </property>
+      <item>
+       <property name="text">
+        <string>— Historial de mensajes —</string>
+       </property>
+       <property name="foreground">
+        <brush brushstyle="SolidPattern">
+         <color alpha="255">
+          <red>255</red>
+          <green>0</green>
+          <blue>0</blue>
+         </color>
+        </brush>
+       </property>
+      </item>
+     </widget>
+    </item>
+    <item row="3" column="1">
+     <widget class="QPushButton" name="streamingButton">
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>Iniciar streaming</string>
+      </property>
+     </widget>
+    </item>
    </layout>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -2332,7 +2412,6 @@
   <tabstop>decadeBoxSerialNumberLineEdit</tabstop>
   <tabstop>decadeBoxIdentificationLineEdit</tabstop>
   <tabstop>saveStandardsInfo</tabstop>
-  <tabstop>streamingButton</tabstop>
   <tabstop>videoView</tabstop>
   <tabstop>nextTestToolButton</tabstop>
   <tabstop>previousTestToolButton</tabstop>

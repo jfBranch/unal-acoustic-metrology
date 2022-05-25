@@ -847,6 +847,8 @@ class SLMPeriodicTester(QObject):
         Real time values reporting signal.
     timerStarted: pyqtSignal
         Signal for indicating the state of a timer related to the frames acquiring.
+    loggingMsg: pyqtSignal
+        Signal for transmitting a logging message.
     __ldaModel: LinearDiscriminantAnalysis
         Model for computing LDA for dimensionality reduction of the features vector.
     __kpcaModel: KernelPCA
@@ -938,6 +940,7 @@ class SLMPeriodicTester(QObject):
     calibrationProgress = pyqtSignal(int)  # Signal for updating the general calibration progress
     realTimeValues = pyqtSignal(tuple)  # Real time values reporting signal
     timerStarted = pyqtSignal(bool)  # Signal for indicating the state of a timer related to the frames acquiring
+    loggingMsg = pyqtSignal(tuple)  # Signal for transmitting a logging message.
 
     __ldaModel = LinearDiscriminantAnalysis(n_components=10)  # «class attribute» LDA for dimensionality reduction
     __kpcaModel = KernelPCA(n_components=16)  # «class attribute» KPCA for dimensionality reduction
@@ -1033,17 +1036,24 @@ class SLMPeriodicTester(QObject):
             # This is called on the start stage, indication at the calibration check frequency and reference voltage.
             if self._calibration_stage == 0:  # Except in stage 0, when the classifier is trained
                 self.train()
+                self.loggingMsg.emit((0, 'Finaliza entrenamiento del clasificador bayesiano.'))
             self._calibration_stage += 1
             self.calibrationProgress.emit(self._calibration_stage)
         elif any([self._calibration_stage == stage for stage in [1, 3, 11]]):
             # Power supply checks
+            self.loggingMsg.emit((1, "Inicia verificación de la fuente de alimentación."))
             self.test_power_supply()
+            self.loggingMsg.emit((0, "Termina verificación de la fuente de alimentación."))
             self._calibration_stage += 1
             self.calibrationProgress.emit(self._calibration_stage)
         elif any([self._calibration_stage == stage for stage in range(5, 8)]):
             # Electrical signal tests of frequency weightings
             W = [*'ACZ']
+            msg = f"Inicia la prueba de ponderación frecuencial {W[self._calibration_stage - 5]}"
+            self.loggingMsg.emit((1, msg + " con señales eléctricas."))
             self.test_electrical_fweightings(W[self._calibration_stage - 5])
+            msg = f"Finaliza la prueba de ponderación frecuencial {W[self._calibration_stage - 5]}"
+            self.loggingMsg.emit((0, msg + " con señales eléctricas."))
             self._calibration_stage += 1
             self.calibrationProgress.emit(self._calibration_stage)
 
@@ -1103,19 +1113,23 @@ class SLMPeriodicTester(QObject):
         """
         self._AFG = self._resource_manager.open_resource(
             'GPIB' + AFG['GPIB bus'] + '::' + AFG['GPIB channel'] + '::INSTR')
+        self.loggingMsg.emit((0, "Generador de señales conectado."))
         self._AFG.info = AFG
         self._DMM = self._resource_manager.open_resource(
             'GPIB' + DMM['GPIB bus'] + '::' + DMM['GPIB channel'] + '::INSTR')
+        self.loggingMsg.emit((0, "Multímetro conectado."))
         self._DMM.info = DMM
 
         # --- STANDARDS BASIC CONFIGURATIONS ---
         afg_config = [':VOLT:UNIT VRMS', ':OUTP:LOAD INF', 'OUTP OFF']
         for config in afg_config:
+            self.loggingMsg.emit((0, f"Comando SCPI enviado vía GPIB: '{config}'."))
             self._AFG.write(config)
         dmm_config = [':CONFigure:VOLTage:DC 100', ':SENSe:VOLTage:DC:NPLCycles 10', ':SAMPle:COUNt 30',
                       ':DISPlay:VIEW NUMeric', ':CALCulate:AVERage:STATe 1', ':CALCulate:CLEar:IMMediate',
                       ':TRIGger:SOURce BUS', ':TRIGger:DELay:AUTO 1']
         for config in dmm_config:
+            self.loggingMsg.emit((0, f"Comando SCPI enviado vía GPIB: '{config}'."))
             self._DMM.write(config)
 
     # def detect_result(self):
@@ -1172,6 +1186,7 @@ class SLMPeriodicTester(QObject):
         total_steps = len(dmm_config) + wait_time * 10  # Total steps for updating progress.
         for config in dmm_config:
             self.check_state()
+            self.loggingMsg.emit((0, f"Comando SCPI enviado vía GPIB: '{config}'."))
             self._DMM.write(config)
             measurement_progress += 1 / total_steps * 100
             self.measurementProgress.emit(int(measurement_progress))
@@ -1180,7 +1195,9 @@ class SLMPeriodicTester(QObject):
             sleep(1 / 10)  # Updates progress every tenth of a second
             measurement_progress += 1 / total_steps * 100
             self.measurementProgress.emit(int(measurement_progress))
-        power_supply_voltage = self._DMM.query(':CALCulate:AVERage:AVERage?')
+        cmd = ':CALCulate:AVERage:AVERage?'
+        self.loggingMsg.emit((0, f"Comando SCPI enviado vía GPIB: '{cmd}'."))
+        power_supply_voltage = self._DMM.query(cmd)
         if self._calibration_stage == 1:
             self._power_supply_results[0, 0] = power_supply_voltage
         elif self._calibration_stage == 3:
@@ -1222,7 +1239,7 @@ class SLMPeriodicTester(QObject):
                 measurement_progress += 1 / total_steps * 100
                 self.measurementProgress.emit(int(measurement_progress))
                 if not afg_flag and total_time >= 0.3:
-                    logging.info(f':APPL:SIN {f},{v}')
+                    self.loggingMsg.emit((0, f"Comando SCPI enviado vía GPIB: ':APPL:SIN {f},{v}'."))
                     self._AFG.write(f':APPL:SIN {f},{v}')  # Send test signal of frequency and voltage required
                     afg_flag = True
 
@@ -1241,6 +1258,7 @@ class SLMPeriodicTester(QObject):
             #         afg_flag = True
 
             self.timerStarted.emit(False)
+            self.loggingMsg.emit((0, f"Comando SCPI enviado vía GPIB: 'OUTP 0'."))
             self._AFG.write('OUTP 0')
             sleep(1)
         self.measurementProgress.emit(0)
@@ -1306,7 +1324,7 @@ class SLMPeriodicTester(QObject):
             return float(result)
         except:
             # For debugging purposes only, here, the wrong recognized frames are stored on disk.
-            logging.info(f'Recognized value: {result}')
+            self.loggingMsg.emit((2, f'Error en reconocimiento, valor detectado: {result} dB.'))
             self.wrong_frames.append(roi)
             with open('CalibrationResults/ElectricalFrequencyWeightings/wrong_frames.pkl', 'wb') as file:
                 pickle.dump(self.wrong_frames, file)

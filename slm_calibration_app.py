@@ -11,16 +11,16 @@ import acoustic_calibrations as ac
 from queue import Queue
 from PyQt5 import QtCore, QtGui, QtWidgets
 from time import sleep
+from datetime import datetime
 
 myappid = 'unal.acuscal.sonometers.1.0'
 ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(myappid)
 
 __autor__ = 'Juan Felipe Maldonado'
 __version__ = '1.0 Beta'
-logging.basicConfig(
-    format='%(asctime)s.%(msecs)03d   %(message)s',
-    level=logging.INFO,
-    datefmt='%H:%M:%S')
+logging.basicConfig(format='%(asctime)s.%(msecs)03d   %(message)s',
+                    level=logging.INFO,
+                    datefmt='%H:%M:%S')
 mutex = QtCore.QMutex()
 
 
@@ -50,6 +50,7 @@ class SonometersCalibrationUI(QtWidgets.QMainWindow):
         self.generalProgressBar = QtWidgets.QProgressBar(self.centralWidget)
         self.streamingButton = QtWidgets.QPushButton(self.centralWidget)
         self.videoLabel = QtWidgets.QLabel(self.centralWidget)
+        self.loggingListWidget = QtWidgets.QListWidget(self.centralWidget)
         self.line = QtWidgets.QFrame(self.centralWidget)
         self.parentTabWidget = QtWidgets.QTabWidget(self.centralWidget)
         self.standardsTab = QtWidgets.QWidget()
@@ -107,6 +108,8 @@ class SonometersCalibrationUI(QtWidgets.QMainWindow):
         self.preampModelLineEdit = QtWidgets.QLineEdit(self.preampGroupBox)
         self.preampSerialLabel = QtWidgets.QLabel(self.preampGroupBox)
         self.preampSerialLineEdit = QtWidgets.QLineEdit(self.preampGroupBox)
+        self.extCableLabel = QtWidgets.QLabel(self.preampGroupBox)
+        self.extCableCheckBox = QtWidgets.QCheckBox(self.preampGroupBox)
         self.customerGroupBox = QtWidgets.QGroupBox(self.infoTab)
         self.customerFormLayout = QtWidgets.QFormLayout(self.customerGroupBox)
         self.customerNameLabel = QtWidgets.QLabel(self.customerGroupBox)
@@ -161,6 +164,10 @@ class SonometersCalibrationUI(QtWidgets.QMainWindow):
         self.micModelLineEdit = QtWidgets.QLineEdit(self.micGroupBox)
         self.micSerialNumberLabel = QtWidgets.QLabel(self.micGroupBox)
         self.micSerialNumberLineEdit = QtWidgets.QLineEdit(self.micGroupBox)
+        self.micRefDirectionLabel = QtWidgets.QLabel(self.micGroupBox)
+        self.micRefDirectionComboBox = QtWidgets.QComboBox(self.micGroupBox)
+        self.micWindscreenLabel = QtWidgets.QLabel(self.micGroupBox)
+        self.micWindscreenCheckBox = QtWidgets.QCheckBox(self.micGroupBox)
         self.preTestsTab = QtWidgets.QWidget()
         self.preTestVLayout = QtWidgets.QVBoxLayout(self.preTestsTab)
         self.supplyLabel = QtWidgets.QLabel(self.preTestsTab)
@@ -360,6 +367,13 @@ class SonometersCalibrationUI(QtWidgets.QMainWindow):
         self.videoLabel.setAlignment(QtCore.Qt.AlignCenter)
         self.videoLabel.setObjectName("videoLabel")
         self.gridCentralLayout.addWidget(self.videoLabel, 1, 1, 1, 1)
+        self.loggingListWidget.setMaximumSize(QtCore.QSize(380, 50))
+        font = QtGui.QFont()
+        font.setFamily("JetBrains Mono")
+        font.setPointSize(7)
+        self.loggingListWidget.setFont(font)
+        self.loggingListWidget.addItem(QtWidgets.QListWidgetItem())
+        self.gridCentralLayout.addWidget(self.loggingListWidget, 4, 1, 1, 1)
         self.line.setFrameShape(QtWidgets.QFrame.HLine)
         self.line.setFrameShadow(QtWidgets.QFrame.Sunken)
         self.line.setObjectName("line")
@@ -509,6 +523,10 @@ class SonometersCalibrationUI(QtWidgets.QMainWindow):
         self.preampSerialLineEdit.setObjectName("preampSerialLineEdit")
         self.preampFormLayout.setWidget(2, QtWidgets.QFormLayout.FieldRole, self.preampSerialLineEdit)
         self.preampSerialLineEdit.setAlignment(QtCore.Qt.AlignCenter)
+        self.extCableLabel.setObjectName("extCablelabel")
+        self.preampFormLayout.setWidget(4, QtWidgets.QFormLayout.LabelRole, self.extCableLabel)
+        self.extCableCheckBox.setObjectName("extCableCheckBox")
+        self.preampFormLayout.setWidget(4, QtWidgets.QFormLayout.FieldRole, self.extCableCheckBox)
         self.infoGridLayout.addWidget(self.preampGroupBox, 1, 1, 1, 1)
         self.customerGroupBox.setObjectName("customerGroupBox")
         self.customerFormLayout.setObjectName("customerFormLayout")
@@ -638,6 +656,16 @@ class SonometersCalibrationUI(QtWidgets.QMainWindow):
         self.micSerialNumberLineEdit.setObjectName("micSerialNumberLineEdit")
         self.micFormLayout.setWidget(2, QtWidgets.QFormLayout.FieldRole, self.micSerialNumberLineEdit)
         self.micSerialNumberLineEdit.setAlignment(QtCore.Qt.AlignCenter)
+        self.micRefDirectionLabel.setObjectName("micRefDirectionLabel")
+        self.micFormLayout.setWidget(3, QtWidgets.QFormLayout.LabelRole, self.micRefDirectionLabel)
+        self.micRefDirectionComboBox.setObjectName("micRefDirectionComboBox")
+        self.micRefDirectionComboBox.addItem("")
+        self.micRefDirectionComboBox.addItem("")
+        self.micFormLayout.setWidget(3, QtWidgets.QFormLayout.FieldRole, self.micRefDirectionComboBox)
+        self.micWindscreenLabel.setObjectName("micWindscreenLabel")
+        self.micFormLayout.setWidget(4, QtWidgets.QFormLayout.LabelRole, self.micWindscreenLabel)
+        self.micWindscreenCheckBox.setObjectName("micWindscreenCheckBox")
+        self.micFormLayout.setWidget(4, QtWidgets.QFormLayout.FieldRole, self.micWindscreenCheckBox)
         self.infoGridLayout.addWidget(self.micGroupBox, 2, 1, 2, 1)
         self.parentTabWidget.addTab(self.infoTab, "")
         self.preTestsTab.setObjectName("preTestsTab")
@@ -1143,7 +1171,7 @@ class SonometersCalibrationUI(QtWidgets.QMainWindow):
         self.ambientTableView.setObjectName("ambientTableView")
         self.ambientGridLayout.addWidget(self.ambientTableView, 0, 0, 1, 1)
         self.parentTabWidget.addTab(self.ambientConditionsTab, "")
-        self.gridCentralLayout.addWidget(self.parentTabWidget, 0, 0, 4, 1)
+        self.gridCentralLayout.addWidget(self.parentTabWidget, 0, 0, 6, 1)
         self.setCentralWidget(self.centralWidget)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 1320, 21))
         self.menubar.setObjectName("menubar")
@@ -1291,7 +1319,8 @@ class SonometersCalibrationUI(QtWidgets.QMainWindow):
         self.setTabOrder(self.multimeterSelfTestCheckBox, self.saveStandardsInfo)
         self.setTabOrder(self.saveStandardsInfo, self.streamingButton)
         self.setTabOrder(self.streamingButton, self.videoView)
-        self.setTabOrder(self.videoView, self.nextTestToolButton)
+        self.setTabOrder(self.videoView, self.loggingListWidget)
+        self.setTabOrder(self.loggingListWidget, self.nextTestToolButton)
         self.setTabOrder(self.nextTestToolButton, self.previousTestToolButton)
         self.setTabOrder(self.previousTestToolButton, self.parentTabWidget)
         self.setTabOrder(self.parentTabWidget, self.consecutiveLineEdit)
@@ -1312,10 +1341,13 @@ class SonometersCalibrationUI(QtWidgets.QMainWindow):
         self.setTabOrder(self.loadFreeFieldPushButton, self.preampBrandLineEdit)
         self.setTabOrder(self.preampBrandLineEdit, self.preampModelLineEdit)
         self.setTabOrder(self.preampModelLineEdit, self.preampSerialLineEdit)
-        self.setTabOrder(self.preampSerialLineEdit, self.micBrandLineEdit)
+        self.setTabOrder(self.preampSerialLineEdit, self.extCableCheckBox)
+        self.setTabOrder(self.extCableCheckBox, self.micBrandLineEdit)
         self.setTabOrder(self.micBrandLineEdit, self.micModelLineEdit)
         self.setTabOrder(self.micModelLineEdit, self.micSerialNumberLineEdit)
-        self.setTabOrder(self.micSerialNumberLineEdit, self.customerNameLineEdit)
+        self.setTabOrder(self.micSerialNumberLineEdit, self.micRefDirectionComboBox)
+        self.setTabOrder(self.micRefDirectionComboBox, self.micWindscreenCheckBox)
+        self.setTabOrder(self.micWindscreenCheckBox, self.customerNameLineEdit)
         self.setTabOrder(self.customerNameLineEdit, self.addressLineEdit)
         self.setTabOrder(self.addressLineEdit, self.cityLineEdit)
         self.setTabOrder(self.cityLineEdit, self.countryLineEdit)
@@ -1348,6 +1380,8 @@ class SonometersCalibrationUI(QtWidgets.QMainWindow):
         self.generalProgressLabel.setText(_translate("MainWindow", "Progreso general"))
         self.streamingButton.setText(_translate("MainWindow", "Iniciar streaming"))
         self.videoLabel.setText(_translate("MainWindow", "VÍDEO"))
+        item = self.loggingListWidget.item(0)
+        item.setText(_translate("MainWindow", "— Historial de mensajes —"))
         self.decadeBoxGroupBox.setTitle(_translate("MainWindow", "ATENUADOR PROGRAMABLE"))
         self.decadeBoxBrandLabel.setText(_translate("MainWindow", "Marca:"))
         self.decadeBoxBrandLineEdit.setText(_translate("MainWindow", "ACOEM"))
@@ -1388,6 +1422,7 @@ class SonometersCalibrationUI(QtWidgets.QMainWindow):
         self.preampBrandLabel.setText(_translate("MainWindow", "Marca:"))
         self.preampModelLabel.setText(_translate("MainWindow", "Modelo:"))
         self.preampSerialLabel.setText(_translate("MainWindow", "Número de serie:"))
+        self.extCableLabel.setText(_translate("MainWindow", "Cable de extensión:"))
         self.customerGroupBox.setTitle(_translate("MainWindow", "CLIENTE"))
         self.customerNameLabel.setText(_translate("MainWindow", "Nombre:"))
         self.addressLabel.setText(_translate("MainWindow", "Dirección:"))
@@ -1419,6 +1454,10 @@ class SonometersCalibrationUI(QtWidgets.QMainWindow):
         self.micBrandLabel.setText(_translate("MainWindow", "Marca:"))
         self.micModelLabel.setText(_translate("MainWindow", "Modelo:"))
         self.micSerialNumberLabel.setText(_translate("MainWindow", "Número de serie:"))
+        self.micRefDirectionLabel.setText(_translate("MainWindow", "Dirección de referencia:"))
+        self.micRefDirectionComboBox.setItemText(0, _translate("MainWindow", "0°"))
+        self.micRefDirectionComboBox.setItemText(1, _translate("MainWindow", "90°"))
+        self.micWindscreenLabel.setText(_translate("MainWindow", "Pantalla antiviento:"))
         self.parentTabWidget.setTabText(self.parentTabWidget.indexOf(self.infoTab),
                                         _translate("MainWindow", "Información IBC"))
         self.supplyLabel.setText(_translate("MainWindow", "FUENTE DE ALIMENTACIÓN"))
@@ -1503,8 +1542,9 @@ class GUIController(object):
     __01dBFusionInfo = {'Brand': '01dB', 'Model': 'FUSION', 'S/N': '11428', 'ID': '12345', 'Class': '1',
                         'Power Supply Limits': ('8', '28'), 'Reference Level': '94', 'Lu 1 kHz': '138',
                         'Range 8 kHz': ('23', '138'), 'Linearity Start Point': '94', 'Screen Rate': '100'}
-    __mic40CEInfo = {'Brand': 'GRAS', 'Model': '40CE', 'S/N': '34567154'}
-    __pre22Info = {'Brand': '01dB', 'Model': 'PRE22', 'S/N': '11811'}
+    __mic40CEInfo = {'Brand': 'GRAS', 'Model': '40CE', 'S/N': '34567154',
+                     'Reference Direction': 0, "Windscreen": 2}
+    __pre22Info = {'Brand': '01dB', 'Model': 'PRE22', 'S/N': '11811', 'Extension Cable': 2}
     __K2Customer = {'Name': 'K2 Ingeniería SAS', 'Address': 'Carrera 22A # 85A - 36', 'City': 'Bogotá',
                     'Country': 'Colombia', 'Postal Code': '111811', 'Contact': '601594354'}
 
@@ -1571,6 +1611,7 @@ class GUIController(object):
         self._TESTER.calibrationProgress.connect(self.calibrationThread.quit)
 
         self._TESTER.timerStarted.connect(self.capture_frames)
+        self._TESTER.loggingMsg.connect(self.print_logging_msg)
         # self._TESTER.realTimeValues.connect(self.update_real_time_values)
 
         # Connect signals of the camera worker and thread
@@ -1578,6 +1619,7 @@ class GUIController(object):
         self.cameraThread.started.connect(self.cameraWorker.run)
         self.cameraWorker.frameCaptured.connect(self.stream_frame)
         self.cameraWorker.cameraReleased.connect(self.cameraThread.quit)
+        self.cameraWorker.loggingMsg.connect(self.print_logging_msg)
         # self.cameraThread.finished.connect(self.cameraThread.deleteLater)
         # self.cameraWorker.cameraReleased.connect(self.cameraWorker.deleteLater)
 
@@ -1603,15 +1645,34 @@ class GUIController(object):
         self._gui.preampBrandLineEdit.setText(self.__pre22Info['Brand'])
         self._gui.preampModelLineEdit.setText(self.__pre22Info['Model'])
         self._gui.preampSerialLineEdit.setText(self.__pre22Info['S/N'])
+        self._gui.extCableCheckBox.setCheckState(self.__pre22Info['Extension Cable'])
         self._gui.micBrandLineEdit.setText(self.__mic40CEInfo['Brand'])
         self._gui.micModelLineEdit.setText(self.__mic40CEInfo['Model'])
         self._gui.micSerialNumberLineEdit.setText(self.__mic40CEInfo['S/N'])
+        self._gui.micRefDirectionComboBox.setCurrentIndex(self.__mic40CEInfo['Reference Direction'])
+        self._gui.micWindscreenCheckBox.setCheckState(self.__mic40CEInfo['Windscreen'])
         self._gui.customerNameLineEdit.setText(self.__K2Customer['Name'])
         self._gui.addressLineEdit.setText(self.__K2Customer['Address'])
         self._gui.cityLineEdit.setText(self.__K2Customer['City'])
         self._gui.countryLineEdit.setText(self.__K2Customer['Country'])
         self._gui.postalCodeLineEdit.setText(self.__K2Customer['Postal Code'])
         self._gui.contactNumberLineEdit.setText(self.__K2Customer['Contact'])
+
+    def print_logging_msg(self, msg: tuple) -> None:
+        """
+        This is a simple method for showing a new logging message on the list widget of the GUI.
+        :param msg: A tuple with the code and the content of the message to be showed.
+        :return: None
+        """
+        item = QtWidgets.QListWidgetItem(datetime.now().strftime('%H:%M:%S.%f')[:-3] + ' ' + msg[1])
+        brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))  # Normal message
+        if msg[0] == 1:  # Good message
+            brush = QtGui.QBrush(QtGui.QColor(0, 170, 0))
+        elif msg[1] == 2:  # Wrong message
+            brush = QtGui.QBrush(QtGui.QColor(170, 0, 0))
+        brush.setStyle(QtCore.Qt.SolidPattern)
+        item.setForeground(brush)
+        self._gui.loggingListWidget.insertItem(1, item)
 
     def save_standards_info(self) -> None:
         """
@@ -1645,6 +1706,7 @@ class GUIController(object):
                 self._gui.decadeBoxGroupBox.setEnabled(False)
                 self._gui.multimeterGroupBox.setEnabled(False)
                 self.save_standards_state = 2
+                self.print_logging_msg((1, 'Información de patrones guardada.'))
                 QtWidgets.QMessageBox.information(self._gui, 'Información', 'Información guardada correctamente.')
                 self._gui.actionSelfTest.setEnabled(True)
             else:
@@ -1729,6 +1791,7 @@ class GUIController(object):
                 self._gui.customerGroupBox.setEnabled(False)
                 self._gui.preampGroupBox.setEnabled(False)
                 self._gui.micGroupBox.setEnabled(False)
+                self.print_logging_msg((1, 'Información del IBC guardada.'))
                 QtWidgets.QMessageBox.information(self._gui, 'Información',
                                                   'La información del IBC y del cliente se guardó correctamente')
                 if self.self_test_passed and self.save_standards_state == 2:
@@ -1803,6 +1866,7 @@ class GUIController(object):
         self.selfTesterWorker.finished.connect(self.show_self_test_results)
         self.selfTesterWorker.finished.connect(self.selfTesterThread.quit)
         self.selfTesterWorker.finished.connect(self.selfTesterWorker.deleteLater)
+        self.selfTesterWorker.loggingMsg.connect(self.print_logging_msg)
         self.selfTesterThread.finished.connect(self.selfTesterThread.deleteLater)
         self._gui.measurementProgressLabel.setText('Progreso de auto-verificación')
         self.selfTesterThread.start()
@@ -1873,7 +1937,7 @@ class GUIController(object):
             mutex.lock()
             self.timer_started = timer_started
             mutex.unlock()
-            logging.info(f'Añadiendo {len(self.frames)} cuadros a la cola.')
+            self.print_logging_msg((0, f'Añadiendo {len(self.frames)} cuadros de vídeo a la cola.'))
             self.frames_queue.put(self.frames)
             del self.frames
 
@@ -1897,7 +1961,10 @@ class GUIController(object):
         self._gui.actionPause.setEnabled(True)
         # If the sequence was paused, It doesn't show instructions again; just resumes the sequence
         if self._TESTER.state < 2:
+            self.print_logging_msg((1, 'Secuencia iniciada.'))
             self.sequence_control()
+        else:
+            self.print_logging_msg((1, 'Secuencia reanudada'))
         self._TESTER.set_state(1)
 
     def pause(self) -> None:
@@ -1922,6 +1989,7 @@ class GUIController(object):
         For your reference consult the GRAFCET.
         """
         if self._TESTER.stage == 0:
+            self.print_logging_msg((0, 'Inicia entrenamiento del clasificador bayesiano'))
             self._gui.measurementProgressLabel.setText('Entrenando clasificador')
             self.calibrationThread.start()
         elif any([self._TESTER.stage == stage for stage in [1, 3, 11]]):
@@ -2014,6 +2082,7 @@ class GUIController(object):
         if not self._gui.adjTableModel.df.isin([""]).any(None) and self._gui.adjEdit.displayText():
             self._TESTER.dut.set_calibration_check_indications(float(self._gui.adjEdit.displayText()),
                                                                self._gui.adjTableModel.df)
+            self.print_logging_msg((1, "Valores de indicación a la frecuencia de comprobación guardados."))
             self.calibrationThread.start()
         else:
             QtWidgets.QMessageBox.warning(self._gui, 'Advertencia',
@@ -2030,6 +2099,7 @@ class GUIController(object):
                 str(round(self._TESTER.dut.calibration_results['Reference Voltage'].iloc[0, 2], 2)))
             self._gui.vRefValueLabel.setText(
                 str(round(self._TESTER.dut.calibration_results['Reference Voltage'].iloc[0, 3], 2)))
+            self.print_logging_msg((1, "Rango de voltajes de referencia guardados."))
             self.calibrationThread.start()
         else:
             QtWidgets.QMessageBox.warning(self._gui, 'Advertencia',
@@ -2115,6 +2185,7 @@ class SelfTester(QtCore.QObject):
     """
     finished = QtCore.pyqtSignal(tuple)
     progress = QtCore.pyqtSignal(int)
+    loggingMsg = QtCore.pyqtSignal(tuple)
 
     def __init__(self, DMM: ac.visa.Resource, AFG: ac.visa.Resource):
         super().__init__()
@@ -2122,11 +2193,14 @@ class SelfTester(QtCore.QObject):
         self._AFG = AFG
 
     def self_test(self):
+        self.loggingMsg.emit((0, "Inicia auto-verificación del multímetro."))
         dmm_pass = self._DMM.query('*TST?')  # Run self-test on multimeter
         dmm_pass = not bool(int(dmm_pass))
         self.progress.emit(50)
-        afg_pass = self._AFG.query('*TST?', 8)  # Run self-test on multimeter
+        self.loggingMsg.emit((0, "Inicia auto-verificación del generador."))
+        afg_pass = self._AFG.query('*TST?', 8)  # Run self-test on generator
         afg_pass = not bool(int(afg_pass))
+        self.loggingMsg.emit((1, "Auto-verificación finalizada."))
         self.progress.emit(100)
         self.finished.emit((dmm_pass, afg_pass))
 
@@ -2206,6 +2280,12 @@ class VideoObject(QtCore.QObject):
 
     Attributes
     -----------
+    frameCaptured: pyqtSignal
+        Qt signal for transmiting a new frame taken from the VideoCapture object.
+    cameraReleased: pyqtSignal
+        Qt signal for indicating the VideoCapture has been released.
+    loggingMsg: pyqtSignal
+        Qt signal for transmiting logging messages to the gui list widget.
     run_flag: bool
         This flag controls the running of the camera. If it is set to True, the camera takes the frames.
 
@@ -2216,6 +2296,7 @@ class VideoObject(QtCore.QObject):
     """
     frameCaptured = QtCore.pyqtSignal(np.ndarray)
     cameraReleased = QtCore.pyqtSignal(bool)
+    loggingMsg = QtCore.pyqtSignal(tuple)
 
     def __init__(self):
         super().__init__()
@@ -2231,7 +2312,7 @@ class VideoObject(QtCore.QObject):
         camera = cv.VideoCapture(0, cv.CAP_MSMF)
         camera.set(cv.CAP_PROP_FPS, self.fps)
         self.fps = camera.get(cv.CAP_PROP_FPS)
-        logging.info(f'FPS: {self.fps}')
+        self.loggingMsg.emit((0, 'Transmisión de vídeo iniciada.'))
         self.frame_size = (int(camera.get(cv.CAP_PROP_FRAME_WIDTH)), int(camera.get(cv.CAP_PROP_FRAME_HEIGHT)))
         while True:
             mutex.lock()
@@ -2245,6 +2326,7 @@ class VideoObject(QtCore.QObject):
                 # sleep(0.1)
         camera.release()
         self.cameraReleased.emit(True)
+        self.loggingMsg.emit((0, 'Transmisión de vídeo finalizada.'))
 
 
 class VideoSaving(QtCore.QObject):
@@ -2264,6 +2346,7 @@ class VideoSaving(QtCore.QObject):
         Method for saving the video frames in the hard disk.
     """
     videoSaved = QtCore.pyqtSignal(bool)
+    loggingMsg = QtCore.pyqtSignal(str)
 
     def __init__(self, frames, video_writer: cv.VideoWriter):
         super().__init__()
@@ -2271,10 +2354,10 @@ class VideoSaving(QtCore.QObject):
         self.video_writer = video_writer
 
     def save_video(self):
-        logging.info('...Guardando vídeo...')
+        self.loggingMsg.emit('...Guardando vídeo...')
         for frame in self.frames:
             self.video_writer.write(frame)
-        logging.info('...Video guardado...')
+        self.loggingMsg.emit('...Vídeo guardado...')
         self.video_writer.release()
         self.videoSaved.emit(True)
 
@@ -2289,6 +2372,8 @@ class ImageProcessingThread(QtCore.QThread):
     ----------
     realTimeValues: pyqtSignal
         This signals shares the measurement value computed.
+    loggingMsg: pyqtSignal
+        This signal is for transmitting loggin messages to the GUI list widget.
     _frames_queue: Queue
         This queue temporally stores the acquired videos, one video for each calibration point. This queue
         is intended to be used to secure the processing flow.
@@ -2312,6 +2397,7 @@ class ImageProcessingThread(QtCore.QThread):
         stochastic model.
     """
     realTimeValues = QtCore.pyqtSignal(float)
+    loggingMsg = QtCore.pyqtSignal(tuple)
 
     def __init__(self, frames_queue: Queue, tester: ac.SLMPeriodicTester, camera: VideoObject):
         super(ImageProcessingThread, self).__init__()
@@ -2333,13 +2419,12 @@ class ImageProcessingThread(QtCore.QThread):
         self._stage = self._TESTER.stage
         while self._stage < 8:
             if not self._frames_queue.empty():  # If there is any video in the queue
-                logging.info(f'\n-----\nFrequency {int(self._octave_frequencies[self._current_f])} Hz process begins.')
                 frames = self._frames_queue.get()
                 frames = np.array([cv.cvtColor(frame, cv.COLOR_BGR2GRAY) for frame in frames])
                 # Recognize first the frames taken while the stabilization time. This is for identifying the frame zero
                 # and then computes downsampling in order to obtain the "true" samples from the screen.
                 stab_frames = frames[:self._TESTER.elect_stab_time * self.fps, :, :]  # Samples until stabilization
-                logging.info('--Recognizing stabilization frames--')
+                self.loggingMsg.emit((0, 'Inicia reconocimiento de cuadros de vídeo del tiempo de estabilización.'))
                 stab_frames = np.array([self._TESTER.read_screen(frame) for frame in stab_frames])  # Recognize numbers
                 changed_value_idx = np.where(stab_frames != stab_frames[0])[0][0]  # Frame 0 (first change identified)
                 frames_down_sampled = frames[changed_value_idx:]  # From frame 0 onwards
@@ -2350,7 +2435,7 @@ class ImageProcessingThread(QtCore.QThread):
                 stab_frame = int((self._TESTER.elect_stab_time - changed_value_idx / self.fps)
                                  * self._TESTER.dut.screen_rate)  # Frame in which the stabilization time has finished
                 frames_down_sampled = frames_down_sampled[stab_frame:, :, :]  # Crops the stabilization time
-                logging.info('--Recognizing measurement frames--')
+                self.loggingMsg.emit((0, 'Inicia reconocimiento de cuadros de vídeo de la medición.'))
                 samples = np.array([self._TESTER.read_screen(frame) for frame in frames_down_sampled])
                 del frames_down_sampled
                 # Construction of the states transition matrix
@@ -2367,13 +2452,13 @@ class ImageProcessingThread(QtCore.QThread):
                     path = ('CalibrationResults/ElectricalFrequencyWeightings/' + f'{point_name}Hz.pkl')
                     with open(path, "wb") as file:  # Saves the grayscale video in bare binary format
                         pickle.dump(frames, file)
+                    self.loggingMsg.emit(f"Imágenes de muestras guardadas en binario como '{point_name}Hz.pkl'.")
                     del frames
                     self._TESTER.fweighting_results['Samples'][point_name] = samples
                     self._TESTER.fweighting_results['Transition Matrix'][point_name] = P
+                    self.loggingMsg.emit((1, "Reconocimiento finalizado."))
                     # TODO: Presentar resultado en la GUI
                 # TODO: Pruebas restantes
-                logging.info(f'Transition Matrix:\n{P}')
-                logging.info(f'\nFrequency {int(self._octave_frequencies[self._current_f])} Hz process finish\n-----')
                 del samples
                 # Updates the current stage and frequency in process
                 self._stage += self._current_f // 8
