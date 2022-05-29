@@ -155,7 +155,7 @@ class SonometersCalibrationUI(QtWidgets.QMainWindow):
         self.startPointLineEdit = QtWidgets.QLineEdit(self.dutGroupBox)
         self.screenRateLabel = QtWidgets.QLabel(self.dutGroupBox)
         self.screenRateLineEdit = QtWidgets.QLineEdit(self.dutGroupBox)
-        self.loadFreeFieldPushButton = QtWidgets.QPushButton(self.dutGroupBox)
+        # self.loadFreeFieldPushButton = QtWidgets.QPushButton(self.dutGroupBox)
         self.micGroupBox = QtWidgets.QGroupBox(self.infoTab)
         self.micFormLayout = QtWidgets.QFormLayout(self.micGroupBox)
         self.micBrandLabel = QtWidgets.QLabel(self.micGroupBox)
@@ -367,7 +367,7 @@ class SonometersCalibrationUI(QtWidgets.QMainWindow):
         self.videoLabel.setAlignment(QtCore.Qt.AlignCenter)
         self.videoLabel.setObjectName("videoLabel")
         self.gridCentralLayout.addWidget(self.videoLabel, 1, 1, 1, 1)
-        self.loggingListWidget.setMaximumSize(QtCore.QSize(380, 50))
+        self.loggingListWidget.setMaximumSize(QtCore.QSize(380, 100))
         font = QtGui.QFont()
         font.setFamily("JetBrains Mono")
         font.setPointSize(7)
@@ -636,8 +636,8 @@ class SonometersCalibrationUI(QtWidgets.QMainWindow):
         self.screenRateLineEdit.setObjectName('screenRateLineEdit')
         self.dutFormLayout.setWidget(13, QtWidgets.QFormLayout.FieldRole, self.screenRateLineEdit)
         self.screenRateLineEdit.setAlignment(QtCore.Qt.AlignCenter)
-        self.loadFreeFieldPushButton.setObjectName("loadFreeFieldPushButton")
-        self.dutFormLayout.setWidget(14, QtWidgets.QFormLayout.SpanningRole, self.loadFreeFieldPushButton)
+        # self.loadFreeFieldPushButton.setObjectName("loadFreeFieldPushButton")
+        # self.dutFormLayout.setWidget(14, QtWidgets.QFormLayout.SpanningRole, self.loadFreeFieldPushButton)
         self.infoGridLayout.addWidget(self.dutGroupBox, 0, 0, 3, 1)
         self.micGroupBox.setObjectName("micGroupBox")
         self.micFormLayout.setObjectName("micFormLayout")
@@ -982,10 +982,12 @@ class SonometersCalibrationUI(QtWidgets.QMainWindow):
         font.setWeight(75)
         self.aW1kHzLabel.setFont(font)
         self.aW1kHzLabel.setObjectName("aW1kHzLabel")
+        self.aW1kHzLabel.setMaximumSize(QtCore.QSize(14, 16777215))
         self.fW1kGridLayout.addWidget(self.aW1kHzLabel, 2, 0, 1, 1)
         self.aW1kHzLevLabel.setText("")
         self.aW1kHzLevLabel.setAlignment(QtCore.Qt.AlignCenter)
         self.aW1kHzLevLabel.setObjectName("aW1kHzLevLabel")
+        self.aW1kHzLevLabel.setMaximumSize(QtCore.QSize(75, 16777215))
         self.fW1kGridLayout.addWidget(self.aW1kHzLevLabel, 2, 2, 1, 1)
         font = QtGui.QFont()
         font.setBold(True)
@@ -996,6 +998,7 @@ class SonometersCalibrationUI(QtWidgets.QMainWindow):
         self.aW1kHzRLevLabel.setText("")
         self.aW1kHzRLevLabel.setAlignment(QtCore.Qt.AlignCenter)
         self.aW1kHzRLevLabel.setObjectName("aW1kHzRLevLabel")
+        self.aW1kHzRLevLabel.setMaximumSize(QtCore.QSize(75, 16777215))
         self.fW1kGridLayout.addWidget(self.aW1kHzRLevLabel, 2, 4, 1, 1)
         font = QtGui.QFont()
         font.setBold(True)
@@ -1083,6 +1086,7 @@ class SonometersCalibrationUI(QtWidgets.QMainWindow):
         self.eqWLevLineEdit.setText("")
         self.eqWLevLineEdit.setAlignment(QtCore.Qt.AlignCenter)
         self.eqWLevLineEdit.setObjectName("eqWLevLineEdit")
+        self.eqWLevLineEdit.setMaximumSize(QtCore.QSize(75, 16777215))
         self.tWGridLayout.addWidget(self.eqWLevLineEdit, 6, 3, 1, 1)
         self.eqWLevLineEdit.setAlignment(QtCore.Qt.AlignCenter)
         self.eqWRLevLabel.setText("")
@@ -1092,6 +1096,7 @@ class SonometersCalibrationUI(QtWidgets.QMainWindow):
         self.fastWRLevLabel.setText("")
         self.fastWRLevLabel.setAlignment(QtCore.Qt.AlignCenter)
         self.fastWRLevLabel.setObjectName("fastWRLevLabel")
+        self.fastWRLevLabel.setMaximumSize(QtCore.QSize(75, 16777215))
         self.tWGridLayout.addWidget(self.fastWRLevLabel, 2, 5, 1, 1)
         self.fastWLevLabel.setText("")
         self.fastWLevLabel.setAlignment(QtCore.Qt.AlignCenter)
@@ -1118,6 +1123,7 @@ class SonometersCalibrationUI(QtWidgets.QMainWindow):
         self.fastWLabel.setFont(font)
         self.fastWLabel.setAlignment(QtCore.Qt.AlignCenter)
         self.fastWLabel.setObjectName("fastWLabel")
+        self.fastWLabel.setMaximumSize(QtCore.QSize(14, 16777215))
         self.tWGridLayout.addWidget(self.fastWLabel, 2, 1, 1, 1)
         self.tWLevLabel.setMinimumSize(QtCore.QSize(75, 0))
         font = QtGui.QFont()
@@ -1208,7 +1214,7 @@ class SonometersCalibrationUI(QtWidgets.QMainWindow):
         icon5.addPixmap(QtGui.QPixmap(":/icons/play.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.actionStart.setIcon(icon5)
         self.actionStart.setObjectName("actionStart")
-        self.actionStart.setEnabled(False)
+        self.actionStart.setEnabled(True)
         icon6 = QtGui.QIcon()
         icon6.addPixmap(QtGui.QPixmap(":/icons/pause.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.actionPause.setIcon(icon6)
@@ -1337,8 +1343,8 @@ class SonometersCalibrationUI(QtWidgets.QMainWindow):
         self.setTabOrder(self.lu8kHzLineEdit, self.li8kHzLineEdit)
         self.setTabOrder(self.li8kHzLineEdit, self.startPointLineEdit)
         self.setTabOrder(self.startPointLineEdit, self.screenRateLineEdit)
-        self.setTabOrder(self.screenRateLineEdit, self.loadFreeFieldPushButton)
-        self.setTabOrder(self.loadFreeFieldPushButton, self.preampBrandLineEdit)
+        self.setTabOrder(self.screenRateLineEdit, self.preampBrandLineEdit)
+        # self.setTabOrder(self.loadFreeFieldPushButton, self.preampBrandLineEdit)
         self.setTabOrder(self.preampBrandLineEdit, self.preampModelLineEdit)
         self.setTabOrder(self.preampModelLineEdit, self.preampSerialLineEdit)
         self.setTabOrder(self.preampSerialLineEdit, self.extCableCheckBox)
@@ -1444,7 +1450,7 @@ class SonometersCalibrationUI(QtWidgets.QMainWindow):
         self.supplyULimitLabel.setText(_translate("MainWindow", "Lu fuente alimentación:"))
         self.supplyLLimitLabel.setText(_translate("MainWindow", "Li fuente alimentación:"))
         self.referenceLevelLabel.setText(_translate("MainWindow", "Nivel de referencia:"))
-        self.loadFreeFieldPushButton.setText(_translate("MainWindow", "Cargar correcciones de campo libre"))
+        # self.loadFreeFieldPushButton.setText(_translate("MainWindow", "Cargar correcciones de campo libre"))
         self.lu1kHzLabel.setText(_translate("MainWindow", "Lu 1 kHz:"))
         self.lu8kHzLabel.setText(_translate("MainWindow", "Lu 8 kHz:"))
         self.li8kHzLabel.setText(_translate("MainWindow", "Li 8  kHz:"))
@@ -1589,14 +1595,13 @@ class GUIController(object):
         self._gui.actionSearchStandards.triggered.connect(self.search_standards)
         self._gui.actionSelfTest.triggered.connect(self.self_test)
         self._gui.saveDUTInfo.clicked.connect(self.save_dut_info)
-        self._gui.loadFreeFieldPushButton.clicked.connect(self.read_elec_ff_corrections)
         self._gui.streamingButton.clicked.connect(self.streaming_control)
         self._gui.actionStart.triggered.connect(self.start)
         self._gui.actionPause.triggered.connect(self.pause)
         self._gui.adjSaveButton.clicked.connect(self.save_cal_ind_values)
         self._gui.saveVRefButton.clicked.connect(self.save_ref_volt)
 
-        self._gui.vRefButton.clicked.connect(functools.partial(self.run_sequence, 5))  # TODO: temporal
+        self._gui.vRefButton.clicked.connect(functools.partial(self.run_sequence, 8))  # TODO: temporal
 
         # Connect signals of the calibration worker and thread
         self._TESTER.moveToThread(self.calibrationThread)
@@ -1604,7 +1609,7 @@ class GUIController(object):
 
         self._TESTER.measurementProgress.connect(self._gui.measurementProgressBar.setValue)
 
-        self._TESTER.calibrationProgress.connect(lambda x: self._gui.generalProgressBar.setValue(int(x / 9 * 100)))
+        self._TESTER.calibrationProgress.connect(lambda x: self._gui.generalProgressBar.setValue(int(x / 11 * 100)))
         self._TESTER.calibrationProgress.connect(self.sequence_control)
         self._TESTER.calibrationProgress.connect(self._gui.lcdNumber.display)
         self._TESTER.calibrationProgress.connect(self.show_power_supply_values)
@@ -1664,11 +1669,11 @@ class GUIController(object):
         :param msg: A tuple with the code and the content of the message to be showed.
         :return: None
         """
-        item = QtWidgets.QListWidgetItem(datetime.now().strftime('%H:%M:%S.%f')[:-3] + ' ' + msg[1])
+        item = QtWidgets.QListWidgetItem(datetime.now().strftime('%Y/%m/%d %H:%M:%S.%f')[:-4] + ' ' + msg[1])
         brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))  # Normal message
         if msg[0] == 1:  # Good message
             brush = QtGui.QBrush(QtGui.QColor(0, 170, 0))
-        elif msg[1] == 2:  # Wrong message
+        elif msg[0] == 2:  # Wrong message
             brush = QtGui.QBrush(QtGui.QColor(170, 0, 0))
         brush.setStyle(QtCore.Qt.SolidPattern)
         item.setForeground(brush)
@@ -1753,10 +1758,13 @@ class GUIController(object):
                     'Screen Rate': float(self._gui.screenRateLineEdit.displayText())}
         pre_info = {'Brand': self._gui.preampBrandLineEdit.displayText(),
                     'Model': self._gui.preampModelLineEdit.displayText(),
-                    'S/N': self._gui.preampSerialLineEdit.displayText()}
+                    'S/N': self._gui.preampSerialLineEdit.displayText(),
+                    'Extension Cable': self._gui.extCableCheckBox.isChecked()}
         mic_info = {'Brand': self._gui.micBrandLineEdit.displayText(),
                     'Model': self._gui.micModelLineEdit.displayText(),
-                    'S/N': self._gui.micSerialNumberLineEdit.displayText()}
+                    'S/N': self._gui.micSerialNumberLineEdit.displayText(),
+                    'Reference Direction': self._gui.micRefDirectionComboBox.currentText(),
+                    'Windscreen': self._gui.micWindscreenCheckBox.isChecked()}
         customer_info = {'Name': self._gui.customerNameLineEdit.displayText(),
                          'Address': self._gui.addressLineEdit.displayText(),
                          'City': self._gui.cityLineEdit.displayText(),
@@ -1768,35 +1776,52 @@ class GUIController(object):
         if self.save_DUT_info_sate == 1:
             # Checks complete info
             if ("" not in dut_info.values()) * ("" not in mic_info.values()) * (
-                    "" not in pre_info.values()) * ("" not in customer_info.values()) * (
-                    not self.electric_ff_corrections.isnull().values.any()):
-                dut = ac.SoundLevelMeter(slm_brand=dut_info['Brand'], slm_model=dut_info['Model'],
-                                         slm_sn=dut_info['S/N'],
-                                         slm_identification=dut_info['ID'], slm_cl=dut_info['Class'],
-                                         power_supply_limits=dut_info['Power Supply Limits'],
-                                         reference_level=dut_info['Reference Level'], lu_1kHz=dut_info['Lu 1 kHz'],
-                                         range_8kHz=dut_info['Range 8 kHz'],
-                                         lin_start_point=dut_info['Linearity Start Point'],
-                                         screen_rate=dut_info['Screen Rate'],
-                                         electrical_ff_corrections=self.electric_ff_corrections,
-                                         mic_brand=mic_info['Brand'], mic_model=mic_info['Model'],
-                                         mic_sn=mic_info['S/N'], pre_brand=pre_info['Brand'],
-                                         pre_model=pre_info['Model'], pre_sn=pre_info['S/N'])
-                self._TESTER.set_dut(dut)
-                self._TESTER.set_consecutive(dut_info['Consecutive'])
-                self._TESTER.set_customer_info(customer_info)
-                self.save_DUT_info_sate = 2
-                self._gui.saveDUTInfo.setText('Editar')
-                self._gui.dutGroupBox.setEnabled(False)
-                self._gui.customerGroupBox.setEnabled(False)
-                self._gui.preampGroupBox.setEnabled(False)
-                self._gui.micGroupBox.setEnabled(False)
-                self.print_logging_msg((1, 'Información del IBC guardada.'))
-                QtWidgets.QMessageBox.information(self._gui, 'Información',
-                                                  'La información del IBC y del cliente se guardó correctamente')
-                if self.self_test_passed and self.save_standards_state == 2:
-                    self._gui.actionStart.setEnabled(True)
-                    self._gui.preTestsTab.setEnabled(True)
+                    "" not in pre_info.values()) * ("" not in customer_info.values()):
+                name = [dut_info['Brand'], dut_info['Model'],
+                        'EXT' if pre_info['Extension Cable'] else '', mic_info['Model'],
+                        mic_info['Reference Direction'][:-1], 'W' if mic_info['Windscreen'] else '']
+                name = 'FreeFieldCorrections/' + '_'.join(name) + '.csv'
+                if os.path.exists(name):
+                    self.electric_ff_corrections = pd.read_csv(name, sep=';', header=0, index_col=0)
+                    file_found_flag = True
+                else:
+                    try:
+                        self.read_elec_ff_corrections()
+                        file_found_flag = True
+                    except FileNotFoundError:
+                        self.print_logging_msg((2, 'Carga de factores de corrección cancelada.'))
+                        file_found_flag = False
+                if file_found_flag:
+                    dut = ac.SoundLevelMeter(slm_brand=dut_info['Brand'], slm_model=dut_info['Model'],
+                                             slm_sn=dut_info['S/N'],
+                                             slm_identification=dut_info['ID'], slm_cl=dut_info['Class'],
+                                             power_supply_limits=dut_info['Power Supply Limits'],
+                                             reference_level=dut_info['Reference Level'], lu_1kHz=dut_info['Lu 1 kHz'],
+                                             range_8kHz=dut_info['Range 8 kHz'],
+                                             lin_start_point=dut_info['Linearity Start Point'],
+                                             screen_rate=dut_info['Screen Rate'],
+                                             electrical_ff_corrections=self.electric_ff_corrections,
+                                             mic_brand=mic_info['Brand'], mic_model=mic_info['Model'],
+                                             mic_sn=mic_info['S/N'], pre_brand=pre_info['Brand'],
+                                             pre_model=pre_info['Model'], pre_sn=pre_info['S/N'])
+                    self._TESTER.set_dut(dut)
+                    self._TESTER.set_consecutive(dut_info['Consecutive'])
+                    self._TESTER.set_customer_info(customer_info)
+                    self.save_DUT_info_sate = 2
+                    self._gui.saveDUTInfo.setText('Editar')
+                    self._gui.dutGroupBox.setEnabled(False)
+                    self._gui.customerGroupBox.setEnabled(False)
+                    self._gui.preampGroupBox.setEnabled(False)
+                    self._gui.micGroupBox.setEnabled(False)
+                    self.print_logging_msg((1, 'Información del IBC guardada.'))
+                    QtWidgets.QMessageBox.information(self._gui, 'Información',
+                                                      'La información del IBC y del cliente se guardó correctamente')
+                    if self.self_test_passed and self.save_standards_state == 2:
+                        self._gui.actionStart.setEnabled(True)
+                        self._gui.preTestsTab.setEnabled(True)
+                else:
+                    QtWidgets.QMessageBox.warning(self._gui, 'Advertencia',
+                                                  'La información del IBC o del cliente no está completa.')
             else:
                 QtWidgets.QMessageBox.warning(self._gui, 'Advertencia',
                                               'La información del IBC o del cliente no está completa.')
@@ -1938,7 +1963,8 @@ class GUIController(object):
             self.timer_started = timer_started
             mutex.unlock()
             self.print_logging_msg((0, f'Añadiendo {len(self.frames)} cuadros de vídeo a la cola.'))
-            self.frames_queue.put(self.frames)
+            if self._TESTER.stage < 8:
+                self.frames_queue.put(self.frames)
             del self.frames
 
             # video_writer = cv.VideoWriter('video_test.avi',
@@ -2018,13 +2044,44 @@ class GUIController(object):
                 self.streaming_control()
             W = [*'ACZ']
             self.instruction = InstructionDialog(None,
-                                                 '1. Ajuste el sonómetro para mostrar un nivel de' +
-                                                 ' sonido con ponderación\ntemporal Fast y ponderación ' +
+                                                 '1. Ajuste el sonómetro para mostrar un nivel de ' +
+                                                 'sonido con ponderación temporal Fast y ponderación ' +
                                                  f'frecuencial {W[self._TESTER.stage - 5]}.\n' +
-                                                 '2. Ajuste la región de interés en el área de vídeo' +
-                                                 'de forma que abarque\n' +
-                                                 'el valor numérico del nivel de sonido.\n' +
+                                                 '2. Ajuste la región de interés en el área de vídeo ' +
+                                                 'de forma que abarque el valor numérico del nivel de sonido.\n' +
                                                  '3. Haga clic en Ok para iniciar la prueba.')
+            icon = QtGui.QIcon()
+            icon.addPixmap(QtGui.QPixmap(":/icons/slm_icon.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+            self.instruction.setWindowIcon(icon)
+            self.instruction.setWindowModality(QtCore.Qt.WindowModal)
+            self.instruction.setWindowFlags(QtCore.Qt.WindowStaysOnTopHint)
+            self.instruction.show()
+            self.instruction.finished.connect(self.parallel_dialog_response)
+        elif self._TESTER.stage == 8:
+            if not self.streaming_running:
+                self.streaming_control()
+            W = [*'ACZ']
+            T = ['S', 'eq']
+            if self._TESTER.substage <= 2:
+                instruction = ('1. Ajuste el sonómetro para mostrar un nivel de sonido con ' +
+                               'ponderación temporal F y ponderación frecuencial ' +
+                               f'{W[self._TESTER.substage]}.\n')
+            else:
+                instruction = ('1. Ajuste el sonómetro para mostrar un nivel de sonido con ' +
+                               f'ponderación temporal {T[self._TESTER.substage - 3]} y ponderación frecuencial A.\n')
+            if self._TESTER.substage <= 3:
+                self.instruction = InstructionDialog(None,
+                                                     instruction +
+                                                     '2. Ajuste la región de interés en el área de vídeo de ' +
+                                                     'forma que abarque el valor numérico del nivel de sonido.\n' +
+                                                     '3. Haga clic en Ok para iniciar la prueba.')
+            else:
+                self.instruction = InstructionDialog(None,
+                                                     '1. Ajuste el sonómetro para medir un nivel promediado' +
+                                                     'en el tiempo durante 10 s.\n' +
+                                                     '2. Inicie la medición en el sonómetro y haga clic en Aceptar. ' +
+                                                     'Al finalizar la medición anote el resultado en su ' +
+                                                     'campo correspondiente.')
             icon = QtGui.QIcon()
             icon.addPixmap(QtGui.QPixmap(":/icons/slm_icon.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
             self.instruction.setWindowIcon(icon)
@@ -2383,7 +2440,7 @@ class ImageProcessingThread(QtCore.QThread):
         Frames per second of the camera object
     _stage: int
         The current stage of the calibration
-    _current_f: int
+    _substage: int
         The current frequency under calibration
     _fweightings: list
         This is a list of strings representing the three frequency weightings: A, C and Z.
@@ -2404,8 +2461,9 @@ class ImageProcessingThread(QtCore.QThread):
         self._frames_queue = frames_queue
         self._TESTER = tester
         self._stage = 0
-        self._current_f = 0
+        self._substage = 0
         self._fweightings = [*'ACZ']
+        self._tweightings = ['S', 'eq']
         self._octave_frequencies = np.array([63, 125, 250, 500, 1e3, 2e3, 4e3, 8e3, 16e3])
         self.fps = camera.fps
 
@@ -2445,24 +2503,38 @@ class ImageProcessingThread(QtCore.QThread):
                     P.loc[samples[i - 1], samples[i]] += 1
                 P = P.divide(samples.shape[0] - 1)
                 # TODO: Probabilidad estacionaria y valor esperado
-
+                path = point_name = ''
                 if self._stage <= 8:  # Electric frequency weightings test
                     point_name = (f'{self._fweightings[self._stage - 5]}' +
-                                  f'_{int(self._octave_frequencies[self._current_f])}')
+                                  f'_{int(self._octave_frequencies[self._substage])}')
                     path = ('CalibrationResults/ElectricalFrequencyWeightings/' + f'{point_name}Hz.pkl')
-                    with open(path, "wb") as file:  # Saves the grayscale video in bare binary format
-                        pickle.dump(frames, file)
-                    self.loggingMsg.emit(f"Imágenes de muestras guardadas en binario como '{point_name}Hz.pkl'.")
-                    del frames
                     self._TESTER.fweighting_results['Samples'][point_name] = samples
                     self._TESTER.fweighting_results['Transition Matrix'][point_name] = P
-                    self.loggingMsg.emit((1, "Reconocimiento finalizado."))
-                    # TODO: Presentar resultado en la GUI
+                    self._stage += self._substage // 8
+                    if self._stage >= 8:
+                        self._substage = 0
+                    else:
+                        self._substage += (1 - 9 * (self._substage // 8))
+                elif self._stage == 8:  # Frequency and time weightings at 1 kHz
+                    if self._substage <= 3:
+                        point_name = f'L{self._fweightings[self._substage]}F'
+                    else:
+                        point_name = f'LA{self._tweightings[self._substage - 3]}'
+                    path = ('CalibrationResults/FreqTimeWeightings1kHz/' + f'{point_name}.pkl')
+                    # TODO: Guardar resultados en el TESTER
+                    self._substage += 1
+                    if self._substage >= 6:
+                        self._substage = 0
+                        self._stage += 1
                 # TODO: Pruebas restantes
+                with open(path, "wb") as file:  # Saves the grayscale video in bare binary format
+                    pickle.dump(frames, file)
+                self.loggingMsg.emit((0, f"Imágenes de muestras guardadas en binario como '{point_name}.pkl'."))
+                del frames
+                self.loggingMsg.emit((1, "Reconocimiento finalizado."))
+                # TODO: Presentar resultado en la GUI
                 del samples
                 # Updates the current stage and frequency in process
-                self._stage += self._current_f // 8
-                self._current_f += (1 - 9 * (self._current_f // 8))
 
             else:
                 sleep(1)

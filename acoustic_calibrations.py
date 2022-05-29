@@ -890,8 +890,6 @@ class SLMPeriodicTester(QObject):
     fweighting_results: dict
         A dictionary for storing the samples, transition matrices, and measurement values for the stages 5, 6, and 7
         (frequency weightings with electric signals) according to IEC 61672-3.
-    current_frequency: int
-        Integer that stores the current frequency under calibration for the frequency weighting test.
     freqtime_1kHz_results: dict
         A dictionary for storing the samples, transition matrices, and measurement values for the stages 8 and 9
         (frequency and time weightings at 1 kHz) according to IEC 61672-3.
@@ -953,8 +951,8 @@ class SLMPeriodicTester(QObject):
                                       columns=['A', 'C', 'Z'])
 
     __slots__ = ['_resource_manager', '_AFG', '_DMM', '_calibration_consecutive', '_dut', '_customer_info',
-                 '_ambient_conditions_values', '_camera', '_result_box', '_calibration_stage', '_calibration_state',
-                 '_power_supply_results', 'fweighting_results', 'current_frequency', 'elect_stab_time']
+                 '_ambient_conditions_values', '_camera', '_result_box', '_calibration_stage', '_calibration_substage',
+                 '_calibration_state', '_power_supply_results', 'fweighting_results', 'elect_stab_time']
 
     def __init__(self):
         super().__init__()
@@ -966,8 +964,7 @@ class SLMPeriodicTester(QObject):
         self._customer_info = {}
         # self._camera = cv.VideoCapture(0, cv.CAP_MSMF)
         self._result_box = (0, 0, 0, 0)
-        self._calibration_stage = 0
-        self._calibration_state = 0
+        self._calibration_stage = self._calibration_substage = self._calibration_state = 0
         self._power_supply_results = np.empty((2, 2), dtype=float)
         self.fweighting_results = {'Samples': {}, 'Transition Matrix': {}}
         self.current_frequency = 0  # The current frequency of electrical frequency weightings test
@@ -1051,10 +1048,33 @@ class SLMPeriodicTester(QObject):
             W = [*'ACZ']
             msg = f"Inicia la prueba de ponderación frecuencial {W[self._calibration_stage - 5]}"
             self.loggingMsg.emit((1, msg + " con señales eléctricas."))
+            self._calibration_substage = 0
             self.test_electrical_fweightings(W[self._calibration_stage - 5])
             msg = f"Finaliza la prueba de ponderación frecuencial {W[self._calibration_stage - 5]}"
             self.loggingMsg.emit((0, msg + " con señales eléctricas."))
+            self._calibration_substage = 0
             self._calibration_stage += 1
+            self.calibrationProgress.emit(self._calibration_stage)
+        elif self._calibration_stage == 8:
+            # Frequency and time weightings at 1 kHz
+            if self._calibration_substage == 0:
+                self.loggingMsg.emit((1, 'Inicia la prueba de ponderaciones frecuenciales y temporales a 1 kHz.'))
+            W = [*'ACZ']
+            T = ['S', 'eq']
+            if self._calibration_substage <= 2:
+                level = f'L{W[self._calibration_substage]}F'
+                self.loggingMsg.emit((0, f'Inicia el reconocimiento del nivel {level}.'))
+            elif self._calibration_substage == 4:
+                level = f'LA{T[self._calibration_substage - 3]}'
+                self.loggingMsg.emit((0, f'Inicia el reconocimiento del nivel {level}.'))
+            else:
+                level = f'LA{T[self._calibration_substage - 3]}'
+                self.loggingMsg.emit((0, f'Inicia la medición del nivel {level}.'))
+            self.test_freqtime_weightings_1kHz()
+            self._calibration_substage += 1
+            if self._calibration_substage >= 5:
+                self._calibration_stage += 1
+                self.loggingMsg.emit((1, 'Finaliza la prueba de ponderaciones frecuenciales y temporales a 1 kHz.'))
             self.calibrationProgress.emit(self._calibration_stage)
 
     def check_state(self):
@@ -1210,7 +1230,7 @@ class SLMPeriodicTester(QObject):
 
     def test_electrical_fweightings(self, weighting: str) -> None:
         """
-        Method for performing the electrical frequency weightings tests with electrical signals, according to the
+        Method for performing the frequency weightings tests with electrical signals, according to the
         IEC 61672-3:2013 Art. 13. The weightings checked can be A, C and Z, at the nominal middle frequencies of octave
         bands.
         For that purpose, this method starts a timer, sets sine signals of certain amplitude depending on the frequency
@@ -1220,7 +1240,7 @@ class SLMPeriodicTester(QObject):
         :return: None
         """
         measurement_progress = 0
-        measuring_time = 25  # Time for capturing video frames (including stabilization time
+        measuring_time = 25  # Time for capturing video frames (including stabilization time)
         total_steps = measuring_time * 10 * self.__weightingFactors.shape[0]
         test_level = self._dut.frequency_ranges['1 kHz'][1] - 45  # Test level according to the IEC 61672-3:2013
         for f, w in zip(self.__weightingFactors.index, self.__weightingFactors[weighting]):
@@ -1260,8 +1280,43 @@ class SLMPeriodicTester(QObject):
             self.timerStarted.emit(False)
             self.loggingMsg.emit((0, f"Comando SCPI enviado vía GPIB: 'OUTP 0'."))
             self._AFG.write('OUTP 0')
+            self._calibration_substage += 1
             sleep(1)
         self.measurementProgress.emit(0)
+
+    def test_freqtime_weightings_1kHz(self) -> None:
+        """
+        Method for performing the electrical frequency  and time weightings tests at 1 kHz with electrical signals,
+        according to the IEC 61672-3:2013 Art. 13.
+        For that purpose, this method starts a timer, sets sine signals of with an amplitude that produce the reference
+        level at 1 kHz, and, after about 25 seconds, finishes the timer. While timer is running, the video frames are
+        acquired and stored.
+        :return: None
+        """
+        measurement_progress = 0
+        measuring_time = 10  # Time for capturing video frames (including stabilization time)
+        total_steps = measuring_time * 10
+        v = self.level2volt(self._dut.reference_level,
+                            (self._dut.reference_level,
+                             self._dut.calibration_results['Reference Voltage'].iat[0, 3]))  # Voltage test
+        self.timerStarted.emit(True)
+        total_time = 0
+        afg_flag = False
+        for t in range(1, measuring_time * 10 + 1):
+            self.check_state()
+            sleep(1 / 10)
+            total_time += t / 10
+            measurement_progress += 1 / total_steps * 100
+            self.measurementProgress.emit(int(measurement_progress))
+            if not afg_flag and total_time >= 0.3 and self._calibration_substage == 0:
+                self.loggingMsg.emit((0, f"Comando SCPI enviado vía GPIB: ':APPL:SIN 1000,{v}'."))
+                self._AFG.write(f':APPL:SIN 1000,{v}')  # Send test signal of frequency and voltage required
+                afg_flag = True
+        self.timerStarted.emit(False)
+        if self._calibration_substage == 5:
+            self.loggingMsg.emit((0, f"Comando SCPI enviado vía GPIB: 'OUTP 0'."))
+            self._AFG.write('OUTP 0')
+            self.measurementProgress.emit(0)
 
     def set_state(self, state: int) -> None:
         if 0 <= state <= 2:
@@ -1374,6 +1429,10 @@ class SLMPeriodicTester(QObject):
     @property
     def stage(self):
         return self._calibration_stage
+
+    @property
+    def substage(self):
+        return self._calibration_substage
 
     @property
     def state(self):
