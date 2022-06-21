@@ -124,7 +124,7 @@ class AcousticCalibrator(object):
                 self._nominal_values) and thd_results.shape[1] == len(self._nominal_values):
             # Constructs a multi-index for the measurement value (y), error (E), and expanded uncertainty (U).
             iterables = [['SPL', 'Frequency', 'THD+N'], ['y', 'E', 'U']]
-            index = pd.MultiIndex.from_product(iterables, names=['Quantity', 'Measurement results'])
+            index = pd.MultiIndex.from_product(iterables, names=['Quantity', 'Measurement result'])
             # Constructs the column names for the available nominal combinations SPL-frequency.
             columns = [str(self._nominal_values.iat[i, 0]) + ' dB @ ' + str(self._nominal_values.iat[i, 1]) + ' Hz' for
                        i in range(self._nominal_values.shape[0])]
@@ -508,7 +508,7 @@ class AcousticCalibratorsPeriodicTester(QObject):
     def measure_quantities(self, n_indications: int = 30) -> None:
         """
         Method for measuring the required quantities by the ISO 60942: Sound pressure level, frequency,
-        and harmonic distortion plus noise. Also, this method reports in "real-time" every acquired results.
+        and harmonic distortion plus noise. Also, this method reports in "real-time" every acquired result.
         :param n_indications: An integer number of indications to acquire.
                               Default is 30, for a normal distribution approximation.
         :return: None
@@ -726,16 +726,38 @@ class SoundLevelMeter(object):
                              'including uncertainties.')
         self._mic = {'Brand': mic_brand, 'Model': mic_model, 'S/N': mic_sn}
         self._preamplifier = {'Brand': pre_brand, 'Model': pre_model, 'S/N': pre_sn}
-        df = pd.DataFrame(data=np.empty((27, 5), dtype=str),
-                          index=pd.MultiIndex.from_product([[*'ACZ'],
-                                                            np.array([63, 125, 250, 500, 1e3, 2e3, 4e3, 8e3, 16e3],
-                                                                     dtype=int)]),
-                          columns=['V', 'L', 'L_rel', 'R', 'LR_rel'])
+        fw_df = pd.DataFrame(data=np.empty((27, 5), dtype=str),
+                             index=pd.MultiIndex.from_product([[*'ACZ'],
+                                                               np.array([63, 125, 250, 500, 1e3, 2e3, 4e3, 8e3, 16e3],
+                                                                        dtype=int)]),
+                             columns=['V', 'L', 'L_rel', 'R', 'LR_rel'])
+        fw1kHz_df = pd.DataFrame(data=np.empty((3, 3), dtype=str),
+                                 index=[*'ACZ'],
+                                 columns=['V', 'L', 'L_rel'])
+        tw1kHz_df = pd.DataFrame(data=np.empty((3, 3), dtype=str),
+                                 index=['F', 'S', 'eq'],
+                                 columns=['V', 'L', 'L_rel'])
+        ind = np.arange(self._lin_start_point, self._frequency_ranges['8 kHz'][1], 5)
+        ind = np.append(ind, np.arange(ind[-1] + 1, self._frequency_ranges['8 kHz'][1] + 1, 1))
+        ind = np.append(ind, np.arange(self._lin_start_point, self._frequency_ranges['8 kHz'][0], -5))
+        ind = np.append(ind, np.arange(ind[1] - 1, self._frequency_ranges['8 kHz'][0] - 1, -1))
+        ref_linearity_df = pd.DataFrame(data=np.empty((ind.shape[0], 4), dtype=str),
+                                        index=ind,
+                                        columns=['V', 'G', 'L', 'L_rel'])
         self._calibration_results = {'Initial Adjustment': 0.0,
                                      'Calibration Check': pd.DataFrame(),
                                      'Power Supply': pd.DataFrame(),
                                      'Reference Voltage': pd.DataFrame(),
-                                     'Electrical Frequency Weightings': df}
+                                     'Electrical Frequency Weightings': fw_df,
+                                     'Frequency Weightings 1 kHz': fw1kHz_df,
+                                     'Time Weightings 1 kHz': tw1kHz_df,
+                                     'Linearity Reference Range': ref_linearity_df}
+        for weighting in [*'ACZ']:
+            self._calibration_results['Electrical Frequency Weightings'].loc[weighting, 'LR_rel'] = np.zeros(9)
+            R = self._electrical_ff_corrections[['Mic [dB]', 'Case [dB]', 'Screen [dB]']].sum(axis=1)
+            self._calibration_results['Electrical Frequency Weightings'].loc[weighting, 'R'] = R.values
+        self._calibration_results['Frequency Weightings 1 kHz'].loc[:] = np.zeros((3, 3))
+        self._calibration_results['Time Weightings 1 kHz'].loc[:] = np.zeros((3, 3))
 
     def set_power_supply_values(self, values: np.ndarray) -> None:
         """
@@ -788,6 +810,58 @@ class SoundLevelMeter(object):
         df.iloc[0, 3] = pow(10, df.iloc[0, 2] / 20)  # The corresponding voltage to that level
         self._calibration_results['Reference Voltage'] = df
 
+    def set_fweightings_result(self, weighting: str, result: float, frequency: int) -> None:
+        """
+        This method stores the given measurement value at the given frequency for the given
+        weighting in the calibration results dataframe. Also, calculates and corrects the relative
+        levels to the level at 1 kHz
+        :param weighting: String character, either A, C or Z.
+        :param result: The measurement value
+        :param frequency: The frequency on which the measurement value was taken
+        :return: None
+        """
+        self._calibration_results['Electrical Frequency Weightings'].loc[(weighting, frequency), 'L'] = result
+        L_1k = self._calibration_results['Electrical Frequency Weightings'].loc[(weighting, 1000), 'L']
+        if L_1k != '':
+            L_rel = L_1k - self._calibration_results['Electrical Frequency Weightings'].loc[weighting, 'L']
+            LR_rel = L_rel + self._calibration_results['Electrical Frequency Weightings'].loc[weighting, 'R']
+            self._calibration_results['Electrical Frequency Weightings'].loc[weighting, 'L_rel'] = L_rel
+            self._calibration_results['Electrical Frequency Weightings'].loc[weighting, 'LR_rel'] = LR_rel
+
+    def set_ft_weightings_1kHz_result(self, is_freq: bool, result: float, substage: int) -> None:
+        """
+        This method stores the given measurement value at the given substage.
+        The substage is related to the frequency or time weighting which the measurement value was taken.
+        :param is_freq: True if the value is a result for the frequency weightings, false if it's for time weightings.
+        :param result: The measurement value
+        :param substage: The integer tag of the substage on which the measurement value was taken
+        :return: None
+        """
+        if is_freq:
+            self._calibration_results['Frequency Weightings 1 kHz'].loc[[*'ACZ'][substage], 'L'] = result
+            LAF = self._calibration_results['Frequency Weightings 1 kHz'].loc['A', 'L']
+            L_rel = LAF - self._calibration_results['Frequency Weightings 1 kHz']['L']
+            self._calibration_results['Frequency Weightings 1 kHz']['L_rel'] = L_rel
+        else:
+            self._calibration_results['Time Weightings 1 kHz'].loc[['F', 'S', 'eq'][substage], 'L'] = result
+            LAF = self._calibration_results['Time Weightings 1 kHz'].loc['F', 'L']
+            L_rel = LAF - self._calibration_results['Time Weightings 1 kHz']['L']
+            self._calibration_results['Time Weightings 1 kHz']['L_rel'] = L_rel
+
+    def set_linearity_ref_range_result(self, result: float, substage: int) -> None:
+        """
+        This method stores the given measurement value at the given substage.
+        The substage is related to the level on the linearity range on which the measurement value was taken.
+        :param result: The measurement value
+        :param substage: The integer tag of the substage on which the measurement value was taken
+        :return:
+        """
+        levels = self._calibration_results['Linearity Reference Range'].index
+        self._calibration_results['Linearity Reference Range'].loc[levels[substage], 'L'] = result
+        L_ref = self._calibration_results['Linearity Reference Range'].loc[self._lin_start_point, 'L']
+        L_rel = L_ref - self._calibration_results['Linearity Reference Range']['L']
+        self._calibration_results['Linearity Reference Range']['L_rel'] = L_rel
+
     # Get methods
     @property
     def info(self):
@@ -808,6 +882,10 @@ class SoundLevelMeter(object):
     @property
     def reference_level(self):
         return self._reference_level
+
+    @property
+    def lin_start_point(self):
+        return self._lin_start_point
 
     @property
     def frequency_ranges(self):
@@ -937,6 +1015,7 @@ class SLMPeriodicTester(QObject):
     measurementProgress = pyqtSignal(int)  # Signal for updating the measurement progress in function of every stage
     calibrationProgress = pyqtSignal(int)  # Signal for updating the general calibration progress
     realTimeValues = pyqtSignal(tuple)  # Real time values reporting signal
+    gainChanged = pyqtSignal(int)  # Sinal for indicating a manual change required on the attenuation of DecadeBox
     timerStarted = pyqtSignal(bool)  # Signal for indicating the state of a timer related to the frames acquiring
     loggingMsg = pyqtSignal(tuple)  # Signal for transmitting a logging message.
 
@@ -952,7 +1031,8 @@ class SLMPeriodicTester(QObject):
 
     __slots__ = ['_resource_manager', '_AFG', '_DMM', '_calibration_consecutive', '_dut', '_customer_info',
                  '_ambient_conditions_values', '_camera', '_result_box', '_calibration_stage', '_calibration_substage',
-                 '_calibration_state', '_power_supply_results', 'fweighting_results', 'elect_stab_time']
+                 '_calibration_state', '_power_supply_results', 'fweighting_results', 'f_weightings_1kHz',
+                 't_weightings_1kHz', 'linearity_ref_range', 'elect_stab_time']
 
     def __init__(self):
         super().__init__()
@@ -966,7 +1046,14 @@ class SLMPeriodicTester(QObject):
         self._result_box = (0, 0, 0, 0)
         self._calibration_stage = self._calibration_substage = self._calibration_state = 0
         self._power_supply_results = np.empty((2, 2), dtype=float)
-        self.fweighting_results = {'Samples': {}, 'Transition Matrix': {}}
+        self.fweighting_results = {'Samples': {}, 'Transition Matrix': {},
+                                   'Stationary Distribution': {}, 'Expected Value': {}}
+        self.f_weightings_1kHz = {'Samples': {}, 'Transition Matrix': {},
+                                  'Stationary Distribution': {}, 'Expected Value': {}}
+        self.t_weightings_1kHz = {'Samples': {}, 'Transition Matrix': {},
+                                  'Stationary Distribution': {}, 'Expected Value': {}}
+        self.linearity_ref_range = {'Samples': {}, 'Transition Matrix': {},
+                                    'Stationary Distribution': {}, 'Expected Value': {}}
         self.current_frequency = 0  # The current frequency of electrical frequency weightings test
         self.elect_stab_time = 2  # Seconds for stabilisation in electrical tests
         self.wrong_frames = []
@@ -1025,9 +1112,11 @@ class SLMPeriodicTester(QObject):
 
     def run_main_sequence(self):
         """
-        This method executes the corresponding actions for each stage of the calibration, based on the designed GRAFCET.
-        Also, emits the respective signal for communicating with the principal thread indicating a finishing.
+        This method executes the corresponding actions for each step of the calibration,
+        based on the designed algorithm. Also, emits the respective signal for communicating
+        with the principal thread indicating a finishing.
         """
+        from math import log10
         if any([self._calibration_stage == stage for stage in [0, 2, 4]]):
             # Stage transition, it's just virtual, really doesn't do anything.
             # This is called on the start stage, indication at the calibration check frequency and reference voltage.
@@ -1057,24 +1146,34 @@ class SLMPeriodicTester(QObject):
             self.calibrationProgress.emit(self._calibration_stage)
         elif self._calibration_stage == 8:
             # Frequency and time weightings at 1 kHz
-            if self._calibration_substage == 0:
-                self.loggingMsg.emit((1, 'Inicia la prueba de ponderaciones frecuenciales y temporales a 1 kHz.'))
             W = [*'ACZ']
             T = ['S', 'eq']
-            if self._calibration_substage <= 2:
+            if self._calibration_substage == 0:
+                self.loggingMsg.emit((1, 'Inicia la prueba de ponderaciones frecuenciales y temporales a 1 kHz.'))
+            if self._calibration_substage <= 2:  # Frequency weighting label
                 level = f'L{W[self._calibration_substage]}F'
                 self.loggingMsg.emit((0, f'Inicia el reconocimiento del nivel {level}.'))
-            elif self._calibration_substage == 4:
+            elif self._calibration_substage == 3:  # Time weighting label
                 level = f'LA{T[self._calibration_substage - 3]}'
                 self.loggingMsg.emit((0, f'Inicia el reconocimiento del nivel {level}.'))
-            else:
+            else:  # LAeq label
                 level = f'LA{T[self._calibration_substage - 3]}'
                 self.loggingMsg.emit((0, f'Inicia la medición del nivel {level}.'))
             self.test_freqtime_weightings_1kHz()
             self._calibration_substage += 1
             if self._calibration_substage >= 5:
+                self._calibration_substage = 0
                 self._calibration_stage += 1
                 self.loggingMsg.emit((1, 'Finaliza la prueba de ponderaciones frecuenciales y temporales a 1 kHz.'))
+                # self._dut.set_ft_weightings_1kHz_results(self.f_weightings_1kHz, self.t_weightings_1kHz)
+            self.calibrationProgress.emit(self._calibration_stage)
+        elif self._calibration_stage == 9:
+            # Level linearity on the reference level range
+            self.loggingMsg.emit((1, 'Inicia la prueba de linealidad en el rango de niveles de referencia.'))
+            self._calibration_substage = 0
+            self.test_linearity_ref_range()
+            self._calibration_substage = 0
+            self._calibration_stage += 1
             self.calibrationProgress.emit(self._calibration_stage)
 
     def check_state(self):
@@ -1131,10 +1230,18 @@ class SLMPeriodicTester(QObject):
                     are Brand, Model, S/N, ID, GPIB bus and GPIB channel.
         :return: None
         """
+        from math import log10
         self._AFG = self._resource_manager.open_resource(
             'GPIB' + AFG['GPIB bus'] + '::' + AFG['GPIB channel'] + '::INSTR')
         self.loggingMsg.emit((0, "Generador de señales conectado."))
         self._AFG.info = AFG
+        self._AFG.info['Limits'] = pd.DataFrame(data=np.array([[10 ** ((20 * log10(2e-3) - 50) / 20),
+                                                                2e-3, 7, 10 ** ((20 * log10(7) + 6) / 20)],
+                                                               [400e-3, 400e-3, 800e-3, 800e-3]]),
+                                                index=['Out 1', 'Out 2'],
+                                                columns=['With attenuation', 'Without attenuation',
+                                                         'Without gain', 'With gain'])
+        self._AFG.gain = 0
         self._DMM = self._resource_manager.open_resource(
             'GPIB' + DMM['GPIB bus'] + '::' + DMM['GPIB channel'] + '::INSTR')
         self.loggingMsg.emit((0, "Multímetro conectado."))
@@ -1181,7 +1288,7 @@ class SLMPeriodicTester(QObject):
     #             thresh = cv.dilate(thresh, cv.getStructuringElement(cv.MORPH_CROSS, (7, 7)), iterations=3)  # Dilation
     #             plt.imshow(thresh, cmap='gray')
     #             plt.show()
-    #             # Find de possibles bounding rectangles of the results
+    #             # Find de possibles bounding rectangles of the result
     #             cnts = cv.findContours(thresh.copy(), cv.RETR_EXTERNAL, cv.CHAIN_APPROX_SIMPLE)
     #             cnts = imutils.grab_contours(cnts)
     #             for c in cnts:
@@ -1247,6 +1354,8 @@ class SLMPeriodicTester(QObject):
             v = self.level2volt(test_level + w,
                                 (self._dut.reference_level,
                                  self._dut.calibration_results['Reference Voltage'].iat[0, 3]))  # Voltage test
+            self._dut.calibration_results['Electrical Frequency Weightings'].iat[9 * (self._calibration_stage - 5) +
+                                                                                 self._calibration_substage, 0] = v
             # Starts timer for video capturing
             self.timerStarted.emit(True)
             total_time = 0
@@ -1276,7 +1385,6 @@ class SLMPeriodicTester(QObject):
             #         logging.info(f':APPL:SIN {f},{v}')
             #         self._AFG.write(f':APPL:SIN {f},{v}')  # Send test signal of frequency and voltage required
             #         afg_flag = True
-
             self.timerStarted.emit(False)
             self.loggingMsg.emit((0, f"Comando SCPI enviado vía GPIB: 'OUTP 0'."))
             self._AFG.write('OUTP 0')
@@ -1289,16 +1397,24 @@ class SLMPeriodicTester(QObject):
         Method for performing the electrical frequency  and time weightings tests at 1 kHz with electrical signals,
         according to the IEC 61672-3:2013 Art. 13.
         For that purpose, this method starts a timer, sets sine signals of with an amplitude that produce the reference
-        level at 1 kHz, and, after about 25 seconds, finishes the timer. While timer is running, the video frames are
+        level at 1 kHz, and, after about 15 seconds, finishes the timer. While timer is running, the video frames are
         acquired and stored.
         :return: None
         """
         measurement_progress = 0
-        measuring_time = 10  # Time for capturing video frames (including stabilization time)
+        measuring_time = 15  # Time for capturing video frames (including stabilization time)
         total_steps = measuring_time * 10
+        W = [*'ACZ']
+        T = ['S', 'eq']
         v = self.level2volt(self._dut.reference_level,
                             (self._dut.reference_level,
                              self._dut.calibration_results['Reference Voltage'].iat[0, 3]))  # Voltage test
+        if self._calibration_substage <= 2:
+            self._dut.calibration_results['Frequency Weightings 1 kHz'].loc[W[self._calibration_substage], 'V'] = v
+            if self._calibration_substage == 0:
+                self._dut.calibration_results['Time Weightings 1 kHz'].loc['F', 'V'] = v
+        else:
+            self._dut.calibration_results['Time Weightings 1 kHz'].loc[T[self._calibration_substage - 3], 'V'] = v
         self.timerStarted.emit(True)
         total_time = 0
         afg_flag = False
@@ -1308,15 +1424,69 @@ class SLMPeriodicTester(QObject):
             total_time += t / 10
             measurement_progress += 1 / total_steps * 100
             self.measurementProgress.emit(int(measurement_progress))
-            if not afg_flag and total_time >= 0.3 and self._calibration_substage == 0:
+            if not afg_flag and total_time >= 0.3:
                 self.loggingMsg.emit((0, f"Comando SCPI enviado vía GPIB: ':APPL:SIN 1000,{v}'."))
                 self._AFG.write(f':APPL:SIN 1000,{v}')  # Send test signal of frequency and voltage required
                 afg_flag = True
         self.timerStarted.emit(False)
-        if self._calibration_substage == 5:
-            self.loggingMsg.emit((0, f"Comando SCPI enviado vía GPIB: 'OUTP 0'."))
-            self._AFG.write('OUTP 0')
-            self.measurementProgress.emit(0)
+        self.loggingMsg.emit((0, f"Comando SCPI enviado vía GPIB: 'OUTP 0'."))
+        self._AFG.write('OUTP 0')
+        self.measurementProgress.emit(0)
+
+    def test_linearity_ref_range(self) -> None:
+        """
+        Method for performing the level linearity on the reference level range test, according to the IEC 61672-3:2013
+        Art. 16. For that purpose, this method starts a timer, sets sine signals of certain amplitude depending on the
+        level on the linearity range, and, after about 25 seconds, finishes the timer. While timer is running,
+        the video frames are acquired and stored.
+        :return: None
+        """
+        from math import log10, ceil
+        measurement_progress = 0
+        measuring_time = 25  # Time for capturing video frames (including stabilization time)
+        total_steps = measuring_time * 10 * self._dut.calibration_results['Linearity Reference Range'].shape[0]
+        v_ref = self._dut.calibration_results['Reference Voltage']['Middle V']
+        fw_corr = self._dut.calibration_results['Electrical Frequency Weightings'].loc[('A', 8000), 'LR_rel']
+        ff_corr = self._dut.calibration_results['Electrical Frequency Weightings'].loc[('A', 8000), 'R']
+        lin_start_lev = 20 * log10(v_ref) - (self._dut.lin_start_point -
+                                             self._dut.reference_level) + 1.1 - fw_corr + ff_corr
+        for i in range(self._dut.calibration_results['Linearity Reference Range'].shape[0]):
+            lev = self._dut.calibration_results['Linearity Reference Range'].index[i]
+            v = 10 ** (((lev - self._dut.lin_start_point) + lin_start_lev) / 20)
+            gain = 0
+            if v > self._AFG.info['Limits'].loc['Out 1', 'Without gain']:  # Checks if voltage requires gain or atten
+                gain = 6
+            elif v < self._AFG.info['Limits'].loc['Out 1', 'Without attenuation']:
+                gain = -ceil((20 * log10(self._AFG.info['Limits'].loc['Out 1', 'Without attenuation']) -
+                              20 * log10(v)) / 10) * 10
+            self._dut.calibration_results['Linearity Reference Range'].iat[i, 1] = gain
+            v = 10 ** ((20 * log10(v) - gain) / 20)  # Adjusts the voltage to the calculated gain or attenuation
+            self._dut.calibration_results['Linearity Reference Range'].iat[i, 0] = v
+            if gain != self._AFG.gain:  # Ask for a manual change of gain on DecadeBox and waits to continue
+                self.gainChanged.emit(int(gain))
+                self._AFG.gain = gain
+                self.set_state(2)
+                self.check_state()
+            # Starts timer for video capturing
+            self.timerStarted.emit(True)
+            total_time = 0
+            afg_flag = False
+            for t in range(1, measuring_time * 10 + 1):
+                self.check_state()
+                sleep(1 / 10)
+                total_time += t / 10
+                measurement_progress += 1 / total_steps * 100
+                self.measurementProgress.emit(int(measurement_progress))
+                if not afg_flag and total_time >= 0.3:
+                    self.loggingMsg.emit((0, f"Comando SCPI enviado vía GPIB: ':APPL:SIN 8000,{v}'."))
+                    self._AFG.write(f':APPL:SIN 8000,{v}')  # Send test signal of frequency and voltage required
+                    afg_flag = True
+            self.timerStarted.emit(False)
+            self._calibration_substage += 1
+            sleep(1)
+        self.loggingMsg.emit((0, f"Comando SCPI enviado vía GPIB: 'OUTP 0'."))
+        self._AFG.write('OUTP 0')
+        self.measurementProgress.emit(0)
 
     def set_state(self, state: int) -> None:
         if 0 <= state <= 2:
@@ -1326,22 +1496,24 @@ class SLMPeriodicTester(QObject):
         else:
             raise RuntimeError('You most assign only 0: stopped, 1: running, 2: paused.')
 
-    def read_screen(self, img: np.ndarray) -> float:
+    def read_screen(self, img: np.ndarray, stabilization: bool) -> float:
         """
         This method segments each digit with threshold Otsu, extracts a features vector based on SIFT
         descriptor, reduces the dimensionality by KPCA, and finally classify the samples
-        with a Gaussian naive Bayes classifier.
+        with a Gaussian naive Bayes classifier
         :param img: The matrix representation of the image in uint8 format (OpenCV).
-        :return: The results obtained as a float number.
+        :param stabilization: True or False indicating if the given frames corresponds to the stabilization time or not.
+        :return: The result obtained as a float number.
         """
         descriptor = cv.SIFT_create()  # Crea un descriptor SIFT
         X = []  # Features arrays of test samples
         # Gaussian filter
-        roi = cv.GaussianBlur(img.copy(), ksize=(0, 0), sigmaX=1.3)
-        img_bin = cv.threshold(roi, 0, 255, cv.THRESH_BINARY | cv.THRESH_OTSU)[1]  # Otsu binarization
+        roi = cv.GaussianBlur(img.copy(), ksize=(0, 0), sigmaX=1.7)
+        img_bin_full = cv.threshold(roi, 0, 255, cv.THRESH_BINARY | cv.THRESH_OTSU)[1]  # Otsu binarization
         # Localization of each digit
-        digits_contours, _ = cv.findContours(img_bin, cv.RETR_EXTERNAL, cv.CHAIN_APPROX_SIMPLE)
+        digits_contours, _ = cv.findContours(img_bin_full, cv.RETR_EXTERNAL, cv.CHAIN_APPROX_SIMPLE)
         x_coords = []
+        digits = []
         for digit_contour in digits_contours:
             [x, y_hat, w, h] = cv.boundingRect(digit_contour)
             digit = roi[y_hat:y_hat + h, x:x + w]
@@ -1361,6 +1533,7 @@ class SLMPeriodicTester(QObject):
             _, des = descriptor.compute(img_bin, key_points)  # Computes SIFT descriptor
             X.append(des.flatten())  # Add the features vector of the actual sample
             x_coords.append(x)
+            digits.append(img_bin)
 
         x_coords = np.array(x_coords)
         X = np.array(X)  # Convert test sample features vector to numpy array
@@ -1376,13 +1549,19 @@ class SLMPeriodicTester(QObject):
                 char = '.'
             result += char
         try:
+            if float(result) > 180 and not stabilization:
+                self.loggingMsg.emit((2, f'Error en reconocimiento, valor ignorado: {result} dB.'))
+                self.wrong_frames.append([img_bin_full, digits])
+                with open('CalibrationResults/ElectricalFrequencyWeightings/wrong_frames.pkl', 'wb') as file:
+                    pickle.dump(self.wrong_frames, file)
             return float(result)
-        except:
+        except ValueError:
             # For debugging purposes only, here, the wrong recognized frames are stored on disk.
-            self.loggingMsg.emit((2, f'Error en reconocimiento, valor detectado: {result} dB.'))
-            self.wrong_frames.append(roi)
-            with open('CalibrationResults/ElectricalFrequencyWeightings/wrong_frames.pkl', 'wb') as file:
-                pickle.dump(self.wrong_frames, file)
+            if not stabilization:
+                self.loggingMsg.emit((2, f'Error en reconocimiento, valor ignorado: {result} dB.'))
+                self.wrong_frames.append([img_bin_full, digits])
+                with open('CalibrationResults/ElectricalFrequencyWeightings/wrong_frames.pkl', 'wb') as file:
+                    pickle.dump(self.wrong_frames, file)
             return np.nan
 
     @staticmethod

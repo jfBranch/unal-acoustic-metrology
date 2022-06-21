@@ -1,3 +1,3 @@
-Cargar correcciones de campo libre de forma automática con modelos preestablecidos. Si no se encuentra el modelo, solicitarlo al usuario.
-
-Incluir mensajes de logging en la GUI
+Resumir la descripción de la arquitectura para ambos instrumentos antes de las secciones.
+Compilar gráficas primero en PDF y luego insertar el PDF en LaTex
+Implementar exportación de matrices de markov

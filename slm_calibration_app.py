@@ -227,17 +227,17 @@ class SonometersCalibrationUI(QtWidgets.QMainWindow):
         self.aWeightLabel = QtWidgets.QLabel(self.weightingsTab)
         self.fW1kGridLayout = QtWidgets.QGridLayout()
         self.fWVLine4 = QtWidgets.QFrame(self.weightingsTab)
-        self.bW1kHzLevLabel = QtWidgets.QLabel(self.weightingsTab)
+        self.cW1kHzLevLabel = QtWidgets.QLabel(self.weightingsTab)
         self.aW1kHzLabel = QtWidgets.QLabel(self.weightingsTab)
         self.aW1kHzLevLabel = QtWidgets.QLabel(self.weightingsTab)
-        self.bW1kHzLabel = QtWidgets.QLabel(self.weightingsTab)
-        self.aW1kHzRLevLabel = QtWidgets.QLabel(self.weightingsTab)
         self.cW1kHzLabel = QtWidgets.QLabel(self.weightingsTab)
-        self.cW1kHzLevLabel = QtWidgets.QLabel(self.weightingsTab)
+        self.aW1kHzRLevLabel = QtWidgets.QLabel(self.weightingsTab)
+        self.zW1kHzLabel = QtWidgets.QLabel(self.weightingsTab)
+        self.zW1kHzLevLabel = QtWidgets.QLabel(self.weightingsTab)
         self.fWRLevLabel = QtWidgets.QLabel(self.weightingsTab)
-        self.cW1kHzRLevLabel = QtWidgets.QLabel(self.weightingsTab)
+        self.zW1kHzRLevLabel = QtWidgets.QLabel(self.weightingsTab)
         self.fWLevLabel = QtWidgets.QLabel(self.weightingsTab)
-        self.bW1kHzRLevLabel = QtWidgets.QLabel(self.weightingsTab)
+        self.cW1kHzRLevLabel = QtWidgets.QLabel(self.weightingsTab)
         self.fWVLine2 = QtWidgets.QFrame(self.weightingsTab)
         self.fWVLine3 = QtWidgets.QFrame(self.weightingsTab)
         self.fWVLine1 = QtWidgets.QFrame(self.weightingsTab)
@@ -973,10 +973,10 @@ class SonometersCalibrationUI(QtWidgets.QMainWindow):
         self.fWVLine4.setFrameShadow(QtWidgets.QFrame.Sunken)
         self.fWVLine4.setObjectName("fWVLine4")
         self.fW1kGridLayout.addWidget(self.fWVLine4, 2, 1, 5, 1)
-        self.bW1kHzLevLabel.setText("")
-        self.bW1kHzLevLabel.setAlignment(QtCore.Qt.AlignCenter)
-        self.bW1kHzLevLabel.setObjectName("bW1kHzLevLabel")
-        self.fW1kGridLayout.addWidget(self.bW1kHzLevLabel, 4, 2, 1, 1)
+        self.cW1kHzLevLabel.setText("")
+        self.cW1kHzLevLabel.setAlignment(QtCore.Qt.AlignCenter)
+        self.cW1kHzLevLabel.setObjectName("cW1kHzLevLabel")
+        self.fW1kGridLayout.addWidget(self.cW1kHzLevLabel, 4, 2, 1, 1)
         font = QtGui.QFont()
         font.setBold(True)
         font.setWeight(75)
@@ -992,9 +992,9 @@ class SonometersCalibrationUI(QtWidgets.QMainWindow):
         font = QtGui.QFont()
         font.setBold(True)
         font.setWeight(75)
-        self.bW1kHzLabel.setFont(font)
-        self.bW1kHzLabel.setObjectName("bW1kHzLabel")
-        self.fW1kGridLayout.addWidget(self.bW1kHzLabel, 4, 0, 1, 1)
+        self.cW1kHzLabel.setFont(font)
+        self.cW1kHzLabel.setObjectName("cW1kHzLabel")
+        self.fW1kGridLayout.addWidget(self.cW1kHzLabel, 4, 0, 1, 1)
         self.aW1kHzRLevLabel.setText("")
         self.aW1kHzRLevLabel.setAlignment(QtCore.Qt.AlignCenter)
         self.aW1kHzRLevLabel.setObjectName("aW1kHzRLevLabel")
@@ -1003,13 +1003,13 @@ class SonometersCalibrationUI(QtWidgets.QMainWindow):
         font = QtGui.QFont()
         font.setBold(True)
         font.setWeight(75)
-        self.cW1kHzLabel.setFont(font)
-        self.cW1kHzLabel.setObjectName("cW1kHzLabel")
-        self.fW1kGridLayout.addWidget(self.cW1kHzLabel, 6, 0, 1, 1)
-        self.cW1kHzLevLabel.setText("")
-        self.cW1kHzLevLabel.setAlignment(QtCore.Qt.AlignCenter)
-        self.cW1kHzLevLabel.setObjectName("cW1kHzLevLabel")
-        self.fW1kGridLayout.addWidget(self.cW1kHzLevLabel, 6, 2, 1, 1)
+        self.zW1kHzLabel.setFont(font)
+        self.zW1kHzLabel.setObjectName("zW1kHzLabel")
+        self.fW1kGridLayout.addWidget(self.zW1kHzLabel, 6, 0, 1, 1)
+        self.zW1kHzLevLabel.setText("")
+        self.zW1kHzLevLabel.setAlignment(QtCore.Qt.AlignCenter)
+        self.zW1kHzLevLabel.setObjectName("zW1kHzLevLabel")
+        self.fW1kGridLayout.addWidget(self.zW1kHzLevLabel, 6, 2, 1, 1)
         self.fWRLevLabel.setMinimumSize(QtCore.QSize(75, 0))
         font = QtGui.QFont()
         font.setBold(True)
@@ -1018,10 +1018,10 @@ class SonometersCalibrationUI(QtWidgets.QMainWindow):
         self.fWRLevLabel.setAlignment(QtCore.Qt.AlignCenter)
         self.fWRLevLabel.setObjectName("fWRLevLabel")
         self.fW1kGridLayout.addWidget(self.fWRLevLabel, 0, 4, 1, 1)
-        self.cW1kHzRLevLabel.setText("")
-        self.cW1kHzRLevLabel.setAlignment(QtCore.Qt.AlignCenter)
-        self.cW1kHzRLevLabel.setObjectName("cW1kHzRLevLabel")
-        self.fW1kGridLayout.addWidget(self.cW1kHzRLevLabel, 6, 4, 1, 1)
+        self.zW1kHzRLevLabel.setText("")
+        self.zW1kHzRLevLabel.setAlignment(QtCore.Qt.AlignCenter)
+        self.zW1kHzRLevLabel.setObjectName("zW1kHzRLevLabel")
+        self.fW1kGridLayout.addWidget(self.zW1kHzRLevLabel, 6, 4, 1, 1)
         self.fWLevLabel.setMinimumSize(QtCore.QSize(75, 0))
         font = QtGui.QFont()
         font.setBold(True)
@@ -1030,10 +1030,10 @@ class SonometersCalibrationUI(QtWidgets.QMainWindow):
         self.fWLevLabel.setAlignment(QtCore.Qt.AlignCenter)
         self.fWLevLabel.setObjectName("fWLevLabel")
         self.fW1kGridLayout.addWidget(self.fWLevLabel, 0, 2, 1, 1)
-        self.bW1kHzRLevLabel.setText("")
-        self.bW1kHzRLevLabel.setAlignment(QtCore.Qt.AlignCenter)
-        self.bW1kHzRLevLabel.setObjectName("bW1kHzRLevLabel")
-        self.fW1kGridLayout.addWidget(self.bW1kHzRLevLabel, 4, 4, 1, 1)
+        self.cW1kHzRLevLabel.setText("")
+        self.cW1kHzRLevLabel.setAlignment(QtCore.Qt.AlignCenter)
+        self.cW1kHzRLevLabel.setObjectName("cW1kHzRLevLabel")
+        self.fW1kGridLayout.addWidget(self.cW1kHzRLevLabel, 4, 4, 1, 1)
         self.fWVLine2.setFrameShape(QtWidgets.QFrame.VLine)
         self.fWVLine2.setFrameShadow(QtWidgets.QFrame.Sunken)
         self.fWVLine2.setObjectName("fWVLine2")
@@ -1497,8 +1497,8 @@ class SonometersCalibrationUI(QtWidgets.QMainWindow):
         self.cWeightLabel.setText(_translate("MainWindow", "PONDERACIÓN FRECUENCIAL C"))
         self.aWeightLabel.setText(_translate("MainWindow", "PONDERACIÓN FRECUENCIAL A"))
         self.aW1kHzLabel.setText(_translate("MainWindow", "A"))
-        self.bW1kHzLabel.setText(_translate("MainWindow", "B"))
         self.cW1kHzLabel.setText(_translate("MainWindow", "C"))
+        self.zW1kHzLabel.setText(_translate("MainWindow", "Z"))
         self.fWRLevLabel.setText(_translate("MainWindow", "Relativo [dB]"))
         self.fWLevLabel.setText(_translate("MainWindow", "Nivel [dB]"))
         self.fW1kHzLabel.setText(_translate("MainWindow", "FRECUENCIALES A 1 kHz"))
@@ -1564,7 +1564,7 @@ class GUIController(object):
         self.AFG_info = {}
         self.DecadeBox_info = {}
         self.DMM_info = {}
-        self.self_test_passed = False  # Instance flag to save the results of self-test
+        self.self_test_passed = False  # Instance flag to save the result of self-test
         empty_array = np.empty((9, 6))
         empty_array[:] = np.nan
         self.electric_ff_corrections = pd.DataFrame(empty_array)
@@ -1617,7 +1617,7 @@ class GUIController(object):
 
         self._TESTER.timerStarted.connect(self.capture_frames)
         self._TESTER.loggingMsg.connect(self.print_logging_msg)
-        # self._TESTER.realTimeValues.connect(self.update_real_time_values)
+        self._TESTER.gainChanged.connect(self.ask_gain_manual_change)
 
         # Connect signals of the camera worker and thread
         self.cameraWorker.moveToThread(self.cameraThread)
@@ -1625,6 +1625,8 @@ class GUIController(object):
         self.cameraWorker.frameCaptured.connect(self.stream_frame)
         self.cameraWorker.cameraReleased.connect(self.cameraThread.quit)
         self.cameraWorker.loggingMsg.connect(self.print_logging_msg)
+        self.imgProcessingThread.loggingMsg.connect(self.print_logging_msg)
+        self.imgProcessingThread.realTimeValues.connect(self.update_real_time_values)
         # self.cameraThread.finished.connect(self.cameraThread.deleteLater)
         # self.cameraWorker.cameraReleased.connect(self.cameraWorker.deleteLater)
 
@@ -1963,8 +1965,7 @@ class GUIController(object):
             self.timer_started = timer_started
             mutex.unlock()
             self.print_logging_msg((0, f'Añadiendo {len(self.frames)} cuadros de vídeo a la cola.'))
-            if self._TESTER.stage < 8:
-                self.frames_queue.put(self.frames)
+            self.frames_queue.put(self.frames)
             del self.frames
 
             # video_writer = cv.VideoWriter('video_test.avi',
@@ -2055,8 +2056,8 @@ class GUIController(object):
             self.instruction.setWindowIcon(icon)
             self.instruction.setWindowModality(QtCore.Qt.WindowModal)
             self.instruction.setWindowFlags(QtCore.Qt.WindowStaysOnTopHint)
-            self.instruction.show()
             self.instruction.finished.connect(self.parallel_dialog_response)
+            self.instruction.show()
         elif self._TESTER.stage == 8:
             if not self.streaming_running:
                 self.streaming_control()
@@ -2079,7 +2080,7 @@ class GUIController(object):
                 self.instruction = InstructionDialog(None,
                                                      '1. Ajuste el sonómetro para medir un nivel promediado' +
                                                      'en el tiempo durante 10 s.\n' +
-                                                     '2. Inicie la medición en el sonómetro y haga clic en Aceptar. ' +
+                                                     '2. Inicie la medición en el sonómetro y haga clic en Ok. ' +
                                                      'Al finalizar la medición anote el resultado en su ' +
                                                      'campo correspondiente.')
             icon = QtGui.QIcon()
@@ -2087,8 +2088,25 @@ class GUIController(object):
             self.instruction.setWindowIcon(icon)
             self.instruction.setWindowModality(QtCore.Qt.WindowModal)
             self.instruction.setWindowFlags(QtCore.Qt.WindowStaysOnTopHint)
-            self.instruction.show()
             self.instruction.finished.connect(self.parallel_dialog_response)
+            self.instruction.show()
+        elif self._TESTER.stage == 9:
+            if not self.streaming_running:
+                self.streaming_control()
+            self.instruction = InstructionDialog(None,
+                                                 '1. Ajuste el sonómetro para mostrar un nivel de ' +
+                                                 'sonido con ponderación temporal Fast y ponderación ' +
+                                                 f'frecuencial A.\n' +
+                                                 '2. Ajuste la región de interés en el área de vídeo ' +
+                                                 'de forma que abarque el valor numérico del nivel de sonido.\n' +
+                                                 '3. Haga clic en Ok para iniciar la prueba.')
+            icon = QtGui.QIcon()
+            icon.addPixmap(QtGui.QPixmap(":/icons/slm_icon.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+            self.instruction.setWindowIcon(icon)
+            self.instruction.setWindowModality(QtCore.Qt.WindowModal)
+            self.instruction.setWindowFlags(QtCore.Qt.WindowStaysOnTopHint)
+            self.instruction.finished.connect(self.parallel_dialog_response)
+            self.instruction.show()
 
     def eval_answer(self, instruction) -> None:
         """
@@ -2109,12 +2127,33 @@ class GUIController(object):
         :return: None
         """
         if answer == QtWidgets.QMessageBox.Ok:
-            self.calibrationThread.start()
+            if not self.calibrationThread.isRunning():
+                self.calibrationThread.start()
+            else:
+                self._TESTER.set_state(1)
             if not self.imgProcessingThread.isRunning():
                 self.imgProcessingThread.start()
         else:
             self._gui.actionStart.setEnabled(True)
             self._gui.actionPause.setEnabled(False)
+
+    def ask_gain_manual_change(self, gain) -> None:
+        """
+        This is a simple method that shows an instruction on the way asking for a change on the gain or
+        attenuation of the DecadeBox.
+        :param gain: Tha gain to be adjusted
+        :return: None
+        """
+        self.instruction = InstructionDialog(None,
+                                             f'1. Ajuste la ganancia del DecadeBox en {gain} dB.\n' +
+                                             '2. Haga clic en Ok para continuar la calibración.')
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap(":/icons/slm_icon.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.instruction.setWindowIcon(icon)
+        self.instruction.setWindowModality(QtCore.Qt.WindowModal)
+        self.instruction.setWindowFlags(QtCore.Qt.WindowStaysOnTopHint)
+        self.instruction.finished.connect(self.parallel_dialog_response)
+        self.instruction.show()
 
     def show_power_supply_values(self) -> None:
         """
@@ -2162,6 +2201,40 @@ class GUIController(object):
             QtWidgets.QMessageBox.warning(self._gui, 'Advertencia',
                                           'No han sido ingresados los dos voltajes\n' +
                                           'que producen una indicación de referencia.')
+
+    def update_real_time_values(self, data: tuple) -> None:
+        """
+        This method is called every time a value is recognized on the screen. This method shows the results of the
+        current test on the corresponding field of the GUI
+        :param data: A tuple with the form (dataframe of results, stage, substage)
+        :return: None
+        """
+        stage = data[1]
+        substage = data[2]
+        model = PandasTableModel(data[0])
+        if stage == 5:  # Electric A frequency weighting test
+            self._gui.aWTableView.setModel(model)
+        elif stage == 6:  # Electric C frequency weighting test
+            self._gui.cWTableView.setModel(model)
+        elif stage == 7:  # Electric Z frequency weighting test
+            self._gui.zWTableView.setModel(model)
+        elif stage == 8:  # Time and frequency weightings at 1 kHz
+            if substage == 0:  # LAF
+                self._gui.aW1kHzLevLabel.setText(data[0].at[[*'ACZ'][substage], 'L'])
+                self._gui.aW1kHzRLevLabel.setText('0.0')
+                self._gui.fastWLevLabel.setText(data[0].at[[*'ACZ'][substage], 'L'])
+                self._gui.fastWRLevLabel.setText(data[0].at[[*'ACZ'][substage], 'L'])
+            elif substage == 1:  # LCF
+                self._gui.cW1kHzLevLabel.setText(data[0].at[[*'ACZ'][substage], 'L'])
+                self._gui.cW1kHzRLevLabel.setText(data[0].at[[*'ACZ'][substage], 'L_rel'])
+            elif substage == 2:  # LZF
+                self._gui.zW1kHzLevLabel.setText(data[0].at[[*'ACZ'][substage], 'L'])
+                self._gui.zW1kHzRLevLabel.setText(data[0].at[[*'ACZ'][substage], 'L_rel'])
+            elif substage == 3:  # LAS
+                self._gui.slowWLevLabel.setText(data[0].at[['F', 'S', 'eq'][substage - 3], 'L'])
+                self._gui.slowWRLevLabel.setText(data[0].at[['F', 'S', 'eq'][substage - 3], 'L_rel'])
+        elif stage == 9:  # Level linearity on the reference level range
+            self._gui.linearityTableView.setModel(model)
 
     @staticmethod
     def img2qpixmap(img: np.ndarray) -> QtGui.QPixmap:
@@ -2330,6 +2403,52 @@ class EditablePandasTableModel(QtCore.QAbstractTableModel):
             return True
 
 
+class PandasTableModel(QtCore.QAbstractTableModel):
+    """
+    This class is the implementation of a table model.
+    The model is created from a Pandas DataFrame.
+    """
+
+    def __init__(self, df, parent=None):
+        QtCore.QAbstractTableModel.__init__(self, parent=parent)
+        self._df = df
+
+    def headerData(self, section, orientation, role=QtCore.Qt.DisplayRole):
+        if role != QtCore.Qt.DisplayRole:
+            return QtCore.QVariant()
+
+        if orientation == QtCore.Qt.Horizontal:
+            try:
+                return self._df.columns.tolist()[section]
+            except (IndexError,):
+                return QtCore.QVariant()
+        elif orientation == QtCore.Qt.Vertical:
+            try:
+                # return self.df.index.tolist()
+                return self._df.index.tolist()[section]
+            except (IndexError,):
+                return QtCore.QVariant()
+
+    def data(self, index, role=QtCore.Qt.DisplayRole):
+        if role != QtCore.Qt.DisplayRole:
+            return QtCore.QVariant()
+
+        if not index.isValid():
+            return QtCore.QVariant()
+
+        if role == QtCore.Qt.DisplayRole:
+            return QtCore.QVariant(str(self._df.iat[index.row(), index.column()]))
+
+        elif role == QtCore.Qt.TextAlignmentRole:
+            return Qt.AlignCenter
+
+    def rowCount(self, parent=QtCore.QModelIndex()):
+        return len(self._df.index)
+
+    def columnCount(self, parent=QtCore.QModelIndex()):
+        return len(self._df.columns)
+
+
 class VideoObject(QtCore.QObject):
     """
     This class is responsible for taking the video frames and transmit them in real time from a parallel thread to the
@@ -2428,7 +2547,7 @@ class ImageProcessingThread(QtCore.QThread):
     Attributes
     ----------
     realTimeValues: pyqtSignal
-        This signals shares the measurement value computed.
+        This signal shares a tuple with the measurement dataframe and the stage which the dataframe corresponds.
     loggingMsg: pyqtSignal
         This signal is for transmitting loggin messages to the GUI list widget.
     _frames_queue: Queue
@@ -2453,7 +2572,7 @@ class ImageProcessingThread(QtCore.QThread):
         This method executes the parallel processing and recognizing of the video frames. Also constructs the
         stochastic model.
     """
-    realTimeValues = QtCore.pyqtSignal(float)
+    realTimeValues = QtCore.pyqtSignal(tuple)
     loggingMsg = QtCore.pyqtSignal(tuple)
 
     def __init__(self, frames_queue: Queue, tester: ac.SLMPeriodicTester, camera: VideoObject):
@@ -2475,7 +2594,7 @@ class ImageProcessingThread(QtCore.QThread):
         :return: None
         """
         self._stage = self._TESTER.stage
-        while self._stage < 8:
+        while self._stage < 10:
             if not self._frames_queue.empty():  # If there is any video in the queue
                 frames = self._frames_queue.get()
                 frames = np.array([cv.cvtColor(frame, cv.COLOR_BGR2GRAY) for frame in frames])
@@ -2483,63 +2602,142 @@ class ImageProcessingThread(QtCore.QThread):
                 # and then computes downsampling in order to obtain the "true" samples from the screen.
                 stab_frames = frames[:self._TESTER.elect_stab_time * self.fps, :, :]  # Samples until stabilization
                 self.loggingMsg.emit((0, 'Inicia reconocimiento de cuadros de vídeo del tiempo de estabilización.'))
-                stab_frames = np.array([self._TESTER.read_screen(frame) for frame in stab_frames])  # Recognize numbers
+                stab_frames = np.array([self._TESTER.read_screen(frame, True) for frame in stab_frames])
                 changed_value_idx = np.where(stab_frames != stab_frames[0])[0][0]  # Frame 0 (first change identified)
                 frames_down_sampled = frames[changed_value_idx:]  # From frame 0 onwards
                 frames_down_sampled = frames_down_sampled[np.arange(0,  # Downsampling video signal
                                                                     frames_down_sampled.shape[0],
-                                                                    self.fps // self._TESTER.dut.screen_rate + 2,
+                                                                    self.fps // self._TESTER.dut.screen_rate + 4,
                                                                     dtype=int), :, :]
                 stab_frame = int((self._TESTER.elect_stab_time - changed_value_idx / self.fps)
                                  * self._TESTER.dut.screen_rate)  # Frame in which the stabilization time has finished
                 frames_down_sampled = frames_down_sampled[stab_frame:, :, :]  # Crops the stabilization time
                 self.loggingMsg.emit((0, 'Inicia reconocimiento de cuadros de vídeo de la medición.'))
-                samples = np.array([self._TESTER.read_screen(frame) for frame in frames_down_sampled])
+                samples = np.array([self._TESTER.read_screen(frame, False) for frame in frames_down_sampled])
                 del frames_down_sampled
-                # Construction of the states transition matrix
-                states = np.unique(samples)
-                P = pd.DataFrame(data=np.zeros((states.shape[0], states.shape[0])), index=states, columns=states)
-                for i in range(1, samples.shape[0]):
-                    P.loc[samples[i - 1], samples[i]] += 1
-                P = P.divide(samples.shape[0] - 1)
-                # TODO: Probabilidad estacionaria y valor esperado
+                P = self.build_transition_matrix(samples)  # Construction of the states transition matrix
+                PI = self.limit_dist(P)  # Calculates the limit distribution
+                # Complete missing samples using the characterized probabilities
+                samples[0] = P.index[PI.argmax()] if np.isnan(samples[0]) else samples[0]  # If initial state is missing
+                for i in np.where(np.isnan(samples))[0]:  # Filling based on the previous state and the Markov model
+                    samples[i] = P.index[P.loc[samples[i - 1]].argmax()]
+                P = self.build_transition_matrix(samples)  # Reconstruction of the states transition matrix
+                PI = self.limit_dist(P)  # Recalculates the limit distribution
+                expected_value = np.round(np.sum(np.array(P.index) * PI.T), 1)
+                self.loggingMsg.emit((1, f'Measurement value is: {expected_value} dB with p = {round(PI.max(), 2)}.'))
+                results = pd.DataFrame()
                 path = point_name = ''
-                if self._stage <= 8:  # Electric frequency weightings test
+                if self._stage < 8:  # Electric frequency weightings test
                     point_name = (f'{self._fweightings[self._stage - 5]}' +
-                                  f'_{int(self._octave_frequencies[self._substage])}')
-                    path = ('CalibrationResults/ElectricalFrequencyWeightings/' + f'{point_name}Hz.pkl')
+                                  f'_{int(self._octave_frequencies[self._substage])}Hz')
                     self._TESTER.fweighting_results['Samples'][point_name] = samples
                     self._TESTER.fweighting_results['Transition Matrix'][point_name] = P
+                    self._TESTER.fweighting_results['Stationary Distribution'][point_name] = PI
+                    self._TESTER.fweighting_results['Expected Value'][point_name] = expected_value
+                    weighting = [*'ACZ'][self._stage - 5]
+                    self._TESTER.dut.set_fweightings_result(weighting, expected_value,
+                                                            self._octave_frequencies[self._substage])
+                    results = self._TESTER.dut.calibration_results['Electrical Frequency Weightings']
+                    path = f'CalibrationResults/ElectricalFrequencyWeightings/{point_name}.pkl'
                     self._stage += self._substage // 8
                     if self._stage >= 8:
                         self._substage = 0
                     else:
                         self._substage += (1 - 9 * (self._substage // 8))
                 elif self._stage == 8:  # Frequency and time weightings at 1 kHz
-                    if self._substage <= 3:
+                    if self._substage < 3:
                         point_name = f'L{self._fweightings[self._substage]}F'
+                        self._TESTER.f_weightings_1kHz['Samples'][point_name] = samples
+                        self._TESTER.f_weightings_1kHz['Transition Matrix'][point_name] = P
+                        self._TESTER.f_weightings_1kHz['Stationary Distribution'][point_name] = PI
+                        self._TESTER.f_weightings_1kHz['Expected Value'][point_name] = expected_value
+                        self._TESTER.dut.set_ft_weightings_1kHz_result(True, result=expected_value,
+                                                                       substage=self._substage)
+                        results = self._TESTER.dut.calibration_results['Frequency Weightings 1 kHz']
+                        if self._substage == 0:  # Repeat LAF in time weightings result
+                            self._TESTER.t_weightings_1kHz['Samples'][point_name] = samples
+                            self._TESTER.t_weightings_1kHz['Transition Matrix'][point_name] = P
+                            self._TESTER.t_weightings_1kHz['Stationary Distribution'][point_name] = PI
+                            self._TESTER.t_weightings_1kHz['Expected Value'][point_name] = expected_value
+                            self._TESTER.dut.set_ft_weightings_1kHz_result(False, result=expected_value,
+                                                                           substage=self._substage)
                     else:
                         point_name = f'LA{self._tweightings[self._substage - 3]}'
-                    path = ('CalibrationResults/FreqTimeWeightings1kHz/' + f'{point_name}.pkl')
-                    # TODO: Guardar resultados en el TESTER
+                        self._TESTER.t_weightings_1kHz['Samples'][point_name] = samples
+                        self._TESTER.t_weightings_1kHz['Transition Matrix'][point_name] = P
+                        self._TESTER.t_weightings_1kHz['Stationary Distribution'][point_name] = PI
+                        self._TESTER.t_weightings_1kHz['Expected Value'][point_name] = expected_value
+                        results = self._TESTER.dut.calibration_results['Time Weightings 1 kHz']
+                        self._TESTER.dut.set_ft_weightings_1kHz_result(False, result=expected_value,
+                                                                       substage=self._substage - 3)
+                    path = f'CalibrationResults/FreqTimeWeightings1kHz/{point_name}.pkl'
                     self._substage += 1
-                    if self._substage >= 6:
+                    if self._substage >= 5:
                         self._substage = 0
                         self._stage += 1
-                # TODO: Pruebas restantes
+                elif self._stage == 9:  # Level linearity on the reference level range
+                    levels = self._TESTER.dut.calibration_results['Linearity Reference Range'].index
+                    point_name = f'LAF_{int(levels[self._substage])}dB'
+                    self._TESTER.linearity_ref_range['Samples'][point_name] = samples
+                    self._TESTER.linearity_ref_range['Transition Matrix'][point_name] = P
+                    self._TESTER.linearity_ref_range['Stationary Distribution'][point_name] = PI
+                    self._TESTER.linearity_ref_range['Expected Value'][point_name] = expected_value
+                    self._TESTER.dut.set_linearity_ref_range_result(expected_value, self._substage)
+                    results = self._TESTER.dut.calibration_results['Linearity Reference Range']
+                    path = f'CalibrationResults/LinearityReferenceRange/{point_name}.pkl'
+                    self._substage += 1
+                    if self._substage > levels.shape[0]:
+                        self._substage = 0
+                        self._stage += 1
+                self.realTimeValues.emit(results, self._stage, self._substage)
                 with open(path, "wb") as file:  # Saves the grayscale video in bare binary format
                     pickle.dump(frames, file)
                 self.loggingMsg.emit((0, f"Imágenes de muestras guardadas en binario como '{point_name}.pkl'."))
                 del frames
                 self.loggingMsg.emit((1, "Reconocimiento finalizado."))
-                # TODO: Presentar resultado en la GUI
                 del samples
-                # Updates the current stage and frequency in process
 
             else:
                 sleep(1)
-        with open('CalibrationResults/ElectricalFrequencyWeightings/DataFrame.pkl', 'wb') as file:
-            pickle.dump(self._TESTER.fweighting_results, file)
+            with open('CalibrationResults/ElectricalFrequencyWeightings/DataFrame.pkl', 'wb') as file:
+                pickle.dump(self._TESTER.fweighting_results, file)
+
+    @staticmethod
+    def build_transition_matrix(samples: np.ndarray) -> np.ndarray:
+        """
+        Method for construction of the states transition matrix from a sequence of samples
+        :param samples: A numpy one dimensional ndarray with the sequence of samples.
+        :return: A numpy array that represents the transition matrix of the Markov model.
+        """
+        states = np.unique(samples)  # Remove repeated samples
+        P = pd.DataFrame(data=np.zeros((states.shape[0], states.shape[0])), index=states, columns=states)  # Empty P
+        for i in range(1, samples.shape[0]):  # Counts transitions from state to state
+            P.loc[samples[i - 1], samples[i]] += 1
+        P = P.div(P.sum(axis=1), axis=0)  # Computes probabilities
+        return P
+
+    @staticmethod
+    def limit_dist(P: np.ndarray) -> float:
+        """
+        Method to calculate the limit distribution with linear algebra solution using a given transition matrix P if
+        the given matrix is a regular matrix, else, the calculation is performed with the high matrix powers of the
+        transition matrix.
+        :param P: The numpy array that represents de transition matrix.
+        :return: The stationary distribution as a float number.
+        """
+        for n in range(2, 1001):
+            if np.all(np.linalg.matrix_power(P, n) > 0):  # Check if it is a regular transition matrix
+                # The matrix is regular, so limiting distribution exists and is the unique stationary distribution
+                A = np.append(np.transpose(P) - np.identity(P.shape[0]), np.ones((1, P.shape[0])),
+                              axis=0)  # Augmented A
+                b = np.zeros((A.shape[0], 1))
+                b[-1] = 1  # Augmented b
+                PI = np.linalg.solve(np.transpose(A).dot(A), np.transpose(A).dot(b))  # Stationary distribution
+                break
+        else:
+            PI = np.linalg.matrix_power(P, 1000)
+
+        return PI
 
 
 class GraphicsRectItem(QtWidgets.QGraphicsRectItem):
