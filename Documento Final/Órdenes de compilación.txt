@@ -1,0 +1,18 @@
+set filename=%date:~11,4%%date:~8,2%%date:~5,2%
+xelatex -synctex=1 -interaction=nonstopmode -jobname=%filename%_Proyecto_de_grado -shell-escape Principal.tex
+bibtex %filename%_Proyecto_de_grado
+xelatex -synctex=1 -interaction=nonstopmode -jobname=%filename%_Proyecto_de_grado -shell-escape Principal.tex
+xelatex -synctex=1 -interaction=nonstopmode -jobname=%filename%_Proyecto_de_grado -shell-escape Principal.tex
+del %filename%_Proyecto_de_grado.aux & del %filename%_Proyecto_de_grado.lof  & del %filename%_Proyecto_de_grado.lot & del %filename%_Proyecto_de_grado.out & del %filename%_Proyecto_de_grado.synctex.gz & del %filename%_Proyecto_de_grado.toc & del Principal.log & ren %filename%_Proyecto_de_grado.log Principal.log  & del %filename%_Proyecto_de_grado.blg & del %filename%_Proyecto_de_grado.bbl
+
+
+
+set filename=%date:~11,4%%date:~8,2%%date:~5,2%
+xelatex -synctex=1 -interaction=nonstopmode -jobname=%filename%_Proyecto_de_grado -shell-escape Principal.tex
+del %filename%_Proyecto_de_grado.aux & del %filename%_Proyecto_de_grado.lof  & del %filename%_Proyecto_de_grado.lot & del %filename%_Proyecto_de_grado.out & del %filename%_Proyecto_de_grado.synctex.gz & del %filename%_Proyecto_de_grado.toc & del Principal.log & ren %filename%_Proyecto_de_grado.log Principal.log  & del %filename%_Proyecto_de_grado.blg & del %filename%_Proyecto_de_grado.bbl
+
+7115115, 1
+601715
+
+fonoservicio.colombia@enel.com
+

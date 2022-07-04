@@ -1,3 +1,4 @@
 Resumir la descripción de la arquitectura para ambos instrumentos antes de las secciones.
 Compilar gráficas primero en PDF y luego insertar el PDF en LaTex
 Implementar exportación de matrices de markov
+Estimación de incertidumbre tipo A

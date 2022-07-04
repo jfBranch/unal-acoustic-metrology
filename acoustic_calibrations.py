@@ -754,7 +754,7 @@ class SoundLevelMeter(object):
                                      'Linearity Reference Range': ref_linearity_df}
         for weighting in [*'ACZ']:
             self._calibration_results['Electrical Frequency Weightings'].loc[weighting, 'LR_rel'] = np.zeros(9)
-            R = self._electrical_ff_corrections[['Mic [dB]', 'Case [dB]', 'Screen [dB]']].sum(axis=1)
+            R = np.round(self._electrical_ff_corrections[['Mic [dB]', 'Case [dB]', 'Screen [dB]']].sum(axis=1), 2)
             self._calibration_results['Electrical Frequency Weightings'].loc[weighting, 'R'] = R.values
         self._calibration_results['Frequency Weightings 1 kHz'].loc[:] = np.zeros((3, 3))
         self._calibration_results['Time Weightings 1 kHz'].loc[:] = np.zeros((3, 3))
@@ -821,10 +821,13 @@ class SoundLevelMeter(object):
         :return: None
         """
         self._calibration_results['Electrical Frequency Weightings'].loc[(weighting, frequency), 'L'] = result
-        L_1k = self._calibration_results['Electrical Frequency Weightings'].loc[(weighting, 1000), 'L']
+        L_1k = self._calibration_results['Electrical Frequency Weightings'].at[(weighting, 1000), 'L']
         if L_1k != '':
-            L_rel = L_1k - self._calibration_results['Electrical Frequency Weightings'].loc[weighting, 'L']
-            LR_rel = L_rel + self._calibration_results['Electrical Frequency Weightings'].loc[weighting, 'R']
+            L = self._calibration_results['Electrical Frequency Weightings'].loc[weighting, 'L']
+            L = L.replace('', np.nan, regex=True)
+            L_rel = L.mul(-1).radd(L_1k)
+            LR_rel = self._calibration_results['Electrical Frequency Weightings'].loc[weighting, 'R'].radd(L_rel)
+            LR_rel = LR_rel.replace(np.nan, '', regex=True)
             self._calibration_results['Electrical Frequency Weightings'].loc[weighting, 'L_rel'] = L_rel
             self._calibration_results['Electrical Frequency Weightings'].loc[weighting, 'LR_rel'] = LR_rel
 
@@ -839,7 +842,7 @@ class SoundLevelMeter(object):
         """
         if is_freq:
             self._calibration_results['Frequency Weightings 1 kHz'].loc[[*'ACZ'][substage], 'L'] = result
-            LAF = self._calibration_results['Frequency Weightings 1 kHz'].loc['A', 'L']
+            LAF = self._calibration_results['Frequency Weightings 1 kHz'].at['A', 'L']
             L_rel = LAF - self._calibration_results['Frequency Weightings 1 kHz']['L']
             self._calibration_results['Frequency Weightings 1 kHz']['L_rel'] = L_rel
         else:

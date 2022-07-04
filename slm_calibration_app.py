@@ -1214,7 +1214,7 @@ class SonometersCalibrationUI(QtWidgets.QMainWindow):
         icon5.addPixmap(QtGui.QPixmap(":/icons/play.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.actionStart.setIcon(icon5)
         self.actionStart.setObjectName("actionStart")
-        self.actionStart.setEnabled(True)
+        self.actionStart.setEnabled(False)
         icon6 = QtGui.QIcon()
         icon6.addPixmap(QtGui.QPixmap(":/icons/pause.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.actionPause.setIcon(icon6)
@@ -2040,6 +2040,7 @@ class GUIController(object):
                                               'indicación del nivel de referencia. Luego,\n' +
                                               'haga clic en guardar.')
         elif any([self._TESTER.stage == stage for stage in range(5, 8)]):
+            self._gui.weightingsTab.setEnabled(True)
             # Electrical signal tests of frequency weightings
             if not self.streaming_running:
                 self.streaming_control()
@@ -2091,6 +2092,7 @@ class GUIController(object):
             self.instruction.finished.connect(self.parallel_dialog_response)
             self.instruction.show()
         elif self._TESTER.stage == 9:
+            self._gui.linearityTab.setEnabled(True)
             if not self.streaming_running:
                 self.streaming_control()
             self.instruction = InstructionDialog(None,
@@ -2220,19 +2222,19 @@ class GUIController(object):
             self._gui.zWTableView.setModel(model)
         elif stage == 8:  # Time and frequency weightings at 1 kHz
             if substage == 0:  # LAF
-                self._gui.aW1kHzLevLabel.setText(data[0].at[[*'ACZ'][substage], 'L'])
+                self._gui.aW1kHzLevLabel.setText(str(round(data[0].at[[*'ACZ'][substage], 'L'], 2)))
                 self._gui.aW1kHzRLevLabel.setText('0.0')
-                self._gui.fastWLevLabel.setText(data[0].at[[*'ACZ'][substage], 'L'])
-                self._gui.fastWRLevLabel.setText(data[0].at[[*'ACZ'][substage], 'L'])
+                self._gui.fastWLevLabel.setText(str(round(data[0].at[[*'ACZ'][substage], 'L'], 2)))
+                self._gui.fastWRLevLabel.setText(str(round(data[0].at[[*'ACZ'][substage], 'L_rel'], 2)))
             elif substage == 1:  # LCF
-                self._gui.cW1kHzLevLabel.setText(data[0].at[[*'ACZ'][substage], 'L'])
-                self._gui.cW1kHzRLevLabel.setText(data[0].at[[*'ACZ'][substage], 'L_rel'])
+                self._gui.cW1kHzLevLabel.setText(str(round(data[0].at[[*'ACZ'][substage], 'L'], 2)))
+                self._gui.cW1kHzRLevLabel.setText(str(round(data[0].at[[*'ACZ'][substage], 'L_rel'], 2)))
             elif substage == 2:  # LZF
-                self._gui.zW1kHzLevLabel.setText(data[0].at[[*'ACZ'][substage], 'L'])
-                self._gui.zW1kHzRLevLabel.setText(data[0].at[[*'ACZ'][substage], 'L_rel'])
+                self._gui.zW1kHzLevLabel.setText(str(round(data[0].at[[*'ACZ'][substage], 'L'], 2)))
+                self._gui.zW1kHzRLevLabel.setText(str(round(data[0].at[[*'ACZ'][substage], 'L_rel'], 2)))
             elif substage == 3:  # LAS
-                self._gui.slowWLevLabel.setText(data[0].at[['F', 'S', 'eq'][substage - 3], 'L'])
-                self._gui.slowWRLevLabel.setText(data[0].at[['F', 'S', 'eq'][substage - 3], 'L_rel'])
+                self._gui.slowWLevLabel.setText(str(round(data[0].at[['F', 'S', 'eq'][substage - 3], 'L'], 2)))
+                self._gui.slowWRLevLabel.setText(str(round(data[0].at[['F', 'S', 'eq'][substage - 3], 'L_rel'], 2)))
         elif stage == 9:  # Level linearity on the reference level range
             self._gui.linearityTableView.setModel(model)
 
@@ -2625,7 +2627,6 @@ class ImageProcessingThread(QtCore.QThread):
                 PI = self.limit_dist(P)  # Recalculates the limit distribution
                 expected_value = np.round(np.sum(np.array(P.index) * PI.T), 1)
                 self.loggingMsg.emit((1, f'Measurement value is: {expected_value} dB with p = {round(PI.max(), 2)}.'))
-                results = pd.DataFrame()
                 path = point_name = ''
                 if self._stage < 8:  # Electric frequency weightings test
                     point_name = (f'{self._fweightings[self._stage - 5]}' +
@@ -2638,12 +2639,15 @@ class ImageProcessingThread(QtCore.QThread):
                     self._TESTER.dut.set_fweightings_result(weighting, expected_value,
                                                             self._octave_frequencies[self._substage])
                     results = self._TESTER.dut.calibration_results['Electrical Frequency Weightings']
+                    self.realTimeValues.emit((results, self._stage, self._substage))
                     path = f'CalibrationResults/ElectricalFrequencyWeightings/{point_name}.pkl'
                     self._stage += self._substage // 8
                     if self._stage >= 8:
                         self._substage = 0
                     else:
                         self._substage += (1 - 9 * (self._substage // 8))
+                    with open('CalibrationResults/ElectricalFrequencyWeightings/DataFrame.pkl', 'wb') as file:
+                        pickle.dump(self._TESTER.fweighting_results, file)
                 elif self._stage == 8:  # Frequency and time weightings at 1 kHz
                     if self._substage < 3:
                         point_name = f'L{self._fweightings[self._substage]}F'
@@ -2670,11 +2674,14 @@ class ImageProcessingThread(QtCore.QThread):
                         results = self._TESTER.dut.calibration_results['Time Weightings 1 kHz']
                         self._TESTER.dut.set_ft_weightings_1kHz_result(False, result=expected_value,
                                                                        substage=self._substage - 3)
+                    self.realTimeValues.emit((results, self._stage, self._substage))
                     path = f'CalibrationResults/FreqTimeWeightings1kHz/{point_name}.pkl'
                     self._substage += 1
                     if self._substage >= 5:
                         self._substage = 0
                         self._stage += 1
+                    with open('CalibrationResults/FreqTimeWeightings1kHz/DataFrame.pkl', 'wb') as file:
+                        pickle.dump(self._TESTER.t_weightings_1kHz, file)
                 elif self._stage == 9:  # Level linearity on the reference level range
                     levels = self._TESTER.dut.calibration_results['Linearity Reference Range'].index
                     point_name = f'LAF_{int(levels[self._substage])}dB'
@@ -2684,12 +2691,14 @@ class ImageProcessingThread(QtCore.QThread):
                     self._TESTER.linearity_ref_range['Expected Value'][point_name] = expected_value
                     self._TESTER.dut.set_linearity_ref_range_result(expected_value, self._substage)
                     results = self._TESTER.dut.calibration_results['Linearity Reference Range']
+                    self.realTimeValues.emit((results, self._stage, self._substage))
                     path = f'CalibrationResults/LinearityReferenceRange/{point_name}.pkl'
                     self._substage += 1
                     if self._substage > levels.shape[0]:
                         self._substage = 0
                         self._stage += 1
-                self.realTimeValues.emit(results, self._stage, self._substage)
+                    with open('CalibrationResults/LinearityReferenceRange/DataFrame.pkl', 'wb') as file:
+                        pickle.dump(self._TESTER.linearity_ref_range, file)
                 with open(path, "wb") as file:  # Saves the grayscale video in bare binary format
                     pickle.dump(frames, file)
                 self.loggingMsg.emit((0, f"Imágenes de muestras guardadas en binario como '{point_name}.pkl'."))
@@ -2699,8 +2708,6 @@ class ImageProcessingThread(QtCore.QThread):
 
             else:
                 sleep(1)
-            with open('CalibrationResults/ElectricalFrequencyWeightings/DataFrame.pkl', 'wb') as file:
-                pickle.dump(self._TESTER.fweighting_results, file)
 
     @staticmethod
     def build_transition_matrix(samples: np.ndarray) -> np.ndarray:

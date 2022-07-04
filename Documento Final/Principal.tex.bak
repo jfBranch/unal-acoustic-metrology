@@ -1,0 +1,190 @@
+\documentclass[12pt,spanish,fleqn,openany,letterpaper,pagesize,hidelinks]{scrbook}
+
+% IMPORTAR PAQUETES
+%\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}  % Escribir con acentos sin necesidad de comandos \'{}
+\usepackage{setspace}  % Paquete para el ajuste de espacio entre líneas
+\usepackage{fancyhdr}  % Paquete para el ajuste de formato de página
+\usepackage{epsfig}
+\usepackage{epic}
+\usepackage{eepic}
+\usepackage{amsmath}  % Paquete para diversas herramientas matemáticas
+\usepackage{amssymb}  % Paquete para rotar tablas, figuras, etc.
+\usepackage{mathtools}  % Paquete para el símbolo :=
+\usepackage{upgreek}  % Paquete para letras griegas en roman upright
+\usepackage{threeparttable}
+\usepackage{amscd}
+\usepackage{here}
+\usepackage{nicefrac}  % Paquete para fracciones en diagonal
+\usepackage[binary-units=true,angle-mode=decimal]{siunitx}  % Paquete para unidades en SI
+\sisetup{output-decimal-marker={,}}  % Establece la coma para decimales
+\usepackage{flowchart}  % Paquete con formas predefinidas de diagramas de flujo
+\usetikzlibrary{arrows, arrows.meta}
+\usetikzlibrary{positioning}  % Paquete con herramientas para facilitar la ubicación de nodos
+\usetikzlibrary{math}  % Paquete para definir variables
+\usepackage{grafcet}  % Paquete para dibujar gráficos de etapas y transiciones
+\usepackage[simplified]{pgf-umlcd}  % Paquete para dibujar diagramas UML
+\usepackage[algochapter,linesnumbered,vlined,ruled,commentsnumbered]{algorithm2e}  % Paquete para escribir pseudocódigo
+\usepackage{tikz}
+\usepackage{graphicx}  % Paquete para poder usar gráficos
+\usepackage{tabularx}  % Paquete para poder usar tablas
+\usepackage{longtable}
+\usepackage{xcolor}  % Paquete para definir colores
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{listings}  % Paquete para entornos tipo listings
+\usepackage[chapter]{minted}  % Paquete para códigos con formato
+\usepackage{lscape}
+\usepackage{lipsum}  % Paquete para simular párrafos de textos
+% Paquete para habilitar hipervínculos habilitando el cambio de línea
+\PassOptionsToPackage{hyphens}{url}\usepackage[colorlinks=true,linkcolor=blue,urlcolor=gray,citecolor=blue]{hyperref}
+\usepackage[all]{hypcap}  % Paquete para ajustar las referencias a floats por encima de estos
+\usepackage{natbib}  % Paquete mejorado para bibliografía
+\usepackage{mathspec} % Importa el paquete para el uso de fuentes externas
+\usepackage{fancyvrb}
+\usepackage{rotating}
+
+% Establece la fuente Ancizar Serif como la fuente principal
+\setmainfont[Ligatures = TeX, UprightFont = {* Regular}, BoldFont = {* Bold},
+				ItalicFont = {* Italic}, BoldItalicFont = {* Bold Italic}]{Ancizar Serif}
+% Establece la fuente Ancizar Sans como la fuente Sans
+\setsansfont[Ligatures = TeX, UprightFont = {* Regular}, BoldFont = {* Bold},
+				ItalicFont = {* Italic}, BoldItalicFont = {* Bold Italic}]{Ancizar Sans}
+% Establece l afuente JetBrains Mono como la fuente monoespaciada
+\setmonofont[Ligatures = TeX, UprightFont = {* Regular}, BoldFont = {* Bold},
+				ItalicFont = {* Italic}, BoldItalicFont = {* Bold Italic}]{JetBrains Mono}
+
+
+% ---------- CONFIGURACIÓN DE PÁGINA ----------
+\pagestyle{fancyplain}
+\addtolength{\headwidth}{\marginparwidth}
+\textheight22.5cm \topmargin0cm \textwidth16.5cm
+\oddsidemargin0.5cm \evensidemargin-0.5cm
+\renewcommand{\chaptermark}[1]{\markboth{\thechapter\; #1}{}}
+\renewcommand{\sectionmark}[1]{\markright{\thesection\; #1}}
+\lhead[\fancyplain{}{\thepage}]{\fancyplain{}{\rightmark}}
+\rhead[\fancyplain{}{\leftmark}]{\fancyplain{}{\thepage}}
+\fancyfoot{}
+\thispagestyle{fancy}
+\unitlength1mm  % Define la unidad LE para Figuras
+\mathindent1cm  % Define la distancia de las formulas al texto,  fleqn las descentra
+\marginparwidth0cm
+\parindent0cm  % Define la distancia de la primera linea de un parrafo a la margen
+% Establece la distancia antes y después de las ecuaciones
+\makeatletter
+\g@addto@macro\normalsize{
+  \setlength\abovedisplayskip{7pt}
+  \setlength\belowdisplayskip{7pt}
+  \setlength\abovedisplayshortskip{7pt}
+  \setlength\belowdisplayshortskip{7pt}}
+\makeatother
+\allowdisplaybreaks  % Permite hacer saltos de página en entornos align
+% Para tablas,  redefine el backslash en tablas donde se define la posición del texto en las
+% casillas (con \centering \raggedright o \raggedleft)
+\newcommand{\PreserveBackslash}[1]{\let\temp=\\#1\let\\=\temp}
+\let\PBS=\PreserveBackslash
+
+\setlength{\parskip}{1em}  % Espacio entre párrafos
+\captionsetup[sub]{font=footnotesize}
+
+% Configuración para permitir referenciar items en el entorno description
+\makeatletter
+\let\orgdescriptionlabel\descriptionlabel
+\renewcommand*{\descriptionlabel}[1]{%
+  \let\orglabel\label
+  \let\label\@gobble
+  \phantomsection
+  \edef\@currentlabel{#1}%
+  %\edef\@currentlabelname{#1}%
+  \let\label\orglabel
+  \orgdescriptionlabel{#1}%
+}
+\makeatother
+% ----------------------------------------------------
+
+% Creación de formas para dibujo
+\tikzstyle{print}=[trapezium, draw, text centered, trapezium left angle=60, trapezium right angle=120, minimum height=2em]  % Trapezoide para el diagrama de flujo
+\tikzstyle{conditional}=[diamond, draw, text centered, aspect=3]  % Rombo para el bloque de decisión.
+\tikzstyle{arrow} = [thick,->,>=stealth]
+
+% Configuraciones para los códigos de Python
+\definecolor{background_color}{HTML}{dddddd}
+\definecolor{rule_color}{HTML}{c9c7c7}
+\definecolor{blue_sky}{HTML}{D9F1FA}
+\definecolor{softOrange}{HTML}{FEF7DA}
+\definecolor{soft_red}{HTML}{FFD4DE}
+
+\newenvironment{code}{\captionsetup{type=listing, labelfont=bf}\vspace{15pt}}{\vspace{-20pt}}
+% \DeclareFloatingEnvironment[fileext=frm,placement={!hbt},name=Code]{code}
+% \captionsetup[code]{type=listing, labelfont=bf}
+\setminted[python]{linenos=true, breaklines=true, breakafter=-/, fontsize=\tiny,
+				   frame=lines, rulecolor=rule_color, framesep=2pt,
+				   numbersep=8pt, python3=true, style=stata, tabsize=4, bgcolor=background_color}
+
+% Definición de alias para referencias bibliográficas
+\defcitealias{Scikit-learndevelopers2022}{scikit Developers, 2022}
+\defcitealias{Bruel2021}{B\&K, 2021}
+\defcitealias{IEC_TC29_2017}{IEC-TC29, 2017}
+\defcitealias{Bruel2016}{B\&K, 2016}
+\defcitealias{IEC_TC29_2013_1}{IEC-TC29, 2013}
+\defcitealias{Keysight2015}{Keysight, 2015}
+\defcitealias{Keysight2022}{Keysight, 2022}
+\defcitealias{MHJSoftware2020}{MHJ-Software, 2020}
+
+% SOBREESCRITURA Y DECLARACIÓN DE COMANDOS
+\renewcommand{\theequation}{\thechapter-\arabic{equation}}
+\renewcommand{\thefigure}{\textbf{\thechapter-\arabic{figure}}}
+\renewcommand{\thetable}{\textbf{\thechapter-\arabic{table}}}
+%\renewcommand{\thelstlisting}{\bfseries\thechapter-\arabic{code}}
+\renewcommand{\baselinestretch}{1.1} % Espacio base entre lineas
+\renewcommand{\tablename}{\textbf{Tabla}}
+\renewcommand{\figurename}{\textbf{Figura}}
+\renewcommand{\listtablename}{Lista de tablas}
+\renewcommand{\listfigurename}{Lista de figuras}
+\renewcommand{\contentsname}{Contenido}
+\renewcommand{\listingscaption}{Código}
+\newcommand{\clearemptydoublepage}{\newpage{\pagestyle{empty}\cleardoublepage}}
+% Formato de números de línea en códigos
+\renewcommand{\theFancyVerbLine}{\sffamily\textcolor[HTML]{808080}{\tiny\oldstylenums{\arabic{FancyVerbLine}}}}
+\renewcommand*{\algorithmcfname}{Algoritmo}
+% Comandos para ecuaciones
+\newcommand{\vect}[1]{\mathrm{\mathbf{#1}}}  % Abreviación de comando para notación de vectores y matrices
+\newcommand{\defeq}{\vcentcolon=}  % Declaración de comando para el símbolo :=
+% Comandos para unidades especiales
+\DeclareSIUnit\mVpp{mVpp}
+\DeclareSIUnit\Vpp{Vpp}
+\DeclareSIUnit\Vrms{Vrms}
+\DeclareSIUnit\uVrms{\upmu Vrms}
+
+%  ╦┌┐┌┬┌─┐┬┌─┐  ┌┬┐┌─┐┬    ┌┬┐┌─┐┌─┐┬ ┬┌┬┐┌─┐┌┐┌┌┬┐┌─┐
+%  ║│││││  ││ │   ││├┤ │     │││ ││  │ ││││├┤ │││ │ │ │
+%  ╩┘└┘┴└─┘┴└─┘  ─┴┘└─┘┴─┘  ─┴┘└─┘└─┘└─┘┴ ┴└─┘┘└┘ ┴ └─┘ 
+
+\begin{document}
+\pagenumbering{roman}
+\include{0_Portada/Portada}
+\cleardoublepage
+\setlength{\jot}{10pt}  % Espacio interlineal por defecto en el entorno align
+\tableofcontents
+\cleardoublepage
+\addcontentsline{toc}{chapter}{Lista de figuras}  % Incluye la lista de figuras en el índice de contenido
+\listoffigures  % Índice de figuras
+\cleardoublepage
+\addcontentsline{toc}{chapter}{Lista de tablas} % Incluye la lista de tablas en el índice de contenido
+\listoftables % Índice de tablas
+\pagenumbering{arabic}
+\capstarttrue  % Inicia el caption de los flotantes
+
+\include{1_Intro/Intro}
+\include{2_Metodología/Metodología}
+\include{3_Reconocimiento/Reconocimiento}
+\include{4_Implementación/Implementación}
+\include{5_MC_incertidumbre/MC_incertidumbre}
+\include{6_Conclusiones/Conclusiones}
+\include{Anexos/Anexos}
+
+\addcontentsline{toc}{chapter}{\numberline{}Bibliografía}
+\bibliographystyle{apalike-es}
+\bibliography{Bibliografía}
+\end{document}

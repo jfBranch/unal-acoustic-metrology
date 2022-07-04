@@ -1,0 +1,1047 @@
+%  ╦┌┬┐┌─┐┬  ┌─┐┌┬┐┌─┐┌┐┌┌┬┐┌─┐┌─┐┬┌─┐┌┐┌
+%  ║│││├─┘│  ├┤ │││├┤ │││ │ ├─┤│  ││ ││││
+%  ╩┴ ┴┴  ┴─┘└─┘┴ ┴└─┘┘└┘ ┴ ┴ ┴└─┘┴└─┘┘└┘
+
+\chapter{Implementación de los procedimientos de calibración}
+
+En este capítulo se describe el desarrollo y arquitectura de software de las aplicaciones diseñadas para la calibración periódica de calibradores acústicos de acuerdo con la \mbox{IEC 60942}~\citeyearpar{IEC_TC29_2017} (tomando como base un modelamiento en GRAFCET) y de sonómetros de acuerdo con la norma \mbox{IEC 61672--3}~\citeyearpar{IEC_TC29_2013_1} (usando el sistema de reconocimiento de caracteres del capítulo~\ref{ch:image_recognition}).
+El desarrollo del \emph{software} está publicado en el siguiente repositorio de GitHub:
+
+    {\footnotesize\url{https://github.com/jfBranch/unal-acoustic-metrology.git}}
+
+
+\section{Automatización de la calibración periódica de calibradores acústicos}
+\label{sec:acoustic_calibrators_automation}
+Siguiendo el método normalizado descrito en la sección~\ref{subsec:acoustic_calibrators_calibration_description} y el algoritmo de la figura~\ref{fig:acoustic_calibrator_calibration_flowchart}, se modeló la secuencia de calibración en un gráfico de etapas y transiciones explicado en la siguiente sección.
+
+\subsection{GRAFCET descriptivo del proceso}
+Para dar mayor claridad, en la figura~\ref{fig:GRAFCET_principal} se presenta la secuencia principal en la que se hacen llamadas a subrutinas mediante las etapas macro.
+Los GRAFCET de las subrutinas se muestran en las figuras~\ref{fig:GRAFCET_micsens} a la~\ref{fig:GRAFCET_noise_dut}.
+\vfill
+\clearpage
+
+\begin{figure}[!hp]
+    \caption{GRAFCET de la rutina principal de la calibración periódica de calibradores acústicos.}
+    \label{fig:GRAFCET_principal}
+    \begin{subfigure}[t]{0.48\textwidth}
+        \centering
+        \begin{tikzpicture}[font=\scriptsize]
+            \EtapeInitTransition[0,0]{0}{}{\tiny \texttt{Start}}
+            \MacroEtape[VT0]{M1}
+            \node [right=0.7 of XM1, align=center]{\textit{``Medición preeliminar de} \\ \textit{sensibilidad del micrófono''}};
+            \TransitionRecept[VXM1]{1}{\tiny \texttt{XM1}}
+            \MacroEtape[VT1]{M2}
+            \node [right=0.7 of XM2, align=center]{\textit{``Medición de ruido} \\ \textit{de fondo a 0°''}};
+            \TransitionRecept[VXM2]{2}{\tiny \texttt{XM2}}
+            \MacroEtape[VT2]{M3}
+            \node[right=0.7 of XM3, align=center]{\textit{``Medición de} \\ \textit{magnitudes a 0°''}};
+            \TransitionRecept[VXM3]{4}{\tiny \texttt{XM3}}
+            \EtapeTransition{4}{\tiny $\texttt{RefCalPower} \defeq 0$}
+            {\tiny $\overline{\texttt{RefCalPower}} \cdot \overline{\texttt{CoupledRefCal}} \cdot \texttt{Ok}$}
+            \ActionActiv{X4}
+            \Action{X4}{\tiny $\texttt{CoupledRefCal} \defeq 0$}
+            \ActionEvenement{X4}{\tiny $\downarrow\texttt{RefCalPower}$}
+            \node(linkXM5)[below=0.1 of T4]{M5};
+            \draw[-Straight Barb](T4) -- (linkXM5);
+            \MacroEtape[9,0]{M5}
+            \node [right=0.7 of XM5, align=center]{``\textit{Medición de ruido} \\ \textit{de fondo a 120°''}};
+            \TransitionRecept[VXM5]{5}{\tiny \texttt{XM5}}
+            \MacroEtape[VT5]{M6}
+            \node[right=0.7 of XM6, align=center]{\textit{``Medición de}\\\textit{magnitudes a 120°''}};
+            \TransitionRecept[VXM6]{6}{\tiny \texttt{XM6}}
+            \EtapeTransition{7}{\tiny \texttt{RefCalPower} $\defeq 0$}
+            {\tiny $\overline{\texttt{RefCalPower}} \cdot \overline{\texttt{CoupledRefCal}} \cdot \texttt{Ok}$}
+            \ActionActiv{X7}
+            \Action{X7}{\tiny $\texttt{CoupledRefCal} \defeq 0$}
+            \ActionEvenement{X7}{\tiny $\downarrow\texttt{RefCalPower}$}
+            \MacroEtape[VT7]{M8}
+            \node[right=0.7 of XM8, align=center]{\textit{``Medición de ruido}\\\textit{de fondo a 240°''}};
+            \TransitionRecept[VXM8]{8}{\tiny \texttt{XM8}}
+            \MacroEtape[VT8]{M9}
+            \node[right=0.7 of XM9, align=center]{\textit{``Medición de}\\\textit{magnitudes a 240°°''}};
+            \TransitionRecept[VXM9]{9}{\tiny \texttt{XM9}}
+            \node(linkX10)[below=0.1 of T9]{10};
+            \draw[-Straight Barb](T9) -- (linkX10);
+        \end{tikzpicture}
+    \end{subfigure}
+    \\[-0.7cm]
+    \begin{subfigure}[t]{0.48\textwidth}
+        \centering
+        \begin{tikzpicture}[font=\scriptsize]
+            \EtapeTransition[0,0]{10}{\tiny $\texttt{RefCalPower} \defeq 0$}
+            {\tiny $\overline{\texttt{RefCalPower}} \cdot \overline{\texttt{CoupledRefCal}} \cdot \texttt{Ok}$}
+            \ActionActiv{X10}
+            \Action{X10}{\tiny $\texttt{CoupledRefCal} \defeq 0$}
+            \ActionEvenement{X10}{\tiny $\downarrow\texttt{RefCalPower}$}
+            \MacroEtape[VT10]{M11}
+            \node[right=0.7 of XM11, align=center]{\textit{``Medición de ruido}\\\textit{de fondo a 0°''}};
+            \TransitionRecept[VXM11]{11}{\tiny \texttt{XM11}}
+            \MacroEtape[VT11]{M12}
+            \node[right=0.7 of XM12, align=center]{\textit{``Medición de}\\\textit{magnitudes a 0°''}};
+            \TransitionRecept[VXM12]{11}{\tiny \texttt{XM12}}
+            \EtapeTransition{13}{\tiny \texttt{CusCalPower} $\defeq 0$}
+            {\tiny $\overline{\texttt{CusCalPower}} \cdot \overline{\texttt{CoupledCusCal}} \cdot \texttt{Ok}$}
+            \ActionActiv{X13}
+            \Action{X13}{\tiny $\texttt{CoupledCusCal} \defeq 0$}
+            \ActionEvenement{X13}{\tiny $\downarrow\texttt{CusCalPower}$}
+            \MacroEtape[VT13]{M14}
+            \node[right=0.7 of XM14, align=center]{\textit{``Medición de ruido}\\\textit{de fondo a 120°''}};
+            \TransitionRecept[VXM14]{14}{\tiny \texttt{XM14}}
+            \node(linkXM15)[below=0.1 of T14]{M15};
+            \draw[-Straight Barb](T14) -- (linkXM15);
+            \MacroEtape[9,0]{M15}
+            \node[right=0.7 of XM15, align=center]{\textit{``Medición de}\\\textit{de magnitudes a 120°''}};
+            \TransitionRecept[VXM15]{15}{\tiny \texttt{XM15}}
+            \EtapeTransition{16}{\tiny $\texttt{CusCalPower} \defeq 0$}
+            {\tiny $\overline{\texttt{CusCalPower}} \cdot \overline{\texttt{CoupledCusCal}} \cdot \texttt{Ok}$}
+            \ActionActiv{X16}
+            \Action{X16}{\tiny $\texttt{CoupledCusCal} \defeq 0$}
+            \ActionEvenement{X16}{\tiny $\downarrow\texttt{CusCalPower}$}
+            \MacroEtape[VT16]{M17}
+            \node[right=0.7 of XM17, align=center]{\textit{``Medición de ruido}\\\textit{de fondo a 240°''}};
+            \TransitionRecept[VXM17]{17}{\tiny \texttt{XM17}}
+            \MacroEtape[VT17]{M18}
+            \node[right=0.7 of XM18, align=center]{\textit{``Medición de}\\\textit{de magnitudes a 240°''}};
+            \TransitionRecept[VXM18]{18}{\tiny \texttt{XM18}}
+            \Etape{19}
+            \ActionX{X19}{\tiny $\texttt{CusCalPower} \defeq 0$}{}
+            \ActionActiv{X19}
+            \Action{X19}{\tiny $\texttt{CoupledCusCal} \defeq 0$}
+            \ActionEvenement{X19}{\tiny $\downarrow\texttt{CusCalPower}$}
+        \end{tikzpicture}
+    \end{subfigure}
+\end{figure}
+%
+\begin{sidewaysfigure}[!hp]
+    \caption{GRAFCET's de las subrutinas para la calibración periódica de calibradores acústicos.}
+    \label{fig:GRAFCET_subrutines}
+    \begin{subfigure}[t]{0.48\textwidth}
+        \caption{Subrutina para la etapa macro $1$: Medición preeliminar de sensibilidad del micrófono.}
+        \label{fig:GRAFCET_micsens}
+        \centering
+        \begin{tikzpicture}[font=\scriptsize]
+            \begin{Encap}{0,0}{M1}{Mic Sensibility Measurement}
+                \Etape[0,0]{E1}
+                \ActionX{XE1}{\tiny $\texttt{CoupledRefCal} \defeq 1$}
+                \ActionActiv{XE1}
+                \Action{XE1}{\tiny \texttt{RefCalPower} $\defeq 1$}
+                \ActionEvenement{XE1}{\tiny $\uparrow\texttt{CoupledRefCal}$}
+                \TransitionRecept[VXE1]{E1}{\tiny $\texttt{RefCalPower} \cdot \texttt{CoupledRefCal} \cdot \texttt{Ok}$}
+                \node(TE1') [below=0cm of VXE1]{}; \node(VTE1')[below=2em of TE1']{}; \draw (TE1') -- (VTE1');
+                \DecaleNoeudx[11]{TE1'}{TE1r}
+                \DecaleNoeudx[11]{VTE1}{VTE1r}
+                \ConvOU{TE1'}{TE1r}{L20}
+                \Etape[L20]{20}
+                \ActionX{X20}{\tiny \texttt{MeasMicSens}}
+                \ActionCond{X20}{\tiny $\qty{10}{\s}$/\texttt{X20}}
+                \Action{X20}{\tiny \texttt{MeasFinished}}
+                \ActionCond{X20}{\tiny $\qty{5}{\s}$/\texttt{MeasMicSens}}
+                \DivOU{X20}{-4/L20a, 5/L20b}
+                \Transition[L20a]{20a}
+                \node[right=0.1 of L20a, align=left]{\tiny $\texttt{MeasFinished} \cdot$ \\ \tiny $[\qty{380}{\mV} \le \mathit{Sens} \le \qty{460}{\mV}]$};
+                \Transition[L20b]{20b}
+                \node [right=0.1 of L20b, align=left]
+                {\tiny $\texttt{MeasFinished} \cdot$ \\ \tiny $([\qty{380}{\mV} \ge \mathit{Sens}] +$ \\ \tiny $[\mathit{Sens} \ge \qty{480}{\mV}])$};
+                \Etape[VT20b]{21}
+                \ActionX{X21}{\tiny \texttt{RepeatDialog}}
+                \DivOU{X21}{-3/L21a,3/L21b}
+                \TransitionRecept[L21a]{21a}{\tiny $\texttt{X21} \cdot \overline{\texttt{Ok}}$}
+                \TransitionRecept[L21b]{21b}{\tiny $\texttt{X21} \cdot \texttt{Ok}$}
+                \node (paso) [right=1em of TE1r]{};
+                \Lien{T21b}{paso}{VTE1r}
+                \Etape[VT21a]{22}
+                \node[right=0.2 of X22, align=center]{\textit{``Suspende la} \\ \textit{secuencia principal''}};
+                \DecaleNoeudy[8.8]{L20a}{nS1}
+                \Etape[nS1]{S1}
+                \draw (L20a) -- (XS1);
+            \end{Encap}
+        \end{tikzpicture}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[t]{0.48\textwidth}
+        \caption{Subrutina para la etapa macro $2$: Medición de ruido de fondo a $\qty{5}{\degree}$ con el calibrador patrón.}
+        \label{fig:GRAFCET_standard_noise0}
+        \centering
+        \begin{tikzpicture}[font=\scriptsize]
+            \begin{Encap}{0,0}{M2}{Background Noise Standard Calibrator}
+                \Etape[0,0]{E2}
+                \ActionX{XE2}{\tiny $\texttt{RefCalOrient} \defeq 0$}
+                \ActionActiv{XE2}
+                \Action{XE2}{\tiny \texttt{RefCalPower} $\defeq 0$}
+                \ActionEvenement{XE2}{\tiny $\uparrow\texttt{RotatedRefCal}$}
+                \TransitionRecept[VXE2]{E2}{\tiny $\overline{\texttt{RefCalPower}} \cdot \texttt{CoupledRefCal} \cdot \texttt{Ok}$}
+                \node(TE2') [below=0cm of VXE2]{}; \node(VTE2')[below=2em of TE2']{}; \draw (TE2') -- (VTE2');
+                \DecaleNoeudx[11]{TE2'}{TE2r}
+                \DecaleNoeudx[11]{VTE2}{VTE2r}
+                \ConvOU{TE2'}{TE2r}{L23}
+                \Etape[L23]{23}
+                \ActionX{X23}{\tiny \texttt{MeasBackNoise}}
+                \ActionCond{X23}{\tiny $\qty{3}{\s}$/\texttt{X23}}
+                \Action{X23}{\tiny \texttt{MeasFinished}}
+                \ActionCond{X23}{\tiny $\qty{7}{\s}$/\texttt{MeasBackNoise}}
+                \DivOU{X23}{-4/L23a, 4.5/L23b}
+                \Transition[L23a]{23a}
+                \node[right=0.1 of L23a, align=left]
+                {\tiny $\texttt{MeasFinished} \cdot$ \\ \tiny $[\mathit{Noise} \le L_{\mathrm{spec}} - \qty{30}{\dB}]$};
+                \Transition[L23b]{23b}
+                \node [right=0.1 of L23b, align=left]
+                {\tiny $\texttt{MeasFinished} \cdot$ \\ \tiny $[\mathit{Noise} \ge L_{\mathrm{spec}} - \qty{30}{\dB}]$};
+                \Etape[VT23b]{24}
+                \ActionX{X24}{\tiny \texttt{RepeatDialog}}
+                \DivOU{X24}{-3/L24a,3/L24b}
+                \TransitionRecept[L24a]{24a}{\tiny $\texttt{X24} \cdot \overline{\texttt{Ok}}$}
+                \TransitionRecept[L24b]{24b}{\tiny $\texttt{X24} \cdot \texttt{Ok}$}
+                \node (paso) [right=2em of TE2r]{};
+                \Lien{T24b}{paso}{VTE2r}
+                \Etape[VT24a]{25}
+                \node[right=0.2 of X25, align=center]{\textit{``Suspende la} \\ \textit{secuencia principal''}};
+                \DecaleNoeudy[8.8]{L23a}{nS2}
+                \Etape[nS2]{S2}
+                \draw (L23a) -- (XS2);
+            \end{Encap}
+        \end{tikzpicture}
+    \end{subfigure}
+\end{sidewaysfigure}
+%
+\begin{sidewaysfigure}[!hp]
+    \ContinuedFloat
+    \caption{GRAFCET's de las subrutinas para la calibración periódica de calibradores acústicos (continuación).}
+    \begin{subfigure}[t]{0.33\textwidth}
+        \caption{Subrutina para las etapas macro $\numlist{3;6;9}$: Medición de magnitudes con el calibrador patrón.}
+        \label{fig:GRAFCET_standard_quantities}
+        \centering
+        \begin{tikzpicture}[font=\scriptsize]
+            \begin{Encap}{0,0}{M3 (M6 o M9)}{Quantities Measurement Standard Cal}
+                \EtapeTransition[0,0]{E3}{\tiny $\texttt{RefCalPower} \defeq 1$}{\tiny $\texttt{RefCalPower} \cdot \texttt{Ok}$}
+                \ActionActiv{XE3}
+                \LienTE[3]{TE3}
+                \EtapeTransition[VTE3]{26}{\tiny \texttt{MeasQuantities}}{\tiny \texttt{MeasFinished}}
+                \ActionCond{X26}{\tiny $\qty{18}{\s}$/\texttt{X26}}
+                \Action{X26}{\tiny \texttt{MeasFinished}}
+                \ActionCond{X26}{\tiny $\qty{30}{\s}$/\texttt{MeasQuantities}}
+                \Etape{S3}
+            \end{Encap}
+        \end{tikzpicture}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[t]{0.55\textwidth}
+        \caption{Subrutina para las etapas macro $\numlist{5; 8}$: Medición de ruido de fondo a $\qty{120}{\degree}$ y $\qty{240}{\degree}$ con el calibrador patrón.}
+        \label{fig:GRAFCET_noise_standard}
+        \centering
+        \begin{tikzpicture}[font=\scriptsize]
+            \begin{Encap}{0,0}{M5 (M8)}{Background Noise Standard Calibrator}
+                \Etape[0,0]{E5}
+                \ActionX{XE5}{\tiny $\texttt{RefCalOrient} \defeq \texttt{RefCalOrient} + 120$}
+                \ActionActiv{XE5}
+                \Action{XE5}{\tiny \texttt{CoupledRefCal} $\defeq 1$}
+                \ActionEvenement{XE5}{\tiny $\uparrow\texttt{RotatedRefCal}$}
+                \TransitionRecept[VXE5]{E5}{\tiny $\overline{\texttt{RefCalPower}} \cdot \texttt{CoupledRefCal} \cdot \texttt{Ok}$}
+                \node(TE5') [below=0cm of VXE5]{}; \node(VTE5')[below=2em of TE5']{}; \draw (TE5') -- (VTE5');
+                \DecaleNoeudx[11]{TE5'}{TE5r}
+                \DecaleNoeudx[11]{VTE5}{VTE5r}
+                \ConvOU{TE5'}{TE5r}{L27}
+                \Etape[L27]{27}
+                \ActionX{X27}{\tiny \texttt{MeasBackNoise}}
+                \ActionCond{X27}{\tiny $\qty{3}{\s}$/\texttt{X27}}
+                \Action{X27}{\tiny \texttt{MeasFinished}}
+                \ActionCond{X27}{\tiny $\qty{7}{\s}$/\texttt{MeasBackNoise}}
+                \DivOU{X27}{-4/L27a, 4.5/L27b}
+                \Transition[L27a]{27a}
+                \node[right=0.1 of L27a, align=left]
+                {\tiny $\texttt{MeasFinished} \cdot$ \\ \tiny $[\mathit{Noise} \le L_{\mathrm{spec}} - \qty{30}{\dB}]$};
+                \Transition[L27b]{27b}
+                \node [right=0.1 of L27b, align=left]
+                {\tiny $\texttt{MeasFinished} \cdot$ \\ \tiny $[\mathit{Noise} \ge L_{\mathrm{spec}} - \qty{30}{\dB}]$};
+                \Etape[VT27b]{28}
+                \ActionX{X28}{\tiny \texttt{RepeatDialog}}
+                \DivOU{X28}{-3/L28a,3/L28b}
+                \TransitionRecept[L28a]{28a}{\tiny $\texttt{X28} \cdot \overline{\texttt{Ok}}$}
+                \TransitionRecept[L28b]{28b}{\tiny $\texttt{X28} \cdot \texttt{Ok}$}
+                \node (paso) [right=2em of TE5r]{};
+                \Lien{T28b}{paso}{VTE5r}
+                \Etape[VT28a]{29}
+                \node[right=0.2 of X29, align=center]{\textit{``Suspende la} \\ \textit{secuencia principal''}};
+                \DecaleNoeudy[8.8]{L27a}{nS5}
+                \Etape[nS5]{S5}
+                \draw (L27a) -- (XS5);
+            \end{Encap}
+        \end{tikzpicture}
+    \end{subfigure}
+\end{sidewaysfigure}
+%
+\begin{sidewaysfigure}[!hp]
+    \ContinuedFloat
+    \caption{GRAFCET's de las subrutinas para la calibración periódica de calibradores acústicos (continuación).}
+    \begin{subfigure}[t]{0.48\textwidth}
+        \caption{Subrutina para la etapa macro $11$: Medición de ruido de fondo a $\qty{0}{\degree}$ con el calibrador bajo prueba.}
+        \label{fig:GRAFCET_noise0_dut}
+        \centering
+        \begin{tikzpicture}[font=\scriptsize]
+            \begin{Encap}{0,0}{M11}{Background Noise Customer Calibrator}
+                \Etape[0,0]{E11}
+                \ActionX{XE11}{\tiny $\texttt{CusCalOrient} \defeq 0$}
+                \ActionActiv{XE11}
+                \Action{XE11}{\tiny \texttt{CusCalPower} $\defeq 0$}
+                \ActionEvenement{XE11}{\tiny $\uparrow\texttt{RotatedRefCal}$}
+                \TransitionRecept[VXE11]{E11}{\tiny $\overline{\texttt{CusCalPower}} \cdot \texttt{CoupledCusCal} \cdot \texttt{Ok}$}
+                \node(TE11') [below=0cm of VXE11]{}; \node(VTE11')[below=2em of TE11']{}; \draw (TE11') -- (VTE11');
+                \DecaleNoeudx[11]{TE11'}{TE11r}
+                \DecaleNoeudx[11]{VTE11}{VTE11r}
+                \ConvOU{TE11'}{TE11r}{L30}
+                \Etape[L30]{30}
+                \ActionX{X30}{\tiny \texttt{MeasBackNoise}}
+                \ActionCond{X30}{\tiny $\qty{3}{\s}$/\texttt{X30}}
+                \Action{X30}{\tiny \texttt{MeasFinished}}
+                \ActionCond{X30}{\tiny $\qty{7}{\s}$/\texttt{MeasBackNoise}}
+                \DivOU{X30}{-4/L30a, 4.5/L30b}
+                \Transition[L30a]{23a}
+                \node[right=0.1 of L30a, align=left]
+                {\tiny $\texttt{MeasFinished} \cdot$ \\ \tiny $[\mathit{Noise} \le L_{\mathrm{spec}} - \qty{30}{\dB}]$};
+                \Transition[L30b]{30b}
+                \node [right=0.1 of L30b, align=left]
+                {\tiny $\texttt{MeasFinished} \cdot$ \\ \tiny $[\mathit{Noise} \ge L_{\mathrm{spec}} - \qty{30}{\dB}]$};
+                \Etape[VT30b]{31}
+                \ActionX{X31}{\tiny \texttt{RepeatDialog}}
+                \DivOU{X31}{-3/L31a,3/L31b}
+                \TransitionRecept[L31a]{31a}{\tiny $\texttt{X31} \cdot \overline{\texttt{Ok}}$}
+                \TransitionRecept[L31b]{31b}{\tiny $\texttt{X31} \cdot \texttt{Ok}$}
+                \node (paso) [right=2em of TE11r]{};
+                \Lien{T31b}{paso}{VTE11r}
+                \Etape[VT31a]{32}
+                \node[right=0.2 of X32, align=center]{\textit{``Suspende la} \\ \textit{secuencia principal''}};
+                \DecaleNoeudy[8.8]{L30a}{nS11}
+                \Etape[nS11]{S11}
+                \draw (L30a) -- (XS11);
+            \end{Encap}
+        \end{tikzpicture}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[t]{0.48\textwidth}
+        \caption{Subrutina para las etapas macro $\numlist{14;17}$: Medición de ruido de fondo a $\qty{120}{\degree}$ y $\qty{240}{\degree}$ con el calibrador bajo prueba.}
+        \label{fig:GRAFCET_noise_dut}
+        \centering
+        \begin{tikzpicture}[font=\scriptsize]
+            \begin{Encap}{0,0}{M14 (M17)}{Background Noise Customer Calibrator}
+                \Etape[0,0]{E14}
+                \ActionX{XE14}{\tiny $\texttt{CusCalOrient} \defeq \texttt{CusCalOrient} + 120$}
+                \ActionActiv{XE14}
+                \Action{XE14}{\tiny \texttt{CoupledCusCal} $\defeq 1$}
+                \ActionEvenement{XE14}{\tiny $\uparrow\texttt{RotatedCusCal}$}
+                \TransitionRecept[VXE14]{E14}{\tiny $\overline{\texttt{RefCalPower}} \cdot \texttt{CoupledCusCal} \cdot \texttt{Ok}$}
+                \node(TE14') [below=0cm of VXE14]{}; \node(VTE14')[below=2em of TE14']{}; \draw (TE14') -- (VTE14');
+                \DecaleNoeudx[11]{TE14'}{TE14r}
+                \DecaleNoeudx[11]{VTE14}{VTE14r}
+                \ConvOU{TE14'}{TE14r}{L34}
+                \Etape[L34]{34}
+                \ActionX{X34}{\tiny \texttt{MeasBackNoise}}
+                \ActionCond{X34}{\tiny $\qty{3}{\s}$/\texttt{X34}}
+                \Action{X34}{\tiny \texttt{MeasFinished}}
+                \ActionCond{X34}{\tiny $\qty{7}{\s}$/\texttt{MeasBackNoise}}
+                \DivOU{X34}{-4/L34a, 4.5/L34b}
+                \Transition[L34a]{34a}
+                \node[right=0.1 of L34a, align=left]
+                {\tiny $\texttt{MeasFinished} \cdot$ \\ \tiny $[\mathit{Noise} \le L_{\mathrm{spec}} - \qty{30}{\dB}]$};
+                \Transition[L34b]{34b}
+                \node [right=0.1 of L34b, align=left]
+                {\tiny $\texttt{MeasFinished} \cdot$ \\ \tiny $[\mathit{Noise} \ge L_{\mathrm{spec}} - \qty{30}{\dB}]$};
+                \Etape[VT34b]{35}
+                \ActionX{X35}{\tiny \texttt{RepeatDialog}}
+                \DivOU{X35}{-3/L35a,3/L35b}
+                \TransitionRecept[L35a]{35a}{\tiny $\texttt{X35} \cdot \overline{\texttt{Ok}}$}
+                \TransitionRecept[L35b]{35b}{\tiny $\texttt{X35} \cdot \texttt{Ok}$}
+                \node (paso) [right=2em of TE14r]{};
+                \Lien{T35b}{paso}{VTE14r}
+                \Etape[VT35a]{36}
+                \node[right=0.2 of X36, align=center]{\textit{``Suspende la} \\ \textit{secuencia principal''}};
+                \DecaleNoeudy[8.8]{L34a}{nS14}
+                \Etape[nS14]{S14}
+                \draw (L34a) -- (XS14);
+            \end{Encap}
+        \end{tikzpicture}
+    \end{subfigure}
+\end{sidewaysfigure}
+%
+\clearpage
+\begin{figure}[!ht]
+    \ContinuedFloat
+    \caption{GRAFCET's de las subrutinas para la calibración periódica de calibradores acústicos (continuación).}
+    \begin{subfigure}[t]{\textwidth}
+        \caption{Subrutina para las etapas macro $\numlist{12;15;18}$: Medición de magnitudes con el calibrador bajo prueba.}
+        \label{fig:GRAFCET_dut_quantities}
+        \centering
+        \begin{tikzpicture}[font=\scriptsize]
+            \begin{Encap}{0,0}{M12 (M15 o M18)}{Quantities Measurement Customer Cal}
+                \EtapeTransition[0,0]{E12}{\tiny $\texttt{CusCalPower} \defeq 1$}{\tiny $\texttt{CusCalPower} \cdot \texttt{Ok}$}
+                \ActionActiv{XE12}
+                \LienTE[3]{TE12}
+                \EtapeTransition[VTE12]{33}{\tiny \texttt{MeasQuantities}}{\tiny \texttt{MeasFinished}}
+                \ActionCond{X33}{\tiny $\qty{18}{\s}$/\texttt{X33}}
+                \Action{X33}{\tiny \texttt{MeasFinished}}
+                \ActionCond{X33}{\tiny $\qty{30}{\s}$/\texttt{MeasQuantities}}
+                \Etape{S12}
+            \end{Encap}
+        \end{tikzpicture}
+    \end{subfigure}
+\end{figure}
+
+En todos los GRAFCET, además de los operandos de cada etapa ({\scriptsize \texttt{X\#}}), se emplean los del siguiente cuadro:
+%
+\begin{table}[!h]
+    \caption{Descripción de los operandos del GRAFCET de la secuencia principal.}
+    \label{tab:principal_GRAFCET_operands}
+    \centering
+    \scriptsize
+    \begin{tabularx}{\textwidth}{c|X}
+        \hline
+        \multicolumn{1}{c|}{\textbf{Operando}} & \multicolumn{1}{c}{\textbf{Descripción}}                                        \\ \hline
+        {\tiny\texttt{RefCalOrient}}           & Orientación del calibrador acústico patrón.                                     \\ \hline
+        {\tiny\texttt{RotatedRefCal}} & {\tiny\texttt{True}} si el calibrador patrón ya fue rotado o
+            {\tiny\texttt{False}} si aún no ha sido rotado. \\ \hline
+        {\tiny\texttt{RefCalPower}} & Estado del calibrador acústico patrón.
+            {\tiny\texttt{True}} significa encender y
+            {\tiny\texttt{False}}  es apagar.
+        Esta acción es realizada manualmente por el operador. \\ \hline
+        {\tiny\texttt{CoupledRefCal}} & Estado de acoplamiento del calibrador acústico patrón.
+            {\tiny\texttt{True}} significa acoplar el calibrador al micrófono,
+            {\tiny\texttt{False}}  es desacoplar el calibrador.
+        Esta acción es realizada manualmente por el operador. \\ \hline
+        {\tiny\texttt{CusCalOrient}}           & Orientación del calibrador acústico bajo prueba.                                \\ \hline
+        {\tiny\texttt{RotatedCusCal}} & {\tiny\texttt{True}} si el calibrador bajo prueba ya fue rotado o
+            {\tiny\texttt{False}} si aún no ha sido rotado. \\ \hline
+        {\tiny\texttt{CusCalPower}} & Estado del calibrador acústico bajo calibración.
+            {\tiny\texttt{True}} significa encender y
+            {\tiny\texttt{False}}  es apagar.
+        Esta acción es realizada manualmente por el operador. \\ \hline
+        {\tiny\texttt{CoupledCusCal}} & Estado de acoplamiento del calibrador acústico bajo calibración.
+            {\tiny\texttt{True}} significa acoplar el calibrador al micrófono,
+            {\tiny\texttt{False}}  es desacoplar el calibrador.
+        Esta acción es realizada manualmente por el operador. \\ \hline
+        {\tiny\texttt{RepeatDialog}}           & Mostrar ventana emergente de diálogo con los botones ``Aceptar'' y ``Abortar''. \\ \hline
+        {\tiny\texttt{Ok}} & Respuesta del usuario a un mensaje de diálogo con los botones ``Aceptar'' ({\tiny\texttt{True}})
+        o ``Abortar'' ({\tiny\texttt{False}}). \\ \hline
+        {\tiny\texttt{MeasMicSens}}            & Medir sensibilidad.
+        Esta acción es automática.                                  \\ \hline
+        {\tiny\texttt{MeasFinished}}           & Señal que indica que la medición en curso ha finalizado.                        \\ \hline
+        {\tiny\texttt{MeasBackNoise}}          & Medir ruido de fondo.
+        Esta acción es automática.                                \\ \hline
+        {\tiny\texttt{MeasQuantities}}         & Medir magnitudes.
+        Esta acción es automática.
+    \end{tabularx}
+\end{table}
+
+\vfill
+\clearpage
+
+\subsection{Implementación en Python}
+Si bien los GRAFCET's son empleados principalmente en aplicaciones mecánicas o eléctricas, es un lenguaje común que tiene el potencial para usarse como base para el desarrollo de software, dada su simplicidad y practicidad \citepalias{MHJSoftware2020}; a lo que se suma la facilidad en aprenderlo, lo cual es una ventaja a la hora de integrar grupos de trabajo en los que participan personas de diferentes disciplinas.
+
+\begin{figure}[!h]
+    \centering
+    \caption{Representación gráfica del paradigma \emph{Model-View-Controller}.}
+    \label{fig:model_view_controller}
+    \begin{tikzpicture}[thick, minimum width=2cm, minimum height=0.8cm]
+        \node (model) at (0,0) [draw, process, fill=softOrange] {Modelo};
+        \node (database) [below=1cm of model] {Base de datos};
+        \node (databaseNortheast2) [above=0.15cm of database.north east,  inner sep=0pt, minimum size=0pt]{};
+        \node (databaseNorthwest2) [above=0.15cm of database.north west,  inner sep=0pt, minimum size=0pt]{};
+        \draw (database.north west) -- (database.south west)
+        .. controls +(-30:0.2cm) and +(-150:0.2cm) .. (database.south east)
+        -- (database.north east) .. controls +(-150:0.2cm) and +(-30: 0.2cm) .. (database.north west)
+        -- (databaseNorthwest2.center) .. controls +(-30:0.2cm) and +(-150:0.2cm) .. (databaseNortheast2.center) -- (database.north east);
+        \draw (databaseNorthwest2.center) .. controls +(30:0.2cm) and +(150:0.2cm) .. (databaseNortheast2.center);
+        \node (database_north1) [above=0.2cm of database.north, inner sep=0pt, minimum size=0pt]{};
+        \node (controller) [draw, process, fill=blue_sky, right=1cm of model]{Controlador};
+        \node (view) [draw, process, fill=soft_red, right=1cm of controller]{Vista};
+        \node (display) [draw, process, below=1cm of view]{};
+        \node (displaySouthwest1) [below left=0.2cm and 0.2cm of display.south west, inner sep=0pt, minimum size=0pt]{};
+        \node (displaySoutheast1) [below right=0.2cm and 0.2cm of display.south east, inner sep=0pt, minimum size=0pt]{};
+        \draw (display.south west) -- (displaySouthwest1.center) -- (displaySoutheast1.center) -- (display.south east);
+        \draw [-stealth] (database_north1) -- (model);
+        \draw [stealth-stealth] (model) -- (controller);
+        \draw [stealth-stealth] (controller) -- (view);
+        \draw [stealth-stealth] (view) -- (display);
+    \end{tikzpicture}
+    \caption*{\footnotesize Fuente: Elaboración propia.}
+\end{figure}
+%
+Normalmente, el diseño de un GRAFCET es llevado a la realidad en los sistemas empleando controladores lógicos programables (PLC), a los que están conectados los sensores y actuadores presentes en el sistema.
+Sin embargo, en este desarrollo (siguiendo el paradigma de la programación orientada a objetos) la función del PLC es desempeñada \emph{virtualmente} por dos objetos cuyas clases están diseñadas para ser el controlador y el modelo en el patrón \emph{Model-View-Controller} (MVC), comúnmente utilizado en el desarrollo de aplicaciones web con interfaz gráfica (véase la figura~\ref{fig:model_view_controller}).
+Para crear un entorno en el que estas interacciones virtuales puedan ocurrir, las clases de los objetos fueron diseñadas heredando de las clases {\small \texttt{QObject}} y {\small \texttt{QThread}} de la librería {\small \texttt{PyQt5}}, que permiten emplear la tecnología multi-hilos.
+De manera que las señales y acciones ocurren en hilos paralelos según sea adecuado, sin \emph{congelar} el funcionamiento de la interfaz gráfica y permitiendo también el procesamiento en ``segundo plano''.
+Las señales conectadas a los \emph{slots} son valores de progreso de la medición general o de la prueba en ejecución, y los valores de medición obtenidos en tiempo real.
+
+La principal ventaja que se obtiene al usar un GRAFCET como base en el desarrollo de un \emph{software} que automatice las rutinas de un sistema, es que al final la programación queda encapsulada, ordenada e incluso etiquetada según las etapas del GRAFCET. De modo que esto facilita el diseño de la arquitectura de \emph{software} y permite que en la práctica se pueda ir a etapas específicas reutilizando las subrutinas, lo cual hace de esta una aplicación versátil e intuitiva para la calibración de calibradores acústicos.
+
+\vfill
+
+\begin{figure}[!hp]
+    \caption{Diagrama de clases de la aplicación desarrollada para la calibración periódica de calibradores acústicos.}
+    \label{fig:uml_acoustic_calibrators}
+    \centering
+    \begin{tikzpicture}[font=\tiny\ttfamily]
+        \begin{class}[text width=2cm]{QObject}{-4,-11.4}\end{class}
+        \begin{package}{AcousticCalibrations}
+            \begin{class}[text width=8cm]{AcousticCalibratorsPeriodicTester}{0,0}
+                \inherit{QObject}
+                \attribute{+ measurementProgress: pyqtSignal \textit{\guillemotleft class attribute\guillemotright}}
+                \attribute{+ calibrationProgress: pyqtSignal \textit{\guillemotleft class attribute\guillemotright}}
+                \attribute{+ invalidMeasurementValue: pyqtSignal \textit{\guillemotleft class attribute\guillemotright}}
+                \attribute{+ realTimeValues: pyqtSignal \textit{\guillemotleft class attribute\guillemotright}}
+                \attribute{\# acceptanceLimits: pd.DataFrame \textit{\guillemotleft class attribute\guillemotright}}
+                \attribute{\# resource\_manager: pyVisa.ResourceManager \textit{\guillemotleft instance attribute\guillemotright}}
+                \attribute{\# DMM: pyVisa.GPIBInstrument \textit{\guillemotleft instance attribute\guillemotright}}
+                \attribute{\# AA: pyVisa.GPIBInstrument \textit{\guillemotleft instance attribute\guillemotright}}
+                \attribute{\# standard: AcousticCalibrator \textit{\guillemotleft instance attribute\guillemotright}}
+                \attribute{\# microphone: dict \textit{\guillemotleft instance attribute\guillemotright}}
+                \attribute{\# calibration\_consecutive: str \textit{\guillemotleft instance attribute\guillemotright}}
+                \attribute{\# dut: AcousticCalibrator \textit{\guillemotleft instance attribute\guillemotright}}
+                \attribute{\# customer\_info: dict \textit{\guillemotleft instance attribute\guillemotright}}
+                \attribute{\# ambient\_condition\_values: dict \textit{\guillemotleft instance attribute\guillemotright}}
+                \attribute{\# standard\_measurement\_values: list \textit{\guillemotleft instance attribute\guillemotright}}
+                \attribute{\# standard\_noise\_values: pd.DataFrame \textit{\guillemotleft instance attribute\guillemotright}}
+                \attribute{\# dut\_measurement\_values: list \textit{\guillemotleft instance attribute\guillemotright}}
+                \attribute{\# dut\_noise\_values: pd.DataFrame \textit{\guillemotleft instance attribute\guillemotright}}
+                \attribute{\# expanded\_uncertainty: dict \textit{\guillemotleft instance attribute\guillemotright}}
+                \attribute{\# current\_level: str \textit{\guillemotleft instance attribute\guillemotright}}
+
+                \operation{+ run\_main\_sequence() ->\,None \textit{\guillemotleft instance method\guillemotright}}
+                \operation{+ check\_state() ->\,None \textit{\guillemotleft instance method\guillemotright}}
+                \operation{+ set\_current\_level(level: int) ->\,None \textit{\guillemotleft instance method\guillemotright}}
+                \operation{+ set\_standard\_calibrator(standard: AcousticCalibrator) ->\,None \textit{\guillemotleft instance method\guillemotright}}
+                \operation{+ set\_dut(dut: AcousticCalibrator) ->\,None \textit{\guillemotleft instance method\guillemotright}}
+                \operation{+ set\_customer\_info(customer\_info: dict) ->\,None \textit{\guillemotleft instance method\guillemotright}}
+                \operation{+ set\_consecutive(consecutive: str) ->\,None \textit{\guillemotleft instance method\guillemotright}}
+                \operation{+ set\_standards(DMM:dict, AA: dict) ->\,None \textit{\guillemotleft instance method\guillemotright}}
+                \operation{+ measure\_mic\_sensibility() ->\,None \textit{\guillemotleft instance method\guillemotright}}
+                \operation{+ measure\_ambient\_noise() -> float \textit{\guillemotleft instance method\guillemotright}}
+                \operation{+ measure\_quantities(n\_indications: int=30) ->\,None \textit{\guillemotleft instance method\guillemotright}}
+                \operation{+ estimate\_expanded\_uncertainty() ->\,None \textit{\guillemotleft instance method\guillemotright}}
+                \operation{+ report\_ambient\_conditions(temperature:float, humidity:float, pressure: float) ->\,None \textit{\guillemotleft instance method\guillemotright}}
+                \operation{+ set\_stage(stage: int) ->\,None \textit{\guillemotleft instance method\guillemotright}}
+                \operation{+ set\_state(state: int) ->\,None \textit{\guillemotleft instance method\guillemotright}}
+                \operation{+ volt2level(v:float, ref\_lev: tuple) ->\,float \textit{\guillemotleft static method\guillemotright}}
+            \end{class}
+
+            \begin{class}[text width=7cm]{AcousticCalibrator}{8,0}
+                \attribute{\# info: dict \textit{\guillemotleft instance attribute\guillemotright}}
+                \attribute{\# cl: int \textit{\guillemotleft instance attribute\guillemotright}}
+                \attribute{\# nominal\_values: pd.DataFrame \textit{\guillemotleft instance attribute\guillemotright}}
+                \attribute{\# pressure\_influence: float \textit{\guillemotleft instance attribute\guillemotright}}
+                \attribute{\# free\_field\_difference: float \textit{\guillemotleft instance attribute\guillemotright}}
+                \attribute{\# calibration\_results: pd.DataFrame \textit{\guillemotleft instance attribute\guillemotright}}
+
+                \operation{+ get\_ambient\_correction(pressure: float) ->\,float \textit{\guillemotleft instance method\guillemotright}}
+                \operation{+ set\_calibration\_results(level\_results: np.ndarray, freq\_results: np.ndarray, thd\_results: np.ndarray) ->\,None \textit{\guillemotleft instance method\guillemotright}}
+            \end{class}
+
+            \node (ACPTEast')[below=2 of AcousticCalibratorsPeriodicTester.east]{};
+            \node (ACSouth')[left=1 of AcousticCalibrator.south]{};
+            \draw [umlcd style dashed line, <-] (ACSouth'.center) |- node[pos=0.8,below,sloped]{\guillemotleft instantiate\guillemotright} (ACPTEast'.center);
+        \end{package}
+        \begin{class}[text width=8cm]{GUIController}{8.4,-8.5}
+            \attribute{\# bruel4231: AcousticCalibrator \textit{\textit{\guillemotleft class attribute\guillemotright}}}
+            \attribute{\# cal21: AcousticCalibrator \textit{\textit{\guillemotleft class attribute\guillemotright}}}
+            \attribute{\# grass40CE: ditc \textit{\textit{\guillemotleft class attribute\guillemotright}}}
+            \attribute{\# TESTER: AcousticCalibratorsPeriodicTester \textit{\guillemotleft instance attribute\guillemotright}}
+            \attribute{\# gui: AcousticCalibratorsUI \textit{\guillemotleft instance attribute\guillemotright}}
+            \attribute{\# resource\_manager: pyVisa.ResourceManager \textit{\guillemotleft instance attribute\guillemotright}}
+            \attribute{+ standard\_calibrator: AcousticCalibrator \textit{\guillemotleft instance attribute\guillemotright}}
+            \attribute{+ acquired\_values: pd.DataFrame \textit{\guillemotleft instance attribute\guillemotright}}
+            \attribute{+ standard\_averaged\_values: pd.DataFrame \textit{\guillemotleft instance attribute\guillemotright}}
+            \attribute{+ dut\_averaged\_values: pd.DataFrame \textit{\guillemotleft instance attribute\guillemotright}}
+            \attribute{+ save\_standards\_state: bool \textit{\guillemotleft instance attribute\guillemotright}}
+            \attribute{+ save\_DUT\_info\_state: bool \textit{\guillemotleft instance attribute\guillemotright}}
+            \attribute{+ self\_test\_passed: bool \textit{\guillemotleft instance attribute\guillemotright}}
+            \attribute{+ searchStandardWorker: PyQt5.QObject \textit{\guillemotleft instance attribute\guillemotright}}
+            \attribute{+ selfTesterWorker: PyQt5.QObject \textit{\guillemotleft instance attribute\guillemotright}}
+            \attribute{+ calibrationThread: PyQt5.QThread \textit{\guillemotleft instance attribute\guillemotright}}
+
+            \operation{\# connect\_signals() ->\,None \textit{\guillemotleft instance method\guillemotright}}
+            \operation{+ fill\_mic\_info() ->\,None \textit{\guillemotleft instance method\guillemotright}}
+            \operation{+ fill\_standard\_calibrator\_info() ->\,None \textit{\guillemotleft instance method\guillemotright}}
+            \operation{+ save\_standards\_info() ->\,None \textit{\guillemotleft instance method\guillemotright}}
+            \operation{+ save\_dut\_info() ->\,None \textit{\guillemotleft instance method\guillemotright}}
+            \operation{+ self\_test() ->\,None \textit{\guillemotleft instance method\guillemotright}}
+            \operation{+ show\_self\_test\_results(results: tuple) ->\,None \textit{\guillemotleft instance method\guillemotright}}
+            \operation{+ search\_standards() ->\,None \textit{\guillemotleft instance method\guillemotright}}
+            \operation{+ fill\_standards\_info() ->\,None \textit{\guillemotleft instance method\guillemotright}}
+            \operation{+ update\_noise\_values() ->\,None \textit{\guillemotleft instance method\guillemotright}}
+            \operation{+ show\_standard\_noise\_values() ->\,None \textit{\guillemotleft instance method\guillemotright}}
+            \operation{+ show\_dut\_noise\_values() ->\,None \textit{\guillemotleft instance method\guillemotright}}
+            \operation{+ show\_averaged\_standard\_values() ->\,None \textit{\guillemotleft instance method\guillemotright}}
+            \operation{+ show\_averaged\_dut\_values() ->\,None \textit{\guillemotleft instance method\guillemotright}}
+            \operation{+ update\_real\_time\_values() ->\,None \textit{\guillemotleft instance method\guillemotright}}
+            \operation{+ start() ->\,None \textit{\guillemotleft instance method\guillemotright}}
+            \operation{+ pause() ->\,None \textit{\guillemotleft instance method\guillemotright}}
+            \operation{+ sequence\_control() ->\,None \textit{\guillemotleft instance method\guillemotright}}
+            \operation{+ eval\_answer(instruction: PyQt5.QMessageBox) ->\,None \textit{\guillemotleft instance method\guillemotright}}
+            \operation{+ invalid\_measurement(value: float) ->\,None \textit{\guillemotleft instance method\guillemotright}}
+        \end{class}
+%\begin{class}[text width=2cm]{QObject}{-4, -12.5}\end{class}
+        \begin{class}[text width=7cm]{StandardsSearcher}{-1, -12.2}
+            \inherit{QObject}
+            \attribute{+ finished: pyqtSignal \textit{\guillemotleft class attribute\guillemotright}}
+            \attribute{+ progress: pyqtSignal \textit{\guillemotleft class attribute\guillemotright}}
+            \attribute{\# resources\_manager: visa.ResourceManager \textit{\guillemotleft instance attribute \guillemotright}}
+            \attribute{+ DMM\_model: str \textit{\guillemotleft instance attribute\guillemotright}}
+            \attribute{+ AA\_model: str \textit{\guillemotleft instance attribute\guillemotright}}
+            \attribute{+ resources: tuple \textit{\guillemotleft instance attribute \guillemotright}}
+            \attribute{+ data: dict \textit{\guillemotleft instance attribute \guillemotright}}
+            \operation{+ search() ->\,None \textit{\guillemotleft instance method \guillemotright}}
+        \end{class}
+
+        \draw [umlcd style dashed line, <-] (AcousticCalibrator) -- node[pos=0.5,above,sloped]{\guillemotleft instantiate\guillemotright} (GUIController);
+        \node (GUICWest1)[above=2 of GUIController.west, inner sep=0pt, minimum size=0pt]{};
+        \draw [umlcd style dashed line, <-] (AcousticCalibratorsPeriodicTester.south) |- node[pos=0.8,above,sloped]{\guillemotleft instantiate\guillemotright} (GUICWest1);
+        \node(SSNorthEast)[below=0.2 of StandardsSearcher.north east, inner sep=0pt, minimum size=0pt]{};
+        \node (GUICWest2)[right=1.6 of SSNorthEast, inner sep=0pt, minimum size=0pt]{};
+        \draw[umlcd style dashed line, <-](SSNorthEast) -- node[pos=0.5,above,sloped]{\guillemotleft instantiate\guillemotright}(GUICWest2);
+
+        \begin{class}[text width=2cm]{QMainWindow}{6,-18.7}\end{class}
+
+        \begin{class}[text width=7cm]{AcousticCalibratorsUI}{-1,-18}
+            \inherit{QMainWindow}
+            \attribute{\textit{\guillemotleft some instance attributes corresponding to the GUI elements\guillemotright}}
+            \operation{\textit{\guillemotleft a few instance methods for configuring the initial state of the GUI elements\guillemotright}}
+        \end{class}
+
+        \begin{class}[text width=7cm]{SelfTester}{-1, -15.6}
+            \inherit{QObject}
+            \attribute{+ finished: pyqtSignal \textit{\guillemotleft class attribute\guillemotright}}
+            \attribute{+ progress: pyqtSignal \textit{\guillemotleft class attribute\guillemotright}}
+            \attribute{\# DMM: visa.Resource \textit{\guillemotleft instance attribute\guillemotright}}
+            \attribute{\# AA: visa.Resource \textit{\guillemotleft instance attribute\guillemotright}}
+            \operation{+ self\_test() ->\,None \textit{\guillemotleft instance method\guillemotright}}
+        \end{class}
+
+        \node(STNorthEast)[below=0.2 of SelfTester.north east, inner sep=0pt, minimum size=0pt]{};
+        \node(GUICWest3)[right=1.6 of STNorthEast, inner sep=0pt, minimum size=0pt]{};
+        \draw[umlcd style dashed line, <-](STNorthEast) -- node[pos=0.5,above,sloped]{\guillemotleft instantiate\guillemotright} (GUICWest3);
+
+        \node (ACUINorth1)[below=0.2 of AcousticCalibratorsUI.north east, inner sep=0pt, minimum size=0pt]{};
+        \node (GUICWest4)[right=1.6 of ACUINorth1, inner sep=0pt, minimum size=0pt]{};
+        \draw [umlcd style dashed line, <-] (ACUINorth1) -- node[pos=0.5,above,sloped]{\guillemotleft instantiate\guillemotright} (GUICWest4);
+    \end{tikzpicture}
+    \caption*{\footnotesize Fuente: Elaboración propia.}
+\end{figure}
+
+\subsubsection{Arquitectura de software}
+%
+El diagrama de clases de la figura~\ref{fig:uml_acoustic_calibrators} es un resumen de las clases principales (con sus atributos y métodos) diseñadas para el desarrollo de la aplicación para la calibración de calibradores acústicos.
+También se presentan las clases heredadas y el instanciamiento entre clases.
+
+La escritura del código se hizo aplicando las buenas prácticas de programación como: Documentación de clases, métodos e instrucciones relevantes, uso de atributos o métodos protegidos y las directrices de la guía PEP 8.
+La interfaz gráfica se diseñó en Qt Designer de tal forma que se logre un manejo intuitivo de las funciones de la aplicación usando diferentes recursos como íconos, barras de progreso, menús desplegables, barra de herramientas, etc.
+Con Qt Designer fue posible generar el código base de Python para el \emph{view} que lanza la aplicación y muestra la interfaz tal como fue diseñada.
+
+\subsubsection{Descripción de funcionamiento}
+\begin{figure}[!hb]
+    \centering
+    \caption{Interfaz gráfica de usuario de la aplicación para calibradores acústicos. Se muestra la pestaña de \emph{Patrones}.}
+    \label{fig:calibrator_gui_standards}
+    \includegraphics[width=0.8\textwidth]{4_Implementación/Figs/calibrator_gui_standards}
+    \caption*{\footnotesize Fuente: Elaboración propia.}
+\end{figure}
+%
+En la figura~\ref{fig:calibrator_gui_standards} se muestra la interfaz de usuario diseñada.
+La pestaña de \emph{Patrones} es la mostrada en la vista inicial.
+En esta, el usuario ingresa la información básica de los patrones empleados en la calibración.
+Para el multímetro y el analizador de audio, si el usuario digita información en los campos de modelo, se habilita la herramienta \includegraphics[height=12pt]{4_Implementación/Figs/searchInstruments}, la cual busca automáticamente los modelos indicados entre todos los equipos disponibles conectados por GPIB al computador, extrae la información de estos y rellena los campos faltantes.
+
+Una vez la información de los patrones está completa, el usuario puede hacer clic en \emph{Guardar}.
+Se habilita la herramienta \includegraphics[height=12pt]{4_Implementación/Figs/test}, con la que se ejecuta la secuencia de auto-verificación de los patrones conectados por GPIB, si está disponible.
+El resultado de la verificación se muestra en el \emph{check box} correspondiente.
+
+\begin{figure}[!h]
+    \centering
+    \caption{Interfaz gráfica de usuario de la aplicación para calibradores acústicos. Se muestra la pestaña de \emph{Información IBC}.}
+    \label{fig:calibrator_gui_dut}
+    \includegraphics[width=0.8\textwidth]{4_Implementación/Figs/calibrator_gui_dut}
+    \caption*{\footnotesize Fuente: Elaboración propia.}
+\end{figure}
+
+A continuación, en la pestaña \emph{Información IBC} (ver figura~\ref{fig:calibrator_gui_dut}), el usuario ingresa toda la información del calibrador bajo verificación y del cliente, necesaria para la calibración y para el certificado de calibración.
+Cuando la información esté completa, el usuario puede hacer clic en \emph{Guardar} y, si el resultado de auto-verificación de los patrones fue correcto, entonces se habilita el botón \includegraphics[height=12pt]{4_Implementación/Figs/play}.
+Al hacer clic en este se cumple la condición para la transición desde la etapa $0$ a la $1$ de la rutina principal del GRAFCET (figura~\ref{fig:GRAFCET_principal}).
+En seguida se llevan a cabo todas las acciones de las demás etapas y, en la medida que avanza la secuencia, se van mostrando instrucciones al usuario para las acciones manuales y los resultados se presentan en tiempo real en la pestaña \emph{Resultados} (ver figura~\ref{fig:calibrator_gui_results}).
+
+\begin{figure}[!h]
+    \centering
+    \caption{Interfaz gráfica de usuario de la aplicación para calibradores acústicos. Se muestra la pestaña de \emph{Resultados}.}
+    \label{fig:calibrator_gui_results}
+    \includegraphics[width=0.8\textwidth]{4_implementación/Figs/calibrator_gui_results}
+    \caption*{\footnotesize Fuente: Elaboración propia.}
+\end{figure}
+
+En la parte inferior de la ventana se incluye una barra de estado que indica la etapa actual (que tiene el \emph{token}), y dos barras de progreso, una para el progreso general de la calibración y otra para la medición en la etapa actual.
+En cualquier momento de la calibración se puede hacer clic en \includegraphics[height=12pt]{4_Implementación/Figs/pause} para suspender temporalmente la secuencia y luego reanudarla haciendo clic nuevamente en \includegraphics[height=12pt]{4_Implementación/Figs/play}.
+También se incluyeron en la interfaz otros botones y herramientas proyectando la aplicación a un desarrollo posterior que permita abrir y guardar sesiones de calibración, avanzar, retroceder etapas o ir a alguna específica del GRAFCET, y hasta generar automáticamente el certificado de calibración.
+
+
+\section{Automatización de la calibración periódica de sonómetros}
+
+De acuerdo con el método descrito en la sección~\ref{subsec:slm_calibration_description} y el diagrama de bloques de la figura~\ref{fig:slm_calibration_flowchart}, la aplicación se desarrolló con una metodología similar a la implementada para calibradores acústicos, como se explica en la siguiente sección.
+
+\subsection{Implementación en Python}
+El funcionamiento de la aplicación para calibradores acústicos asentó las bases para diseñar la aplicación para sonómetros.
+Para aprovechar esas interacciones de los paradigmas \emph{model-view-controller} y GRAFCET que ocurren en el ambiente multihilos, se establecieron los siguientes pasos para la automatización de las pruebas realizadas en sonómetros;
+estos pasos serían análogos a las etapas de un GRAFCET\@.
+
+\begin{algorithm}[H]
+    \caption{Pasos para la calibración periódica de sonómetros implementados en la aplicación desarrollada.}
+    \label{alg:slm_calibration_steps}
+    \scriptsize
+    \DontPrintSemicolon
+    \textbf{Paso 0.} Inicio, entrenar clasificador bayesiano. \;
+    \textbf{Paso 1.} Verificar fuente de alimentación.\;
+    \textbf{Paso 2.} Realizar prueba de indicación a la frecuencia de comprobación de la calibración.\;
+    \textbf{Paso 3.} Verificar fuente de alimentación.\;
+    \textbf{Paso 4.} Determinar el voltaje que produce una indicación del nivel de referencia.\;
+    \textbf{Paso 5.} Realizar prueba de ponderación frecuencial $A$ con señales eléctricas.\;
+    \textbf{Paso 6.} Realizar prueba de ponderación frecuencial $C$ con señales eléctricas.\;
+    \textbf{Paso 7.} Realizar prueba de ponderación frecuencial $Z$ con señales eléctricas.\;
+    \textbf{Paso 8.} Realizar prueba de ponderaciones frecuenciales a $\qty{1}{\kHz}$.\;
+    \textbf{Paso 9.} Realizar prueba de ponderaciones temporales a $\qty{1}{\kHz}$.\;
+    \textbf{Paso 10.} Realizar prueba de linealidad en el rango de niveles de referencia.\;
+    \textbf{Paso 11.} Verificar fuente de alimentación.\;
+    \textbf{Paso 12.} Fin\;
+\end{algorithm}
+
+%\begin{description}
+%\item[Paso 0.] Inicio
+%\item[Paso 1.] Verificar fuente de alimentación.
+%\item[Paso 2.] Realizar prueba de indicación a la frecuencia de comprobación de la calibración.
+%\item[Paso 3.] Verificar fuente de alimentación.
+%\item[Paso 4.] Determinar el voltaje que produce una indicación del nivel de referencia.
+%\item[Paso 5.] Realizar prueba de ponderación frecuencial $A$ con señales eléctricas.
+%\item[Paso 6.] Realizar prueba de ponderación frecuencial $C$ con señales eléctricas.
+%\item[Paso 7.] Realizar prueba de ponderación frecuencial $Z$ con señales eléctricas.
+%\item[Paso 8.] Realizar prueba de ponderaciones frecuenciales a $\qty{1}{\kHz}$.
+%\item[Paso 9.] Realizar prueba de ponderaciones temporales a $\qty{1}{\kHz}$.
+%\item[Paso 10.] Realizar prueba de linealidad en el rango de niveles de referencia.
+%\item[Paso 11.] Verificar fuente de alimentación.
+%\item[Paso 12.] Fin
+%\end{description}
+
+Además de los hilos en los que el modelo hace sus operaciones y la vista envía y recibe las instrucciones del controlador, para esta aplicación fueron necesarios dos hilos más: uno que captura y muestra las imágenes del objeto de vídeo y otro que en segundo plano procesa, reconoce y guarda en disco en formato binario las imágenes de cada punto de calibración.
+Todo esto a la vez que el modelo está corriendo temporizadores, enviando instrucciones a los instrumentos patrones y haciendo cálculos.
+También se agregan otras señales Qt para indicar el arranque y parada de temporizadores, entregar el cuadro de vídeo capturado, indicar la liberación del objeto de vídeo y la finalización de guardado del vídeo, y enviar los mensajes de \emph{logging}.
+
+Asignar los procesos de cálculo de los voltajes de prueba y temporizadores que se realizan en el modelo, y los procesos de reconocimiento de imágenes a hilos separados es un beneficio para el mantenimiento del \emph{software} y el desempeño de la aplicación.
+Por ejemplo, el último objetivo de este proyecto, que consiste en el modelamiento de las cadenas de Markov, se puede implementar como un proceso adicional en el hilo de reconocimiento de imágenes, sin afectar los otros procesos.
+
+\vfill
+
+\begin{figure}[!hp]
+    \caption{Diagrama de clases de la aplicación desarrollada para la calibración periódica de sonómetros.}
+    \label{fig:uml_sonometers}
+    \centering
+    \begin{tikzpicture}[font=\tiny\ttfamily]
+        \begin{class}[text width=2cm]{QObject}{-4,-12.6}\end{class}
+        \begin{package}{AcousticCalibrations}
+            \begin{class}[text width=8cm]{SLMPeriodicTester}{0,0}
+                \inherit{QObject}
+                \attribute{+ measurementProgress: pyqtSignal \textit{\guillemotleft class attribute\guillemotright}}
+                \attribute{+ calibrationProgress: pyqtSignal \textit{\guillemotleft class attribute\guillemotright}}
+                \attribute{+ realTimeValues: pyqtSignal \textit{\guillemotleft class attribute\guillemotright}}
+                \attribute{+ timerStarted: pyqtSignal \textit{\guillemotleft class attribute\guillemotright}}
+                \attribute{+ loggingMsg: pyqtSignal \textit{\guillemotleft class attribute\guillemotright}}
+                \attribute{\# ldaModel: LinearDiscriminantAnalysis \textit{\guillemotleft class attribute\guillemotright}}
+                \attribute{\# kpcaModel: KernelPCA \textit{\guillemotleft class attribute\guillemotright}}
+                \attribute{\# gnbClassifier: GaussianNB \textit{\guillemotleft class attribute\guillemotright}}
+                \attribute{\# weightingFactors: pd.DataFrame \textit{\guillemotleft class attribute\guillemotright}}
+                \attribute{\# acceptanceLimits: pd.DataFrame \textit{\guillemotleft class attribute\guillemotright}}
+                \attribute{\# resource\_manager: pyVisa.ResourceManager \textit{\guillemotleft instance attribute\guillemotright}}
+                \attribute{\# AFG: pyVisa.GPIBInstrument \textit{\guillemotleft instance attribute\guillemotright}}
+                \attribute{\# DMM: pyVisa.GPIBInstrument \textit{\guillemotleft instance attribute\guillemotright}}
+                \attribute{\# calibration\_consecutive: str \textit{\guillemotleft instance attribute\guillemotright}}
+                \attribute{\# dut: SoundLevelMeter \textit{\guillemotleft instance attribute\guillemotright}}
+                \attribute{\# customer\_info: dict \textit{\guillemotleft instance attribute\guillemotright}}
+                \attribute{\# ambient\_condition\_values: dict \textit{\guillemotleft instance attribute\guillemotright}}
+                \attribute{\# result\_box: tuple \textit{\guillemotleft instance attribute\guillemotright}}
+                \attribute{\# calibration\_stage: int \textit{\guillemotleft instance attribute\guillemotright}}
+                \attribute{\# calibration\_state: int \textit{\guillemotleft instance attribute\guillemotright}}
+                \attribute{\# power\_supply\_results: np.array \textit{\guillemotleft instance attribute\guillemotright}}
+                \attribute{+ fweighting\_results: dict \textit{\guillemotleft instance attribute\guillemotright}}
+                \attribute{+ current\_frequency: int \textit{\guillemotleft instance attribute\guillemotright}}
+                \attribute{+ freqtime\_1kHz\_results: dict \textit{\guillemotleft instance attribute\guillemotright}}
+                \attribute{+ ref\_linearity\_results: dict \textit{\guillemotleft instance attribute\guillemotright}}
+                \attribute{+ elect\_stab\_time: float \textit{\guillemotleft instance attribute\guillemotright}}
+
+                \operation{+ train() ->\,None \textit{\guillemotleft instance method\guillemotright}}
+                \operation{+ run\_main\_sequence() ->\,None \textit{\guillemotleft instance method\guillemotright}}
+                \operation{+ check\_state() ->\,None \textit{\guillemotleft instance method\guillemotright}}
+                \operation{+ set\_dut(dut: SoundLevelMeter) ->\,None \textit{\guillemotleft instance method\guillemotright}}
+                \operation{+ set\_customer\_info(customer\_info: dict) ->\,None \textit{\guillemotleft instance method\guillemotright}}
+                \operation{+ set\_consecutive(consecutive: str) ->\,None \textit{\guillemotleft instance method\guillemotright}}
+                \operation{+ set\_standards(DMM:dict, AA: dict) ->\,None \textit{\guillemotleft instance method\guillemotright}}
+                \operation{+ detect\_result() ->\,None \textit{\guillemotleft instance method\guillemotright}}
+                \operation{+ test\_power\_supply() ->\,float \textit{\guillemotleft instance method\guillemotright}}
+                \operation{+ test\_electrical\_fweightings(): int=30) ->\,None \textit{\guillemotleft instance method\guillemotright}}
+                \operation{+ test\_freqtime\_weightings\_1kHz(): int=30) ->\,None \textit{\guillemotleft instance method\guillemotright}}
+                \operation{+ set\_state(): int=30) ->\,None \textit{\guillemotleft instance method\guillemotright}}
+                \operation{+ set\_stage(stage: int) ->\,None \textit{\guillemotleft instance method\guillemotright}}
+                \operation{+ estimate\_expanded\_uncertainty() ->\,None \textit{\guillemotleft instance method\guillemotright}}
+                \operation{+ report\_ambient\_conditions(temperature:float, humidity:float, pressure: float) ->\,None \textit{\guillemotleft instance method\guillemotright}}
+                \operation{+ read\_screen() ->\,None \textit{\guillemotleft instance method\guillemotright}}
+                \operation{+ volt2level(v:float, ref\_lev: tuple) ->\,float \textit{\guillemotleft static method\guillemotright}}
+            \end{class}
+
+            \begin{class}[text width=7cm]{SoundLevelMeter}{8,0}
+                \attribute{\# info: dict \textit{\guillemotleft instance attribute\guillemotright}}
+                \attribute{\# cl: int \textit{\guillemotleft instance attribute\guillemotright}}
+                \attribute{\# preamplifier: dict \textit{\guillemotleft instance attribute\guillemotright}}
+                \attribute{\# mic: dict \textit{\guillemotleft instance attribute\guillemotright}}
+                \attribute{\# reference\_level: float \textit{\guillemotleft instance attribute\guillemotright}}
+                \attribute{\# calibration\_results: list \textit{\guillemotleft instance attribute\guillemotright}}
+
+                \operation{+ set\_power\_supply\_values(values: np.ndarray) ->\,None \textit{\guillemotleft instance method\guillemotright}}
+                \operation{+ set\_calibration\_check\_indications(init\_adjustment: float, indications: np.array) ->\,None \textit{\guillemotleft instance method\guillemotright}}
+                \operation{+ set\_reference\_voltages\_values(voltages: np.ndarray) ->\,None \textit{\guillemotleft instance method\guillemotright}}
+            \end{class}
+
+            \node (SLMPTEast1)[above=1 of SLMPeriodicTester.east]{};
+            \node (SLMSouth1)[left=1 of SoundLevelMeter.south]{};
+            \draw [umlcd style dashed line, <-] (SLMSouth1.center) |- node[pos=0.8,below,sloped]{\guillemotleft instantiate\guillemotright} (SLMPTEast1.center);
+        \end{package}
+        \begin{class}[text width=8cm]{GUIController}{8.6,-6.4}
+            \attribute{\# TESTER: SLMPeriodicTester \textit{\guillemotleft instance attribute\guillemotright}}
+            \attribute{\# gui: SonometersCalibrationUI \textit{\guillemotleft instance attribute\guillemotright}}
+            \attribute{\# resource\_manager: pyVisa.ResourceManager \textit{\guillemotleft instance attribute\guillemotright}}
+            \attribute{+ calibrationThread: PyQt5.QThread \textit{\guillemotleft instance attribute\guillemotright}}
+            \attribute{+ save\_standards\_state: bool \textit{\guillemotleft instance attribute\guillemotright}}
+            \attribute{+ save\_DUT\_info\_sate: bool \textit{\guillemotleft instance attribute\guillemotright}}
+            \attribute{+ AFG\_info: dict \textit{\guillemotleft instance attribute\guillemotright}}
+            \attribute{+ DecadeBox\_info: dict \textit{\guillemotleft instance attribute\guillemotright}}
+            \attribute{+ DMM\_info: dict \textit{\guillemotleft instance attribute\guillemotright}}
+            \attribute{+ self\_test\_passed: bool \textit{\guillemotleft instance attribute\guillemotright}}
+            \attribute{+ electric\_ff\_corrections: pd.DataFrame \textit{\guillemotleft instance attribute\guillemotright}}
+            \attribute{+ instruction: QMessageBox \textit{\guillemotleft instance attribute\guillemotright}}
+            \attribute{+ searchStandardWorker: PyQt5.QObject \textit{\guillemotleft instance attribute\guillemotright}}
+            \attribute{+ searchStandardThread: PyQt5.QThread \textit{\guillemotleft instance attribute\guillemotright}}
+            \attribute{+ selfTesterWorker: PyQt5.QObject \textit{\guillemotleft instance attribute\guillemotright}}
+            \attribute{+ selfTesterThread: PyQt5.QThread \textit{\guillemotleft instance attribute\guillemotright}}
+            \attribute{+ cameraWorker: PyQt5.QObject \textit{\guillemotleft instance attribute\guillemotright}}
+            \attribute{+ cameraThread: PyQt5.QThread \textit{\guillemotleft instance attribute\guillemotright}}
+            \attribute{+ streaming\_running: bool \textit{\guillemotleft instance attribute\guillemotright}}
+            \attribute{+ x1, y1, x2, y2: int \textit{\guillemotleft instance attributes\guillemotright}}
+            \attribute{+ timer\_started: bool \textit{\guillemotleft instance attribute\guillemotright}}
+            \attribute{+ frames: list \textit{\guillemotleft instance attribute\guillemotright}}
+            \attribute{+ frames\_queue: Queue \textit{\guillemotleft instance attribute\guillemotright}}
+            \attribute{+ imgProcessingThread: ImageProcessingThread \textit{\guillemotleft instance attribute\guillemotright}}
+
+            \operation{\# connect\_signals() ->\,None \textit{\guillemotleft instance method\guillemotright}}
+            \operation{+ save\_dut\_info() ->\,None \textit{\guillemotleft instance method\guillemotright}}
+            \operation{+ print\_logging\_msg(msg: str) ->\,None \textit{\guillemotleft instance method\guillemotright}}
+            \operation{+ save\_standards\_info() ->\,None \textit{\guillemotleft instance method\guillemotright}}
+            \operation{+ read\_elec\_ff\_corrections() ->\,None \textit{\guillemotleft instance method\guillemotright}}
+            \operation{+ save\_dut\_info() ->\,None \textit{\guillemotleft instance method\guillemotright}}
+            \operation{+ search\_standards() ->\,None \textit{\guillemotleft instance method\guillemotright}}
+            \operation{+ fill\_standards\_info() ->\,None \textit{\guillemotleft instance method\guillemotright}}
+            \operation{+ self\_test() ->\,None \textit{\guillemotleft instance method\guillemotright}}
+            \operation{+ show\_self\_test\_results(results: tuple) ->\,None \textit{\guillemotleft instance method\guillemotright}}
+            \operation{+ streaming\_control() ->\,None \textit{\guillemotleft instance method\guillemotright}}
+            \operation{+ stream\_frame() ->\,None \textit{\guillemotleft instance method\guillemotright}}
+            \operation{+ capture\_frames() ->\,None \textit{\guillemotleft instance method\guillemotright}}
+            \operation{+ start() ->\,None \textit{\guillemotleft instance method\guillemotright}}
+            \operation{+ pause() ->\,None \textit{\guillemotleft instance method\guillemotright}}
+            \operation{+ run\_sequence() ->\,None \textit{\guillemotleft instance method\guillemotright}}
+            \operation{+ sequence\_control() ->\,None \textit{\guillemotleft instance method\guillemotright}}
+            \operation{+ eval\_answer(instruction: PyQt5.QMessageBox) ->\,None \textit{\guillemotleft instance method\guillemotright}}
+            \operation{+ parallel\_dialog\_response(answer) ->\,None \textit{\guillemotleft instance method\guillemotright}}
+            \operation{+ show\_power\_supply\_values() ->\,None \textit{\guillemotleft instance method\guillemotright}}
+            \operation{+ save\_cal\_ind\_values() ->\,None \textit{\guillemotleft instance method\guillemotright}}
+            \operation{+ save\_ref\_volt() ->\,None \textit{\guillemotleft instance method\guillemotright}}
+            \operation{+ img2qpixmap() ->\,None \textit{\guillemotleft instance method\guillemotright}}
+        \end{class}
+%\begin{class}[text width=2cm]{QObject}{-4, -12.5}\end{class}
+        \begin{class}[text width=7cm]{StandardsSearcher}{-1, -13.5}
+            \inherit{QObject}
+            \attribute{+ finished: pyqtSignal \textit{\guillemotleft class attribute\guillemotright}}
+            \attribute{+ progress: pyqtSignal \textit{\guillemotleft class attribute\guillemotright}}
+            \attribute{\# resources\_manager: visa.ResourceManager \textit{\guillemotleft instance attribute \guillemotright}}
+            \attribute{+ DMM\_model: str \textit{\guillemotleft instance attribute\guillemotright}}
+            \attribute{+ AA\_model: str \textit{\guillemotleft instance attribute\guillemotright}}
+            \attribute{+ resources: tuple \textit{\guillemotleft instance attribute \guillemotright}}
+            \attribute{+ data: dict \textit{\guillemotleft instance attribute \guillemotright}}
+            \operation{+ search() ->\,None \textit{\guillemotleft instance method \guillemotright}}
+        \end{class}
+
+        \draw [umlcd style dashed line, <-] (SoundLevelMeter) -- node[pos=0.5,above,sloped]{\guillemotleft instantiate\guillemotright} (GUIController);
+        \node (GUICWest1)[above=0.1 of GUIController.west, inner sep=0pt, minimum size=0pt]{};
+        \draw [umlcd style dashed line, <-] (SLMPeriodicTester.south) |- node[pos=0.8,above,sloped]{\guillemotleft instantiate\guillemotright} (GUICWest1);
+        \node(SSNorthEast)[below=0.3 of StandardsSearcher.north east, inner sep=0pt, minimum size=0pt]{};
+        \node (GUICWest2)[right=1.8 of SSNorthEast, inner sep=0pt, minimum size=0pt]{};
+        \draw[umlcd style dashed line, <-](SSNorthEast) -- node[pos=0.5,above,sloped]{\guillemotleft instantiate\guillemotright}(GUICWest2);
+
+        \begin{class}[text width=7cm]{SelfTester}{-1, -17}
+            \inherit{QObject}
+            \attribute{+ finished: pyqtSignal \textit{\guillemotleft class attribute\guillemotright}}
+            \attribute{+ progress: pyqtSignal \textit{\guillemotleft class attribute\guillemotright}}
+            \attribute{+ loggingMsg: pyqtSignal \textit{\guillemotleft class attribute\guillemotright}}
+            \attribute{\# DMM: visa.Resource \textit{\guillemotleft instance attribute\guillemotright}}
+            \attribute{\# AA: visa.Resource \textit{\guillemotleft instance attribute\guillemotright}}
+            \operation{+ self\_test() ->\,None \textit{\guillemotleft instance method\guillemotright}}
+        \end{class}
+
+        \node(STNorthEast)[below=0.2 of SelfTester.north east, inner sep=0pt, minimum size=0pt]{};
+        \node(GUICWest3)[right=1.8 of STNorthEast, inner sep=0pt, minimum size=0pt]{};
+        \draw[umlcd style dashed line, <-](STNorthEast) -- node[pos=0.5,above,sloped]{\guillemotleft instantiate\guillemotright} (GUICWest3);
+    \end{tikzpicture}
+    \caption*{\footnotesize Fuente: Elaboración propia.}
+\end{figure}
+%
+\begin{figure}[!h]
+    \ContinuedFloat
+    \centering
+    \caption{Diagrama de clases de la aplicación desarrollada para la calibración periódica de sonómetros. (Continuación)}
+    \begin{tikzpicture}[font=\tiny\ttfamily]
+        \begin{class}[text width=1.6cm]{QMainWindow}{-1,0.9}\end{class}
+
+        \begin{class}[text width=8cm]{SoundLevelMetersUI}{-1,0}
+            \inherit{QMainWindow}
+            \attribute{\textit{\guillemotleft some instance attributes corresponding to the GUI elements\guillemotright}}
+            \operation{\textit{\guillemotleft a few instance methods for configuring the initial state of the GUI elements\guillemotright}}
+        \end{class}
+
+        \begin{class}[text width=4cm]{GUIController}{8,0}
+            \attribute{\textit{\guillemotleft same attributes\guillemotright}}
+            \operation{\textit{\guillemotleft same methods\guillemotright}}
+        \end{class}
+
+        \node (ACUINorth1)[below=0.2 of SoundLevelMetersUI.north east, inner sep=0pt, minimum size=0pt]{};
+        \node (GUICWest4)[right=2.6 of ACUINorth1, inner sep=0pt, minimum size=0pt]{};
+        \draw [umlcd style dashed line, <-] (ACUINorth1) -- node[pos=0.5,above,sloped]{\guillemotleft instantiate\guillemotright} (GUICWest4);
+
+        \begin{class}[text width=2cm]{QObject}{-3,-4.5}\end{class}
+
+        \begin{class}[text width=6cm]{VideoObject}{2, -2}
+            \inherit{QObject}
+            \attribute{+ frameCaptured: pyqtSignal \textit{\guillemotleft class attribute\guillemotright}}
+            \attribute{+ cameraReleased: pyqtSignal \textit{\guillemotleft class attribute\guillemotright}}
+            \attribute{+ loggingMsg: pyqtSignal \textit{\guillemotleft class attribute\guillemotright}}
+            \attribute{+ run\_flag: bool \textit{\guillemotleft instance attribute\guillemotright}}
+            \attribute{+ fps: int \textit{\guillemotleft instance attribute\guillemotright}}
+            \attribute{+ frame\_size: tuple \textit{\guillemotleft instance attribute\guillemotright}}
+
+            \operation{+ run() ->\,None \textit{\guillemotleft instance method\guillemotright}}
+        \end{class}
+
+        \begin{class}[text width=6cm]{VideoSaving}{2, -4.9}
+            \inherit{QObject}
+            \attribute{+ videoSaved: pyqtSignal \textit{\guillemotleft class attribute\guillemotright}}
+            \attribute{+ loggingMsg: pyqtSignal \textit{\guillemotleft class attribute\guillemotright}}
+            \attribute{+ frames: list \textit{\guillemotleft instance attribute\guillemotright}}
+            \attribute{+ video\_writer: cv.VideoWriter \textit{\guillemotleft instance attribute\guillemotright}}
+
+            \operation{+ save\_video() ->\,None \textit{\guillemotleft instance method\guillemotright}}
+        \end{class}
+
+        \begin{class}[text width=2cm]{QThread}{-3,-9}\end{class}
+
+        \begin{class}[text width=6cm]{ImageProcessingThread}{2, -7.5}
+            \inherit{QThread}
+            \attribute{+ realTimeValues: pyqtSignal \textit{\guillemotleft class attribute\guillemotright}}
+            \attribute{+ loggingMsg: pyqtSignal \textit{\guillemotleft class attribute\guillemotright}}
+            \attribute{\# frames\_queue: Queue \textit{\guillemotleft instance attribute\guillemotright}}
+            \attribute{\# TESTER: SLMPeriodicTester \textit{\guillemotleft instance attribute\guillemotright}}
+            \attribute{\# stage: int \textit{\guillemotleft instance attribute\guillemotright}}
+            \attribute{\# current\_f: int \textit{\guillemotleft instance attribute\guillemotright}}
+            \attribute{\# fweightings: list \textit{\guillemotleft instance attribute\guillemotright}}
+            \attribute{\# octave\_frequencies: list \textit{\guillemotleft instance attribute\guillemotright}}
+            \attribute{+ fps: int \textit{\guillemotleft instance attribute\guillemotright}}
+
+            \operation{+ run() ->\,None \textit{\guillemotleft instance method\guillemotright}}
+        \end{class}
+
+        \draw [umlcd style dashed line, <-](VideoObject.east) -| node[pos=0.3,above,sloped]{\guillemotleft instantiate\guillemotright} (GUIController.south);
+        \draw [umlcd style dashed line, <-](VideoSaving.east) -| node[pos=0.3,above,sloped]{\guillemotleft instantiate\guillemotright} (GUIController.south);
+        \draw [umlcd style dashed line, <-](ImageProcessingThread.east) -| node[pos=0.3,above,sloped]{\guillemotleft instantiate\guillemotright} (GUIController.south);
+    \end{tikzpicture}
+    \caption*{\footnotesize Fuente: Elaboración propia.}
+\end{figure}
+
+\subsubsection{Arquitectura de software}
+El diagrama de clases de la figura~\ref{fig:uml_sonometers} es un resumen de las clases principales (con sus atributos y métodos) diseñadas para el desarrollo de la aplicación para la calibración de sonómetros.
+También se presentan las clases heredadas y el instanciamiento entre clases.
+
+La escritura del código se hizo aplicando las buenas prácticas de programación como: Documentación de clases, métodos e instrucciones relevantes, uso de atributos o métodos protegidos, aseguramiento de recursos para evitar condiciones de carrera entre hilos, colas para el procesamiento en segundo plano y las directrices de la guía PEP 8.
+La interfaz gráfica se diseñó en Qt Designer de tal forma que se logre un manejo intuitivo de las funciones de la aplicación usando diferentes recursos como íconos, barras de progreso, menús desplegables, barra de herramientas, etc.
+Con Qt Designer fue posible generar el código base de Python para el \emph{view} que lanza la aplicación y muestra la interfaz tal como fue diseñada.
+
+\subsubsection{Descripción de funcionamiento}
+
+\begin{figure}[!h]
+    \centering
+    \caption{Interfaz gráfica de usuario de la aplicación para sonómetros. Se muestra la pestaña de \emph{Patrones}.}
+    \label{fig:slm_gui_standards}
+    \includegraphics[width=\textwidth]{4_implementación/Figs/slm_gui_standards}
+    \caption*{\footnotesize Fuente: Elaboración propia.}
+\end{figure}
+
+La aplicación para la calibración de sonómetros tiene un flujo de trabajo similar a la de calibradores acústicos.
+En la figura~\ref{fig:slm_gui_standards} se muestra la interfaz gráfica de usuario diseñada.
+En la vista inicial, la pestaña de \emph{Patrones} es la primera en mostrarse.
+En esta, el usuario ingresa la información básica de los patrones empleados en la calibración.
+Para el generador de señales y el multímetro digital, si el usuario digita información en los campos de modelo, se habilita la herramienta \includegraphics[height=12pt]{4_Implementación/Figs/searchInstruments}, la cual busca automáticamente los modelos indicados entre todos los equipos disponibles conectados por GPIB al computador, extrae la información de estos y rellena los campos faltantes.
+
+Una vez la información de los patrones está completa, el usuario puede hacer clic en \emph{Guardar}.
+Se habilita la herramienta \includegraphics[height=12pt]{4_Implementación/Figs/test}, con la que se ejecuta la secuencia de auto-verificación de los patrones conectados por GPIB, si está disponible.
+El resultado de la verificación se muestra en el \emph{check box} correspondiente.
+
+Dado que en esta aplicación se realizan más tareas y hay mayor interacción de los hilos de programación, fue conveniente incluir un {\footnotesize \texttt{QListWidget}} en el que se indexan registros de eventos con su correspondiente marca de tiempo, usando un código de colores (negro: mensaje informativo, verde: acción importante realizada y rojo: error o acción finalizada incorrectamente).
+Este registro de eventos está siempre visible debajo del recuadro al que se transmiten los cuadros de vídeo.
+
+\begin{figure}[!h]
+    \centering
+    \caption{Interfaz gráfica de usuario de la aplicación para sonómetros. Se muestra la pestaña de \emph{Información del IBC}.}
+    \label{fig:slm_gui_dut}
+    \includegraphics[width=\textwidth]{4_implementación/Figs/slm_gui_dut}
+    \caption*{\footnotesize Fuente: Elaboración propia.}
+\end{figure}
+
+A continuación, en la pestaña \emph{Información IBC} (véase figura~\ref{fig:slm_gui_dut}), el usuario ingresa toda la información del sonómetro bajo verificación y del cliente, necesaria para la calibración y para el certificado de calibración.
+Cuando la información esté completa, el usuario puede hacer clic en \emph{Guardar}.
+Según la configuración indicada para el sonómetro, el programa buscará en una base de datos los factores de corrección de campo libre;
+si estos no están disponibles, entonces el usuario puede crear un archivo separado por comas con los factores de corrección y cargarlos manualmente.
+Luego, si el resultado de auto-verificación de los patrones fue correcto, entonces se habilita el botón \includegraphics[height=12pt]{4_Implementación/Figs/play}.
+Al hacer clic en este se ejecuta el paso $0$ del algoritmo~\ref{alg:slm_calibration_steps}.
+En seguida se llevan a cabo todas las acciones de los demás pasos y, en la medida que avanza la secuencia, se van mostrando instrucciones al usuario para las acciones manuales (ver figura~\ref{fig:slm_gui_results1}).
+
+\vfill
+\clearpage
+
+\begin{figure}[!h]
+    \centering
+    \caption{Interfaz gráfica de usuario de la aplicación para sonómetros. Se muestra la pestaña de \emph{Pruebas preliminares} y un cuadro de diálogo con una instrucción.}
+    \label{fig:slm_gui_results1}
+    \includegraphics[width=0.9\textwidth]{4_implementación/Figs/slm_gui_results1}
+    \caption*{\footnotesize Fuente: Elaboración propia.}
+\end{figure}
+
+\begin{figure}[!h]
+    \centering
+    \caption{Interfaz gráfica de usuario de la aplicación para sonómetros. Se muestra la pestaña de \emph{Pruebas preliminares} y la selección del área de interés sobre el vídeo.}
+    \label{fig:slm_gui_results2}
+    \includegraphics[width=0.9\textwidth]{4_implementación/Figs/slm_gui_results2}
+    \caption*{\footnotesize Fuente: Elaboración propia.}
+\end{figure}
+
+\vfill
+\clearpage
+
+Al llegar al paso 5 (ponderación frecuencial $A$ con señales eléctricas), si no se ha activado la transmisión de vídeo, entonces esta iniciará y el usuario puede seleccionar el área de interés donde se encuentra el valor de medición que se desea reconocer (véase figura~\ref{fig:slm_gui_results2}).
+Igualmente con las siguientes pruebas hasta el paso 10.
+En la medida que avanzan las pruebas, los voltajes y frecuencias de las señales eléctricas se van ajustando automáticamente y se muestran en el historial los comandos SCPI enviados;
+los resultados se presentan en tiempo real en sus campos correspondientes según la prueba en curso como se muestra en la siguiente figura.
+
+\begin{figure}[!h]
+    \centering
+    \caption{Interfaz gráfica de usuario de la aplicación para sonómetros. Se muestra la pestaña de \emph{Ponderaciones frecuenciales y temporales} y la presentación de resultados.}
+    \label{fig:slm_gui_results3}
+    \includegraphics[width=\textwidth]{4_implementación/Figs/slm_gui_results3}
+    \caption*{\footnotesize Fuente: Elaboración propia.}
+\end{figure}
+
+\vfill
+\clearpage

@@ -1,0 +1,41 @@
+\chapter{Introducción}
+%TODO
+% Visión general del trabajo
+% Organización del informe
+
+\section{Planteamiento del problema}
+En la actualidad, la creciente contaminación acústica amerita la implementación de redes de monitoreo continuo de ruido o mediciones puntuales empleando instrumentos adecuados como son los sonómetros con el propósito de cuantizar los niveles de ruido ambiental, de emisión de ruido de fuentes sonoras específicas y de exposición sonora, para luego comparar con los niveles máximos permitidos por la normativa relacionada nacional e internacional y tomar decisiones al respecto.
+Para garantizar la confiabilidad de tales mediciones o asegurar la validez de sus resultados, en Colombia, entidades como el Instituto de Hidrología, Meteorología y Estudios Ambientales (IDEAM) exigen que las organizaciones que prestan estos servicios cuenten con sonómetros calibrados periódicamente bajo el estándar internacional \mbox{IEC 61672-3:2013}.
+por parte de un organismo de evaluación de la conformidad (OEC), en este caso un laboratorio de calibración acreditado por el Organismo Nacional de Acreditación de Colombia (ONAC) bajo el estándar \mbox{ISO 17025}, con el fin de verificar que estos instrumentos continúan cumpliendo las especificaciones normalizadas según su clase.
+La norma \mbox{IEC 61672--3} describe una serie de pruebas acústicas y eléctricas que se realizan a sonómetros integradores clase 1 y 2, cuyo propósito es comprobar el funcionamiento del sonómetro en: 1) La sensibilidad de su micrófono (para lo cual se usa un calibrador acústico calibrado previamente y que esté en conformidad con las especificaciones de la \mbox{IEC 60942}).
+2) Las redes de ponderación frecuencial A, C y Z. 3) En las ponderaciones temporales F (\emph{fast}) y S (\emph{slow}).
+4) En el rango lineal.
+5) En la medición de niveles promediados en el tiempo, niveles de exposición sonora y niveles pico.
+6) En la indicación de sobrecarga.
+7) En la exposición a largos periodos de medición y a niveles de sonido elevados.
+Dicha comprobación se hace comparando con las especificaciones definidas en la norma \mbox{IEC 61672-1:2013}.
+
+\section{Objetivos}
+
+\subsection{General}
+Desarrollar un sistema de calibración periódica de sonómetros y calibradores acústicos de conformidad con las normas \mbox{IEC 61672-3:2013} e {IEC 60942:2017}.
+
+\subsection{Específicos}
+
+\begin{enumerate}
+\item Formular un modelo en GRAFCET como base para el desarrollo de un sistema de calibración periódica de calibradores acústicos.
+\item Implementar las secuencias de comando (a través de bus GPIB) para configurar parámetros de señal y, a su vez, recibir resultados de los instrumentos de medición.
+\item Desarrollar un método de reconocimiento de imágenes para detectar los niveles instantáneos ponderados en tiempo y en frecuencia desde la pantalla del sonómetro.
+\item Desarrollar un método que permita tener en cuenta la variabilidad de los niveles en pantalla instantáneos ponderados en tiempo y en frecuencia del objetivo 3, (mediante mediciones de larga duración), para la estimación del mesurando y de la incertidumbre de medición.
+\end{enumerate}
+
+\subsection{Alcance de los objetivos}
+El sistema de calibración se implementará para ejecutar las pruebas de calibración de los numerales 9.3 (apoyado en la IEC 60942), 13, 14 y 16 de la \mbox{IEC 61672--3}.
+Los indicadores de interés serán los niveles instantáneos con ponderación temporal (\emph{slow} o \emph{fast}) y ponderación frecuencial ($A$, $C$, o $Z$), i.e. $L_{AF}$,$L_{AS}$,$L_{CF}$,$L_{CS}$,$L_{ZF}$ o $L_{ZS}$, dependiendo de la prueba y según estén disponibles en el sonómetro sujetos al periodo de actualización de la pantalla del sonómetro.
+El sistema tendrá en cuenta el modelo del proceso estocástico para la estimación de incertidumbre expandida de medición.
+
+\subsection{Antecedentes}
+\subsubsection{Sistemas de calibración comerciales desarrollados por fabricantes}
+\subsubsection{Sistemas de calibración desarrollados por otras organizaciones}
+
+\vfill

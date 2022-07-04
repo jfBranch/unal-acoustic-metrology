@@ -1,0 +1,52 @@
+%  ╔═╗┌┐┌┌─┐─┐ ┬┌─┐┌─┐
+%  ╠═╣│││├┤ ┌┴┬┘│ │└─┐
+%  ╩ ╩┘└┘└─┘┴ └─└─┘└─┘
+
+\begin{appendix}
+
+\chapter{Anexo: Códigos de Python}
+
+\begin{code}
+	\caption{Código para presentar resultados del procesamiento de una muestra del número $5$ del conjunto de imágenes entrenamiento.}
+	\label{code:test_samples_code}
+	\centering
+	\inputminted{python}{3_Reconocimiento/Codes/image_processing_test.py}
+\end{code}
+
+\begin{code}
+	\caption{Código para realizar la extracción de características de los vectores de entrenamiento y para entrenar el clasificador.}
+	\label{code:features_extracting}
+	\centering
+	\inputminted{python}{3_Reconocimiento/Codes/features_extracting.py}
+\end{code}
+
+\begin{code}
+\caption{Código para realizar la extracción de características de los vectores de prueba y para realizar la clasificación.}
+\label{code:sample_classifying}
+\centering
+\begin{minted}{python}
+X = np.array(X)  # Convert test sample features vector to numpy array
+# -------- DIMENSIONALITY REDUCTION BY KERNEL PCA --------- #
+X = kpcaModel.transform(X)
+# ------- CLASSIFY ---------#
+y_hat = gnbClassifier.predict(X)
+
+\end{minted}
+\end{code}
+
+\begin{code}
+\caption{Código para generar la matriz de confusión del clasificador bayesiano normal.}
+\label{code:confusion_matrix}
+\centering
+\begin{minted}{python}
+from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
+
+# -------------- CLASSIFICATION ACCURACY --------------
+cm = confusion_matrix(y_hat, y_test, labels=gnbClassifier.classes_)
+disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=gnbClassifier.classes_)
+disp.plot()
+plt.show()
+\end{minted}
+\end{code}
+
+\end{appendix}
