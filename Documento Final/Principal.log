@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999994 (MiKTeX 22.3) (preloaded format=xelatex 2022.7.4)  4 JUL 2022 17:15
+This is XeTeX, Version 3.141592653-2.6-0.999994 (MiKTeX 22.3) (preloaded format=xelatex 2022.7.4)  5 JUL 2022 00:29
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -396,7 +396,14 @@ Package: mhsetup 2021/03/18 v1.4 programming setup (MH)
 \l_MT_below_shortintertext_sep=\dimen169
 \xmathstrut@box=\box57
 \xmathstrut@dim=\dimen170
-) (C:\Users\juan_\AppData\Local\Programs\MiKTeX\tex/latex/was\upgreek.sty
+) (kbordermatrix.sty
+Package: kbordermatrix 2011/09/21 Bordered matrix with brackets
+\kbcolsep=\skip81
+\kbrowsep=\skip82
+\br@kwd=\skip83
+\k@bordht=\skip84
+)
+(C:\Users\juan_\AppData\Local\Programs\MiKTeX\tex/latex/was\upgreek.sty
 Package: upgreek 2003/02/12 v2.0 (WaS)
 Package upgreek Info: Using Euler Roman for upright Greek on input line 31.
 \symugrf@m=\mathgroup6
@@ -426,9 +433,9 @@ Package: float 2001/11/08 v1.3d Float enhancements (AL)
 )
 (C:\Users\juan_\AppData\Local\Programs\MiKTeX\tex/latex/units\nicefrac.sty
 Package: nicefrac 1998/08/04 v0.9b Nice fractions
-\L@UnitsRaiseDisplaystyle=\skip81
-\L@UnitsRaiseTextstyle=\skip82
-\L@UnitsRaiseScriptstyle=\skip83
+\L@UnitsRaiseDisplaystyle=\skip85
+\L@UnitsRaiseTextstyle=\skip86
+\L@UnitsRaiseScriptstyle=\skip87
 
 (C:\Users\juan_\AppData\Local\Programs\MiKTeX\tex/latex/base\ifthen.sty
 Package: ifthen 2022/04/13 v1.1d Standard LaTeX ifthen package (DPC)
@@ -497,16 +504,10 @@ Package: array 2021/10/04 v2.5f Tabular extension package (FMi)
 \ar@mcellbox=\box68
 \extrarowheight=\dimen180
 \NC@list=\toks26
-\extratabsurround=\skip84
-\backup@length=\skip85
+\extratabsurround=\skip88
+\backup@length=\skip89
 \ar@cellbox=\box69
 ))
-(C:\Users\juan_\AppData\Local\Programs\MiKTeX\tex/latex/flowchart\flowchart.sty
-Package: flowchart 2015/03/19 3.3 Flowchart shapes for TikZ
-
-(C:\Users\juan_\AppData\Local\Programs\MiKTeX\tex/latex/makeshape\makeshape.sty
-Package: makeshape 2013/01/25 2.1 Making custom shapes for PGF/TikZ
-
 (C:\Users\juan_\AppData\Local\Programs\MiKTeX\tex/latex/pgf/frontendlayer\tikz.
 sty
 (C:\Users\juan_\AppData\Local\Programs\MiKTeX\tex/latex/pgf/basiclayer\pgf.sty
@@ -839,6 +840,12 @@ File: pgfmodulematrix.code.tex 2021/05/15 v3.1.9a (3.1.9a)
 z/libraries\tikzlibrarytopaths.code.tex
 File: tikzlibrarytopaths.code.tex 2021/05/15 v3.1.9a (3.1.9a)
 )))
+(C:\Users\juan_\AppData\Local\Programs\MiKTeX\tex/latex/flowchart\flowchart.sty
+Package: flowchart 2015/03/19 3.3 Flowchart shapes for TikZ
+
+(C:\Users\juan_\AppData\Local\Programs\MiKTeX\tex/latex/makeshape\makeshape.sty
+Package: makeshape 2013/01/25 2.1 Making custom shapes for PGF/TikZ
+
 (C:\Users\juan_\AppData\Local\Programs\MiKTeX\tex/generic/pgf/libraries\pgflibr
 aryintersections.code.tex
 (C:\Users\juan_\AppData\Local\Programs\MiKTeX\tex/generic/pgf/libraries\pgflibr
@@ -933,6 +940,10 @@ File: pgflibraryarrows.meta.code.tex 2021/05/15 v3.1.9a (3.1.9a)
 \pgfarrowlinewidth=\dimen292
 )
 (C:\Users\juan_\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendlayer/tik
+z/libraries\tikzlibraryautomata.code.tex
+File: tikzlibraryautomata.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+)
+(C:\Users\juan_\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendlayer/tik
 z/libraries\tikzlibrarypositioning.code.tex
 File: tikzlibrarypositioning.code.tex 2021/05/15 v3.1.9a (3.1.9a)
 )
@@ -981,7 +992,7 @@ Invalid UTF-8 byte or sequence at line 299 replaced by U+FFFD.
 Invalid UTF-8 byte or sequence at line 550 replaced by U+FFFD.
 Package: algorithm2e 2017/07/18 v5.2 algorithms environments
 \c@AlgoLine=\count329
-\algocf@hangindent=\skip86
+\algocf@hangindent=\skip90
 
 (C:\Users\juan_\AppData\Local\Programs\MiKTeX\tex/latex/ifoddpage\ifoddpage.sty
 Package: ifoddpage 2016/04/23 v1.1 Conditionals for odd/even page detection
@@ -992,36 +1003,36 @@ Package: xspace 2014/10/28 v1.13 Space after command names (DPC,MH)
 (C:\Users\juan_\AppData\Local\Programs\MiKTeX\tex/latex/relsize\relsize.sty
 Package: relsize 2013/03/29 ver 4.1
 )
-\skiptotal=\skip87
-\skiplinenumber=\skip88
-\skiprule=\skip89
-\skiphlne=\skip90
-\skiptext=\skip91
-\skiplength=\skip92
-\algomargin=\skip93
-\skipalgocfslide=\skip94
+\skiptotal=\skip91
+\skiplinenumber=\skip92
+\skiprule=\skip93
+\skiphlne=\skip94
+\skiptext=\skip95
+\skiplength=\skip96
+\algomargin=\skip97
+\skipalgocfslide=\skip98
 \algowidth=\dimen294
 \inoutsize=\dimen295
 \inoutindent=\dimen296
 \interspacetitleruled=\dimen297
 \interspacealgoruled=\dimen298
 \interspacetitleboxruled=\dimen299
-\algocf@ruledwidth=\skip95
+\algocf@ruledwidth=\skip99
 \algocf@inoutbox=\box105
 \algocf@inputbox=\box106
-\AlCapSkip=\skip96
-\AlCapHSkip=\skip97
-\algoskipindent=\skip98
+\AlCapSkip=\skip100
+\AlCapHSkip=\skip101
+\algoskipindent=\skip102
 \algocf@nlbox=\box107
 \algocf@hangingbox=\box108
 \algocf@untilbox=\box109
-\algocf@skipuntil=\skip99
+\algocf@skipuntil=\skip103
 \algocf@capbox=\box110
-\algocf@lcaptionbox=\skip100
-\algoheightruledefault=\skip101
-\algoheightrule=\skip102
-\algotitleheightruledefault=\skip103
-\algotitleheightrule=\skip104
+\algocf@lcaptionbox=\skip104
+\algoheightruledefault=\skip105
+\algoheightrule=\skip106
+\algotitleheightruledefault=\skip107
+\algotitleheightrule=\skip108
 \c@algocfline=\count331
 \c@algocfproc=\count332
 \c@algocf=\count333
@@ -1040,10 +1051,10 @@ Package: tabularx 2020/01/15 v2.11c `tabularx' package (DPC)
 )
 (C:\Users\juan_\AppData\Local\Programs\MiKTeX\tex/latex/tools\longtable.sty
 Package: longtable 2021-09-01 v4.17 Multi-page Table package (DPC)
-\LTleft=\skip105
-\LTright=\skip106
-\LTpre=\skip107
-\LTpost=\skip108
+\LTleft=\skip109
+\LTright=\skip110
+\LTpre=\skip111
+\LTpost=\skip112
 \LTchunksize=\count335
 \LTcapwidth=\dimen305
 \LT@head=\box113
@@ -1057,7 +1068,7 @@ Package: longtable 2021-09-01 v4.17 Multi-page Table package (DPC)
 \c@LT@chunks=\count339
 \LT@p@ftn=\toks41
 )
-Class scrbook Info: longtable captions redefined on input line 33.
+Class scrbook Info: longtable captions redefined on input line 35.
 
 (C:\Users\juan_\AppData\Local\Programs\MiKTeX\tex/latex/caption\caption.sty
 Package: caption 2022/03/01 v3.6b Customizing captions (AR)
@@ -1167,7 +1178,7 @@ LaTeX Info: Redefining \\ on input line 3056.
 \c@FV@TrueTabGroupLevel=\count362
 \c@FV@TrueTabCounter=\count363
 \FV@TabBox@Group=\box122
-\FV@TmpLength=\skip109
+\FV@TmpLength=\skip113
 \c@FV@HighlightLinesStart=\count364
 \c@FV@HighlightLinesStop=\count365
 \FV@LoopCount=\count366
@@ -1211,7 +1222,7 @@ Package: ifluatex 2019/10/25 v1.5 ifluatex legacy package. Use iftex instead.
 Package: xstring 2021/07/21 v1.84 String manipulations (CT)
 ) (C:\Users\juan_\AppData\Local\Programs\MiKTeX\tex/latex/framed\framed.sty
 Package: framed 2011/10/22 v 0.96: framed or shaded text with page breaks
-\OuterFrameSep=\skip110
+\OuterFrameSep=\skip114
 \fb@frw=\dimen329
 \fb@frh=\dimen330
 \FrameRule=\dimen331
@@ -1225,8 +1236,8 @@ Package: framed 2011/10/22 v 0.96: framed or shaded text with page breaks
 \@float@every@listing=\toks44
 \c@listing=\count377
 )
-runsystem(if not exist _minted-20220704_Proyecto_de_grado mkdir _minted-2022070
-4_Proyecto_de_grado)...executed.
+runsystem(if not exist _minted-20220705_Proyecto_de_grado mkdir _minted-2022070
+5_Proyecto_de_grado)...executed.
 
 
 (C:\Users\juan_\AppData\Local\Programs\MiKTeX\tex/latex/graphics\lscape.sty
@@ -1377,15 +1388,15 @@ Package: uniquecounter 2019/12/15 v1.4 Provide unlimited unique counter (HO)
 Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
 86.
 )
-\Hy@SectionHShift=\skip111
+\Hy@SectionHShift=\skip115
 )
 (C:\Users\juan_\AppData\Local\Programs\MiKTeX\tex/latex/oberdiek\hypcap.sty
 Package: hypcap 2016/05/16 v1.12 Adjusting the anchors of captions (HO)
 )
 (C:\Users\juan_\AppData\Local\Programs\MiKTeX\tex/latex/natbib\natbib.sty
 Package: natbib 2010/09/13 8.31b (PWD, AO)
-\bibhang=\skip112
-\bibsep=\skip113
+\bibhang=\skip116
+\bibsep=\skip117
 LaTeX Info: Redefining \cite on input line 694.
 \c@NAT@ctr=\count398
 )
@@ -1442,8 +1453,8 @@ File: xkeyval.tex 2014/12/03 v2.7a key=value parser (HA)
 (C:\Users\juan_\AppData\Local\Programs\MiKTeX\tex/latex/graphics\rotating.sty
 Package: rotating 2016/08/11 v2.16d rotated objects in LaTeX
 \c@r@tfl@t=\count414
-\rotFPtop=\skip114
-\rotFPbot=\skip115
+\rotFPtop=\skip118
+\rotFPbot=\skip119
 \rot@float@box=\box129
 \rot@mess@toks=\toks47
 )
@@ -1566,49 +1577,49 @@ Space,Ligatures
 (fontspec)             \tex_hyphenchar:D \font =-1\scan_stop: 
 
 runsystem(for ^%i in (pygmentize.exe pygmentize.bat pygmentize.cmd) do set > 20
-220704_Proyecto_de_grado.aex <nul: /p x=^%~$PATH:i>> 20220704_Proyecto_de_grado
+220705_Proyecto_de_grado.aex <nul: /p x=^%~$PATH:i>> 20220705_Proyecto_de_grado
 .aex)...executed.
 
-runsystem(del 20220704_Proyecto_de_grado.aex)...executed.
+runsystem(del 20220705_Proyecto_de_grado.aex)...executed.
 
 
-(20220704_Proyecto_de_grado.aux (0_Portada/Portada.aux)
+(20220705_Proyecto_de_grado.aux (0_Portada/Portada.aux)
 LaTeX Info: Redefining \. on input line 25.
 LaTeX Info: Redefining \% on input line 25.
  (1_Intro/Intro.aux)
 (2_Metodología/Metodología.aux) (3_Reconocimiento/Reconocimiento.aux)
 (4_Implementación/Implementación.aux) (5_MC_incertidumbre/MC_incertidumbre.aux)
 (6_Conclusiones/Conclusiones.aux) (Anexos/Anexos.aux))
-\openout1 = `20220704_Proyecto_de_grado.aux'.
+\openout1 = `20220705_Proyecto_de_grado.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 164.
-LaTeX Font Info:    ... okay on input line 164.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 164.
-LaTeX Font Info:    ... okay on input line 164.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 164.
-LaTeX Font Info:    ... okay on input line 164.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 164.
-LaTeX Font Info:    ... okay on input line 164.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 164.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 166.
+LaTeX Font Info:    ... okay on input line 166.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 166.
+LaTeX Font Info:    ... okay on input line 166.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 166.
+LaTeX Font Info:    ... okay on input line 166.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 166.
+LaTeX Font Info:    ... okay on input line 166.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 166.
 LaTeX Font Info:    Trying to load font information for TS1+cmr on input line 1
-64.
+66.
 
 (C:\Users\juan_\AppData\Local\Programs\MiKTeX\tex/latex/base\ts1cmr.fd
 File: ts1cmr.fd 2019/12/16 v2.5j Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 164.
-LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 164.
-LaTeX Font Info:    ... okay on input line 164.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 164.
-LaTeX Font Info:    ... okay on input line 164.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 164.
-LaTeX Font Info:    ... okay on input line 164.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 164.
-LaTeX Font Info:    ... okay on input line 164.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 164.
-LaTeX Font Info:    ... okay on input line 164.
-LaTeX Info: Redefining \. on input line 164.
-LaTeX Info: Redefining \% on input line 164.
+LaTeX Font Info:    ... okay on input line 166.
+LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 166.
+LaTeX Font Info:    ... okay on input line 166.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 166.
+LaTeX Font Info:    ... okay on input line 166.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 166.
+LaTeX Font Info:    ... okay on input line 166.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 166.
+LaTeX Font Info:    ... okay on input line 166.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 166.
+LaTeX Font Info:    ... okay on input line 166.
+LaTeX Info: Redefining \. on input line 166.
+LaTeX Info: Redefining \% on input line 166.
 
 (C:\Users\juan_\AppData\Local\Programs\MiKTeX\tex/latex/translations/dicts\tran
 slations-basic-dictionary-spanish.trsl
@@ -1616,7 +1627,7 @@ File: translations-basic-dictionary-spanish.trsl (spanish translation file `tra
 nslations-basic-dictionary')
 )
 Package translations Info: loading dictionary `translations-basic-dictionary' f
-or `spanish'. on input line 164.
+or `spanish'. on input line 166.
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: hyperref package is loaded.
 Package caption Info: hypcap package is loaded.
@@ -1624,11 +1635,11 @@ Package caption Info: listings package is loaded.
 Package caption Info: rotating package is loaded.
 Package caption Info: End \AtBeginDocument code.
 \c@lstlisting=\count415
-Package hyperref Info: Link coloring ON on input line 164.
- (20220704_Proyecto_de_grado.out)
-(20220704_Proyecto_de_grado.out)
+Package hyperref Info: Link coloring ON on input line 166.
+ (20220705_Proyecto_de_grado.out)
+(20220705_Proyecto_de_grado.out)
 \@outlinefile=\write6
-\openout6 = `20220704_Proyecto_de_grado.out'.
+\openout6 = `20220705_Proyecto_de_grado.out'.
 
 Class scrbook Info: loading recommended package `bookmark'.
 (scrbook)           Using `bookmark' together with `hyperref' is recommended,
@@ -1637,9 +1648,9 @@ Class scrbook Info: loading recommended package `bookmark'.
 (scrbook)           `bookmarkpackage=false' before \begin{document} and
 (scrbook)           you can avoid this message adding:
 (scrbook)             \usepackage{bookmark}
-(scrbook)           before \begin{document} on input line 164.
+(scrbook)           before \begin{document} on input line 166.
 Class scrbook Info: temporary deactivation of babel-spanish quoting  on input l
-ine 164.
+ine 166.
 
 (C:\Users\juan_\AppData\Local\Programs\MiKTeX\tex/latex/bookmark\bookmark.sty
 Package: bookmark 2020-11-06 v1.29 PDF bookmarks (HO)
@@ -1649,7 +1660,7 @@ f
 File: bkm-dvipdfm.def 2020-11-06 v1.29 bookmark driver for dvipdfm (HO)
 \BKM@id=\count416
 ))
-Class scrbook Info: reactivation of babel-spanish quoting  on input line 164.
+Class scrbook Info: reactivation of babel-spanish quoting  on input line 166.
 \openout2 = `0_Portada/Portada.aux'.
 
  (0_Portada/Portada.tex
@@ -1688,7 +1699,7 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 
 
 
-] (20220704_Proyecto_de_grado.toc
+] (20220705_Proyecto_de_grado.toc
 Package tocbasic Info: Using my definition of `\numberline' on input line 1.
 Package tocbasic Info: Using my definition of `\numberline' on input line 2.
 LaTeX Info: Redefining \. on input line 3.
@@ -1732,19 +1743,14 @@ Package tocbasic Info: Using my definition of `\numberline' on input line 46.
 Package tocbasic Info: Using my definition of `\numberline' on input line 47.
 Package tocbasic Info: Using my definition of `\numberline' on input line 48.
 Package tocbasic Info: Using my definition of `\numberline' on input line 49.
-Package tocbasic Info: Using my definition of `\numberline' on input line 50.
-Package tocbasic Info: Using my definition of `\numberline' on input line 51.
-Package tocbasic Info: Using my definition of `\numberline' on input line 52.
-Package tocbasic Info: Using my definition of `\numberline' on input line 53.
-Package tocbasic Info: Using my definition of `\numberline' on input line 54.
 )
 \tf@toc=\write7
-\openout7 = `20220704_Proyecto_de_grado.toc'.
+\openout7 = `20220705_Proyecto_de_grado.toc'.
 
-LaTeX Info: Redefining \. on input line 170.
-LaTeX Info: Redefining \% on input line 170.
+LaTeX Info: Redefining \. on input line 172.
+LaTeX Info: Redefining \% on input line 172.
  [12]
-(20220704_Proyecto_de_grado.lof
+(20220705_Proyecto_de_grado.lof
 LaTeX Info: Redefining \. on input line 1.
 LaTeX Info: Redefining \% on input line 1.
 Package tocbasic Info: Using my definition of `\numberline' on input line 4.
@@ -1793,20 +1799,21 @@ Package tocbasic Info: Using my definition of `\numberline' on input line 40.
 Package tocbasic Info: Using my definition of `\numberline' on input line 41.
 Package tocbasic Info: Using my definition of `\numberline' on input line 42.
 Package tocbasic Info: Using my definition of `\numberline' on input line 43.
+Package tocbasic Info: Using my definition of `\numberline' on input line 45.
 )
 \tf@lof=\write8
-\openout8 = `20220704_Proyecto_de_grado.lof'.
+\openout8 = `20220705_Proyecto_de_grado.lof'.
 
-LaTeX Info: Redefining \. on input line 173.
-LaTeX Info: Redefining \% on input line 173.
+LaTeX Info: Redefining \. on input line 175.
+LaTeX Info: Redefining \% on input line 175.
 
-[14] (20220704_Proyecto_de_grado.lot
+[14] (20220705_Proyecto_de_grado.lot
 LaTeX Info: Redefining \. on input line 1.
 LaTeX Info: Redefining \% on input line 1.
 Package tocbasic Info: Using my definition of `\numberline' on input line 6.
 )
 \tf@lot=\write9
-\openout9 = `20220704_Proyecto_de_grado.lot'.
+\openout9 = `20220705_Proyecto_de_grado.lot'.
 
  [1
 
@@ -1841,11 +1848,11 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 ])
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-LaTeX Info: Redefining \. on input line 179.
-LaTeX Info: Redefining \% on input line 179.
+LaTeX Info: Redefining \. on input line 181.
+LaTeX Info: Redefining \% on input line 181.
  [3]
-LaTeX Info: Redefining \. on input line 179.
-LaTeX Info: Redefining \% on input line 179.
+LaTeX Info: Redefining \. on input line 181.
+LaTeX Info: Redefining \% on input line 181.
 
 [4]
 \openout2 = `2_Metodología/Metodología.aux'.
@@ -1990,8 +1997,8 @@ LaTeX Info: Redefining \% on input line 619.
 LaTeX Info: Redefining \. on input line 650.
 LaTeX Info: Redefining \% on input line 650.
  [23])
-LaTeX Info: Redefining \. on input line 180.
-LaTeX Info: Redefining \% on input line 180.
+LaTeX Info: Redefining \. on input line 182.
+LaTeX Info: Redefining \% on input line 182.
  [24]
 \openout2 = `3_Reconocimiento/Reconocimiento.aux'.
 
@@ -2196,8 +2203,8 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 LaTeX Info: Redefining \. on input line 785.
 LaTeX Info: Redefining \% on input line 785.
  [40] [41])
-LaTeX Info: Redefining \. on input line 181.
-LaTeX Info: Redefining \% on input line 181.
+LaTeX Info: Redefining \. on input line 183.
+LaTeX Info: Redefining \% on input line 183.
  [42]
 \openout2 = `4_Implementación/Implementación.aux'.
 
@@ -3557,16 +3564,13 @@ Package relsize Warning: Font size 5.55556pt is too small.
 (relsize)                Using 6.0pt instead on input line 70.
 
 [63]
-LaTeX Info: Redefining \. on input line 123.
-LaTeX Info: Redefining \% on input line 123.
- [64]
 Package hyperref Info: bookmark level for unknown listing defaults to 0 on inpu
-t line 125.
-\openout4 = `20220704_Proyecto_de_grado.pyg'.
+t line 110.
+\openout4 = `20220705_Proyecto_de_grado.pyg'.
 
- (_minted-20220704_Proyecto_de_grado/stata.pygstyle)
-(_minted-20220704_Proyecto_de_grado/E04429856619BB14A14B655A3A7B061F698172D2C63
-6F25E17CDDA60E1C665AD.pygtex
+ (_minted-20220705_Proyecto_de_grado/stata.pygstyle)
+(_minted-20220705_Proyecto_de_grado/E04429856619BB14A14B655A3A7B061F39AC4ACBE5F
+143C146C471975E076D55.pygtex
 
 Package fontspec Info: Font family 'AncizarSans(1)' created for font 'Ancizar
 (fontspec)             Sans' with options [Ligatures=TeX,Ligatures =
@@ -3608,7 +3612,10 @@ xt;"
 tex-text;"
 
 )
-Overfull \hbox (1.49878pt too wide) in paragraph at lines 147--150
+LaTeX Info: Redefining \. on input line 136.
+LaTeX Info: Redefining \% on input line 136.
+ [64]
+Overfull \hbox (1.49878pt too wide) in paragraph at lines 145--148
 \TU/AncizarSerif(0)/m/n/12 probabilidades de transición del estado $\OML/cmm/m/
 it/12 i$ \TU/AncizarSerif(0)/m/n/12 al $\OML/cmm/m/it/12 j$ \TU/AncizarSerif(0)
 /m/n/12 en $\OML/cmm/m/it/12 n \OMS/cmsy/m/n/12 ^^U \OT1/cmr/m/n/12 1$ \TU/Anci
@@ -3616,35 +3623,49 @@ zarSerif(0)/m/n/12 pasos, es decir $\OML/cmm/m/it/12 p[] \OT1/cmr/m/n/12 = \OML
 /cmm/m/it/12 P []$\TU/AncizarSerif(0)/m/n/12 ,
  []
 
-LaTeX Info: Redefining \. on input line 166.
-LaTeX Info: Redefining \% on input line 166.
-[65]
-\openout5 = `20220704_Proyecto_de_grado.pyg'.
+
+Underfull \vbox (badness 6608) has occurred while \output is active []
+
+LaTeX Info: Redefining \. on input line 167.
+LaTeX Info: Redefining \% on input line 167.
+ [65]
+\openout5 = `20220705_Proyecto_de_grado.pyg'.
 
 
-(_minted-20220704_Proyecto_de_grado/CCD86483726B52B516B0F43C56BFAEE6698172D2C63
-6F25E17CDDA60E1C665AD.pygtex)
-Underfull \vbox (badness 1436) has occurred while \output is active []
-
-LaTeX Info: Redefining \. on input line 207.
-LaTeX Info: Redefining \% on input line 207.
+(_minted-20220705_Proyecto_de_grado/CCD86483726B52B516B0F43C56BFAEE639AC4ACBE5F
+143C146C471975E076D55.pygtex)
+LaTeX Info: Redefining \. on input line 206.
+LaTeX Info: Redefining \% on input line 206.
  [66]
-\openout4 = `20220704_Proyecto_de_grado.pyg'.
+\openout4 = `20220705_Proyecto_de_grado.pyg'.
 
 
-(_minted-20220704_Proyecto_de_grado/743EE1A6AF1CAA19B69E71994F800123698172D2C63
-6F25E17CDDA60E1C665AD.pygtex)
-\openout4 = `20220704_Proyecto_de_grado.pyg'.
+(_minted-20220705_Proyecto_de_grado/743EE1A6AF1CAA19B69E71994F80012339AC4ACBE5F
+143C146C471975E076D55.pygtex)
+\openout4 = `20220705_Proyecto_de_grado.pyg'.
 
 
-(_minted-20220704_Proyecto_de_grado/D6183C6D38676C12492EE63F37583CF6698172D2C63
-6F25E17CDDA60E1C665AD.pygtex)
-LaTeX Info: Redefining \. on input line 258.
-LaTeX Info: Redefining \% on input line 258.
- [67])
-LaTeX Info: Redefining \. on input line 183.
-LaTeX Info: Redefining \% on input line 183.
+(_minted-20220705_Proyecto_de_grado/D6183C6D38676C12492EE63F37583CF639AC4ACBE5F
+143C146C471975E076D55.pygtex)
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+LaTeX Info: Redefining \. on input line 289.
+LaTeX Info: Redefining \% on input line 289.
+[67]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+LaTeX Info: Redefining \. on input line 312.
+LaTeX Info: Redefining \% on input line 312.
  [68]
+\openout5 = `20220705_Proyecto_de_grado.pyg'.
+
+
+(_minted-20220705_Proyecto_de_grado/882CD05BF9CC6F10F864F35A805221A239AC4ACBE5F
+143C146C471975E076D55.pygtex))
+LaTeX Info: Redefining \. on input line 185.
+LaTeX Info: Redefining \% on input line 185.
+ [69]
 \openout2 = `6_Conclusiones/Conclusiones.aux'.
 
  (6_Conclusiones/Conclusiones.tex
@@ -3655,11 +3676,11 @@ Underfull \hbox (badness 10000) in paragraph at lines 7--8
  []
 
 )
-Underfull \hbox (badness 10000) in paragraph at lines 10--184
+Underfull \hbox (badness 10000) in paragraph at lines 10--186
 
  []
 
-[69
+[70
 
 
 
@@ -3684,48 +3705,51 @@ Class scrbook Warning: You are using `\begin{appendix}...\end{appendix}'.
 
 chapter A.
 
-(_minted-20220704_Proyecto_de_grado/376ABBC771219BDBF0AEC6849D65ADC0871BF61F112
-7D46722BDCC78640E74A5.pygtex)
+(_minted-20220705_Proyecto_de_grado/376ABBC771219BDBF0AEC6849D65ADC0668EB6E9DA9
+987FBFB03E0DC47057CBF.pygtex)
 Underfull \vbox (badness 2027) has occurred while \output is active []
 
- [70
+ [71
 
 
 
 
 ]
-(_minted-20220704_Proyecto_de_grado/335E7376BE654661F46074EA590245DA7F3F5E2EE34
-A951D08C450C55276C873.pygtex)
-\openout4 = `20220704_Proyecto_de_grado.pyg'.
+(_minted-20220705_Proyecto_de_grado/335E7376BE654661F46074EA590245DA1626F85F6C1
+821F7E42C94A5BC55DDBC.pygtex)
+\openout4 = `20220705_Proyecto_de_grado.pyg'.
 
 
-(_minted-20220704_Proyecto_de_grado/F69EAD47DE9411DA23F381B820123110698172D2C63
-6F25E17CDDA60E1C665AD.pygtex)
-\openout4 = `20220704_Proyecto_de_grado.pyg'.
+(_minted-20220705_Proyecto_de_grado/F69EAD47DE9411DA23F381B82012311039AC4ACBE5F
+143C146C471975E076D55.pygtex)
+\openout4 = `20220705_Proyecto_de_grado.pyg'.
 
 
-(_minted-20220704_Proyecto_de_grado/BD2F9A5D65184D75CE7F1B749BF0660A698172D2C63
-6F25E17CDDA60E1C665AD.pygtex)) [71] (20220704_Proyecto_de_grado.bbl
-Underfull \hbox (badness 10000) in paragraph at lines 74--79
+(_minted-20220705_Proyecto_de_grado/BD2F9A5D65184D75CE7F1B749BF0660A39AC4ACBE5F
+143C146C471975E076D55.pygtex))
+LaTeX Info: Redefining \. on input line 187.
+LaTeX Info: Redefining \% on input line 187.
+ [72] (20220705_Proyecto_de_grado.bbl [73
+
+
+
+]
+Underfull \hbox (badness 10000) in paragraph at lines 81--86
 [][] [] [][] [] [][][] [] [][][][][][][][] [][] [][][][][][] [] [][][][][][][][
 ] [][] [][][][][][][][] [] [][] [][] [][][][][][][][][] [][] [][][][][] [][] []
 [][][][][][][][] [][]
  []
 
-[72
 
-
-
-]
-Underfull \hbox (badness 2884) in paragraph at lines 98--103
+Underfull \hbox (badness 2884) in paragraph at lines 105--110
 []\TU/AncizarSerif(0)/m/n/12 PyVISA (2022).  PyVISA: Control your instruments w
 ith Python.  [][]$[][][][][] [] [] [] [][][][][][] []
  []
 
 )
-LaTeX Info: Redefining \. on input line 190.
-LaTeX Info: Redefining \% on input line 190.
- [73] (20220704_Proyecto_de_grado.aux (0_Portada/Portada.aux)
+LaTeX Info: Redefining \. on input line 192.
+LaTeX Info: Redefining \% on input line 192.
+ [74] (20220705_Proyecto_de_grado.aux (0_Portada/Portada.aux)
 LaTeX Info: Redefining \. on input line 25.
 LaTeX Info: Redefining \% on input line 25.
 
@@ -3733,19 +3757,19 @@ LaTeX Info: Redefining \% on input line 25.
 (3_Reconocimiento/Reconocimiento.aux) (4_Implementación/Implementación.aux)
 (5_MC_incertidumbre/MC_incertidumbre.aux) (6_Conclusiones/Conclusiones.aux)
 (Anexos/Anexos.aux))
-Package rerunfilecheck Info: File `20220704_Proyecto_de_grado.out' has not chan
+Package rerunfilecheck Info: File `20220705_Proyecto_de_grado.out' has not chan
 ged.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
-runsystem(del 20220704_Proyecto_de_grado.pyg)...executed.
+runsystem(del 20220705_Proyecto_de_grado.pyg)...executed.
 
  ) 
 Here is how much of TeX's memory you used:
- 50312 strings out of 410670
- 1100262 string characters out of 2816709
- 2212657 words of memory out of 3000000
- 70456 multiletter control sequences out of 15000+600000
+ 50510 strings out of 410670
+ 1105634 string characters out of 2816709
+ 2215763 words of memory out of 3000000
+ 70645 multiletter control sequences out of 15000+600000
  487802 words of font info for 148 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 118i,21n,119p,10606b,2010s stack positions out of 10000i,1000n,20000p,200000b,80000s
+ 108i,21n,109p,10606b,2010s stack positions out of 10000i,1000n,20000p,200000b,80000s
 
-Output written on 20220704_Proyecto_de_grado.pdf (87 pages).
+Output written on 20220705_Proyecto_de_grado.pdf (88 pages).

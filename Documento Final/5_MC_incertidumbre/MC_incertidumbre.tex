@@ -101,25 +101,10 @@ Analíticamente, una cadena de Markov es una secuencia de variables aleatorias $
 \end{equation}
 %
 Para todo $x_0, \dots, x_{n - 1}, i, j \in \mathcal{S}$ y $n \ge 0$.
-Normalmente, se asume que todas las cadenas de Markov son homogéneas, en las que la probabilidad no dependen de $n$.
+Normalmente, se asume que todas las cadenas de Markov son homogéneas, en las que la probabilidad no depende de $n$.
 
 En la ecuación~\eqref{eq:markov_chain} las probabilidades solamente dependen de $i$ y $j$, por lo que estas se pueden organizar de forma matricial en $\mathbf{P}$, cuya $ji$-ésima entrada es $p_{ij} = P\left(X_{n + 1} = j\,|\,X_n = i\right)$, la probabilidad de transición de un estado a otro en un paso.
 La matriz de transición es una matriz cuadrada de $k \times k$ para los $k$ estados en el espacio $\mathcal{S}$.
-
-La matriz de transición o matriz estocástica debe cumplir que $p_{ij} \ge 0 \quad \forall\,i,j$ y que
-%
-\begin{equation*}
-    \sum_j p_{ij} = \sum_j P\left(X_{n + 1} = j\,|\,X_n = i\right)
-    = \sum_j \frac{P\left(X_{n + 1} = j, X_n = i\right)}{P\left(X_n = i\right)}
-    = \frac{P\left(X_n = i\right)}{P\left(X_n = i\right)} = 1.
-\end{equation*}
-%
-Lo que indica que las transiciones en las cadenas de Markov son exhaustivas.
-
-Teniendo en cuenta este fundamento conceptual, para cada punto de calibración se conforma una matriz de transición en la que cada nivel diferente indicado en pantalla es un estado en la cadena de Markov.
-Para este efecto se escribió el método estático a continuación.
-\vfill
-\pagebreak
 
 \begin{code}
     \caption{Método estático para la construcción de una matriz de transición de estados a partir de una serie de muestras dada.}
@@ -142,11 +127,24 @@ def build_transition_matrix(samples: np.ndarray) -> np.ndarray:
     \end{minted}
 \end{code}
 
+La matriz de transición o matriz estocástica debe cumplir que $p_{ij} \ge 0 \quad \forall\,i,j$ y que
+%
+\begin{equation*}
+    \sum_j p_{ij} = \sum_j P\left(X_{n + 1} = j\,|\,X_n = i\right)
+    = \sum_j \frac{P\left(X_{n + 1} = j, X_n = i\right)}{P\left(X_n = i\right)}
+    = \frac{P\left(X_n = i\right)}{P\left(X_n = i\right)} = 1.
+\end{equation*}
+%
+Lo que indica que las transiciones en las cadenas de Markov son exhaustivas.
+
+Teniendo en cuenta este fundamento conceptual, para cada punto de calibración se conforma una matriz de transición en la que cada nivel diferente indicado en pantalla es un estado en la cadena de Markov.
+Para este efecto se escribió el método estático del código~\ref{code:build_transition_matrix}.
+
 \subsection*{Paso 3: Distribución de probabilidad estacionaria}
 \label{subsec:stationary_distribution}
 Una vez se conforma una matriz con las probabilidades de transición se puede usar álgebra matricial para hacer cálculos con las probabilidades.
 Uno de los más elementales es el cálculo de las probabilidades de transición del estado $i$ al $j$ en $n \ge 1$ pasos, es decir $p_{ij}^{(n)} = P\left(X_n = j \,|\,X_0 = i\right)$, la probabilidad de que en $n$ pasos el proceso visite el estado $j$ dado que ahora está en el estado $i$.
-Cuando $n = 1$ las probabilidades son las mismas de $\mathbf{P}$, pero cuando $n \ge 1$ las probabilidades de transición son los $ij$-ésimos elementos de la potencia $n$ de $\mathbf{P}$, denotado como $\mathbf{P}^n$.
+Cuando $n = 1$ las probabilidades son las mismas de $\mathbf{P}$, pero cuando $n \ge 1$ las probabilidades de transición son los $ij$-ésimos elementos de la potencia $n$ de $\mathbf{P}$, denotada como $\mathbf{P}^n$.
 
 Es de especial interés conocer el comportamiento del sistema en el largo plazo, lo cual está caracterizado por las potencias de mayor orden de $\mathbf{P}$.
 En la medida en que $n$ incrementa, el proceso alcanza un comportamiento límite y las probabilidades de transición convergen a una distribución de equilibrio, conocida como distribución límite, la cual no depende de la distribución de probabilidad inicial de los estados.
@@ -157,7 +155,7 @@ Para una cadena de Markov la distribución límite es la distribución de probab
 \end{equation}
 
 Si una cadena de Markov tiene una distribución límite, entonces esta es única.
-Se puede encontrar la distribución límite simplemente tomando la potencias de mayor orden hasta obtener una matriz $\boldsymbol{\Lambda}$ en la cual todas las filas son iguales a $\boldsymbol{\lambda}$, o también se pueden encontrar soluciones exactas de forma analítica y teórica.
+Se puede encontrar la distribución límite simplemente tomando las potencias de mayor orden hasta obtener una matriz $\boldsymbol{\Lambda}$ en la cual todas las filas son iguales a $\boldsymbol{\lambda}$, o también se pueden encontrar soluciones exactas de forma analítica y teórica.
 Cabe mencionar que la distribución límite también puede ser interpretada como la proporción de tiempo que el proceso visita cada estado en el largo plazo
 
 Ahora, si se asigna la distribución límite como la distribución inicial de la cadena de Markov, luego se encuentran las probabilidades marginales $\boldsymbol{\lambda}\,\mathbf{P}$, y el resultado es el mismo vector $\boldsymbol{\lambda}$, entonces esta distribución límite es llamada distribución estacionaria.
@@ -177,7 +175,7 @@ La ecuación~\eqref{eq:stationary_distribution} puede escribirse matricialmente 
 Finalmente, se puede escribir el sistema de ecuaciones matricialmente como
 %
 \begin{align}
-    \mathbf{A}\,\boldsymbol{\pi} &= \mathbf{b} \\
+    \mathbf{A}\,\boldsymbol{\pi} &= \mathbf{b}; \\
     \left[\begin{matrix}
               \left(\mathbf{P}^\intercal - \mathbf{I}\right) \\ 1 \\ \vdots \\ 1;
     \end{matrix}\right]\,\boldsymbol{\pi} &= \left[\begin{matrix}
@@ -187,6 +185,7 @@ Finalmente, se puede escribir el sistema de ecuaciones matricialmente como
 
 Para encontrar soluciones para $\boldsymbol{\pi}$ se resuelve el sistema
 \begin{equation}
+    \label{eq:pi_linear_system}
     \left(\mathbf{A}^\intercal\,\mathbf{A}\right)\,\boldsymbol{\pi} = \mathbf{A}^\intercal\,\mathbf{b}.
 \end{equation}
 
@@ -256,32 +255,86 @@ for i in np.where(np.isnan(samples))[0]:  # Filling based on the previous state 
 
 Una vez el vector de muestras está completo, se construye una segunda matriz de transición y nuevamente se calcula la distribución estacionaria que se empleará en el cálculo del valor esperado.
 
+\begin{figure}[!h]
+    \caption{Grafo de estados y probabilidades de transición que representa la matriz de transición~\eqref{eq:eg_transition_matrix}.}
+    \label{fig:eg_automata}
+    \centering
+    \begin{tikzpicture}[thick,shorten >=1pt,node distance=6cm,on grid,auto]
+        \node[state](q1){$\qty{33.1}{\dB}$};
+        \node[state](q2)[below=of q1]{$\qty{33.2}{\dB}$};
+        \node[state](q3)[right=of q1]{$\qty{33.3}{\dB}$};
+        \node[state](q4)[below=of q3]{$\qty{33.4}{\dB}$};
+        \draw[->, stealth-]
+        (q1) edge [loop left] node {$\num{0.200}$} ()
+        edge [bend right, swap] node {$\num{0.045}$} (q2)
+        edge [swap] node {$\num{0.022}$} (q3)
+        (q2) edge [loop left] node {$\num{0.455}$} ()
+        edge [swap, pos=0.6] node {$\num{0.200}$} (q1)
+        edge [bend right] node {$\num{0.696}$} (q3)
+        edge [bend right, swap] node {$\num{0.667}$} (q4)
+        (q3) edge [loop right] node {$\num{0.261}$} ()
+        edge [bend right, swap] node {$\num{0.600}$} (q1)
+        edge [bend right] node {$\num{0.455}$} (q2)
+        edge [swap, pos=0.6] node {$\num{0.333}$} (q4)
+        (q4) edge [swap] node {$\num{0.045}$} (q2)
+        edge [bend right, swap] node {$\num{0.022}$} (q3);
+    \end{tikzpicture}
+    \caption*{\footnotesize Fuente propia.}
+\end{figure}
 
 \section{Ejemplo de resultado de ejecución del método}
 Habiendo incluido apropiadamente este método en el desarrollo previo de la aplicación, se obtuvieron los resultados esperados.
 Un ejemplo de una matriz de transición obtenida en la prueba de ponderación frecuencial $Z$ con señales eléctricas a $\qty{63}{\Hz}$ se muestra a continuación.
+%
+\begin{equation}
+    \label{eq:eg_transition_matrix}
+    \mathbf{P} = \kbordermatrix{
+        & \mathbf{\num{33,1}} & \mathbf{\num{33.2}} & \mathbf{\num{33.3}} & \mathbf{\num{33.4}} \\
+        \mathbf{\num{33.1}} & \num{0.200} & \num{0.200} & \num{0.600} & \num{0.000} \\
+        \mathbf{\num{33.2}} & \num{0.045} & \num{0.455} & \num{0.455} & \num{0.045} \\
+        \mathbf{\num{33.3}} & \num{0.022} & \num{0.696} & \num{0.261} & \num{0.022} \\
+        \mathbf{\num{33.4}} & \num{0.000} & \num{0.667} & \num{0.333} & \num{0.000} \\
+    }
+\end{equation}
+%
+Y el grafo correspondiente se representa en la figura~\ref{fig:eg_automata}.
 
-%TODO Incluir matriz de transición
+Resolviendo el sistema de la ecuación~\eqref{eq:pi_linear_system}, la distribución estacionaria es
+%
+\begin{equation*}
+    \boldsymbol{\pi} = \kbordermatrix{
+        & \mathbf{\num{33.1}} &  \mathbf{\num{33.2}} &  \mathbf{\num{33.3}} & \mathbf{\num{33.4}} \\
+        & \num{0.041} & \num{0.543} & \num{0.382} & \num{0.033}
+    }
+\end{equation*}
 
-Y el grafo correspondiente se representa en la siguiente figura.
-
-%TODO Dibujar grafo (autómata)
-
-La distribución estacionaria es
-
-%TODO Incluir matriz pi
-
-Y finalmente, el valor esperado es $x$.
+Finalmente, el valor esperado, redondeado a la misma cantidad de dígitos decimales de la precisión del sonómetro es $\qty{33.2}{\dB}$.
 
 
-\section{Incertidumbre de medición}
+\section{Evaluación tipo A de la incertidumbre típica}
 
-\subsection{Definición matemática del mesurando}
+De a cuerdo con la guía para la expresión de la incertidumbre de medida~\citep{ISO_TAG4_2008}, los valores de las observaciones individuales $q_k$ difieren en razón de las variaciones aleatorias de las magnitudes de influencia o de efectos aleatorios.
+La varianza experimental de dichas $n$ observaciones está dada por:
+%
+\begin{equation}
+    s^2\left( q_k \right) = \frac{1}{n - 1}\, \sum_{j = 1}^{n} \left( q_j - \bar{q} \right)^2,
+\end{equation}
+%
+Que, junto con su raíz cuadrada positiva $s\left( q_k \right)$ (denominada desviación típica experimental), representan la variabilidad de los valores $q_k$, es decir, su dispersion al rededor del valor esperado $\bar{q}$.
+Luego, la mejor estimación de la varianza experimental de la media $\sigma^2\left( \bar{q} \right) = \sigma^2 / n$ es
+%
+\begin{equation}
+    \label{eq:experimental_mean_variance}
+    s^2\left( \bar{q} \right) = \frac{s^2\left( q_k \right)}{n},
+\end{equation}
+Que, junto con desviación típica experimental de la media $s\left( \bar{q} \right) = \sqrt{s^2\left( \bar{q} \right)}$ pueden ser utilizadas como medida de la incertidumbre de $\bar{q}$.
 
-\subsection{Incertidumbre tipo A}
+En concreto, en un modelo matemático de un mesurando $y$, para una magnitud de entrada $X_i$ obtenida a partir de $n$ observaciones repetidas e independientes $X_{i,k}$, la incertidumbre típica $u\left( x_i \right)$ de su estimación $x_i = \bar{X}_i$ es $u\left( x_i \right) = s\left( \bar{X}_i \right)$, con $s^2\left( \bar{X}_i \right)$ calculada con la ecuación~\eqref{eq:experimental_mean_variance}.
+Esta incertidumbre típica $u\left( x_i \right)$ es llamada \emph{incertidumbre típica tipo A}.
 
-\subsection{Incertidumbre tipo B}
+El número de observaciones $n$ debe ser lo suficientemente grande para garantizar que $s^2\left( \bar{q} \right)$ proporcione una estimación fiable de la varianza $\sigma^2\left( \bar{q} \right)$.
+La aplicación desarrollada permite cumplir esta consideración, puesto que en un tiempo de $\qty{25}{\s}$, con un periodo de actualización de pantalla típico de $\qty{100}{\ms}$, se capturan $250$ muestras.
+Ahora, en un cálculo posterior, cuando se determinan intervalos de confianza para la incertidumbre expandida, se debe tomar en cuenta la diferencia entre $\sigma^2\left( \bar{q} \right)$ y $s\left( \bar{q} \right)$, ya que en muchos casos puede ser que la distribución de probabilidad del mesurando (en este caso equivale a la distribución estacionaria) sea muy distinta de una distribución normal.
 
-\subsection{Incertidumbre típica combinada}
-
-\subsection{Grados efectivos de libertad, factor de cobertura e incertidumbre expandida}
+La estimación de la incertidumbre típica tipo A puede hacerse rápidamente con la instrucción \mintinline{python}{samples.std() / math.sqrt(samples.shape[0])}.
+Para las muestras del ejemplo anterior se obtiene $s\left( \bar{q} \right) \approx \qty{0.0057}{\dB}$.
