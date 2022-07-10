@@ -685,14 +685,14 @@ En la figura~\ref{fig:train_samples_features} se muestran los resultados de una 
     \includegraphics[width=0.8\textwidth]{3_Reconocimiento/Figs/train_samples_features}
 \end{figure}
 
-Ahora, el código~\ref{code:test_samples_code} se puede ejecutar iterativamente para leer todas las imágenes de un conjunto de entrenamiento con entre $10$ y $20$ muestras por cada clase.
+Ahora, el código~\ref{code:test_samples_code} se puede ejecutar iterativamente para leer todas las imágenes de un conjunto de entrenamiento con aproximadamente entre $40$ y $100$ muestras por cada clase.
 Luego, para los pasos \hyperref[sec:kpca_reduction]{5} y \hyperref[sec:nb_classifier]{6}, complementando con el código~\ref{code:features_extracting}, se efectúa la extracción de características y se entrena el clasificador bayesiano normal.
 La reducción de dimensionalidad se hizo hasta un valor de $d = 16$, empíricamente seleccionado según los resultados de clasificación obtenidos.
 
 Finalmente, para una muestra dada de prueba, se efectúa el mismo procesamiento de la imagen con el código~\ref{code:test_samples_code}, y la extracción y clasificación se efectúa con el código~\ref{code:sample_classifying}.
 
 Durante los primeros ensayos del algoritmo se pudo notar que si las condiciones de captura de la imagen no son controladas, factores como el desenfoque de la cámara, la alta exposición controlada por el diafragma de la cámara, reflejos, destellos de luz o bajo contraste, pueden afectar significativamente la clasificación.
-Por ejemplo, en la figura~\ref{fig:good_bad_conditions} se presenta una comparación entre dos números fotografiados en condiciones controladas y no controladas, y el respectivo resultado de procesamiento.
+Por ejemplo, en la figura~\ref{fig:good_bad_conditions} se presenta una comparación entre tres números fotografiados en condiciones controladas y no controladas, y el respectivo resultado de procesamiento.
 
 \tikzmath{\x1 = 5.3;}
 \begin{figure}[hp!]
