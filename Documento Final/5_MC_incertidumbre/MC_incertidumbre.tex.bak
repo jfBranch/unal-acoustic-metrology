@@ -4,101 +4,113 @@
 
 \chapter{Caracterización de la variabilidad del valor de medición usando modelos de Markov}
 
-En esta sección se explica el diseño e implementación del método propuesto para tener en cuenta la variabilidad del nivel indicado en la pantalla del sonómetro bajo calibración en el resultado de medición, expresado como el valor de medición junto con la incertidumbre expandida de medición. En primer lugar se describen las consideraciones previas que dan validez al método propuesto y se introduce el algoritmo que resume la ejecución del método en una serie de pasos. Luego, se presenta el fundamento teórico suficiente de los procesos estocásticos modelados con cadenas de Markov y se describen brevemente los detalles de la implementación del método. Finalmente se muestra y discute un ejemplo de un valor de medición obtenido con el método implementado y su correspondiente incertidumbre de medida tipo A.
+En esta sección se explica el diseño e implementación del método propuesto para tener en cuenta la variabilidad del nivel indicado en la pantalla del sonómetro bajo calibración en el resultado de medición, expresado como el valor de medición junto con la incertidumbre expandida de medición.
+En primer lugar, se describen las consideraciones previas que dan validez al método propuesto y se introduce el algoritmo que resume la ejecución del método en una serie de pasos.
+Luego, se presenta el fundamento teórico suficiente de los procesos estocásticos modelados con cadenas de Markov y se describen brevemente los detalles de la implementación del método.
+Finalmente, se muestra y discute un ejemplo de un valor de medición obtenido con el método implementado y su correspondiente incertidumbre de medida tipo A\@.
 
-\subsection*{Consideraciones previas}
-El nivel instantáneo ponderado en tiempo y en frecuencia definido en la ecuación \ref{ec:time_weighted_level} no es un indicador representativo del nivel de sonidos cuya presión tiene bastante variabilidad, ya que es muy susceptible a las variaciones instantáneas en la presión acústica, por lo que normalmente en mediciones acústicas se evalúa el nivel de sonido promediado en el tiempo o nivel de sonido continuo equivalente, definido en la \mbox{IEC 61672-1} \citeyearpar{IEC_TC29_2013_1} como
+\section*{Consideraciones previas}
+El nivel instantáneo ponderado en tiempo y en frecuencia definido en la ecuación~\eqref{eq:time_weighted_level} no es un indicador representativo del nivel de sonidos cuya presión tiene bastante variabilidad, ya que es muy susceptible a las variaciones instantáneas en la presión acústica, por lo que normalmente en mediciones acústicas se evalúa el nivel de sonido promediado en el tiempo o nivel de sonido continuo equivalente, definido en la \mbox{IEC 61672--1}~\citeyearpar{IEC_TC29_2013_1} como
 %
 \begin{equation}
-\label{ec:equivalent_level}
-	L_{Xeq,T} = 10\log{\left(\frac{\frac{1}{t_1 - t_2}\,\int_{t_2}^{t_1} p_X^2\left(\xi\right)\,\mathrm{d}\xi}{p_0^2}\right)},
+    \label{eq:equivalent_level}
+    L_{Xeq,T} = 10\log{\left(\frac{\frac{1}{t_1 - t_2}\,\int_{t_2}^{t_1} p_X^2\left(\xi\right)\,\mathrm{d}\xi}{p_0^2}\right)},
 \end{equation}
 %
-En que $t_1$ y $t_2$ son el instante de tiempo final e inicial de integración correspondientemente. El nivel continuo equivalente es un indicador mucho más confiable, ya que se trata de un nivel constante que, durante todo el tiempo de integración, tiene la misma energía acústica que la señal de presión con sus variaciones instantáneas.
+En que $t_1$ y $t_2$ son el instante de tiempo final e inicial de integración correspondientemente.
+El nivel continuo equivalente es un indicador mucho más confiable, ya que se trata de un nivel constante que, durante todo el tiempo de integración, tiene la misma energía acústica que la señal de presión con sus variaciones instantáneas.
 
-Ahora, medir el nivel equivalente requiere una intervención manual del usuario para ajustar en el sonómetro el tiempo de integración y ver el resultado final, por lo que este indicador no es el más adecuado para la automatización empleando reconocimiento de imágenes. No obstante, la \mbox{IEC 61672-3} \citeyearpar{IEC_TC29_2013_3} permite seleccionar entre un nivel ponderado en el tiempo o un nivel promediado en el tiempo, como valor de medición en cada punto de calibración. Para no comprometer la automatización y obtener un resultado de medición válido y representativo de todas las posibles variaciones que pueda tener el nivel instantáneo ponderado en el tiempo, se propone tener en cuenta todas las muestras del nivel ponderado en el tiempo y luego, el nivel presente en la mayor cantidad de muestras viene a ser una estimación apropiada del nivel promediado en el tiempo (esto en condiciones controladas, como es el caso en laboratorios de calibración). Este efecto se puede comprobar analizando las expresiones matemáticas de cada indicador. En primer lugar, de la ecuación \ref{ec:time_weighted_level} se extrae que la presión acústica con ponderación temporal, expresada como una función del tiempo es
+Ahora, medir el nivel equivalente requiere una intervención manual del usuario para ajustar en el sonómetro el tiempo de integración y ver el resultado final, por lo que este indicador no es el más adecuado para la automatización empleando reconocimiento de imágenes.
+No obstante, la \mbox{IEC 61672--3}~\citeyearpar{IEC_TC29_2013_3} permite seleccionar entre un nivel ponderado en el tiempo o un nivel promediado en el tiempo, como valor de medición en cada punto de calibración.
+Para no comprometer la automatización y obtener un resultado de medición válido y representativo de todas las posibles variaciones que pueda tener el nivel instantáneo ponderado en el tiempo, se propone tener en cuenta todas las muestras del nivel ponderado en el tiempo y luego, el nivel presente en la mayor cantidad de muestras viene a ser una estimación apropiada del nivel promediado en el tiempo (esto en condiciones controladas, como es el caso en laboratorios de calibración).
+Este efecto se puede comprobar analizando las expresiones matemáticas de cada indicador.
+En primer lugar, de la ecuación~\eqref{eq:time_weighted_level} se extrae que la presión acústica con ponderación temporal, expresada como una función del tiempo es
 %
 \begin{equation}
-	p_{XY}^2(t) = \frac{1}{\tau_{Y}}\,\int_{-\infty}^t p_X^2\left(\xi\right)\,
-								e^{\nicefrac{-\left(t - \xi\right)}{\tau_Y}}\,\mathrm{d}\xi.
+    p_{XY}^2(t) = \frac{1}{\tau_{Y}}\,\int_{-\infty}^t p_X^2\left(\xi\right)\,
+    e^{\nicefrac{-\left(t - \xi\right)}{\tau_Y}}\,\mathrm{d}\xi.
 \end{equation}
 
-Esta presión instantánea ponderada en el tiempo no es la misma de la ecuación \ref{ec:equivalent_level}. Para calcular un nivel continuo equivalente con ponderación temporal y frecuencial se requiere modificar la ecuación \ref{ec:equivalent_level} remplazando $p_X^2(\xi)$ por $p_{XY}^2(t)$; en efecto, queda
+Esta presión instantánea ponderada en el tiempo no es la misma de la ecuación~\eqref{eq:equivalent_level}.
+Para calcular un nivel continuo equivalente con ponderación temporal y frecuencial se requiere modificar la ecuación~\eqref{eq:equivalent_level} remplazando $p_X^2(\xi)$ por $p_{XY}^2(t)$; en efecto, queda
 %
 \begin{align}
-	L_{AFeq,T} &= 10\log{\left(\frac{\frac{1}{t_1 - t_2}\,\int_{t_2}^{t_1} p_{XY}^2(t)\,\mathrm{d}t}{p_0^2}\right)}; \nonumber \\
-			   &= 10\log{\left(\frac{\frac{1}{\tau_Y\,\left(t_1 - t_2\right)}\,
-			   				   \int_{t_2}^{t_1} \int_{-\infty}^t p_X^2\left(\xi\right)\,
-								e^{\nicefrac{-\left(t - \xi\right)}{\tau_Y}}\,\mathrm{d}\xi\,\mathrm{d}t}{p_0^2}\right)}. \label{ec:equivalent_time_weighted_level}
+    L_{AFeq,T} &= 10\log{\left(\frac{\frac{1}{t_1 - t_2}\,\int_{t_2}^{t_1} p_{XY}^2(t)\,\mathrm{d}t}{p_0^2}\right)}; \nonumber \\
+    &= 10\log{\left(\frac{\frac{1}{\tau_Y\,\left(t_1 - t_2\right)}\,
+    \int_{t_2}^{t_1} \int_{-\infty}^t p_X^2\left(\xi\right)\,
+    e^{\nicefrac{-\left(t - \xi\right)}{\tau_Y}}\,\mathrm{d}\xi\,\mathrm{d}t}{p_0^2}\right)}. \label{eq:equivalent_time_weighted_level}
 \end{align}
 
-En la ecuación \ref{ec:equivalent_time_weighted_level} se puede concluir que cuanto más tiempo permanezca estable una presión acústica instantánea ponderada en tiempo, el nivel equivalente más se acercará al correspondiente nivel instantáneo ponderado en tiempo, pues tiene mayor efecto en el resultado de la integral.
+En la ecuación~\eqref{eq:equivalent_time_weighted_level} se puede concluir que cuanto más tiempo permanezca estable una presión acústica instantánea ponderada en tiempo, el nivel equivalente más se acercará al correspondiente nivel instantáneo ponderado en tiempo, pues tiene mayor efecto en el resultado de la integral.
 
-\subsection*{Algoritmo para la creación del modelo de Markov}
-El método propuesto consiste en tomar cada uno de los niveles instantáneos obtenidos como un estado en una cadena de Markov. Esta cadena caracteriza los cambios de un nivel a otro, considerando la variabilidad del nivel instantáneo como un proceso estocástico. Luego, con la distribución de probabilidad estacionaria se estima el valor esperado en el largo plazo, que lógicamente corresponde al estado (nivel instantáneo) con mayor probabilidad de ocurrir. Las probabilidades de transición de un estado a otro se determinar a partir de una serie de muestras de niveles instantáneos obtenidas durante un tiempo de $25$ segundos aproximadamente, y la cantidad de muestras depende del periodo de actualización del nivel instantáneo en la pantalla del sonómetro. Por tanto, el valor esperado calculado con la cadena de Markov será probablemente el nivel instantáneo que más muestras tuvo y será el valor de medición. Este es un proceso que se realiza en cada punto de calibración y se resume en el siguiente algoritmo, y las operaciones realizadas en cada paso, se describen en la siguientes secciones.
+\section*{Algoritmo para la creación del modelo de Markov}
+El método propuesto consiste en tomar cada uno de los niveles instantáneos obtenidos como un estado en una cadena de Markov.
+Esta cadena caracteriza los cambios de un nivel a otro, considerando la variabilidad del nivel instantáneo como un proceso estocástico.
+Luego, con la distribución de probabilidad estacionaria se estima el valor esperado en el largo plazo, que lógicamente corresponde al estado (nivel instantáneo) con mayor probabilidad de ocurrir.
+Las probabilidades de transición de un estado a otro se determinan a partir de una serie de muestras de niveles instantáneos obtenidas durante un tiempo de $25$ segundos aproximadamente, y la cantidad de muestras depende del periodo de actualización del nivel instantáneo en la pantalla del sonómetro.
+Por tanto, el valor esperado calculado con la cadena de Markov será probablemente el nivel instantáneo que más muestras tuvo y será el valor de medición.
+Este es un proceso que se realiza en cada punto de calibración y se resume en el siguiente algoritmo, y las operaciones realizadas en cada paso, se describen en las siguientes secciones.
 
 \begin{algorithm}[H]
-\caption{Algoritmo para el cálculo del valor esperado usando cadenas de Markov.}
-\label{alg:markov_expected_value}
-\scriptsize
-\DontPrintSemicolon
-\SetKwData{frames}{frames}
-\SetKwInOut{Output}{output}
-\KwData{\frames $\leftarrow$ \text{Vídeo de $\qty{25}{\s}$ del nivel instantáneo indicado en pantalla.}}
-\Output{Valor esperado}
-\BlankLine
-\textbf{\hyperref[sec:downsampling]{Paso 1}:} Submuestrear y reconocer cuadros después del tiempo de estabilización.\;
-\textbf{\hyperref[sec:transition_matrix]{Paso 2}:} Conformar matriz de transición de estados.\;
-\textbf{\hyperref[sec:stationary_distribution]{Paso 3}:} Calcular distribución de probabilidad estacionaria.\;
-\textbf{\hyperref[sec:fill_missing_values]{Paso 4}:} Completar valores faltantes usando la matriz de transición.\;
-Repetir paso 2.\;
-Repetir paso 3.\;
-\textbf{\hyperref[sec:expected_value]{Paso 5}:} Calcular valor esperado.\;
+    \caption{Algoritmo para el cálculo del valor esperado usando cadenas de Markov.}
+    \label{alg:markov_expected_value}
+    \scriptsize
+    \DontPrintSemicolon
+    \SetKwData{frames}{frames}
+    \SetKwInOut{Output}{output}
+    \KwData{\frames $\leftarrow$ \text{Vídeo de $\qty{25}{\s}$ del nivel instantáneo indicado en pantalla.}}
+    \Output{Valor esperado}
+    \BlankLine
+    \textbf{\hyperref[sec:downsampling]{Paso 1}:} Submuestrear y reconocer cuadros después del tiempo de estabilización.\;
+    \textbf{\hyperref[subsec:transition_matrix]{Paso 2}:} Conformar matriz de transición de estados.\;
+    \textbf{\hyperref[subsec:stationary_distribution]{Paso 3}:} Calcular distribución de probabilidad estacionaria.\;
+    \textbf{\hyperref[sec:fill_missing_values]{Paso 4}:} Completar valores faltantes usando la matriz de transición.\;
+    Repetir paso 2.\;
+    Repetir paso 3.\;
+    \textbf{\hyperref[subsec:expected_value]{Paso 5}:} Calcular valor esperado.\;
 \end{algorithm}
 
 \section*{Paso 1: Submuestreo y reconocimiento de cuadros después de la estabilización}
 \label{sec:downsampling}
-Como el nivel con ponderación temporal \emph{Fast}, que tiene una constante de tiempo $\tau_F = \qty{125}{\ms}$, requiere un tiempo transitorio hasta que el nivel se estabilice después de enviar la señal eléctrica. Se determinó experimentalmente un tiempo de $\qty{2}{\s}$. Los cuadros obtenidos durante este tiempo de estabilización no se tienen en cuenta para la matriz de transición, pero sí para determinar el cuadro $0$ para sincronizar la actualización del nivel instantáneo en pantalla con los cuadros del vídeo.
+Como el nivel con ponderación temporal \emph{Fast}, que tiene una constante de tiempo $\tau_F = \qty{125}{\ms}$, requiere un tiempo transitorio hasta que el nivel se estabilice después de enviar la señal eléctrica.
+Se determinó experimentalmente un tiempo de $\qty{2}{\s}$.
+Los cuadros obtenidos durante este tiempo de estabilización no se tienen en cuenta para la matriz de transición, pero sí para determinar el cuadro $0$ para sincronizar la actualización del nivel instantáneo en pantalla con los cuadros del vídeo.
 
-Para determinar el cuadro $0$ primero se efectúa el algoritmo \ref{alg:image_recongnition} en los cuadros del tiempo de estabilización. Con el vector de los valores numéricos reconocidos se encuentra el índice del primer cambio de valor. Luego, a los cuadros después de ese índice se les hace un submuestreo según la relación entre la tasa de cuadros por segundo de la cámara y la tasa de actualización de la pantalla del sonómetro. Los cuadros que quedan corresponden al instante exacto en el que hay una nueva muestra en pantalla. Sin embargo, dado que puede presentarse en la pantalla LCD un efecto de solapamiento entre la muestra anterior y la nueva, que afecta negativamente el reconocimiento de imágenes, se determinó experimentalmente tomar $4$ cuadros después del cuadro en el que ocurre el cambio, para permitir la estabilización de la pantalla.
+Para determinar el cuadro $0$ primero se efectúa el algoritmo~\ref{alg:image_recongnition} en los cuadros del tiempo de estabilización.
+Con el vector de los valores numéricos reconocidos se encuentra el índice del primer cambio de valor.
+Luego, a los cuadros después de ese índice se les hace un submuestreo según la relación entre la tasa de cuadros por segundo de la cámara y la tasa de actualización de la pantalla del sonómetro.
+Los cuadros que quedan corresponden al instante exacto en el que hay una nueva muestra en pantalla.
+Sin embargo, dado que puede presentarse en la pantalla LCD un efecto de solapamiento entre la muestra anterior y la nueva, que afecta negativamente el reconocimiento de imágenes, se determinó experimentalmente tomar $4$ cuadros después del cuadro en el que ocurre el cambio, para permitir la estabilización de la pantalla.
 
-En seguida, en el nuevo vector de cuadros submuestreado se busca el índice del cuadro inmediatamente después al tiempo de estabilización, que corresponde al producto del tiempo de estabilización y la tasa de actualización de la pantalla del sonómetro. Finalmente, se efectúa el reconocimiento de los cuadros submuestreados a partir del índice del cuadro de estabilización con el algoritmo \ref{alg:image_recongnition}. El vector de valores numéricos reconocidos es el arreglo de muestras a partir del cual se conforma la matriz de transición de estados en el paso a continuación.
+En seguida, en el nuevo vector de cuadros submuestreado se busca el índice del cuadro inmediatamente después al tiempo de estabilización, que corresponde al producto del tiempo de estabilización y la tasa de actualización de la pantalla del sonómetro.
+Finalmente, se efectúa el reconocimiento de los cuadros submuestreados a partir del índice del cuadro de estabilización con el algoritmo~\ref{alg:image_recongnition}.
+El vector de valores numéricos reconocidos es el arreglo de muestras a partir del cual se conforma la matriz de transición de estados en el paso a continuación.
+
 
 \section{Cadenas de Markov de tiempo discreto}
 
 \subsection*{Paso 2: Matriz de probabilidades de transición}
-\label{sec:transition_matrix}
-Tomando como guía el libro de Robert Dobrow \citeyearpar{Dobrow2016} y el de John Gubner \citeyearpar{Gubner2006}, una cadena de Markov es un proceso aleatorio con la propiedad particular de que, dados unos valores del proceso desde el tiempo cero hasta el tiempo actual, la probabilidad condicional del valor del proceso en algún tiempo futuro depende sólo del valor actual, es decir, el futuro y el pasado son condicionalmente independientes dado el presente. Analíticamente, una cadena de Markov es una secuencia de variables aleatorias $X_0, X_1, \dots$ que toman valores del espacio discreto de estados $\mathcal{S}$ con la propiedad de que
+\label{subsec:transition_matrix}
+Tomando como guía el libro de Robert Dobrow~\citeyearpar{Dobrow2016} y el de John Gubner~\citeyearpar{Gubner2006}, una cadena de Markov es un proceso aleatorio con la propiedad particular de que, dados unos valores del proceso desde el tiempo cero hasta el tiempo actual, la probabilidad condicional del valor del proceso en algún tiempo futuro depende solo del valor actual, es decir, el futuro y el pasado son condicionalmente independientes dado el presente.
+Analíticamente, una cadena de Markov es una secuencia de variables aleatorias $X_0, X_1, \dots$ que toman valores del espacio discreto de estados $\mathcal{S}$ con la propiedad de que
 %
 \begin{equation}
-	\label{ec:markov_chain}	
-	P\left(X_{n + 1} = j\,|\,X_0 = x_0, \dots, X_{n - 1}
-					 = x_{n - 1}, X_n = i\right) = P\left(X_{n + 1} = j\,|\,X_n = i\right),
+    \label{eq:markov_chain}
+    P\left(X_{n + 1} = j\,|\,X_0 = x_0, \dots, X_{n - 1}
+    = x_{n - 1}, X_n = i\right) = P\left(X_{n + 1} = j\,|\,X_n = i\right),
 \end{equation}
 %
-Para todo $x_0, \dots, x_{n - 1}, i, j \in \mathcal{S}$ y $n \ge 0$. Normalmente, se asume que todas las cadenas de Markov son homogéneas, en las que la probabilidad no dependen de $n$.
+Para todo $x_0, \dots, x_{n - 1}, i, j \in \mathcal{S}$ y $n \ge 0$.
+Normalmente, se asume que todas las cadenas de Markov son homogéneas, en las que la probabilidad no depende de $n$.
 
-En la ecuación \ref{ec:markov_chain} las probabilidades sólo dependen de $i$ y $j$, por lo que estas se pueden organizar de forma matricial en $\mathbf{P}$, cuya $ji$-ésima entrada es $p_{ij} = P\left(X_{n + 1} = j\,|\,X_n = i\right)$, la probabilidad de transición de un estado a otro en un paso. La matriz de transición es una matriz cuadrada de $k \times k$ para los $k$ estados en el espacio $\mathcal{S}$.
-
-La matriz de transición o matriz estocástica debe cumplir que $p_{ij} \ge 0 \quad \forall\,i,j$ y que
-%
-\begin{equation*}
-\sum_j p_{ij} = \sum_j P\left(X_{n + 1} = j\,|\,X_n = i\right)
-			  = \sum_j \frac{P\left(X_{n + 1} = j, X_n = i\right)}{P\left(X_n = i\right)}
-			  = \frac{P\left(X_n = i\right)}{P\left(X_n = i\right)} = 1.
-\end{equation*}
-%
-Lo que indica que las transiciones en las cadenas de Markov son exhaustivas.
-
-Teniendo en cuenta este fundamento conceptual, para cada punto de calibración se conforma una matriz de transición en la que cada nivel diferente indicado en pantalla es un estado en la cadena de Markov. Para este efecto se escribió el método estático a continuación.
-\vfill
-\pagebreak
+En la ecuación~\eqref{eq:markov_chain} las probabilidades solamente dependen de $i$ y $j$, por lo que estas se pueden organizar de forma matricial en $\mathbf{P}$, cuya $ji$-ésima entrada es $p_{ij} = P\left(X_{n + 1} = j\,|\,X_n = i\right)$, la probabilidad de transición de un estado a otro en un paso.
+La matriz de transición es una matriz cuadrada de $k \times k$ para los $k$ estados en el espacio $\mathcal{S}$.
 
 \begin{code}
-\caption{Método estático para la construcción de una matriz de transición de estados a partir de una serie de muestras dada.}
-\label{code:build_transition_matrix}
-\centering
-\begin{minted}{python}
+    \caption{Método estático para la construcción de una matriz de transición de estados a partir de una serie de muestras dada.}
+    \label{code:build_transition_matrix}
+    \centering
+    \begin{minted}{python}
 @staticmethod
 def build_transition_matrix(samples: np.ndarray) -> np.ndarray:
     """
@@ -112,62 +124,89 @@ def build_transition_matrix(samples: np.ndarray) -> np.ndarray:
         P.loc[samples[i - 1], samples[i]] += 1
     P = P.div(P.sum(axis=1), axis=0)  # Computes probabilities
     return P
-\end{minted}
+    \end{minted}
 \end{code}
 
+La matriz de transición o matriz estocástica debe cumplir que $p_{ij} \ge 0 \quad \forall\,i,j$ y que
+%
+\begin{equation*}
+    \sum_j p_{ij} = \sum_j P\left(X_{n + 1} = j\,|\,X_n = i\right)
+    = \sum_j \frac{P\left(X_{n + 1} = j, X_n = i\right)}{P\left(X_n = i\right)}
+    = \frac{P\left(X_n = i\right)}{P\left(X_n = i\right)} = 1.
+\end{equation*}
+%
+Lo que indica que las transiciones en las cadenas de Markov son exhaustivas.
+
+Teniendo en cuenta este fundamento conceptual, para cada punto de calibración se conforma una matriz de transición en la que cada nivel diferente indicado en pantalla es un estado en la cadena de Markov.
+Para este efecto se escribió el método estático del código~\ref{code:build_transition_matrix}.
+
 \subsection*{Paso 3: Distribución de probabilidad estacionaria}
-\label{sec:stationary_distribution}
-Una vez se conforma una matriz con las probabilidades de transición se puede usar álgebra matricial para hacer cálculos con las probabilidades. Uno de los más elementales es el cálculo de las probabilidades de transición del estado $i$ al $j$ en $n \ge 1$ pasos, es decir $p_{ij}^{(n)} = P\left(X_n = j \,|\,X_0 = i\right)$, la probabilidad de que en $n$ pasos el proceso visite el estado $j$ dado que ahora está en el estado $i$. Cuando $n = 1$ las probabilidades son las mismas de $\mathbf{P}$, pero cuando $n \ge 1$ las probabilidades de transición son los $ij$-ésimos elementos de la potencia $n$ de $\mathbf{P}$, denotado como $\mathbf{P}^n$.
+\label{subsec:stationary_distribution}
+Una vez se conforma una matriz con las probabilidades de transición se puede usar álgebra matricial para hacer cálculos con las probabilidades.
+Uno de los más elementales es el cálculo de las probabilidades de transición del estado $i$ al $j$ en $n \ge 1$ pasos, es decir $p_{ij}^{(n)} = P\left(X_n = j \,|\,X_0 = i\right)$, la probabilidad de que en $n$ pasos el proceso visite el estado $j$ dado que ahora está en el estado $i$.
+Cuando $n = 1$ las probabilidades son las mismas de $\mathbf{P}$, pero cuando $n \ge 1$ las probabilidades de transición son los $ij$-ésimos elementos de la potencia $n$ de $\mathbf{P}$, denotada como $\mathbf{P}^n$.
 
-Es de especial interés conocer el comportamiento del sistema en el largo plazo, lo cual está caracterizado por las potencias de mayor orden de $\mathbf{P}$. En la medida en que $n$ incrementa, el proceso alcanza un comportamiento límite y las probabilidades de transición convergen a una distribución de equilibrio, conocida como distribución límite, la cual no depende de la distribución de probabilidad inicial de los estados. Para una cadena de Markov la distribución límite es la distribución de probabilidad $\boldsymbol{\lambda}$ con la propiedad de que para todo $i$ y $j$
+Es de especial interés conocer el comportamiento del sistema en el largo plazo, lo cual está caracterizado por las potencias de mayor orden de $\mathbf{P}$.
+En la medida en que $n$ incrementa, el proceso alcanza un comportamiento límite y las probabilidades de transición convergen a una distribución de equilibrio, conocida como distribución límite, la cual no depende de la distribución de probabilidad inicial de los estados.
+Para una cadena de Markov la distribución límite es la distribución de probabilidad $\boldsymbol{\lambda}$ con la propiedad de que para todo $i$ y $j$
 %
 \begin{equation}
-	\lim_{n\to\infty} P_{ij}^n = \lambda_{j}
+    \lim_{n\to\infty} P_{ij}^n = \lambda_{j}.
 \end{equation}
 
-Si una cadena de Markov tiene una distribución límite, entonces esta es única. Se puede encontrar la distribución límite simplemente tomando la potencias de mayor orden hasta obtener una matriz $\boldsymbol{\Lambda}$ en la cual todas las filas son iguales a $\boldsymbol{\lambda}$, o también se pueden encontrar soluciones exactas de forma analítica y teórica. Cabe mencionar que la distribución límite también puede ser interpretada como la proporción de tiempo que el proceso visita cada estado en el largo plazo
+Si una cadena de Markov tiene una distribución límite, entonces esta es única.
+Se puede encontrar la distribución límite simplemente tomando las potencias de mayor orden hasta obtener una matriz $\boldsymbol{\Lambda}$ en la cual todas las filas son iguales a $\boldsymbol{\lambda}$, o también se pueden encontrar soluciones exactas de forma analítica y teórica.
+Cabe mencionar que la distribución límite también puede ser interpretada como la proporción de tiempo que el proceso visita cada estado en el largo plazo
 
-Ahora, si se asigna la distribución límite como la distribución inicial de la cadena de Markov, luego se encuentran las probabilidades marginales $\boldsymbol{\lambda}\,\mathbf{P}$, y el resultado es el mismo vector $\boldsymbol{\lambda}$, entonces esta distribución límite es llamada distribución estacionaria. Es decir, una distribución estacionaria es una distribución de probabilidad $\boldsymbol{\pi}$ que satisface $\boldsymbol{\pi} = \boldsymbol{\pi}\,\mathbf{P}$, o lo que es igual
+Ahora, si se asigna la distribución límite como la distribución inicial de la cadena de Markov, luego se encuentran las probabilidades marginales $\boldsymbol{\lambda}\,\mathbf{P}$, y el resultado es el mismo vector $\boldsymbol{\lambda}$, entonces esta distribución límite es llamada distribución estacionaria.
+Es decir, una distribución estacionaria es una distribución de probabilidad $\boldsymbol{\pi}$ que satisface $\boldsymbol{\pi} = \boldsymbol{\pi}\,\mathbf{P}$, o lo que es igual
 %
 \begin{equation}
-\label{ec:stationary_distribution}
-	\pi_j = \sum_i \pi_j\,P_{ij}, \quad \forall\,j.
+    \label{eq:stationary_distribution}
+    \pi_j = \sum_i \pi_j\, P_{ij}, \quad \forall\, j.
 \end{equation}
 
-Aunque la distribución límite y la estacionaria están relacionadas, una cadena de Markov puede tener más de una distribución estacionaria o ninguna, y esta no necesariamente es la distribución límite. Pero si la cadena tiene una distribución límite, entonces esa distribución es estacionaria. Esto depende directamente de la topología de la cadena; si la cadena es regular entonces su matriz de transición $\mathbf{P}$ es regular (todos los valores de alguna de sus potencias son positivos), y la distribución límite es igual a la estacionaria.
+Aunque la distribución límite y la estacionaria están relacionadas, una cadena de Markov puede tener más de una distribución estacionaria o ninguna, y esta no necesariamente es la distribución límite.
+Pero si la cadena tiene una distribución límite, entonces esa distribución es estacionaria.\ Esto depende directamente de la topología de la cadena;
+si la cadena es regular entonces su matriz de transición $\mathbf{P}$ es regular (todos los valores de alguna de sus potencias son positivos), y la distribución límite es igual a la estacionaria.
 
-Para encontrar la distribución estacionaria cuando la matriz es regular, la forma más directa es resolver el sistema lineal de ecuaciones que resulta de combinar la ecuación \ref{ec:stationary_distribution} y la restricción $\sum_i \pi_i = 1$. La ecuación \ref{ec:stationary_distribution} puede escribirse matricialmente como $\boldsymbol{\pi}\,(\mathbf{P} - \mathbf{I}) = 0$, o, para operar con vectores columna, como $\left(\mathbf{P}^\intercal - \mathbf{I}\right)\,\boldsymbol{\pi} = 0$. Finalmente se puede escribir el sistema de ecuaciones matricialmente como
+Para encontrar la distribución estacionaria cuando la matriz es regular, la forma más directa es resolver el sistema lineal de ecuaciones que resulta de combinar la ecuación~\eqref{eq:stationary_distribution} y la restricción $\sum_i \pi_i = 1$.
+La ecuación~\eqref{eq:stationary_distribution} puede escribirse matricialmente como $\boldsymbol{\pi}\,(\mathbf{P} - \mathbf{I}) = 0$, o, para operar con vectores columna, como $\left(\mathbf{P}^\intercal - \mathbf{I}\right)\,\boldsymbol{\pi} = 0$.
+Finalmente, se puede escribir el sistema de ecuaciones matricialmente como
 %
 \begin{align}
-	\mathbf{A}\,\boldsymbol{\pi} &= \mathbf{b} \\
-	\left[\begin{matrix}
-	\left(\mathbf{P}^\intercal - \mathbf{I}\right) \\ 1 \\ \vdots \\ 1
-	\end{matrix}\right]\,\boldsymbol{\pi} &= \left[\begin{matrix} 0 \\ 0 \\ \vdots \\ 1 \end{matrix}\right].
+    \mathbf{A}\,\boldsymbol{\pi} &= \mathbf{b}; \\
+    \left[\begin{matrix}
+              \left(\mathbf{P}^\intercal - \mathbf{I}\right) \\ 1 \\ \vdots \\ 1;
+    \end{matrix}\right]\,\boldsymbol{\pi} &= \left[\begin{matrix}
+                                                       0 \\ 0 \\ \vdots \\ 1
+    \end{matrix}\right].
 \end{align}
 
 Para encontrar soluciones para $\boldsymbol{\pi}$ se resuelve el sistema
 \begin{equation}
-	\left(\mathbf{A}^\intercal\,\mathbf{A}\right)\,\boldsymbol{\pi} = \mathbf{A}^\intercal\,\mathbf{b}.
+    \label{eq:pi_linear_system}
+    \left(\mathbf{A}^\intercal\,\mathbf{A}\right)\,\boldsymbol{\pi} = \mathbf{A}^\intercal\,\mathbf{b}.
 \end{equation}
 
-Para implementar lo anterior y calcular la distribución límite dada una matriz de transición $\mathbf{P}$ se escribió el siguiente método estático del código \ref{code:limit_dist}.
+Para implementar lo anterior y calcular la distribución límite dada una matriz de transición $\mathbf{P}$ se escribió el método estático del código~\ref{code:limit_dist}.
 
 \subsection*{Paso 5: Valor esperado}
-\label{sec:expected_value}
+\label{subsec:expected_value}
 
 En un sistema discreto, el valor esperado calculado a partir de la distribución estacionaria es
 %
 \begin{equation}
-	\mathrm{E}[X] = \sum_n x_n\,\pi_n,
+    \mathrm{E}[X] = \sum_n x_n\,\pi_n,
 \end{equation}
 %
 Que puede implementarse simplemente como \mintinline{python}{expected_value = np.round(np.sum(np.array(P.index) * PI.T), 1)}.
 
 \begin{code}
-\caption{Método estático para el cálculo de la distribución límite de una cadena de Markov dada una matriz de transición.}
-\label{code:limit_dist}
-\centering
-\begin{minted}{python}
+    \caption{Método estático para el cálculo de la distribución límite de una cadena de Markov dada una matriz de transición.}
+    \label{code:limit_dist}
+    \centering
+    \begin{minted}{python}
 def limit_dist(P: np.ndarray) -> float:
     """
     Method to calculate the limit distribution with linear algebra solution using a given transition matrix P if
@@ -189,47 +228,113 @@ def limit_dist(P: np.ndarray) -> float:
         PI = np.linalg.matrix_power(P, 1000)
 
     return PI
-\end{minted}
+    \end{minted}
 \end{code}
 
 \section*{Paso 4: Completar valores faltantes}
 \label{sec:fill_missing_values}
-Aún cuando el clasificador tiene un buen desempeño y el submuestreo se ha realizado evitando el efecto de solapamiento de valores en la pantalla del sonómetro, puede ocurrir que eventualmente un cuadro capturado coincide con la actualización del valor en pantalla y consecuentemente el clasificador devuelve un resultado incorrecto. Para estos casos poco recurrentes, se determinó que el clasificador devolviera un valor \texttt{\small np.nan}. Esta es una muestra faltante que debe ser completada para continuar con el proceso.
+Aún cuando el clasificador tiene un buen desempeño y el submuestreo se ha realizado evitando el efecto de solapamiento de valores en la pantalla del sonómetro, puede ocurrir que eventualmente un cuadro capturado coincide con la actualización del valor en pantalla y consecuentemente el clasificador devuelve un resultado incorrecto.
+Para estos casos poco recurrentes, se determinó que el clasificador devolviera un valor \texttt{\small np.nan}.
+Esta es una muestra faltante que debe ser completada para continuar con el proceso.
 
-Para remplazar la muestra faltante conviene utilizar la matriz inicial de transición de un paso construida en el \hyperref[sec:downsampling]{Paso 1} para ubicar el valor más probable a partir del valor anterior. En el caso en el que la primera muestra sea un estado faltante, esta se completa con la distribución estacionaria de la matriz de transición inicial. Esto es razonable porque los valores ubicados obedecen a la dinámica del proceso estocástico que fue caracterizada en la matriz de transición inicial. En efecto, este paso se realiza con el siguiente código.
+Para remplazar la muestra faltante conviene utilizar la matriz inicial de transición de un paso construida en el \hyperref[sec:downsampling]{Paso 1} para ubicar el valor más probable a partir del valor anterior.
+En el caso en el que la primera muestra sea un estado faltante, esta se completa con la distribución estacionaria de la matriz de transición inicial.
+Esto es razonable porque los valores ubicados obedecen a la dinámica del proceso estocástico que fue caracterizada en la matriz de transición inicial.
+En efecto, este paso se realiza con el siguiente código.
 %
 \begin{code}
-\caption{Ciclo para completar muestras faltantes a partir del modelo inicial de Markov.}
-\label{code:limit_dist}
-\centering
-\begin{minted}{python}
+    \caption{Ciclo para completar muestras faltantes a partir del modelo inicial de Markov.}
+    \label{code:filling_missing_samples}
+    \centering
+    \begin{minted}{python}
 samples[0] = P.index[PI.argmax()] if np.isnan(samples[0]) else samples[0]  # If initial state is missing
 for i in np.where(np.isnan(samples))[0]:  # Filling based on the previous state and the Markov model
     samples[i] = P.index[P.loc[samples[i - 1]].argmax()]
-\end{minted}
+    \end{minted}
 \end{code}
 
-Una vez el vector de muestras está completo, se construye una segunda matriz de transición y nuevamente se calcula la distribución estacionaria que empleará en el cálculo del valor esperado.
+Una vez el vector de muestras está completo, se construye una segunda matriz de transición y nuevamente se calcula la distribución estacionaria que se empleará en el cálculo del valor esperado.
 
+\begin{figure}[!h]
+    \caption{Grafo de estados y probabilidades de transición que representa la matriz de transición~\eqref{eq:eg_transition_matrix}.}
+    \label{fig:eg_automata}
+    \centering
+    \begin{tikzpicture}[thick,shorten >=1pt,node distance=6cm,on grid,auto]
+        \node[state](q1){$\qty{33.1}{\dB}$};
+        \node[state](q2)[below=of q1]{$\qty{33.2}{\dB}$};
+        \node[state](q3)[right=of q1]{$\qty{33.3}{\dB}$};
+        \node[state](q4)[below=of q3]{$\qty{33.4}{\dB}$};
+        \draw[->, stealth-]
+        (q1) edge [loop left] node {$\num{0.200}$} ()
+        edge [bend right, swap] node {$\num{0.045}$} (q2)
+        edge [swap] node {$\num{0.022}$} (q3)
+        (q2) edge [loop left] node {$\num{0.455}$} ()
+        edge [swap, pos=0.6] node {$\num{0.200}$} (q1)
+        edge [bend right] node {$\num{0.696}$} (q3)
+        edge [bend right, swap] node {$\num{0.667}$} (q4)
+        (q3) edge [loop right] node {$\num{0.261}$} ()
+        edge [bend right, swap] node {$\num{0.600}$} (q1)
+        edge [bend right] node {$\num{0.455}$} (q2)
+        edge [swap, pos=0.6] node {$\num{0.333}$} (q4)
+        (q4) edge [swap] node {$\num{0.045}$} (q2)
+        edge [bend right, swap] node {$\num{0.022}$} (q3);
+    \end{tikzpicture}
+    \caption*{\footnotesize Fuente propia.}
+\end{figure}
 
 \section{Ejemplo de resultado de ejecución del método}
-Habiendo incluido apropiadamente este método en el desarrollo previo de la aplicación, se obtuvieron los resultados esperados. Un ejemplo de una matriz de transición obtenida en la prueba de ponderación frecuencial $Z$ con señales eléctricas a $\qty{63}{\Hz}$ se muestra a continuación.
+Habiendo incluido apropiadamente este método en el desarrollo previo de la aplicación, se obtuvieron los resultados esperados.
+Un ejemplo de una matriz de transición obtenida en la prueba de ponderación frecuencial $Z$ con señales eléctricas a $\qty{63}{\Hz}$ se muestra a continuación.
+%
+\begin{equation}
+    \label{eq:eg_transition_matrix}
+    \mathbf{P} = \kbordermatrix{
+        & \mathbf{\num{33,1}} & \mathbf{\num{33.2}} & \mathbf{\num{33.3}} & \mathbf{\num{33.4}} \\
+        \mathbf{\num{33.1}} & \num{0.200} & \num{0.200} & \num{0.600} & \num{0.000} \\
+        \mathbf{\num{33.2}} & \num{0.045} & \num{0.455} & \num{0.455} & \num{0.045} \\
+        \mathbf{\num{33.3}} & \num{0.022} & \num{0.696} & \num{0.261} & \num{0.022} \\
+        \mathbf{\num{33.4}} & \num{0.000} & \num{0.667} & \num{0.333} & \num{0.000} \\
+    }
+\end{equation}
+%
+Y el grafo correspondiente se representa en la figura~\ref{fig:eg_automata}.
 
-%TODO Incluir matriz de transición
+Resolviendo el sistema de la ecuación~\eqref{eq:pi_linear_system}, la distribución estacionaria es
+%
+\begin{equation*}
+    \boldsymbol{\pi} = \kbordermatrix{
+        & \mathbf{\num{33.1}} &  \mathbf{\num{33.2}} &  \mathbf{\num{33.3}} & \mathbf{\num{33.4}} \\
+        & \num{0.041} & \num{0.543} & \num{0.382} & \num{0.033}
+    }
+\end{equation*}
 
-Y el grafo correspondiente se representa en la siguiente figura.
+Finalmente, el valor esperado, redondeado a la misma cantidad de dígitos decimales de la precisión del sonómetro es $\qty{33.2}{\dB}$.
 
-%TODO Dibujar grafo (autómata)
 
-La distribución estacionaria es
+\section{Evaluación tipo A de la incertidumbre típica}
 
-%TODO Incluir matriz pi
+De a cuerdo con la guía para la expresión de la incertidumbre de medida~\citep{ISO_TAG4_2008}, los valores de las observaciones individuales $q_k$ difieren en razón de las variaciones aleatorias de las magnitudes de influencia o de efectos aleatorios.
+La varianza experimental de dichas $n$ observaciones está dada por:
+%
+\begin{equation}
+    s^2\left( q_k \right) = \frac{1}{n - 1}\, \sum_{j = 1}^{n} \left( q_j - \bar{q} \right)^2,
+\end{equation}
+%
+Que, junto con su raíz cuadrada positiva $s\left( q_k \right)$ (denominada desviación típica experimental), representan la variabilidad de los valores $q_k$, es decir, su dispersion al rededor del valor esperado $\bar{q}$.
+Luego, la mejor estimación de la varianza experimental de la media $\sigma^2\left( \bar{q} \right) = \sigma^2 / n$ es
+%
+\begin{equation}
+    \label{eq:experimental_mean_variance}
+    s^2\left( \bar{q} \right) = \frac{s^2\left( q_k \right)}{n},
+\end{equation}
+Que, junto con desviación típica experimental de la media $s\left( \bar{q} \right) = \sqrt{s^2\left( \bar{q} \right)}$ pueden ser utilizadas como medida de la incertidumbre de $\bar{q}$.
 
-Y finalmente, el valor esperado es $x$.
+En concreto, en un modelo matemático de un mesurando $y$, para una magnitud de entrada $X_i$ obtenida a partir de $n$ observaciones repetidas e independientes $X_{i,k}$, la incertidumbre típica $u\left( x_i \right)$ de su estimación $x_i = \bar{X}_i$ es $u\left( x_i \right) = s\left( \bar{X}_i \right)$, con $s^2\left( \bar{X}_i \right)$ calculada con la ecuación~\eqref{eq:experimental_mean_variance}.
+Esta incertidumbre típica $u\left( x_i \right)$ es llamada \emph{incertidumbre típica tipo A}.
 
-\section{Incertidumbre de medición}
-\subsubsection{Definición matemática del mesurando}
-\subsection{Incertidumbre tipo A}
-\subsection{Incertidumbre tipo B}
-\subsection{Incertidumbre típica combinada}
-\subsection{Grados efectivos de libertad, factor de cobertura e incertidumbre expandida}
+El número de observaciones $n$ debe ser lo suficientemente grande para garantizar que $s^2\left( \bar{q} \right)$ proporcione una estimación fiable de la varianza $\sigma^2\left( \bar{q} \right)$.
+La aplicación desarrollada permite cumplir esta consideración, puesto que en un tiempo de $\qty{25}{\s}$, con un periodo de actualización de pantalla típico de $\qty{100}{\ms}$, se capturan $250$ muestras.
+Ahora, en un cálculo posterior, cuando se determinan intervalos de confianza para la incertidumbre expandida, se debe tomar en cuenta la diferencia entre $\sigma^2\left( \bar{q} \right)$ y $s\left( \bar{q} \right)$, ya que en muchos casos puede ser que la distribución de probabilidad del mesurando (en este caso equivale a la distribución estacionaria) sea muy distinta de una distribución normal.
+
+La estimación de la incertidumbre típica tipo A puede hacerse rápidamente con la instrucción \mintinline{python}{samples.std() / math.sqrt(samples.shape[0])}.
+Para las muestras del ejemplo anterior se obtiene $s\left( \bar{q} \right) \approx \qty{0.0057}{\dB}$.

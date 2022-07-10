@@ -42,7 +42,7 @@ y_hat = gnbClassifier.predict(X)
 from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
 
 # -------------- CLASSIFICATION ACCURACY --------------
-cm = confusion_matrix(y_hat, y_test, labels=gnbClassifier.classes_)
+cm = confusion_matrix(y_test, y_hat, labels=gnbClassifier.classes_)
 disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=gnbClassifier.classes_)
 disp.plot()
 plt.show()
