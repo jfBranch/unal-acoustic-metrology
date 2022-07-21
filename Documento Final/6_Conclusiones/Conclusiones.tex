@@ -4,7 +4,76 @@
 
 \chapter{Conclusiones y recomendaciones}
 \section{Conclusiones}
-Las conclusiones constituyen un cap\'{\i}tulo independiente y presentan, en forma l\'{o}gica, los resultados de la tesis  o trabajo de investigaci\'{o}n. Las conclusiones deben ser la respuesta a los objetivos o prop\'{o}sitos planteados. Se deben titular con la palabra conclusiones en el mismo formato de los t\'{\i}tulos de los cap\'{\i}tulos anteriores (T\'{\i}tulos primer nivel), precedida por el numeral correspondiente (seg\'{u}n la presente plantilla).\\
+En este trabajo se desarrollaron dos aplicaciones de \emph{software} diseñadas, una para realizar la calibración de calibradores
+acústicos, y otra para sonómetros, de conformidad con los lineamientos del Anexo B de la \mbox{IEC 60942}~\citeyearpar{IEC_TC29_2017}
+y de la \mbox{IEC 61672--3}~\citeyearpar{IEC_TC29_2013_3} respectivamente.
+Estas aplicaciones integran el control de los instrumentos de medición (patrones y auxiliares) que conforman el sistema de
+calibración junto con las secuencias predeterminadas.
+Particularmente, para sonómetros, también se integra el procesamiento de imágenes para el reconocimiento de los valores
+indicados en la pantalla del sonómetro y el modelamiento de la variabilidad de un resultado usando cadenas de Markov.
 
-\section{Recomendaciones}
-Se presentan como una serie de aspectos que se podr\'{\i}an realizar en un futuro para emprender investigaciones similares o fortalecer la investigaci\'{o}n realizada. Deben contemplar las perspectivas de la investigaci\'{o}n, las cuales son sugerencias, proyecciones o alternativas que se presentan para modificar, cambiar o incidir sobre una situaci\'{o}n espec\'{\i}fica o una problem\'{a}tica encontrada. Pueden presentarse como un texto con caracter\'{\i}sticas argumentativas, resultado de una reflexi\'{o}n acerca de la tesis o trabajo de investigaci\'{o}n.\\
+Dados los resultados obtenidos, las aplicaciones desarrolladas son una utilidad que mejora significativamente los procesos
+de calibración de los laboratorios, ya que reducen el tiempo total de calibración en aproximadamente un $30\%$,
+bajan la incertidumbre de medición (al incrementar los grados efectivos de libertad por el mayor número de muestras que
+pueden obtenerse respecto a un proceso manual) y aumentan la robustez del procedimiento (asegurando los resultados contra
+el error humano).
+
+Para calibradores acústicos, la arquitectura de \emph{software} basada en el modelo de GRAFCET es una metodología
+que permitió desarrollar una aplicación versátil e intuitiva, ofreciendo al usuario un mecanismo sencillo para identificar
+y ordenar los pasos del proceso de calibración en etapas enumeradas.
+A esto se suma que, tomar el GRAFCET como un tipo de paradigma de programación, facilita la implementación en Python
+empleando multi-hilos.
+
+El control de los instrumentos del estante de calibración mediante comandos SCPI es una de las herramientas fundamentales
+en la aplicación desarrollada.
+Utilizar estos comandos en las secuencias programadas hace innecesario que el usuario manipule directamente los controles
+físicos de los instrumentos.
+Esto contribuye al aseguramiento contra el error humano y aumenta la precisión de los parámetros de señal, ya que se pueden
+ajustar y obtener todos los dígitos disponibles en el instrumento, lo que no es posible con la interfaz física.
+
+El método de reconocimiento de imágenes implementado para la calibración de sonómetros siguió la estructura clásica de
+adquisición (captura de fotogramas), preproceso (filtrado, \emph{padding} y escalamiento), segmentación
+(binarización Otsu), extracción de características (descriptor SIFT simplificado), y reconocimiento (clasificador
+bayesiano normal ingenuo).
+Este método diseñado es lo bastante sencillo, pero suficiente para el reconocimiento en tiempo real con una base de datos
+de entrenamiento relativamente pequeña y con el que se consiguen resultados confiables a un bajo costo computacional.
+
+Finalmente, el modelamiento de la variabilidad de un resultado empleando cadenas de Markov, considerándola como un proceso
+estocástico, permite estimar en el largo plazo cuál es el valor de medición tomando en cuenta la \emph{dinámica} del
+cambio de un valor a otro (representada en las probabilidades de transición) y no solo como la media de todas las
+muestras adquiridas.
+
+\section{Recomendaciones y trabajo futuro}
+Las aplicaciones fueron programadas con un manejo de excepciones básicas, sin embargo, conviene garantizar que estas
+sean ejecutadas en las condiciones normales.
+Como que las señales eléctricas enviadas o medidas se encuentren dentro del rango de los instrumentos utilizados,
+lo cual se puede predecir con la sensibilidad del micrófono patrón y del micrófono del sonómetro, y con los límites
+del rango lineal de medición del sonómetro.
+Al usar la aplicación para la calibración de sonómetros, se recomienda adecuar un ambiente controlado para que la
+iluminación, distancia focal, o ruido no afecte el reconocimiento de imágenes.
+
+Tal como están desarrolladas las aplicaciones hasta ahora, cuentan con el funcionamiento básico necesario para llevar a
+cabo las calibraciones de principio a fin.
+Sin embargo, aún resta desarrollar utilidades que mejorarían las aplicaciones y las harían más adecuadas para el uso
+cotidiano en los laboratorios.
+Utilidades como guardar y cargar sesiones de calibración, retroceder, avanzar o navegar entre etapas, emitir certificado
+de calibración y bloquear resultados.
+El desarrollo de estas utilidades puede hacerse sobre lo que ya está, puesto que en el código se dejaron las bases para
+esas funciones.
+Por ejemplo, en la interfaz gráfica están los botones correspondientes, y la configuración básica de estos se ejecuta al
+lanzar la aplicación.
+
+Por ahora, las señales eléctricas son ajustadas y medidas sin tener en cuenta las correcciones proporcionadas en los
+certificados de calibración de los patrones, por lo que los resultados aún no son trazables en el sentido estricto.
+El trabajo posterior es entonces, aplicar las correcciones usando técnicas de interpolación o métodos numéricos a partir
+de los resultados de calibración de los patrones.
+
+Igualmente, la estimación de incertidumbre de medición en este trabajo llegó hasta la incertidumbre tipo A, pero para
+reportar un resultado de medición completo, el trabajo debe complementarse estimando las demás componentes de incertidumbre
+tipo B y calculando la incertidumbre expandida de medición.
+Además, en este trabajo la incertidumbre tipo A se estimó a partir de la desviación experimental de la media, no del
+valor esperado del proceso estocástico.
+El trabajo futuro es tener en cuenta la distribución de probabilidad estacionaria del proceso estocástico en la estimación
+de la incertidumbre tipo A y posteriormente en la determinación de los intervalos de confianza de la incertidumbre
+expandida de medición, de tal modo que se relacione el modelamiento en cadenas de Markov con la incertidumbre de medición
+asociada al valor de medición.

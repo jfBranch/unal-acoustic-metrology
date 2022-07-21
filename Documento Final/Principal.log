@@ -1,34 +1,34 @@
-This is XeTeX, Version 3.141592653-2.6-0.999994 (MiKTeX 22.3) (preloaded format=xelatex 2022.7.9)  9 JUL 2022 20:49
+This is XeTeX, Version 3.141592653-2.6-0.999994 (MiKTeX 22.7) (preloaded format=xelatex 2022.7.20)  20 JUL 2022 20:35
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
 **./Principal.tex
 (Principal.tex
-LaTeX2e <2022-06-01> patch level 3
-L3 programming layer <2022-06-16>
+LaTeX2e <2022-06-01> patch level 5
+L3 programming layer <2022-07-04>
 (C:\Users\juan_\AppData\Local\Programs\MiKTeX\tex/latex/koma-script\scrbook.cls
-Document Class: scrbook 2022/05/01 v3.36 KOMA-Script document class (book)
+Document Class: scrbook 2022/07/04 v3.37 KOMA-Script document class (book)
 
 (C:\Users\juan_\AppData\Local\Programs\MiKTeX\tex/latex/koma-script\scrkbase.st
 y
-Package: scrkbase 2022/05/01 v3.36 KOMA-Script package (KOMA-Script-dependent b
+Package: scrkbase 2022/07/04 v3.37 KOMA-Script package (KOMA-Script-dependent b
 asics and keyval usage)
 
 (C:\Users\juan_\AppData\Local\Programs\MiKTeX\tex/latex/koma-script\scrbase.sty
-Package: scrbase 2022/05/01 v3.36 KOMA-Script package (KOMA-Script-independent 
+Package: scrbase 2022/07/04 v3.37 KOMA-Script package (KOMA-Script-independent 
 basics and keyval usage)
 
 (C:\Users\juan_\AppData\Local\Programs\MiKTeX\tex/latex/koma-script\scrlfile.st
 y
-Package: scrlfile 2022/05/01 v3.36 KOMA-Script package (file load hooks)
+Package: scrlfile 2022/07/04 v3.37 KOMA-Script package (file load hooks)
 
 (C:\Users\juan_\AppData\Local\Programs\MiKTeX\tex/latex/koma-script\scrlfile-ho
 ok.sty
-Package: scrlfile-hook 2022/05/01 v3.36 KOMA-Script package (using LaTeX hooks)
+Package: scrlfile-hook 2022/07/04 v3.37 KOMA-Script package (using LaTeX hooks)
 
 
 (C:\Users\juan_\AppData\Local\Programs\MiKTeX\tex/latex/koma-script\scrlogo.sty
-Package: scrlogo 2022/05/01 v3.36 KOMA-Script package (logo)
+Package: scrlogo 2022/07/04 v3.37 KOMA-Script package (logo)
 ))) (C:\Users\juan_\AppData\Local\Programs\MiKTeX\tex/latex/graphics\keyval.sty
 Package: keyval 2022/05/29 v1.15 key=value parser (DPC)
 \KV@toks@=\toks16
@@ -39,7 +39,7 @@ Already applied: [0000/00/00] Usage of raw or classic option list on input line
 ))
 (C:\Users\juan_\AppData\Local\Programs\MiKTeX\tex/latex/koma-script\tocbasic.st
 y
-Package: tocbasic 2022/05/01 v3.36 KOMA-Script package (handling toc-files)
+Package: tocbasic 2022/07/04 v3.37 KOMA-Script package (handling toc-files)
 \scr@dte@tocline@numberwidth=\skip47
 \scr@dte@tocline@numbox=\box51
 )
@@ -68,16 +68,16 @@ Class scrbook Info: You've used standard option `openany'.
 (scrbook)           you'd have to use `open=any' there
 (scrbook)           instead of `openany', too.
 Class scrbook Info: File `scrsize12pt.clo' used to setup font sizes on input li
-ne 2505.
+ne 2569.
 
 (C:\Users\juan_\AppData\Local\Programs\MiKTeX\tex/latex/koma-script\scrsize12pt
 .clo
-File: scrsize12pt.clo 2022/05/01 v3.36 KOMA-Script font size class option (12pt
+File: scrsize12pt.clo 2022/07/04 v3.37 KOMA-Script font size class option (12pt
 )
 )
 (C:\Users\juan_\AppData\Local\Programs\MiKTeX\tex/latex/koma-script\typearea.st
 y
-Package: typearea 2022/05/01 v3.36 KOMA-Script package (type area)
+Package: typearea 2022/07/04 v3.37 KOMA-Script package (type area)
 \ta@bcor=\skip49
 \ta@div=\count181
 Package typearea Info: You've used standard option `letterpaper'.
@@ -111,7 +111,7 @@ Package typearea Info: These are the values describing the layout:
 (typearea)              \topskip        = 12.0pt
 (typearea)              \footskip       = 50.75pt
 (typearea)              \baselineskip   = 14.5pt
-(typearea)              on input line 1744.
+(typearea)              on input line 1766.
 )
 \c@part=\count182
 \c@chapter=\count183
@@ -122,49 +122,49 @@ Package typearea Info: These are the values describing the layout:
 \c@subparagraph=\count188
 \scr@dte@chapter@maxnumwidth=\skip54
 Class scrbook Info: using compatibility default `afterindent=bysign'
-(scrbook)           for `\chapter on input line 5737.
+(scrbook)           for `\chapter on input line 5801.
 \scr@dte@section@maxnumwidth=\skip55
 Class scrbook Info: using compatibility default `runin=bysign'
-(scrbook)           for `\section on input line 5748.
+(scrbook)           for `\section on input line 5812.
 Class scrbook Info: using compatibility default `afterindent=bysign'
-(scrbook)           for `\section on input line 5748.
+(scrbook)           for `\section on input line 5812.
 \scr@dte@part@maxnumwidth=\skip56
 Class scrbook Info: using compatibility default `afterindent=true'
-(scrbook)           for `\part on input line 5757.
+(scrbook)           for `\part on input line 5821.
 \scr@dte@subsection@maxnumwidth=\skip57
 Class scrbook Info: using compatibility default `runin=bysign'
-(scrbook)           for `\subsection on input line 5767.
+(scrbook)           for `\subsection on input line 5831.
 Class scrbook Info: using compatibility default `afterindent=bysign'
-(scrbook)           for `\subsection on input line 5767.
+(scrbook)           for `\subsection on input line 5831.
 \scr@dte@subsubsection@maxnumwidth=\skip58
 Class scrbook Info: using compatibility default `runin=bysign'
-(scrbook)           for `\subsubsection on input line 5777.
+(scrbook)           for `\subsubsection on input line 5841.
 Class scrbook Info: using compatibility default `afterindent=bysign'
-(scrbook)           for `\subsubsection on input line 5777.
+(scrbook)           for `\subsubsection on input line 5841.
 \scr@dte@paragraph@maxnumwidth=\skip59
 Class scrbook Info: using compatibility default `runin=bysign'
-(scrbook)           for `\paragraph on input line 5788.
+(scrbook)           for `\paragraph on input line 5852.
 Class scrbook Info: using compatibility default `afterindent=bysign'
-(scrbook)           for `\paragraph on input line 5788.
+(scrbook)           for `\paragraph on input line 5852.
 \scr@dte@subparagraph@maxnumwidth=\skip60
 Class scrbook Info: using compatibility default `runin=bysign'
-(scrbook)           for `\subparagraph on input line 5798.
+(scrbook)           for `\subparagraph on input line 5862.
 Class scrbook Info: using compatibility default `afterindent=bysign'
-(scrbook)           for `\subparagraph on input line 5798.
+(scrbook)           for `\subparagraph on input line 5862.
 \abovecaptionskip=\skip61
 \belowcaptionskip=\skip62
 \c@pti@nb@sid@b@x=\box52
 Package tocbasic Info: babel extension for `lof' omitted
-(tocbasic)             because of missing \bbl@set@language on input line 6967.
+(tocbasic)             because of missing \bbl@set@language on input line 7033.
 
 \scr@dte@figure@maxnumwidth=\skip63
 \c@figure=\count189
 Package tocbasic Info: babel extension for `lot' omitted
-(tocbasic)             because of missing \bbl@set@language on input line 6984.
+(tocbasic)             because of missing \bbl@set@language on input line 7050.
 
 \scr@dte@table@maxnumwidth=\skip64
 \c@table=\count190
-Class scrbook Info: Redefining `\numberline' on input line 7155.
+Class scrbook Info: Redefining `\numberline' on input line 7221.
 \bibindent=\dimen138
 ) (C:\Users\juan_\AppData\Local\Programs\MiKTeX\tex/latex/base\fontenc.sty
 Package: fontenc 2021/04/29 v2.0v Standard LaTeX package
@@ -175,7 +175,7 @@ LaTeX Font Info:    Trying to load font information for T1+lmr on input line 11
 File: t1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 ))
 (C:\Users\juan_\AppData\Local\Programs\MiKTeX\tex/generic/babel\babel.sty
-Package: babel 2022/06/06 3.76 The Babel package
+Package: babel 2022/06/26 3.77 The Babel package
 \babel@savecnt=\count191
 \U@D=\dimen139
 \l@unhyphenated=\language79
@@ -368,7 +368,7 @@ LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
 (Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
 ))
 (C:\Users\juan_\AppData\Local\Programs\MiKTeX\tex/latex/mathtools\mathtools.sty
-Package: mathtools 2022/02/07 v1.28a mathematical typesetting tools
+Package: mathtools 2022/06/29 v1.29 mathematical typesetting tools
 (C:\Users\juan_\AppData\Local\Programs\MiKTeX\tex/latex/tools\calc.sty
 Package: calc 2017/05/25 v4.3 Infix arithmetic (KKT,FJ)
 \calc@Acount=\count282
@@ -1236,8 +1236,8 @@ Package: framed 2011/10/22 v 0.96: framed or shaded text with page breaks
 \@float@every@listing=\toks44
 \c@listing=\count377
 )
-runsystem(if not exist _minted-20220709_Proyecto_de_grado mkdir _minted-2022070
-9_Proyecto_de_grado)...executed.
+runsystem(if not exist _minted-20220720_Proyecto_de_grado mkdir _minted-2022072
+0_Proyecto_de_grado)...executed.
 
 
 (C:\Users\juan_\AppData\Local\Programs\MiKTeX\tex/latex/graphics\lscape.sty
@@ -1247,11 +1247,11 @@ Package: lscape 2020/05/28 v3.02 Landscape Pages (DPC)
 (C:\Users\juan_\AppData\Local\Programs\MiKTeX\tex/latex/l3packages/l3keys2e\l3k
 eys2e.sty
 (C:\Users\juan_\AppData\Local\Programs\MiKTeX\tex/latex/l3kernel\expl3.sty
-Package: expl3 2022-06-16 L3 programming layer (loader) 
+Package: expl3 2022-07-04 L3 programming layer (loader) 
 
 (C:\Users\juan_\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3backend-xet
 ex.def
-File: l3backend-xetex.def 2022-04-20 L3 backend support: XeTeX
+File: l3backend-xetex.def 2022-07-01 L3 backend support: XeTeX
 \g__graphics_track_int=\count378
 \l__pdf_internal_box=\box127
 \g__pdf_backend_object_int=\count379
@@ -1374,7 +1374,7 @@ Package: stringenc 2019/11/29 v1.12 Convert strings between diff. encodings (HO
 
 (C:\Users\juan_\AppData\Local\Programs\MiKTeX\tex/latex/rerunfilecheck\rerunfil
 echeck.sty
-Package: rerunfilecheck 2019/12/05 v1.9 Rerun checks for auxiliary files (HO)
+Package: rerunfilecheck 2022-07-10 v1.10 Rerun checks for auxiliary files (HO)
 
 (C:\Users\juan_\AppData\Local\Programs\MiKTeX\tex/latex/base\atveryend-ltx.sty
 Package: atveryend-ltx 2020/08/19 v1.0a Emulation of the original atveryend pac
@@ -1386,7 +1386,7 @@ ounter.sty
 Package: uniquecounter 2019/12/15 v1.4 Provide unlimited unique counter (HO)
 )
 Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
-86.
+85.
 )
 \Hy@SectionHShift=\skip115
 )
@@ -1577,49 +1577,49 @@ Space,Ligatures
 (fontspec)             \tex_hyphenchar:D \font =-1\scan_stop: 
 
 runsystem(for ^%i in (pygmentize.exe pygmentize.bat pygmentize.cmd) do set > 20
-220709_Proyecto_de_grado.aex <nul: /p x=^%~$PATH:i>> 20220709_Proyecto_de_grado
+220720_Proyecto_de_grado.aex <nul: /p x=^%~$PATH:i>> 20220720_Proyecto_de_grado
 .aex)...executed.
 
-runsystem(del 20220709_Proyecto_de_grado.aex)...executed.
+runsystem(del 20220720_Proyecto_de_grado.aex)...executed.
 
 
-(20220709_Proyecto_de_grado.aux (0_Portada/Portada.aux)
+(20220720_Proyecto_de_grado.aux (0_Portada/Portada.aux)
 LaTeX Info: Redefining \. on input line 25.
 LaTeX Info: Redefining \% on input line 25.
  (1_Intro/Intro.aux)
 (2_Metodología/Metodología.aux) (3_Reconocimiento/Reconocimiento.aux)
 (4_Implementación/Implementación.aux) (5_MC_incertidumbre/MC_incertidumbre.aux)
 (6_Conclusiones/Conclusiones.aux) (Anexos/Anexos.aux))
-\openout1 = `20220709_Proyecto_de_grado.aux'.
+\openout1 = `20220720_Proyecto_de_grado.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 166.
-LaTeX Font Info:    ... okay on input line 166.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 166.
-LaTeX Font Info:    ... okay on input line 166.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 166.
-LaTeX Font Info:    ... okay on input line 166.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 166.
-LaTeX Font Info:    ... okay on input line 166.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 166.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 167.
+LaTeX Font Info:    ... okay on input line 167.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 167.
+LaTeX Font Info:    ... okay on input line 167.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 167.
+LaTeX Font Info:    ... okay on input line 167.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 167.
+LaTeX Font Info:    ... okay on input line 167.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 167.
 LaTeX Font Info:    Trying to load font information for TS1+cmr on input line 1
-66.
+67.
 
 (C:\Users\juan_\AppData\Local\Programs\MiKTeX\tex/latex/base\ts1cmr.fd
 File: ts1cmr.fd 2019/12/16 v2.5j Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 166.
-LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 166.
-LaTeX Font Info:    ... okay on input line 166.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 166.
-LaTeX Font Info:    ... okay on input line 166.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 166.
-LaTeX Font Info:    ... okay on input line 166.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 166.
-LaTeX Font Info:    ... okay on input line 166.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 166.
-LaTeX Font Info:    ... okay on input line 166.
-LaTeX Info: Redefining \. on input line 166.
-LaTeX Info: Redefining \% on input line 166.
+LaTeX Font Info:    ... okay on input line 167.
+LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 167.
+LaTeX Font Info:    ... okay on input line 167.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 167.
+LaTeX Font Info:    ... okay on input line 167.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 167.
+LaTeX Font Info:    ... okay on input line 167.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 167.
+LaTeX Font Info:    ... okay on input line 167.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 167.
+LaTeX Font Info:    ... okay on input line 167.
+LaTeX Info: Redefining \. on input line 167.
+LaTeX Info: Redefining \% on input line 167.
 
 (C:\Users\juan_\AppData\Local\Programs\MiKTeX\tex/latex/translations/dicts\tran
 slations-basic-dictionary-spanish.trsl
@@ -1627,7 +1627,7 @@ File: translations-basic-dictionary-spanish.trsl (spanish translation file `tra
 nslations-basic-dictionary')
 )
 Package translations Info: loading dictionary `translations-basic-dictionary' f
-or `spanish'. on input line 166.
+or `spanish'. on input line 167.
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: hyperref package is loaded.
 Package caption Info: hypcap package is loaded.
@@ -1635,11 +1635,11 @@ Package caption Info: listings package is loaded.
 Package caption Info: rotating package is loaded.
 Package caption Info: End \AtBeginDocument code.
 \c@lstlisting=\count415
-Package hyperref Info: Link coloring ON on input line 166.
- (20220709_Proyecto_de_grado.out)
-(20220709_Proyecto_de_grado.out)
+Package hyperref Info: Link coloring ON on input line 167.
+ (20220720_Proyecto_de_grado.out)
+(20220720_Proyecto_de_grado.out)
 \@outlinefile=\write6
-\openout6 = `20220709_Proyecto_de_grado.out'.
+\openout6 = `20220720_Proyecto_de_grado.out'.
 
 Class scrbook Info: loading recommended package `bookmark'.
 (scrbook)           Using `bookmark' together with `hyperref' is recommended,
@@ -1648,9 +1648,9 @@ Class scrbook Info: loading recommended package `bookmark'.
 (scrbook)           `bookmarkpackage=false' before \begin{document} and
 (scrbook)           you can avoid this message adding:
 (scrbook)             \usepackage{bookmark}
-(scrbook)           before \begin{document} on input line 166.
+(scrbook)           before \begin{document} on input line 167.
 Class scrbook Info: temporary deactivation of babel-spanish quoting  on input l
-ine 166.
+ine 167.
 
 (C:\Users\juan_\AppData\Local\Programs\MiKTeX\tex/latex/bookmark\bookmark.sty
 Package: bookmark 2020-11-06 v1.29 PDF bookmarks (HO)
@@ -1660,7 +1660,7 @@ f
 File: bkm-dvipdfm.def 2020-11-06 v1.29 bookmark driver for dvipdfm (HO)
 \BKM@id=\count416
 ))
-Class scrbook Info: reactivation of babel-spanish quoting  on input line 166.
+Class scrbook Info: reactivation of babel-spanish quoting  on input line 167.
 \openout2 = `0_Portada/Portada.aux'.
 
  (0_Portada/Portada.tex
@@ -1676,13 +1676,13 @@ File: 0_Portada/EscudoUN.png Graphic file (type bmp)
 
 
 ]
-LaTeX Font Info:    Trying to load font information for U+msa on input line 60.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 63.
 
 
 (C:\Users\juan_\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 60.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 63.
 
 
 (C:\Users\juan_\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsb.fd
@@ -1693,13 +1693,13 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 
 ] [7] [8
 
-
-]) [9] [10
-
+] [9
 
 
 
-] (20220709_Proyecto_de_grado.toc
+]) [10
+
+] (20220720_Proyecto_de_grado.toc
 Package tocbasic Info: Using my definition of `\numberline' on input line 1.
 Package tocbasic Info: Using my definition of `\numberline' on input line 2.
 LaTeX Info: Redefining \. on input line 3.
@@ -1707,6 +1707,11 @@ LaTeX Info: Redefining \% on input line 3.
 Package tocbasic Info: Using my definition of `\numberline' on input line 4.
 Package tocbasic Info: Using my definition of `\numberline' on input line 5.
 Package tocbasic Info: Using my definition of `\numberline' on input line 6.
+
+Overfull \hbox (0.57596pt too wide) detected at line 6
+ [][]
+ []
+
 Package tocbasic Info: Using my definition of `\numberline' on input line 7.
 Package tocbasic Info: Using my definition of `\numberline' on input line 8.
 Package tocbasic Info: Using my definition of `\numberline' on input line 9.
@@ -1727,31 +1732,50 @@ Package tocbasic Info: Using my definition of `\numberline' on input line 27.
 Package tocbasic Info: Using my definition of `\numberline' on input line 28.
 Package tocbasic Info: Using my definition of `\numberline' on input line 29.
 Package tocbasic Info: Using my definition of `\numberline' on input line 30.
-Package tocbasic Info: Using my definition of `\numberline' on input line 31.
-Package tocbasic Info: Using my definition of `\numberline' on input line 32.
- [11
+[11
+
+
+
+
 
 ]
+Package tocbasic Info: Using my definition of `\numberline' on input line 31.
+Package tocbasic Info: Using my definition of `\numberline' on input line 32.
 Package tocbasic Info: Using my definition of `\numberline' on input line 33.
+Package tocbasic Info: Using my definition of `\numberline' on input line 34.
+Package tocbasic Info: Using my definition of `\numberline' on input line 35.
 Package tocbasic Info: Using my definition of `\numberline' on input line 36.
 Package tocbasic Info: Using my definition of `\numberline' on input line 37.
+Package tocbasic Info: Using my definition of `\numberline' on input line 38.
+Package tocbasic Info: Using my definition of `\numberline' on input line 39.
 Package tocbasic Info: Using my definition of `\numberline' on input line 40.
 Package tocbasic Info: Using my definition of `\numberline' on input line 41.
 Package tocbasic Info: Using my definition of `\numberline' on input line 42.
-Package tocbasic Info: Using my definition of `\numberline' on input line 43.
-Package tocbasic Info: Using my definition of `\numberline' on input line 44.
 Package tocbasic Info: Using my definition of `\numberline' on input line 45.
 Package tocbasic Info: Using my definition of `\numberline' on input line 46.
-Package tocbasic Info: Using my definition of `\numberline' on input line 47.
-Package tocbasic Info: Using my definition of `\numberline' on input line 48.
+Package tocbasic Info: Using my definition of `\numberline' on input line 49.
+Package tocbasic Info: Using my definition of `\numberline' on input line 50.
+Package tocbasic Info: Using my definition of `\numberline' on input line 51.
+Package tocbasic Info: Using my definition of `\numberline' on input line 52.
+Package tocbasic Info: Using my definition of `\numberline' on input line 53.
+Package tocbasic Info: Using my definition of `\numberline' on input line 54.
+Package tocbasic Info: Using my definition of `\numberline' on input line 55.
+Package tocbasic Info: Using my definition of `\numberline' on input line 56.
+Package tocbasic Info: Using my definition of `\numberline' on input line 57.
+Package tocbasic Info: Using my definition of `\numberline' on input line 58.
+Package tocbasic Info: Using my definition of `\numberline' on input line 59.
+Package tocbasic Info: Using my definition of `\numberline' on input line 60.
+Package tocbasic Info: Using my definition of `\numberline' on input line 61.
+Package tocbasic Info: Using my definition of `\numberline' on input line 62.
+Package tocbasic Info: Using my definition of `\numberline' on input line 63.
+Package tocbasic Info: Using my definition of `\numberline' on input line 64.
 )
 \tf@toc=\write7
-\openout7 = `20220709_Proyecto_de_grado.toc'.
+\openout7 = `20220720_Proyecto_de_grado.toc'.
 
-LaTeX Info: Redefining \. on input line 172.
-LaTeX Info: Redefining \% on input line 172.
- [12]
-(20220709_Proyecto_de_grado.lof
+LaTeX Info: Redefining \. on input line 174.
+LaTeX Info: Redefining \% on input line 174.
+ [12] (20220720_Proyecto_de_grado.lof
 LaTeX Info: Redefining \. on input line 1.
 LaTeX Info: Redefining \% on input line 1.
 Package tocbasic Info: Using my definition of `\numberline' on input line 3.
@@ -1805,29 +1829,32 @@ Package tocbasic Info: Using my definition of `\numberline' on input line 45.
 Package tocbasic Info: Using my definition of `\numberline' on input line 47.
 )
 \tf@lof=\write8
-\openout8 = `20220709_Proyecto_de_grado.lof'.
+\openout8 = `20220720_Proyecto_de_grado.lof'.
 
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-LaTeX Info: Redefining \. on input line 175.
-LaTeX Info: Redefining \% on input line 175.
+LaTeX Info: Redefining \. on input line 177.
+LaTeX Info: Redefining \% on input line 177.
  [14]
-LaTeX Info: Redefining \. on input line 175.
-LaTeX Info: Redefining \% on input line 175.
+LaTeX Info: Redefining \. on input line 177.
+LaTeX Info: Redefining \% on input line 177.
 
 [15] [16
 
 
-] (20220709_Proyecto_de_grado.lot
+] (20220720_Proyecto_de_grado.lot
 LaTeX Info: Redefining \. on input line 1.
 LaTeX Info: Redefining \% on input line 1.
 Package tocbasic Info: Using my definition of `\numberline' on input line 6.
 )
 \tf@lot=\write9
-\openout9 = `20220709_Proyecto_de_grado.lot'.
+\openout9 = `20220720_Proyecto_de_grado.lot'.
 
- [1
+ [17
+
+] [18
+
 
 ]
 \openout2 = `1_Intro/Intro.aux'.
@@ -1849,22 +1876,22 @@ Class scrbook Warning: \float@addtolists detected!
 (scrbook)              a package that still implements the
 (scrbook)              deprecated \float@addtolist interface.
 
-[2
+[1
 
 
 ]
 File: 1_Intro/AP146Laboratory.png Graphic file (type bmp)
 <1_Intro/AP146Laboratory.png>
-LaTeX Info: Redefining \. on input line 77.
-LaTeX Info: Redefining \% on input line 77.
- [3]
+LaTeX Info: Redefining \. on input line 70.
+LaTeX Info: Redefining \% on input line 70.
+ [2]
 File: 1_Intro/BK3630A.png Graphic file (type bmp)
 <1_Intro/BK3630A.png>
 
 ! Misplaced alignment tab character &.
 \NAT@nm ->{Br{\"{u}}el &
                          Kj{\ae }r}
-l.83 ...tnotesize Tomado de~\cite{BruelKjaer2000}}
+l.76 ...tnotesize Tomado de~\cite{BruelKjaer2000}}
                                                   
 I can't figure out why you would want to use a tab mark
 here. If you just want an ampersand, the remedy is
@@ -1876,7 +1903,7 @@ might try typing `S' now just to see what is salvageable.
 ! Misplaced alignment tab character &.
 \NAT@nm ->{Br{\"{u}}el &
                          Kj{\ae }r}
-l.83 ...tnotesize Tomado de~\cite{BruelKjaer2000}}
+l.76 ...tnotesize Tomado de~\cite{BruelKjaer2000}}
                                                   
 I can't figure out why you would want to use a tab mark
 here. If you just want an ampersand, the remedy is
@@ -1888,23 +1915,23 @@ might try typing `S' now just to see what is salvageable.
 
 Underfull \vbox (badness 1019) has occurred while \output is active []
 
-LaTeX Info: Redefining \. on input line 107.
-LaTeX Info: Redefining \% on input line 107.
- [4]
-LaTeX Info: Redefining \. on input line 136.
-LaTeX Info: Redefining \% on input line 136.
+LaTeX Info: Redefining \. on input line 100.
+LaTeX Info: Redefining \% on input line 100.
+ [3]
+LaTeX Info: Redefining \. on input line 129.
+LaTeX Info: Redefining \% on input line 129.
 
-[5])
-LaTeX Info: Redefining \. on input line 181.
-LaTeX Info: Redefining \% on input line 181.
- [6]
+[4])
+LaTeX Info: Redefining \. on input line 183.
+LaTeX Info: Redefining \% on input line 183.
+ [5]
 \openout2 = `2_Metodología/Metodología.aux'.
 
  (2_Metodología/Metodología.tex
 chapter 2.
 File: 2_Metodología/Figs/bruel4226.jpg Graphic file (type bmp)
 <2_Metodología/Figs/bruel4226.jpg>
-[7
+[6
 
 
 
@@ -1920,10 +1947,10 @@ LaTeX Warning: Float too large for page by 0.13675pt on input line 52.
 
 LaTeX Info: Redefining \. on input line 62.
 LaTeX Info: Redefining \% on input line 62.
-[8]
+[7]
 LaTeX Info: Redefining \. on input line 62.
 LaTeX Info: Redefining \% on input line 62.
- [9]
+ [8]
 File: 2_Metodología/Figs/frequency-weighings.png Graphic file (type bmp)
 <2_Metodología/Figs/frequency-weighings.png>
 
@@ -1931,48 +1958,46 @@ Underfull \vbox (badness 4673) has occurred while \output is active []
 
 LaTeX Info: Redefining \. on input line 78.
 LaTeX Info: Redefining \% on input line 78.
- [10]
+ [9]
 File: 2_Metodología/Figs/time-weightings.png Graphic file (type bmp)
 <2_Metodología/Figs/time-weightings.png>
 LaTeX Info: Redefining \. on input line 108.
 LaTeX Info: Redefining \% on input line 108.
 
-[11]
-Overfull \hbox (21.63942pt too wide) in paragraph at lines 192--193
- [][] 
- []
-
-LaTeX Info: Redefining \. on input line 195.
-LaTeX Info: Redefining \% on input line 195.
-[12]
-LaTeX Info: Redefining \. on input line 205.
-LaTeX Info: Redefining \% on input line 205.
- [13]
+[10]
+File: 2_Metodología/IEC60942Flowchart.pdf Graphic file (type pdf)
+<use 2_Metodología/IEC60942Flowchart.pdf>
+LaTeX Info: Redefining \. on input line 140.
+LaTeX Info: Redefining \% on input line 140.
+ [11]
+LaTeX Info: Redefining \. on input line 150.
+LaTeX Info: Redefining \% on input line 150.
+ [12]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-LaTeX Info: Redefining \. on input line 234.
-LaTeX Info: Redefining \% on input line 234.
- [14]
-LaTeX Info: Redefining \. on input line 302.
-LaTeX Info: Redefining \% on input line 302.
+LaTeX Info: Redefining \. on input line 179.
+LaTeX Info: Redefining \% on input line 179.
+ [13]
+LaTeX Info: Redefining \. on input line 247.
+LaTeX Info: Redefining \% on input line 247.
 
-[15]
-LaTeX Info: Redefining \. on input line 327.
-LaTeX Info: Redefining \% on input line 327.
+[14]
+LaTeX Info: Redefining \. on input line 272.
+LaTeX Info: Redefining \% on input line 272.
+ [15]
+LaTeX Info: Redefining \. on input line 297.
+LaTeX Info: Redefining \% on input line 297.
  [16]
-LaTeX Info: Redefining \. on input line 352.
-LaTeX Info: Redefining \% on input line 352.
+LaTeX Info: Redefining \. on input line 331.
+LaTeX Info: Redefining \% on input line 331.
  [17]
-LaTeX Info: Redefining \. on input line 386.
-LaTeX Info: Redefining \% on input line 386.
+LaTeX Info: Redefining \. on input line 367.
+LaTeX Info: Redefining \% on input line 367.
  [18]
-LaTeX Info: Redefining \. on input line 422.
-LaTeX Info: Redefining \% on input line 422.
- [19]
 File: 2_Metodología/Figs/IEC60942connections.png Graphic file (type bmp)
 <2_Metodología/Figs/IEC60942connections.png>
 
-Overfull \hbox (8.39914pt too wide) in paragraph at lines 459--460
+Overfull \hbox (8.39914pt too wide) in paragraph at lines 404--405
  [][] 
  []
 
@@ -1990,181 +2015,178 @@ File: 2_Metodología/Figs/gras12AK.jpg Graphic file (type bmp)
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-LaTeX Info: Redefining \. on input line 511.
-LaTeX Info: Redefining \% on input line 511.
-[20]
-LaTeX Info: Redefining \. on input line 514.
-LaTeX Info: Redefining \% on input line 514.
- [21]
+LaTeX Info: Redefining \. on input line 456.
+LaTeX Info: Redefining \% on input line 456.
+[19]
+LaTeX Info: Redefining \. on input line 459.
+LaTeX Info: Redefining \% on input line 459.
+ [20]
 File: 2_Metodología/Figs/keysight34461A.jpg Graphic file (type bmp)
 <2_Metodología/Figs/keysight34461A.jpg>
 
-Overfull \hbox (16.6005pt too wide) in paragraph at lines 524--525
+Overfull \hbox (16.6005pt too wide) in paragraph at lines 469--470
  [][] 
  []
 
 File: 2_Metodología/Figs/keysightU8903B.jpg Graphic file (type bmp)
 <2_Metodología/Figs/keysightU8903B.jpg>
 
-Overfull \hbox (15.19827pt too wide) in paragraph at lines 531--532
+Overfull \hbox (15.19827pt too wide) in paragraph at lines 476--477
  [][] 
  []
 
-LaTeX Info: Redefining \. on input line 549.
-LaTeX Info: Redefining \% on input line 549.
-[22]
+LaTeX Info: Redefining \. on input line 494.
+LaTeX Info: Redefining \% on input line 494.
+[21]
 File: 2_Metodología/Figs/IEC61672-3connections.png Graphic file (type bmp)
 <2_Metodología/Figs/IEC61672-3connections.png>
 
-Overfull \hbox (8.39914pt too wide) in paragraph at lines 577--578
+Overfull \hbox (8.39914pt too wide) in paragraph at lines 522--523
  [][] 
  []
 
-LaTeX Info: Redefining \. on input line 585.
-LaTeX Info: Redefining \% on input line 585.
-[23]
+LaTeX Info: Redefining \. on input line 530.
+LaTeX Info: Redefining \% on input line 530.
+[22]
 File: 2_Metodología/Figs/keysight33511B.jpg Graphic file (type bmp)
 <2_Metodología/Figs/keysight33511B.jpg>
 File: 2_Metodología/Figs/decadebox.jpg Graphic file (type bmp)
 <2_Metodología/Figs/decadebox.jpg>
 
-Overfull \hbox (3.53522pt too wide) in paragraph at lines 599--600
+Overfull \hbox (3.53522pt too wide) in paragraph at lines 544--545
  [][] 
  []
 
-LaTeX Info: Redefining \. on input line 619.
-LaTeX Info: Redefining \% on input line 619.
-[24
+LaTeX Info: Redefining \. on input line 564.
+LaTeX Info: Redefining \% on input line 564.
+[23
 
 ]
-LaTeX Info: Redefining \. on input line 650.
-LaTeX Info: Redefining \% on input line 650.
- [25])
-LaTeX Info: Redefining \. on input line 182.
-LaTeX Info: Redefining \% on input line 182.
- [26]
+LaTeX Info: Redefining \. on input line 595.
+LaTeX Info: Redefining \% on input line 595.
+ [24])
+LaTeX Info: Redefining \. on input line 184.
+LaTeX Info: Redefining \% on input line 184.
+ [25]
 \openout2 = `3_Reconocimiento/Reconocimiento.aux'.
 
  (3_Reconocimiento/Reconocimiento.tex
 chapter 3.
 
 Package caption Warning: Ambiguous sub-caption(s), use \nextfloat on input line
- 16.
+ 17.
 See the caption package documentation for explanation.
 
 
 Package relsize Warning: Font size 5.55556pt is too small.
-(relsize)                Using 6.0pt instead on input line 24.
+(relsize)                Using 6.0pt instead on input line 25.
 
 
 Package relsize Warning: Font size 5.55556pt is too small.
-(relsize)                Using 6.0pt instead on input line 37.
+(relsize)                Using 6.0pt instead on input line 38.
 
 
 Package relsize Warning: Font size 5.55556pt is too small.
-(relsize)                Using 6.0pt instead on input line 37.
+(relsize)                Using 6.0pt instead on input line 38.
 
 
 Package relsize Warning: Font size 5.55556pt is too small.
-(relsize)                Using 6.0pt instead on input line 37.
+(relsize)                Using 6.0pt instead on input line 38.
 
 
 Package relsize Warning: Font size 5.55556pt is too small.
-(relsize)                Using 6.0pt instead on input line 37.
+(relsize)                Using 6.0pt instead on input line 38.
 
 
 Package relsize Warning: Font size 5.55556pt is too small.
-(relsize)                Using 6.0pt instead on input line 37.
+(relsize)                Using 6.0pt instead on input line 38.
 
 
 Package relsize Warning: Font size 5.55556pt is too small.
-(relsize)                Using 6.0pt instead on input line 37.
+(relsize)                Using 6.0pt instead on input line 38.
 
 
 Package relsize Warning: Font size 5.55556pt is too small.
-(relsize)                Using 6.0pt instead on input line 37.
+(relsize)                Using 6.0pt instead on input line 38.
 
 
 Package relsize Warning: Font size 5.55556pt is too small.
-(relsize)                Using 6.0pt instead on input line 37.
+(relsize)                Using 6.0pt instead on input line 38.
 
 
 Package relsize Warning: Font size 5.55556pt is too small.
-(relsize)                Using 6.0pt instead on input line 37.
+(relsize)                Using 6.0pt instead on input line 38.
 
 
 Package relsize Warning: Font size 5.55556pt is too small.
-(relsize)                Using 6.0pt instead on input line 37.
+(relsize)                Using 6.0pt instead on input line 38.
 
 
 Package relsize Warning: Font size 5.55556pt is too small.
-(relsize)                Using 6.0pt instead on input line 37.
+(relsize)                Using 6.0pt instead on input line 38.
 
 
 Package relsize Warning: Font size 5.55556pt is too small.
-(relsize)                Using 6.0pt instead on input line 39.
+(relsize)                Using 6.0pt instead on input line 40.
 
 
 Package relsize Warning: Font size 5.55556pt is too small.
-(relsize)                Using 6.0pt instead on input line 39.
+(relsize)                Using 6.0pt instead on input line 40.
 
 
 Package relsize Warning: Font size 5.55556pt is too small.
-(relsize)                Using 6.0pt instead on input line 39.
+(relsize)                Using 6.0pt instead on input line 40.
 
 
 Package relsize Warning: Font size 5.55556pt is too small.
-(relsize)                Using 6.0pt instead on input line 42.
+(relsize)                Using 6.0pt instead on input line 43.
 
-[27
-
-
+[26
 
 
-]
-LaTeX Info: Redefining \. on input line 193.
-LaTeX Info: Redefining \% on input line 193.
- [28]
+
+
+] [27]
 File: 3_Reconocimiento/Figs/for_padding.jpg Graphic file (type bmp)
 <3_Reconocimiento/Figs/for_padding.jpg>
 File: 3_Reconocimiento/Figs/zero_padding.jpg Graphic file (type bmp)
 <3_Reconocimiento/Figs/zero_padding.jpg>
 File: 3_Reconocimiento/Figs/mirror_padding.jpg Graphic file (type bmp)
 <3_Reconocimiento/Figs/mirror_padding.jpg>
- [29]
-LaTeX Info: Redefining \. on input line 285.
-LaTeX Info: Redefining \% on input line 285.
+LaTeX Info: Redefining \. on input line 248.
+LaTeX Info: Redefining \% on input line 248.
+ [28] [29]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+LaTeX Info: Redefining \. on input line 337.
+LaTeX Info: Redefining \% on input line 337.
  [30]
+[31]
+LaTeX Info: Redefining \. on input line 420.
+LaTeX Info: Redefining \% on input line 420.
+ [32] [33]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [31]
-LaTeX Info: Redefining \. on input line 373.
-LaTeX Info: Redefining \% on input line 373.
-
-[32] [33]
-LaTeX Info: Redefining \. on input line 436.
-LaTeX Info: Redefining \% on input line 436.
+LaTeX Info: Redefining \. on input line 489.
+LaTeX Info: Redefining \% on input line 489.
  [34]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [35]
 Underfull \vbox (badness 3088) has occurred while \output is active []
 
-LaTeX Info: Redefining \. on input line 527.
-LaTeX Info: Redefining \% on input line 527.
- [36]
+ [35]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [37]
+LaTeX Info: Redefining \. on input line 580.
+LaTeX Info: Redefining \% on input line 580.
+ [36]
 File: 3_reconocimiento/Figs/slm_screen.jpg Graphic file (type bmp)
 <3_reconocimiento/Figs/slm_screen.jpg>
-LaTeX Info: Redefining \. on input line 629.
-LaTeX Info: Redefining \% on input line 629.
 
-[38]
+[37]
 File: 3_Reconocimiento/Figs/keypoints_SIFT.jpg Graphic file (type bmp)
 <3_Reconocimiento/Figs/keypoints_SIFT.jpg>
- [39]
+LaTeX Info: Redefining \. on input line 650.
+LaTeX Info: Redefining \% on input line 650.
+ [38]
 File: 3_Reconocimiento/Figs/train_sample5_original.png Graphic file (type bmp)
 <3_Reconocimiento/Figs/train_sample5_original.png>
 File: 3_Reconocimiento/Figs/train_sample5_filtered.png Graphic file (type bmp)
@@ -2175,9 +2197,7 @@ File: 3_Reconocimiento/Figs/train_sample5_otsu.png Graphic file (type bmp)
 <3_Reconocimiento/Figs/train_sample5_otsu.png>
 File: 3_Reconocimiento/Figs/train_samples_features.png Graphic file (type bmp)
 <3_Reconocimiento/Figs/train_samples_features.png>
-LaTeX Info: Redefining \. on input line 687.
-LaTeX Info: Redefining \% on input line 687.
- [40]
+ [39]
 File: 3_Reconocimiento/Figs/test_sample6_good_original.png Graphic file (type b
 mp)
 <3_Reconocimiento/Figs/test_sample6_good_original.png>
@@ -2185,14 +2205,14 @@ File: 3_Reconocimiento/Figs/test_sample6_good_padded.png Graphic file (type bmp
 )
 <3_Reconocimiento/Figs/test_sample6_good_padded.png>
 
-Overfull \hbox (8.83815pt too wide) in paragraph at lines 711--712
+Overfull \hbox (8.83815pt too wide) in paragraph at lines 718--719
  [][] 
  []
 
 File: 3_Reconocimiento/Figs/test_sample6_good_otsu.png Graphic file (type bmp)
 <3_Reconocimiento/Figs/test_sample6_good_otsu.png>
 
-Overfull \hbox (7.45836pt too wide) in paragraph at lines 718--719
+Overfull \hbox (7.45836pt too wide) in paragraph at lines 725--726
  [][] 
  []
 
@@ -2203,14 +2223,14 @@ File: 3_Reconocimiento/Figs/test_sample6_bad_padded1.png Graphic file (type bmp
 )
 <3_Reconocimiento/Figs/test_sample6_bad_padded1.png>
 
-Overfull \hbox (7.18065pt too wide) in paragraph at lines 730--731
+Overfull \hbox (7.18065pt too wide) in paragraph at lines 737--738
  [][] 
  []
 
 File: 3_Reconocimiento/Figs/test_sample6_bad_otsu1.png Graphic file (type bmp)
 <3_Reconocimiento/Figs/test_sample6_bad_otsu1.png>
 
-Overfull \hbox (6.88089pt too wide) in paragraph at lines 736--737
+Overfull \hbox (6.88089pt too wide) in paragraph at lines 743--744
  [][] 
  []
 
@@ -2221,14 +2241,14 @@ File: 3_Reconocimiento/Figs/test_sample6_bad_padded2.png Graphic file (type bmp
 )
 <3_Reconocimiento/Figs/test_sample6_bad_padded2.png>
 
-Overfull \hbox (13.61221pt too wide) in paragraph at lines 748--749
+Overfull \hbox (13.61221pt too wide) in paragraph at lines 755--756
  [][] 
  []
 
 File: 3_Reconocimiento/Figs/test_sample6_bad_otsu2.png Graphic file (type bmp)
 <3_Reconocimiento/Figs/test_sample6_bad_otsu2.png>
 
-Overfull \hbox (12.75624pt too wide) in paragraph at lines 754--755
+Overfull \hbox (12.75624pt too wide) in paragraph at lines 761--762
  [][] 
  []
 
@@ -2242,45 +2262,24 @@ File: 3_Reconocimiento/Figs/confusion_matrix_good.png Graphic file (type bmp)
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[41]
-LaTeX Info: Redefining \. on input line 785.
-LaTeX Info: Redefining \% on input line 785.
- [42]
-Underfull \vbox (badness 1990) has occurred while \output is active []
-
- [43])
-LaTeX Info: Redefining \. on input line 183.
-LaTeX Info: Redefining \% on input line 183.
-
-[44]
+LaTeX Info: Redefining \. on input line 792.
+LaTeX Info: Redefining \% on input line 792.
+[40] [41]
+LaTeX Info: Redefining \. on input line 792.
+LaTeX Info: Redefining \% on input line 792.
+ [42]) [43]
 \openout2 = `4_Implementación/Implementación.aux'.
 
  (4_Implementación/Implementación.tex
 chapter 4.
-[45
+[44
 
 
 
 
 ]
-Missing character: There is no ; in font nullfont!
-Missing character: There is no ; in font nullfont!
-
-Overfull \hbox (219.93501pt too wide) in paragraph at lines 65--66
- [][] 
- []
-
-Missing character: There is no ; in font nullfont!
-Missing character: There is no ; in font nullfont!
-Missing character: There is no ; in font nullfont!
-Missing character: There is no ; in font nullfont!
-
-Overfull \hbox (220.62459pt too wide) in paragraph at lines 111--112
- [][] 
- []
-
-
-LaTeX Warning: Float too large for page by 44.60152pt on input line 113.
+File: 4_Implementación/principalGRAFCET.pdf Graphic file (type pdf)
+<use 4_Implementación/principalGRAFCET.pdf>
 
 Missing character: There is no ; in font nullfont!
 Missing character: There is no ; in font nullfont!
@@ -2291,7 +2290,7 @@ Missing character: There is no ; in font nullfont!
 Missing character: There is no ; in font nullfont!
 Missing character: There is no ; in font nullfont!
 
-Overfull \hbox (2.59418pt too wide) in paragraph at lines 224--225
+Overfull \hbox (2.59418pt too wide) in paragraph at lines 142--143
  [][] 
  []
 
@@ -2305,496 +2304,48 @@ Missing character: There is no ; in font nullfont!
 Missing character: There is no ; in font nullfont!
 Missing character: There is no ; in font nullfont!
 
-Overfull \hbox (9.87283pt too wide) in paragraph at lines 360--361
+Overfull \hbox (9.87283pt too wide) in paragraph at lines 281--282
  [][] 
  []
 
-LaTeX Info: Redefining \. on input line 364.
-LaTeX Info: Redefining \% on input line 364.
-[46]
-LaTeX Info: Redefining \. on input line 364.
-LaTeX Info: Redefining \% on input line 364.
+LaTeX Info: Redefining \. on input line 286.
+LaTeX Info: Redefining \% on input line 286.
+[45]
+LaTeX Info: Redefining \. on input line 286.
+LaTeX Info: Redefining \% on input line 286.
+ [46]
+LaTeX Info: Redefining \. on input line 286.
+LaTeX Info: Redefining \% on input line 286.
  [47]
-LaTeX Info: Redefining \. on input line 364.
-LaTeX Info: Redefining \% on input line 364.
+LaTeX Info: Redefining \. on input line 286.
+LaTeX Info: Redefining \% on input line 286.
  [48]
-LaTeX Info: Redefining \. on input line 364.
-LaTeX Info: Redefining \% on input line 364.
- [49]
 Missing character: There is no ; in font nullfont!
 Missing character: There is no ; in font nullfont!
-LaTeX Info: Redefining \. on input line 433.
-LaTeX Info: Redefining \% on input line 433.
-[50
+LaTeX Info: Redefining \. on input line 356.
+LaTeX Info: Redefining \% on input line 356.
+[49
 
 
 ]
-Underfull \hbox (badness 7397) in paragraph at lines 523--523
-[][]\TU/JetBrainsMono(0)/m/n/6 + measurementProgress: pyqtSignal \TU/JetBrainsM
-ono(0)/m/it/6 «class attribute» 
- []
-
-
-Underfull \hbox (badness 7397) in paragraph at lines 523--523
-\TU/JetBrainsMono(0)/m/n/6 + calibrationProgress: pyqtSignal \TU/JetBrainsMono(
-0)/m/it/6 «class attribute» 
- []
-
-
-Underfull \hbox (badness 2698) in paragraph at lines 523--523
-\TU/JetBrainsMono(0)/m/n/6 + invalidMeasurementValue: pyqtSignal \TU/JetBrainsM
-ono(0)/m/it/6 «class attribute» 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 523--523
-\TU/JetBrainsMono(0)/m/n/6 + realTimeValues: pyqtSignal \TU/JetBrainsMono(0)/m/
-it/6 «class attribute» 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 523--523
-\TU/JetBrainsMono(0)/m/n/6 # acceptanceLimits: pd.DataFrame \TU/JetBrainsMono(0
-)/m/it/6 «class attribute» 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 523--523
-\TU/JetBrainsMono(0)/m/n/6 # DMM: pyVisa.GPIBInstrument \TU/JetBrainsMono(0)/m/
-it/6 «instance attribute» 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 523--523
-\TU/JetBrainsMono(0)/m/n/6 # AA: pyVisa.GPIBInstrument \TU/JetBrainsMono(0)/m/i
-t/6 «instance attribute» 
- []
-
-
-Underfull \hbox (badness 7397) in paragraph at lines 523--523
-\TU/JetBrainsMono(0)/m/n/6 # standard: AcousticCalibrator \TU/JetBrainsMono(0)/
-m/it/6 «instance attribute» 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 523--523
-\TU/JetBrainsMono(0)/m/n/6 # microphone: dict \TU/JetBrainsMono(0)/m/it/6 «inst
-ance attribute» 
- []
-
-
-Underfull \hbox (badness 7397) in paragraph at lines 523--523
-\TU/JetBrainsMono(0)/m/n/6 # calibration_consecutive: str \TU/JetBrainsMono(0)/
-m/it/6 «instance attribute» 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 523--523
-\TU/JetBrainsMono(0)/m/n/6 # dut: AcousticCalibrator \TU/JetBrainsMono(0)/m/it/
-6 «instance attribute» 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 523--523
-\TU/JetBrainsMono(0)/m/n/6 # customer_info: dict \TU/JetBrainsMono(0)/m/it/6 «i
-nstance attribute» 
- []
-
-
-Underfull \hbox (badness 4660) in paragraph at lines 523--523
-\TU/JetBrainsMono(0)/m/n/6 # ambient_condition_values: dict \TU/JetBrainsMono(0
-)/m/it/6 «instance attribute» 
- []
-
-
-Underfull \hbox (badness 1968) in paragraph at lines 523--523
-\TU/JetBrainsMono(0)/m/n/6 # standard_measurement_values: list \TU/JetBrainsMon
-o(0)/m/it/6 «instance attribute» 
- []
-
-
-Underfull \hbox (badness 7397) in paragraph at lines 523--523
-\TU/JetBrainsMono(0)/m/n/6 # dut_measurement_values: list \TU/JetBrainsMono(0)/
-m/it/6 «instance attribute» 
- []
-
-
-Underfull \hbox (badness 4660) in paragraph at lines 523--523
-\TU/JetBrainsMono(0)/m/n/6 # dut_noise_values: pd.DataFrame \TU/JetBrainsMono(0
-)/m/it/6 «instance attribute» 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 523--523
-\TU/JetBrainsMono(0)/m/n/6 # expanded_uncertainty: dict \TU/JetBrainsMono(0)/m/
-it/6 «instance attribute» 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 523--523
-[][]\TU/JetBrainsMono(0)/m/n/6 + run_main_sequence() ->None \TU/JetBrainsMono(0
-)/m/it/6 «instance method» 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 523--523
-\TU/JetBrainsMono(0)/m/n/6 + check_state() ->None \TU/JetBrainsMono(0)/m/it/6 «
-instance method» 
- []
-
-
-Underfull \hbox (badness 2080) in paragraph at lines 523--523
-\TU/JetBrainsMono(0)/m/n/6 + set_current_level(level: int) ->None \TU/JetBrains
-Mono(0)/m/it/6 «instance method» 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 523--523
-\TU/JetBrainsMono(0)/m/n/6 + set_standard_calibrator(standard: 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 523--523
-\TU/JetBrainsMono(0)/m/n/6 AcousticCalibrator) ->None \TU/JetBrainsMono(0)/m/it
-/6 «instance method» 
- []
-
-
-Underfull \hbox (badness 5563) in paragraph at lines 523--523
-\TU/JetBrainsMono(0)/m/n/6 + measure_mic_sensibility() ->None \TU/JetBrainsMono
-(0)/m/it/6 «instance method» 
- []
-
-
-Underfull \hbox (badness 6559) in paragraph at lines 523--523
-\TU/JetBrainsMono(0)/m/n/6 + measure_ambient_noise() -> float \TU/JetBrainsMono
-(0)/m/it/6 «instance method» 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 523--523
-\TU/JetBrainsMono(0)/m/n/6 + measure_quantities(n_indications: 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 523--523
-\TU/JetBrainsMono(0)/m/n/6 int=30) ->None \TU/JetBrainsMono(0)/m/it/6 «instance
- method» 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 523--523
-\TU/JetBrainsMono(0)/m/n/6 + report_ambient_conditions(temperature:float, 
- []
-
-
-Underfull \hbox (badness 1472) in paragraph at lines 523--523
-\TU/JetBrainsMono(0)/m/n/6 humidity:float, pressure: float) ->None \TU/JetBrain
-sMono(0)/m/it/6 «instance method» 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 523--523
-\TU/JetBrainsMono(0)/m/n/6 + set_stage(stage: int) ->None \TU/JetBrainsMono(0)/
-m/it/6 «instance method» 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 523--523
-\TU/JetBrainsMono(0)/m/n/6 + set_state(state: int) ->None \TU/JetBrainsMono(0)/
-m/it/6 «instance method» 
- []
-
-
-Underfull \hbox (badness 4859) in paragraph at lines 523--523
-\TU/JetBrainsMono(0)/m/n/6 + volt2level(v:float, ref_lev: tuple) ->float \TU/Je
-tBrainsMono(0)/m/it/6 «static 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 535--535
-[][]\TU/JetBrainsMono(0)/m/n/6 # info: dict \TU/JetBrainsMono(0)/m/it/6 «instan
-ce attribute» 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 535--535
-\TU/JetBrainsMono(0)/m/n/6 # cl: int \TU/JetBrainsMono(0)/m/it/6 «instance attr
-ibute» 
- []
-
-
-Underfull \hbox (badness 2035) in paragraph at lines 535--535
-\TU/JetBrainsMono(0)/m/n/6 # pressure_influence: float \TU/JetBrainsMono(0)/m/i
-t/6 «instance attribute» 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 535--535
-[][]\TU/JetBrainsMono(0)/m/n/6 + get_ambient_correction(pressure: 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 535--535
-\TU/JetBrainsMono(0)/m/n/6 float) ->float \TU/JetBrainsMono(0)/m/it/6 «instance
- method» 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 579--579
-[][]\TU/JetBrainsMono(0)/m/n/6 # bruel4231: AcousticCalibrator \TU/JetBrainsMon
-o(0)/m/it/6 «class attribute» 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 579--579
-\TU/JetBrainsMono(0)/m/n/6 # cal21: AcousticCalibrator \TU/JetBrainsMono(0)/m/i
-t/6 «class attribute» 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 579--579
-\TU/JetBrainsMono(0)/m/n/6 # grass40CE: ditc \TU/JetBrainsMono(0)/m/it/6 «class
- attribute» 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 579--579
-\TU/JetBrainsMono(0)/m/n/6 # gui: AcousticCalibratorsUI \TU/JetBrainsMono(0)/m/
-it/6 «instance attribute» 
- []
-
-
-Underfull \hbox (badness 5924) in paragraph at lines 579--579
-\TU/JetBrainsMono(0)/m/n/6 + acquired_values: pd.DataFrame \TU/JetBrainsMono(0)
-/m/it/6 «instance attribute» 
- []
-
-
-Underfull \hbox (badness 1968) in paragraph at lines 579--579
-\TU/JetBrainsMono(0)/m/n/6 + dut_averaged_values: pd.DataFrame \TU/JetBrainsMon
-o(0)/m/it/6 «instance attribute» 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 579--579
-\TU/JetBrainsMono(0)/m/n/6 + save_standards_state: bool \TU/JetBrainsMono(0)/m/
-it/6 «instance attribute» 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 579--579
-\TU/JetBrainsMono(0)/m/n/6 + save_DUT_info_state: bool \TU/JetBrainsMono(0)/m/i
-t/6 «instance attribute» 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 579--579
-\TU/JetBrainsMono(0)/m/n/6 + self_test_passed: bool \TU/JetBrainsMono(0)/m/it/6
- «instance attribute» 
- []
-
-
-Underfull \hbox (badness 3590) in paragraph at lines 579--579
-\TU/JetBrainsMono(0)/m/n/6 + selfTesterWorker: PyQt5.QObject \TU/JetBrainsMono(
-0)/m/it/6 «instance attribute» 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 579--579
-[][]\TU/JetBrainsMono(0)/m/n/6 # connect_signals() ->None \TU/JetBrainsMono(0)/
-m/it/6 «instance method» 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 579--579
-\TU/JetBrainsMono(0)/m/n/6 + fill_mic_info() ->None \TU/JetBrainsMono(0)/m/it/6
- «instance method» 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 579--579
-\TU/JetBrainsMono(0)/m/n/6 + save_standards_info() ->None \TU/JetBrainsMono(0)/
-m/it/6 «instance method» 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 579--579
-\TU/JetBrainsMono(0)/m/n/6 + save_dut_info() ->None \TU/JetBrainsMono(0)/m/it/6
- «instance method» 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 579--579
-\TU/JetBrainsMono(0)/m/n/6 + self_test() ->None \TU/JetBrainsMono(0)/m/it/6 «in
-stance method» 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 579--579
-\TU/JetBrainsMono(0)/m/n/6 + search_standards() ->None \TU/JetBrainsMono(0)/m/i
-t/6 «instance method» 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 579--579
-\TU/JetBrainsMono(0)/m/n/6 + fill_standards_info() ->None \TU/JetBrainsMono(0)/
-m/it/6 «instance method» 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 579--579
-\TU/JetBrainsMono(0)/m/n/6 + update_noise_values() ->None \TU/JetBrainsMono(0)/
-m/it/6 «instance method» 
- []
-
-
-Underfull \hbox (badness 2478) in paragraph at lines 579--579
-\TU/JetBrainsMono(0)/m/n/6 + show_standard_noise_values() ->None \TU/JetBrainsM
-ono(0)/m/it/6 «instance method» 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 579--579
-\TU/JetBrainsMono(0)/m/n/6 + show_dut_noise_values() ->None \TU/JetBrainsMono(0
-)/m/it/6 «instance method» 
- []
-
-
-Underfull \hbox (badness 4353) in paragraph at lines 579--579
-\TU/JetBrainsMono(0)/m/n/6 + show_averaged_dut_values() ->None \TU/JetBrainsMon
-o(0)/m/it/6 «instance method» 
- []
-
-
-Underfull \hbox (badness 5563) in paragraph at lines 579--579
-\TU/JetBrainsMono(0)/m/n/6 + update_real_time_values() ->None \TU/JetBrainsMono
-(0)/m/it/6 «instance method» 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 579--579
-\TU/JetBrainsMono(0)/m/n/6 + start() ->None \TU/JetBrainsMono(0)/m/it/6 «instan
-ce method» 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 579--579
-\TU/JetBrainsMono(0)/m/n/6 + pause() ->None \TU/JetBrainsMono(0)/m/it/6 «instan
-ce method» 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 579--579
-\TU/JetBrainsMono(0)/m/n/6 + sequence_control() ->None \TU/JetBrainsMono(0)/m/i
-t/6 «instance method» 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 579--579
-\TU/JetBrainsMono(0)/m/n/6 + eval_answer(instruction: 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 579--579
-\TU/JetBrainsMono(0)/m/n/6 PyQt5.QMessageBox) ->None \TU/JetBrainsMono(0)/m/it/
-6 «instance method» 
- []
-
-
-Underfull \hbox (badness 5563) in paragraph at lines 579--579
-\TU/JetBrainsMono(0)/m/n/6 + invalid_measurement(value: float) ->None \TU/JetBr
-ainsMono(0)/m/it/6 «instance 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 591--591
-[][]\TU/JetBrainsMono(0)/m/n/6 + finished: pyqtSignal \TU/JetBrainsMono(0)/m/it
-/6 «class attribute» 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 591--591
-\TU/JetBrainsMono(0)/m/n/6 + progress: pyqtSignal \TU/JetBrainsMono(0)/m/it/6 «
-class attribute» 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 591--591
-\TU/JetBrainsMono(0)/m/n/6 # resources_manager: visa.ResourceManager 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 591--591
-\TU/JetBrainsMono(0)/m/it/6 «instance attribute » 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 591--591
-\TU/JetBrainsMono(0)/m/n/6 + DMM_model: str \TU/JetBrainsMono(0)/m/it/6 «instan
-ce attribute» 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 591--591
-\TU/JetBrainsMono(0)/m/n/6 + AA_model: str \TU/JetBrainsMono(0)/m/it/6 «instanc
-e attribute» 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 591--591
-\TU/JetBrainsMono(0)/m/n/6 + resources: tuple \TU/JetBrainsMono(0)/m/it/6 «inst
-ance attribute » 
- []
-
-
-Underfull \hbox (badness 1377) in paragraph at lines 606--606
-[][]\TU/JetBrainsMono(0)/m/it/6 «some instance attributes corresponding to the 
-GUI 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 615--615
-[][]\TU/JetBrainsMono(0)/m/n/6 + finished: pyqtSignal \TU/JetBrainsMono(0)/m/it
-/6 «class attribute» 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 615--615
-\TU/JetBrainsMono(0)/m/n/6 + progress: pyqtSignal \TU/JetBrainsMono(0)/m/it/6 «
-class attribute» 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 615--615
-\TU/JetBrainsMono(0)/m/n/6 # DMM: visa.Resource \TU/JetBrainsMono(0)/m/it/6 «in
-stance attribute» 
- []
-
-
-Overfull \hbox (34.00629pt too wide) in paragraph at lines 624--625
- [][] 
- []
-
-
-LaTeX Warning: Float too large for page by 17.3972pt on input line 626.
-
-LaTeX Info: Redefining \. on input line 632.
-LaTeX Info: Redefining \% on input line 632.
-[51
+File: 4_Implementación/IEC60942uml.pdf Graphic file (type pdf)
+<use 4_Implementación/IEC60942uml.pdf>
+LaTeX Info: Redefining \. on input line 412.
+LaTeX Info: Redefining \% on input line 412.
+ [50
 
 ]
-LaTeX Info: Redefining \. on input line 632.
-LaTeX Info: Redefining \% on input line 632.
- [52]
+LaTeX Info: Redefining \. on input line 412.
+LaTeX Info: Redefining \% on input line 412.
+ [51]
 File: 4_Implementación/Figs/calibrator_gui_standards.png Graphic file (type bmp
 )
 <4_Implementación/Figs/calibrator_gui_standards.png>
 File: 4_Implementación/Figs/searchInstruments.png Graphic file (type bmp)
 <4_Implementación/Figs/searchInstruments.png>
-LaTeX Info: Redefining \. on input line 650.
-LaTeX Info: Redefining \% on input line 650.
- [53]
+LaTeX Info: Redefining \. on input line 430.
+LaTeX Info: Redefining \% on input line 430.
+ [52]
 File: 4_Implementación/Figs/test.png Graphic file (type bmp)
 <4_Implementación/Figs/test.png>
 File: 4_Implementación/Figs/calibrator_gui_dut.png Graphic file (type bmp)
@@ -2803,720 +2354,138 @@ File: 4_Implementación/Figs/play.png Graphic file (type bmp)
 <4_Implementación/Figs/play.png>
 File: 4_implementación/Figs/calibrator_gui_results.png Graphic file (type bmp)
 <4_implementación/Figs/calibrator_gui_results.png>
-LaTeX Info: Redefining \. on input line 674.
-LaTeX Info: Redefining \% on input line 674.
- [54]
+LaTeX Info: Redefining \. on input line 454.
+LaTeX Info: Redefining \% on input line 454.
+ [53]
 File: 4_Implementación/Figs/pause.png Graphic file (type bmp)
 <4_Implementación/Figs/pause.png>
 File: 4_Implementación/Figs/play.png Graphic file (type bmp)
 <4_Implementación/Figs/play.png>
-LaTeX Info: Redefining \. on input line 689.
-LaTeX Info: Redefining \% on input line 689.
- [55]
+LaTeX Info: Redefining \. on input line 469.
+LaTeX Info: Redefining \% on input line 469.
+ [54]
 
 Package relsize Warning: Font size 5.55556pt is too small.
-(relsize)                Using 6.0pt instead on input line 695.
-
-
-Package relsize Warning: Font size 5.55556pt is too small.
-(relsize)                Using 6.0pt instead on input line 696.
+(relsize)                Using 6.0pt instead on input line 475.
 
 
 Package relsize Warning: Font size 5.55556pt is too small.
-(relsize)                Using 6.0pt instead on input line 697.
+(relsize)                Using 6.0pt instead on input line 476.
 
 
 Package relsize Warning: Font size 5.55556pt is too small.
-(relsize)                Using 6.0pt instead on input line 698.
+(relsize)                Using 6.0pt instead on input line 477.
 
 
 Package relsize Warning: Font size 5.55556pt is too small.
-(relsize)                Using 6.0pt instead on input line 699.
+(relsize)                Using 6.0pt instead on input line 478.
 
 
 Package relsize Warning: Font size 5.55556pt is too small.
-(relsize)                Using 6.0pt instead on input line 700.
+(relsize)                Using 6.0pt instead on input line 479.
 
 
 Package relsize Warning: Font size 5.55556pt is too small.
-(relsize)                Using 6.0pt instead on input line 701.
+(relsize)                Using 6.0pt instead on input line 480.
 
 
 Package relsize Warning: Font size 5.55556pt is too small.
-(relsize)                Using 6.0pt instead on input line 702.
+(relsize)                Using 6.0pt instead on input line 481.
 
 
 Package relsize Warning: Font size 5.55556pt is too small.
-(relsize)                Using 6.0pt instead on input line 703.
+(relsize)                Using 6.0pt instead on input line 482.
 
 
 Package relsize Warning: Font size 5.55556pt is too small.
-(relsize)                Using 6.0pt instead on input line 704.
+(relsize)                Using 6.0pt instead on input line 483.
 
 
 Package relsize Warning: Font size 5.55556pt is too small.
-(relsize)                Using 6.0pt instead on input line 705.
+(relsize)                Using 6.0pt instead on input line 484.
 
 
 Package relsize Warning: Font size 5.55556pt is too small.
-(relsize)                Using 6.0pt instead on input line 706.
+(relsize)                Using 6.0pt instead on input line 485.
 
 
 Package relsize Warning: Font size 5.55556pt is too small.
-(relsize)                Using 6.0pt instead on input line 707.
+(relsize)                Using 6.0pt instead on input line 486.
 
 
-Underfull \hbox (badness 7397) in paragraph at lines 788--788
-[][]\TU/JetBrainsMono(0)/m/n/6 + measurementProgress: pyqtSignal \TU/JetBrainsM
-ono(0)/m/it/6 «class attribute» 
- []
+Package relsize Warning: Font size 5.55556pt is too small.
+(relsize)                Using 6.0pt instead on input line 487.
 
+File: 4_Implementación/IEC61672uml.pdf Graphic file (type pdf)
+<use 4_Implementación/IEC61672uml.pdf>
 
-Underfull \hbox (badness 7397) in paragraph at lines 788--788
-\TU/JetBrainsMono(0)/m/n/6 + calibrationProgress: pyqtSignal \TU/JetBrainsMono(
-0)/m/it/6 «class attribute» 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 788--788
-\TU/JetBrainsMono(0)/m/n/6 + realTimeValues: pyqtSignal \TU/JetBrainsMono(0)/m/
-it/6 «class attribute» 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 788--788
-\TU/JetBrainsMono(0)/m/n/6 + timerStarted: pyqtSignal \TU/JetBrainsMono(0)/m/it
-/6 «class attribute» 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 788--788
+Underfull \hbox (badness 1005) in paragraph at lines 557--557
 \TU/JetBrainsMono(0)/m/n/6 + loggingMsg: pyqtSignal \TU/JetBrainsMono(0)/m/it/6
  «class attribute» 
  []
 
 
-Underfull \hbox (badness 1968) in paragraph at lines 788--788
-\TU/JetBrainsMono(0)/m/n/6 # ldaModel: LinearDiscriminantAnalysis \TU/JetBrains
-Mono(0)/m/it/6 «class attribute» 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 788--788
-\TU/JetBrainsMono(0)/m/n/6 # kpcaModel: KernelPCA \TU/JetBrainsMono(0)/m/it/6 «
-class attribute» 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 788--788
-\TU/JetBrainsMono(0)/m/n/6 # gnbClassifier: GaussianNB \TU/JetBrainsMono(0)/m/i
-t/6 «class attribute» 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 788--788
-\TU/JetBrainsMono(0)/m/n/6 # weightingFactors: pd.DataFrame \TU/JetBrainsMono(0
-)/m/it/6 «class attribute» 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 788--788
-\TU/JetBrainsMono(0)/m/n/6 # acceptanceLimits: pd.DataFrame \TU/JetBrainsMono(0
-)/m/it/6 «class attribute» 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 788--788
-\TU/JetBrainsMono(0)/m/n/6 # AFG: pyVisa.GPIBInstrument \TU/JetBrainsMono(0)/m/
-it/6 «instance attribute» 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 788--788
-\TU/JetBrainsMono(0)/m/n/6 # DMM: pyVisa.GPIBInstrument \TU/JetBrainsMono(0)/m/
-it/6 «instance attribute» 
- []
-
-
-Underfull \hbox (badness 7397) in paragraph at lines 788--788
-\TU/JetBrainsMono(0)/m/n/6 # calibration_consecutive: str \TU/JetBrainsMono(0)/
-m/it/6 «instance attribute» 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 788--788
-\TU/JetBrainsMono(0)/m/n/6 # dut: SoundLevelMeter \TU/JetBrainsMono(0)/m/it/6 «
-instance attribute» 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 788--788
-\TU/JetBrainsMono(0)/m/n/6 # customer_info: dict \TU/JetBrainsMono(0)/m/it/6 «i
-nstance attribute» 
- []
-
-
-Underfull \hbox (badness 4660) in paragraph at lines 788--788
-\TU/JetBrainsMono(0)/m/n/6 # ambient_condition_values: dict \TU/JetBrainsMono(0
-)/m/it/6 «instance attribute» 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 788--788
-\TU/JetBrainsMono(0)/m/n/6 # result_box: tuple \TU/JetBrainsMono(0)/m/it/6 «ins
-tance attribute» 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 788--788
-\TU/JetBrainsMono(0)/m/n/6 # calibration_stage: int \TU/JetBrainsMono(0)/m/it/6
- «instance attribute» 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 788--788
-\TU/JetBrainsMono(0)/m/n/6 # calibration_state: int \TU/JetBrainsMono(0)/m/it/6
- «instance attribute» 
- []
-
-
-Underfull \hbox (badness 4660) in paragraph at lines 788--788
-\TU/JetBrainsMono(0)/m/n/6 # power_supply_results: np.array \TU/JetBrainsMono(0
-)/m/it/6 «instance attribute» 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 788--788
-\TU/JetBrainsMono(0)/m/n/6 + fweighting_results: dict \TU/JetBrainsMono(0)/m/it
-/6 «instance attribute» 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 788--788
-\TU/JetBrainsMono(0)/m/n/6 + current_frequency: int \TU/JetBrainsMono(0)/m/it/6
- «instance attribute» 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 788--788
-\TU/JetBrainsMono(0)/m/n/6 + freqtime_1kHz_results: dict \TU/JetBrainsMono(0)/m
-/it/6 «instance attribute» 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 788--788
-\TU/JetBrainsMono(0)/m/n/6 + ref_linearity_results: dict \TU/JetBrainsMono(0)/m
-/it/6 «instance attribute» 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 788--788
-[][]\TU/JetBrainsMono(0)/m/n/6 + train() ->None \TU/JetBrainsMono(0)/m/it/6 «in
-stance method» 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 788--788
-\TU/JetBrainsMono(0)/m/n/6 + run_main_sequence() ->None \TU/JetBrainsMono(0)/m/
-it/6 «instance method» 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 788--788
-\TU/JetBrainsMono(0)/m/n/6 + check_state() ->None \TU/JetBrainsMono(0)/m/it/6 «
-instance method» 
- []
-
-
-Underfull \hbox (badness 2080) in paragraph at lines 788--788
-\TU/JetBrainsMono(0)/m/n/6 + set_dut(dut: SoundLevelMeter) ->None \TU/JetBrains
-Mono(0)/m/it/6 «instance method» 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 788--788
-\TU/JetBrainsMono(0)/m/n/6 + detect_result() ->None \TU/JetBrainsMono(0)/m/it/6
- «instance method» 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 788--788
-\TU/JetBrainsMono(0)/m/n/6 + test_power_supply() ->float \TU/JetBrainsMono(0)/m
-/it/6 «instance method» 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 788--788
-\TU/JetBrainsMono(0)/m/n/6 + test_freqtime_weightings_1kHz(): 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 788--788
-\TU/JetBrainsMono(0)/m/n/6 int=30) ->None \TU/JetBrainsMono(0)/m/it/6 «instance
- method» 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 788--788
-\TU/JetBrainsMono(0)/m/n/6 + set_state(): int=30) ->None \TU/JetBrainsMono(0)/m
-/it/6 «instance method» 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 788--788
-\TU/JetBrainsMono(0)/m/n/6 + set_stage(stage: int) ->None \TU/JetBrainsMono(0)/
-m/it/6 «instance method» 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 788--788
-\TU/JetBrainsMono(0)/m/n/6 + report_ambient_conditions(temperature:float, 
- []
-
-
-Underfull \hbox (badness 1472) in paragraph at lines 788--788
-\TU/JetBrainsMono(0)/m/n/6 humidity:float, pressure: float) ->None \TU/JetBrain
-sMono(0)/m/it/6 «instance method» 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 788--788
-\TU/JetBrainsMono(0)/m/n/6 + read_screen() ->None \TU/JetBrainsMono(0)/m/it/6 «
-instance method» 
- []
-
-
-Underfull \hbox (badness 4859) in paragraph at lines 788--788
-\TU/JetBrainsMono(0)/m/n/6 + volt2level(v:float, ref_lev: tuple) ->float \TU/Je
-tBrainsMono(0)/m/it/6 «static 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 801--801
-[][]\TU/JetBrainsMono(0)/m/n/6 # info: dict \TU/JetBrainsMono(0)/m/it/6 «instan
-ce attribute» 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 801--801
-\TU/JetBrainsMono(0)/m/n/6 # cl: int \TU/JetBrainsMono(0)/m/it/6 «instance attr
-ibute» 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 801--801
-\TU/JetBrainsMono(0)/m/n/6 # preamplifier: dict \TU/JetBrainsMono(0)/m/it/6 «in
-stance attribute» 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 801--801
-\TU/JetBrainsMono(0)/m/n/6 # mic: dict \TU/JetBrainsMono(0)/m/it/6 «instance at
-tribute» 
- []
-
-
-Underfull \hbox (badness 4779) in paragraph at lines 801--801
-\TU/JetBrainsMono(0)/m/n/6 # reference_level: float \TU/JetBrainsMono(0)/m/it/6
- «instance attribute» 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 801--801
-[][]\TU/JetBrainsMono(0)/m/n/6 + set_power_supply_values(values: 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 801--801
-\TU/JetBrainsMono(0)/m/n/6 np.ndarray) ->None \TU/JetBrainsMono(0)/m/it/6 «inst
-ance method» 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 856--856
-[][]\TU/JetBrainsMono(0)/m/n/6 # TESTER: SLMPeriodicTester \TU/JetBrainsMono(0)
-/m/it/6 «instance attribute» 
- []
-
-
-Underfull \hbox (badness 7397) in paragraph at lines 856--856
-\TU/JetBrainsMono(0)/m/n/6 # gui: SonometersCalibrationUI \TU/JetBrainsMono(0)/
-m/it/6 «instance attribute» 
- []
-
-
-Underfull \hbox (badness 2698) in paragraph at lines 856--856
-\TU/JetBrainsMono(0)/m/n/6 + calibrationThread: PyQt5.QThread \TU/JetBrainsMono
-(0)/m/it/6 «instance attribute» 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 856--856
-\TU/JetBrainsMono(0)/m/n/6 + save_standards_state: bool \TU/JetBrainsMono(0)/m/
-it/6 «instance attribute» 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 856--856
-\TU/JetBrainsMono(0)/m/n/6 + save_DUT_info_sate: bool \TU/JetBrainsMono(0)/m/it
-/6 «instance attribute» 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 856--856
-\TU/JetBrainsMono(0)/m/n/6 + AFG_info: dict \TU/JetBrainsMono(0)/m/it/6 «instan
-ce attribute» 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 856--856
-\TU/JetBrainsMono(0)/m/n/6 + DecadeBox_info: dict \TU/JetBrainsMono(0)/m/it/6 «
-instance attribute» 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 856--856
-\TU/JetBrainsMono(0)/m/n/6 + DMM_info: dict \TU/JetBrainsMono(0)/m/it/6 «instan
-ce attribute» 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 856--856
-\TU/JetBrainsMono(0)/m/n/6 + self_test_passed: bool \TU/JetBrainsMono(0)/m/it/6
- «instance attribute» 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 856--856
-\TU/JetBrainsMono(0)/m/n/6 + instruction: QMessageBox \TU/JetBrainsMono(0)/m/it
-/6 «instance attribute» 
- []
-
-
-Underfull \hbox (badness 3590) in paragraph at lines 856--856
-\TU/JetBrainsMono(0)/m/n/6 + selfTesterWorker: PyQt5.QObject \TU/JetBrainsMono(
-0)/m/it/6 «instance attribute» 
- []
-
-
-Underfull \hbox (badness 3590) in paragraph at lines 856--856
-\TU/JetBrainsMono(0)/m/n/6 + selfTesterThread: PyQt5.QThread \TU/JetBrainsMono(
-0)/m/it/6 «instance attribute» 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 856--856
-\TU/JetBrainsMono(0)/m/n/6 + cameraWorker: PyQt5.QObject \TU/JetBrainsMono(0)/m
-/it/6 «instance attribute» 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 856--856
-\TU/JetBrainsMono(0)/m/n/6 + cameraThread: PyQt5.QThread \TU/JetBrainsMono(0)/m
-/it/6 «instance attribute» 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 856--856
-\TU/JetBrainsMono(0)/m/n/6 + streaming_running: bool \TU/JetBrainsMono(0)/m/it/
-6 «instance attribute» 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 856--856
-\TU/JetBrainsMono(0)/m/n/6 + x1, y1, x2, y2: int \TU/JetBrainsMono(0)/m/it/6 «i
-nstance attributes» 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 856--856
-\TU/JetBrainsMono(0)/m/n/6 + timer_started: bool \TU/JetBrainsMono(0)/m/it/6 «i
-nstance attribute» 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 856--856
-\TU/JetBrainsMono(0)/m/n/6 + frames: list \TU/JetBrainsMono(0)/m/it/6 «instance
- attribute» 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 856--856
-\TU/JetBrainsMono(0)/m/n/6 + frames_queue: Queue \TU/JetBrainsMono(0)/m/it/6 «i
-nstance attribute» 
- []
-
-
-Underfull \hbox (badness 3179) in paragraph at lines 856--856
-\TU/JetBrainsMono(0)/m/n/6 + imgProcessingThread: ImageProcessingThread \TU/Jet
-BrainsMono(0)/m/it/6 «instance 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 856--856
-[][]\TU/JetBrainsMono(0)/m/n/6 # connect_signals() ->None \TU/JetBrainsMono(0)/
-m/it/6 «instance method» 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 856--856
-\TU/JetBrainsMono(0)/m/n/6 + save_dut_info() ->None \TU/JetBrainsMono(0)/m/it/6
- «instance method» 
- []
-
-
-Underfull \hbox (badness 3758) in paragraph at lines 856--856
-\TU/JetBrainsMono(0)/m/n/6 + print_logging_msg(msg: str) ->None \TU/JetBrainsMo
-no(0)/m/it/6 «instance method» 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 856--856
-\TU/JetBrainsMono(0)/m/n/6 + save_standards_info() ->None \TU/JetBrainsMono(0)/
-m/it/6 «instance method» 
- []
-
-
-Underfull \hbox (badness 4353) in paragraph at lines 856--856
-\TU/JetBrainsMono(0)/m/n/6 + read_elec_ff_corrections() ->None \TU/JetBrainsMon
-o(0)/m/it/6 «instance method» 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 856--856
-\TU/JetBrainsMono(0)/m/n/6 + save_dut_info() ->None \TU/JetBrainsMono(0)/m/it/6
- «instance method» 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 856--856
-\TU/JetBrainsMono(0)/m/n/6 + search_standards() ->None \TU/JetBrainsMono(0)/m/i
-t/6 «instance method» 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 856--856
-\TU/JetBrainsMono(0)/m/n/6 + fill_standards_info() ->None \TU/JetBrainsMono(0)/
-m/it/6 «instance method» 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 856--856
-\TU/JetBrainsMono(0)/m/n/6 + self_test() ->None \TU/JetBrainsMono(0)/m/it/6 «in
-stance method» 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 856--856
-\TU/JetBrainsMono(0)/m/n/6 + streaming_control() ->None \TU/JetBrainsMono(0)/m/
-it/6 «instance method» 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 856--856
-\TU/JetBrainsMono(0)/m/n/6 + stream_frame() ->None \TU/JetBrainsMono(0)/m/it/6 
-«instance method» 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 856--856
-\TU/JetBrainsMono(0)/m/n/6 + capture_frames() ->None \TU/JetBrainsMono(0)/m/it/
-6 «instance method» 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 856--856
-\TU/JetBrainsMono(0)/m/n/6 + start() ->None \TU/JetBrainsMono(0)/m/it/6 «instan
-ce method» 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 856--856
-\TU/JetBrainsMono(0)/m/n/6 + pause() ->None \TU/JetBrainsMono(0)/m/it/6 «instan
-ce method» 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 856--856
-\TU/JetBrainsMono(0)/m/n/6 + run_sequence() ->None \TU/JetBrainsMono(0)/m/it/6 
-«instance method» 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 856--856
-\TU/JetBrainsMono(0)/m/n/6 + sequence_control() ->None \TU/JetBrainsMono(0)/m/i
-t/6 «instance method» 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 856--856
-\TU/JetBrainsMono(0)/m/n/6 + eval_answer(instruction: 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 856--856
-\TU/JetBrainsMono(0)/m/n/6 PyQt5.QMessageBox) ->None \TU/JetBrainsMono(0)/m/it/
-6 «instance method» 
- []
-
-
-Underfull \hbox (badness 4353) in paragraph at lines 856--856
-\TU/JetBrainsMono(0)/m/n/6 + show_power_supply_values() ->None \TU/JetBrainsMon
-o(0)/m/it/6 «instance method» 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 856--856
-\TU/JetBrainsMono(0)/m/n/6 + save_cal_ind_values() ->None \TU/JetBrainsMono(0)/
-m/it/6 «instance method» 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 856--856
-\TU/JetBrainsMono(0)/m/n/6 + save_ref_volt() ->None \TU/JetBrainsMono(0)/m/it/6
- «instance method» 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 868--868
-[][]\TU/JetBrainsMono(0)/m/n/6 + finished: pyqtSignal \TU/JetBrainsMono(0)/m/it
-/6 «class attribute» 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 868--868
-\TU/JetBrainsMono(0)/m/n/6 + progress: pyqtSignal \TU/JetBrainsMono(0)/m/it/6 «
-class attribute» 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 868--868
-\TU/JetBrainsMono(0)/m/n/6 # resources_manager: visa.ResourceManager 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 868--868
-\TU/JetBrainsMono(0)/m/it/6 «instance attribute » 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 868--868
-\TU/JetBrainsMono(0)/m/n/6 + DMM_model: str \TU/JetBrainsMono(0)/m/it/6 «instan
-ce attribute» 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 868--868
-\TU/JetBrainsMono(0)/m/n/6 + AA_model: str \TU/JetBrainsMono(0)/m/it/6 «instanc
-e attribute» 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 868--868
-\TU/JetBrainsMono(0)/m/n/6 + resources: tuple \TU/JetBrainsMono(0)/m/it/6 «inst
-ance attribute » 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 885--885
-[][]\TU/JetBrainsMono(0)/m/n/6 + finished: pyqtSignal \TU/JetBrainsMono(0)/m/it
-/6 «class attribute» 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 885--885
-\TU/JetBrainsMono(0)/m/n/6 + progress: pyqtSignal \TU/JetBrainsMono(0)/m/it/6 «
-class attribute» 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 885--885
-\TU/JetBrainsMono(0)/m/n/6 + loggingMsg: pyqtSignal \TU/JetBrainsMono(0)/m/it/6
- «class attribute» 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 885--885
-\TU/JetBrainsMono(0)/m/n/6 # DMM: visa.Resource \TU/JetBrainsMono(0)/m/it/6 «in
-stance attribute» 
- []
-
-
-Overfull \hbox (39.69717pt too wide) in paragraph at lines 890--891
- [][] 
- []
-
-
-LaTeX Warning: Float too large for page by 2.68645pt on input line 892.
-
-
-Underfull \hbox (badness 1005) in paragraph at lines 928--928
-\TU/JetBrainsMono(0)/m/n/6 + loggingMsg: pyqtSignal \TU/JetBrainsMono(0)/m/it/6
- «class attribute» 
- []
-
-
-Underfull \hbox (badness 4886) in paragraph at lines 928--928
+Underfull \hbox (badness 4886) in paragraph at lines 557--557
 \TU/JetBrainsMono(0)/m/n/6 + run_flag: bool \TU/JetBrainsMono(0)/m/it/6 «instan
 ce attribute» 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 928--928
+Underfull \hbox (badness 10000) in paragraph at lines 557--557
 \TU/JetBrainsMono(0)/m/n/6 + fps: int \TU/JetBrainsMono(0)/m/it/6 «instance att
 ribute» 
  []
 
 
-Underfull \hbox (badness 1005) in paragraph at lines 938--938
+Underfull \hbox (badness 1005) in paragraph at lines 567--567
 [][]\TU/JetBrainsMono(0)/m/n/6 + videoSaved: pyqtSignal \TU/JetBrainsMono(0)/m/
 it/6 «class attribute» 
  []
 
 
-Underfull \hbox (badness 1005) in paragraph at lines 938--938
+Underfull \hbox (badness 1005) in paragraph at lines 567--567
 \TU/JetBrainsMono(0)/m/n/6 + loggingMsg: pyqtSignal \TU/JetBrainsMono(0)/m/it/6
  «class attribute» 
  []
 
 
-Underfull \hbox (badness 7722) in paragraph at lines 938--938
+Underfull \hbox (badness 7722) in paragraph at lines 567--567
 \TU/JetBrainsMono(0)/m/n/6 + frames: list \TU/JetBrainsMono(0)/m/it/6 «instance
  attribute» 
  []
 
 
-Underfull \hbox (badness 1810) in paragraph at lines 938--938
+Underfull \hbox (badness 1810) in paragraph at lines 567--567
 \TU/JetBrainsMono(0)/m/n/6 + video_writer: cv.VideoWriter \TU/JetBrainsMono(0)/
 m/it/6 «instance 
  []
 
 
-Underfull \hbox (badness 1005) in paragraph at lines 955--955
+Underfull \hbox (badness 1005) in paragraph at lines 584--584
 \TU/JetBrainsMono(0)/m/n/6 + loggingMsg: pyqtSignal \TU/JetBrainsMono(0)/m/it/6
  «class attribute» 
  []
 
 
-Underfull \hbox (badness 1005) in paragraph at lines 955--955
+Underfull \hbox (badness 1005) in paragraph at lines 584--584
 \TU/JetBrainsMono(0)/m/n/6 # frames_queue: Queue \TU/JetBrainsMono(0)/m/it/6 «i
 nstance attribute» 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 955--955
+Underfull \hbox (badness 10000) in paragraph at lines 584--584
 \TU/JetBrainsMono(0)/m/n/6 # stage: int \TU/JetBrainsMono(0)/m/it/6 «instance a
 ttribute» 
  []
 
 
-Underfull \hbox (badness 4886) in paragraph at lines 955--955
+Underfull \hbox (badness 4886) in paragraph at lines 584--584
 \TU/JetBrainsMono(0)/m/n/6 # current_f: int \TU/JetBrainsMono(0)/m/it/6 «instan
 ce attribute» 
  []
 
 
-Underfull \hbox (badness 2096) in paragraph at lines 955--955
+Underfull \hbox (badness 2096) in paragraph at lines 584--584
 \TU/JetBrainsMono(0)/m/n/6 # fweightings: list \TU/JetBrainsMono(0)/m/it/6 «ins
 tance attribute» 
  []
@@ -3524,72 +2493,61 @@ tance attribute»
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-LaTeX Info: Redefining \. on input line 967.
-LaTeX Info: Redefining \% on input line 967.
-[56]
-LaTeX Info: Redefining \. on input line 967.
-LaTeX Info: Redefining \% on input line 967.
- [57]
+LaTeX Info: Redefining \. on input line 596.
+LaTeX Info: Redefining \% on input line 596.
+[55]
+LaTeX Info: Redefining \. on input line 596.
+LaTeX Info: Redefining \% on input line 596.
+ [56]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-LaTeX Info: Redefining \. on input line 972.
-LaTeX Info: Redefining \% on input line 972.
- [58]
+LaTeX Info: Redefining \. on input line 601.
+LaTeX Info: Redefining \% on input line 601.
+ [57]
 File: 4_implementación/Figs/slm_gui_standards.png Graphic file (type bmp)
 <4_implementación/Figs/slm_gui_standards.png>
 File: 4_Implementación/Figs/searchInstruments.png Graphic file (type bmp)
 <4_Implementación/Figs/searchInstruments.png>
 File: 4_Implementación/Figs/test.png Graphic file (type bmp)
 <4_Implementación/Figs/test.png>
-LaTeX Info: Redefining \. on input line 994.
-LaTeX Info: Redefining \% on input line 994.
+LaTeX Info: Redefining \. on input line 623.
+LaTeX Info: Redefining \% on input line 623.
 
-[59]
+[58]
 File: 4_implementación/Figs/slm_gui_dut.png Graphic file (type bmp)
 <4_implementación/Figs/slm_gui_dut.png>
 File: 4_Implementación/Figs/play.png Graphic file (type bmp)
 <4_Implementación/Figs/play.png>
-LaTeX Info: Redefining \. on input line 1012.
-LaTeX Info: Redefining \% on input line 1012.
- [60]
+LaTeX Info: Redefining \. on input line 641.
+LaTeX Info: Redefining \% on input line 641.
+ [59]
 File: 4_implementación/Figs/slm_gui_results1.png Graphic file (type bmp)
 <4_implementación/Figs/slm_gui_results1.png>
 File: 4_implementación/Figs/slm_gui_results2.png Graphic file (type bmp)
 <4_implementación/Figs/slm_gui_results2.png>
-LaTeX Info: Redefining \. on input line 1031.
-LaTeX Info: Redefining \% on input line 1031.
- [61
+LaTeX Info: Redefining \. on input line 660.
+LaTeX Info: Redefining \% on input line 660.
+ [60
 
 ]
 File: 4_implementación/Figs/slm_gui_results3.png Graphic file (type bmp)
 <4_implementación/Figs/slm_gui_results3.png>
-LaTeX Info: Redefining \. on input line 1047.
-LaTeX Info: Redefining \% on input line 1047.
- [62
+LaTeX Info: Redefining \. on input line 676.
+LaTeX Info: Redefining \% on input line 676.
+ [61
 
 ])
 \openout2 = `5_MC_incertidumbre/MC_incertidumbre.aux'.
 
  (5_MC_incertidumbre/MC_incertidumbre.tex
 chapter 5.
-[63
+[62
 
 
 
 
 
-]
-LaTeX Info: Redefining \. on input line 53.
-LaTeX Info: Redefining \% on input line 53.
- [64]
-
-Package relsize Warning: Font size 5.55556pt is too small.
-(relsize)                Using 6.0pt instead on input line 64.
-
-
-Package relsize Warning: Font size 5.55556pt is too small.
-(relsize)                Using 6.0pt instead on input line 65.
-
+] [63]
 
 Package relsize Warning: Font size 5.55556pt is too small.
 (relsize)                Using 6.0pt instead on input line 66.
@@ -3610,14 +2568,24 @@ Package relsize Warning: Font size 5.55556pt is too small.
 Package relsize Warning: Font size 5.55556pt is too small.
 (relsize)                Using 6.0pt instead on input line 70.
 
-[65]
-Package hyperref Info: bookmark level for unknown listing defaults to 0 on inpu
-t line 110.
-\openout4 = `20220709_Proyecto_de_grado.pyg'.
 
- (_minted-20220709_Proyecto_de_grado/stata.pygstyle)
-(_minted-20220709_Proyecto_de_grado/E04429856619BB14A14B655A3A7B061F662A6B86369
-74CFA42F4B567A1C3C709.pygtex
+Package relsize Warning: Font size 5.55556pt is too small.
+(relsize)                Using 6.0pt instead on input line 71.
+
+
+Package relsize Warning: Font size 5.55556pt is too small.
+(relsize)                Using 6.0pt instead on input line 72.
+
+LaTeX Info: Redefining \. on input line 91.
+LaTeX Info: Redefining \% on input line 91.
+[64]
+Package hyperref Info: bookmark level for unknown listing defaults to 0 on inpu
+t line 115.
+\openout4 = `20220720_Proyecto_de_grado.pyg'.
+
+ (_minted-20220720_Proyecto_de_grado/stata.pygstyle)
+(_minted-20220720_Proyecto_de_grado/E04429856619BB14A14B655A3A7B061F3D3B72BC295
+E2614A216DC4370C528CB.pygtex
 
 Package fontspec Info: Font family 'AncizarSans(1)' created for font 'Ancizar
 (fontspec)             Sans' with options [Ligatures=TeX,Ligatures =
@@ -3658,11 +2626,8 @@ xt;"
 (fontspec)             Italic/OT:script=latn;language=dflt;+onum;+smcp;mapping=
 tex-text;"
 
-)
-LaTeX Info: Redefining \. on input line 136.
-LaTeX Info: Redefining \% on input line 136.
- [66]
-Overfull \hbox (1.49878pt too wide) in paragraph at lines 145--148
+) [65]
+Overfull \hbox (1.49878pt too wide) in paragraph at lines 151--154
 \TU/AncizarSerif(0)/m/n/12 probabilidades de transición del estado $\OML/cmm/m/
 it/12 i$ \TU/AncizarSerif(0)/m/n/12 al $\OML/cmm/m/it/12 j$ \TU/AncizarSerif(0)
 /m/n/12 en $\OML/cmm/m/it/12 n \OMS/cmsy/m/n/12 ^^U \OT1/cmr/m/n/12 1$ \TU/Anci
@@ -3673,66 +2638,193 @@ zarSerif(0)/m/n/12 pasos, es decir $\OML/cmm/m/it/12 p[] \OT1/cmr/m/n/12 = \OML
 
 Underfull \vbox (badness 6608) has occurred while \output is active []
 
-LaTeX Info: Redefining \. on input line 167.
-LaTeX Info: Redefining \% on input line 167.
- [67]
-\openout5 = `20220709_Proyecto_de_grado.pyg'.
+LaTeX Info: Redefining \. on input line 173.
+LaTeX Info: Redefining \% on input line 173.
+ [66]
+\openout5 = `20220720_Proyecto_de_grado.pyg'.
 
 
-(_minted-20220709_Proyecto_de_grado/CCD86483726B52B516B0F43C56BFAEE6662A6B86369
-74CFA42F4B567A1C3C709.pygtex)
-LaTeX Info: Redefining \. on input line 206.
-LaTeX Info: Redefining \% on input line 206.
- [68]
-\openout4 = `20220709_Proyecto_de_grado.pyg'.
+(_minted-20220720_Proyecto_de_grado/CCD86483726B52B516B0F43C56BFAEE63D3B72BC295
+E2614A216DC4370C528CB.pygtex) [67]
+\openout4 = `20220720_Proyecto_de_grado.pyg'.
 
 
-(_minted-20220709_Proyecto_de_grado/743EE1A6AF1CAA19B69E71994F800123662A6B86369
-74CFA42F4B567A1C3C709.pygtex)
-\openout4 = `20220709_Proyecto_de_grado.pyg'.
+(_minted-20220720_Proyecto_de_grado/743EE1A6AF1CAA19B69E71994F8001233D3B72BC295
+E2614A216DC4370C528CB.pygtex)
+\openout4 = `20220720_Proyecto_de_grado.pyg'.
 
 
-(_minted-20220709_Proyecto_de_grado/D6183C6D38676C12492EE63F37583CF6662A6B86369
-74CFA42F4B567A1C3C709.pygtex)
+(_minted-20220720_Proyecto_de_grado/D6183C6D38676C12492EE63F37583CF63D3B72BC295
+E2614A216DC4370C528CB.pygtex)
+! Argument of \language@active@arg> has an extra }.
+<inserted text> 
+                \par 
+l.270 ...ten >=1pt,node distance=6cm,on grid,auto]
+                                                  
+I've run across a `}' that doesn't seem to match anything.
+For example, `\def\a#1{...}' and `\a}' would produce
+this error. If you simply proceed now, the `\par' that
+I've just inserted will cause me to report a runaway
+argument that might be the root of the problem. But if
+your `}' was spurious, just type `2' and it will go away.
+
+Runaway argument?
+! Paragraph ended before \language@active@arg> was complete.
+<to be read again> 
+                   \par 
+l.270 ...ten >=1pt,node distance=6cm,on grid,auto]
+                                                  
+I suspect you've forgotten a `}', causing me to apply this
+control sequence to too much text. How can we recover?
+My plan is to forget the whole thing and hope for the best.
+
+Runaway argument?
+shorten 
+! Paragraph ended before \pgfkeys@addpath was complete.
+<to be read again> 
+                   \par 
+l.270 ...ten >=1pt,node distance=6cm,on grid,auto]
+                                                  
+I suspect you've forgotten a `}', causing me to apply this
+control sequence to too much text. How can we recover?
+My plan is to forget the whole thing and hope for the best.
+
+! Missing \endcsname inserted.
+<to be read again> 
+                   \scan_stop: 
+l.270 ...ten >=1pt,node distance=6cm,on grid,auto]
+                                                  
+The control sequence marked <to be read again> should
+not appear between \csname and \endcsname.
+
+! Missing \endcsname inserted.
+<to be read again> 
+                   \scan_stop: 
+l.270 ...ten >=1pt,node distance=6cm,on grid,auto]
+                                                  
+The control sequence marked <to be read again> should
+not appear between \csname and \endcsname.
+
+Runaway argument?
+shorten 
+! Paragraph ended before \pgfkeys@splitter was complete.
+<to be read again> 
+                   \par 
+l.270 ...ten >=1pt,node distance=6cm,on grid,auto]
+                                                  
+I suspect you've forgotten a `}', causing me to apply this
+control sequence to too much text. How can we recover?
+My plan is to forget the whole thing and hope for the best.
+
+Missing character: There is no / in font nullfont!
+Missing character: There is no / in font nullfont!
+! Argument of \language@active@arg> has an extra }.
+<inserted text> 
+                \par 
+l.275         \draw[->, stealth-]
+                                 
+I've run across a `}' that doesn't seem to match anything.
+For example, `\def\a#1{...}' and `\a}' would produce
+this error. If you simply proceed now, the `\par' that
+I've just inserted will cause me to report a runaway
+argument that might be the root of the problem. But if
+your `}' was spurious, just type `2' and it will go away.
+
+Runaway argument?
+! Paragraph ended before \language@active@arg> was complete.
+<to be read again> 
+                   \par 
+l.275         \draw[->, stealth-]
+                                 
+I suspect you've forgotten a `}', causing me to apply this
+control sequence to too much text. How can we recover?
+My plan is to forget the whole thing and hope for the best.
+
+Runaway argument?
+-
+! Paragraph ended before \pgfkeys@addpath was complete.
+<to be read again> 
+                   \par 
+l.275         \draw[->, stealth-]
+                                 
+I suspect you've forgotten a `}', causing me to apply this
+control sequence to too much text. How can we recover?
+My plan is to forget the whole thing and hope for the best.
+
+! Missing \endcsname inserted.
+<to be read again> 
+                   \scan_stop: 
+l.275         \draw[->, stealth-]
+                                 
+The control sequence marked <to be read again> should
+not appear between \csname and \endcsname.
+
+! Missing \endcsname inserted.
+<to be read again> 
+                   \scan_stop: 
+l.275         \draw[->, stealth-]
+                                 
+The control sequence marked <to be read again> should
+not appear between \csname and \endcsname.
+
+! Missing \endcsname inserted.
+<to be read again> 
+                   \scan_stop: 
+l.275         \draw[->, stealth-]
+                                 
+The control sequence marked <to be read again> should
+not appear between \csname and \endcsname.
+
+Runaway argument?
+-
+! Paragraph ended before \pgfkeys@splitter was complete.
+<to be read again> 
+                   \par 
+l.275         \draw[->, stealth-]
+                                 
+I suspect you've forgotten a `}', causing me to apply this
+control sequence to too much text. How can we recover?
+My plan is to forget the whole thing and hope for the best.
+
+Missing character: There is no / in font nullfont!
+Missing character: There is no / in font nullfont!
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-LaTeX Info: Redefining \. on input line 289.
-LaTeX Info: Redefining \% on input line 289.
-[69]
+LaTeX Info: Redefining \. on input line 298.
+LaTeX Info: Redefining \% on input line 298.
+[68]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-LaTeX Info: Redefining \. on input line 312.
-LaTeX Info: Redefining \% on input line 312.
+ [69]
+\openout5 = `20220720_Proyecto_de_grado.pyg'.
+
+
+(_minted-20220720_Proyecto_de_grado/882CD05BF9CC6F10F864F35A805221A23D3B72BC295
+E2614A216DC4370C528CB.pygtex))
+LaTeX Info: Redefining \. on input line 187.
+LaTeX Info: Redefining \% on input line 187.
  [70]
-\openout5 = `20220709_Proyecto_de_grado.pyg'.
-
-
-(_minted-20220709_Proyecto_de_grado/882CD05BF9CC6F10F864F35A805221A2662A6B86369
-74CFA42F4B567A1C3C709.pygtex))
-LaTeX Info: Redefining \. on input line 185.
-LaTeX Info: Redefining \% on input line 185.
- [71]
 \openout2 = `6_Conclusiones/Conclusiones.aux'.
 
  (6_Conclusiones/Conclusiones.tex
 chapter 6.
 
-Underfull \hbox (badness 10000) in paragraph at lines 7--8
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
- []
-
-)
-Underfull \hbox (badness 10000) in paragraph at lines 10--186
-
- []
-
-[72
+ [71
 
 
 
 
-]
+])
+LaTeX Info: Redefining \. on input line 188.
+LaTeX Info: Redefining \% on input line 188.
+
+[72]
+LaTeX Info: Redefining \. on input line 188.
+LaTeX Info: Redefining \% on input line 188.
+ [73]
 \openout2 = `Anexos/Anexos.aux'.
 
  (Anexos/Anexos.tex
@@ -3752,31 +2844,28 @@ Class scrbook Warning: You are using `\begin{appendix}...\end{appendix}'.
 
 chapter A.
 
-(_minted-20220709_Proyecto_de_grado/376ABBC771219BDBF0AEC6849D65ADC091908277DFE
-68C80E5883613E71FEF2F.pygtex)
+(_minted-20220720_Proyecto_de_grado/376ABBC771219BDBF0AEC6849D65ADC0516F5ABB7B7
+9D9927D1D9BD6DC8C912C.pygtex)
 Underfull \vbox (badness 2027) has occurred while \output is active []
 
- [73
+ [74
 
 
 
 
 ]
-(_minted-20220709_Proyecto_de_grado/335E7376BE654661F46074EA590245DAD56B45B6436
-0863B9FC2109B5226659E.pygtex)
-\openout4 = `20220709_Proyecto_de_grado.pyg'.
+(_minted-20220720_Proyecto_de_grado/335E7376BE654661F46074EA590245DA8DFE2129F6F
+E017B875A989AC5F1284E.pygtex)
+\openout4 = `20220720_Proyecto_de_grado.pyg'.
 
 
-(_minted-20220709_Proyecto_de_grado/F69EAD47DE9411DA23F381B820123110662A6B86369
-74CFA42F4B567A1C3C709.pygtex)
-\openout4 = `20220709_Proyecto_de_grado.pyg'.
+(_minted-20220720_Proyecto_de_grado/F69EAD47DE9411DA23F381B8201231103D3B72BC295
+E2614A216DC4370C528CB.pygtex)
+\openout4 = `20220720_Proyecto_de_grado.pyg'.
 
 
-(_minted-20220709_Proyecto_de_grado/FD8E064D1B03A71B006480C4AE4B034B662A6B86369
-74CFA42F4B567A1C3C709.pygtex))
-LaTeX Info: Redefining \. on input line 187.
-LaTeX Info: Redefining \% on input line 187.
- [74] (20220709_Proyecto_de_grado.bbl
+(_minted-20220720_Proyecto_de_grado/FD8E064D1B03A71B006480C4AE4B034B3D3B72BC295
+E2614A216DC4370C528CB.pygtex)) [75] (20220720_Proyecto_de_grado.bbl
 ! Misplaced alignment tab character &.
 l.11 {Br{\"{u}}el &
                     Kj{\ae}r} (2000).
@@ -3787,7 +2876,7 @@ up above has ended a previous alignment prematurely,
 you're probably due for more error messages, and you
 might try typing `S' now just to see what is salvageable.
 
-[75
+[76
 
 
 
@@ -3805,9 +2894,9 @@ ith Python.  [][]$[][][][][] [] [] [] [][][][][][] []
  []
 
 )
-LaTeX Info: Redefining \. on input line 192.
-LaTeX Info: Redefining \% on input line 192.
- [76] (20220709_Proyecto_de_grado.aux (0_Portada/Portada.aux)
+LaTeX Info: Redefining \. on input line 194.
+LaTeX Info: Redefining \% on input line 194.
+ [77] (20220720_Proyecto_de_grado.aux (0_Portada/Portada.aux)
 LaTeX Info: Redefining \. on input line 25.
 LaTeX Info: Redefining \% on input line 25.
 
@@ -3815,19 +2904,19 @@ LaTeX Info: Redefining \% on input line 25.
 (3_Reconocimiento/Reconocimiento.aux) (4_Implementación/Implementación.aux)
 (5_MC_incertidumbre/MC_incertidumbre.aux) (6_Conclusiones/Conclusiones.aux)
 (Anexos/Anexos.aux))
-Package rerunfilecheck Info: File `20220709_Proyecto_de_grado.out' has not chan
+Package rerunfilecheck Info: File `20220720_Proyecto_de_grado.out' has not chan
 ged.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
-runsystem(del 20220709_Proyecto_de_grado.pyg)...executed.
+runsystem(del 20220720_Proyecto_de_grado.pyg)...executed.
 
  ) 
 Here is how much of TeX's memory you used:
- 50561 strings out of 410670
- 1106886 string characters out of 2816709
- 2217273 words of memory out of 3000000
- 70694 multiletter control sequences out of 15000+600000
- 487802 words of font info for 148 fonts, out of 8000000 for 9000
+ 49346 strings out of 410654
+ 1087619 string characters out of 2816299
+ 2006667 words of memory out of 3000000
+ 69492 multiletter control sequences out of 15000+600000
+ 487794 words of font info for 147 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 108i,21n,109p,10606b,2010s stack positions out of 10000i,1000n,20000p,200000b,80000s
+ 108i,21n,109p,10606b,2011s stack positions out of 10000i,1000n,20000p,200000b,80000s
 
-Output written on 20220709_Proyecto_de_grado.pdf (92 pages).
+Output written on 20220720_Proyecto_de_grado.pdf (95 pages).

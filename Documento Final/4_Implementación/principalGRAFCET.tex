@@ -1,0 +1,179 @@
+%! Author = Usuario
+%! Date = 18/07/2022
+
+% Preamble
+\documentclass[12pt,spanish,fleqn,openany,letterpaper,pagesize,hidelinks]{scrbook}
+
+% Packages
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}  % Escribir con acentos sin necesidad de comandos \'{}
+\usepackage{setspace}  % Paquete para el ajuste de espacio entre líneas
+\usepackage{fancyhdr}  % Paquete para el ajuste de formato de página
+\usepackage{epsfig}
+\usepackage{epic}
+\usepackage{eepic}
+\usepackage{amsmath}  % Paquete para diversas herramientas matemáticas
+\usepackage{amssymb}  % Paquete para rotar tablas, figuras, etc.
+\usepackage{mathtools}  % Paquete para el símbolo :=
+\usepackage{kbordermatrix}  % Paquete para matrices con índices de filas y columnas
+\usepackage{upgreek}  % Paquete para letras griegas en roman upright
+\usepackage{threeparttable}
+\usepackage{amscd}
+\usepackage{here}
+\usepackage{nicefrac}  % Paquete para fracciones en diagonal
+\usepackage[binary-units=true,angle-mode=decimal]{siunitx}  % Paquete para unidades en SI
+\sisetup{output-decimal-marker={,}}  % Establece la coma para decimales
+\usepackage{tikz}
+\usepackage{flowchart}  % Paquete con formas predefinidas de diagramas de flujo
+\usetikzlibrary{arrows, arrows.meta}
+\usetikzlibrary{automata}  % Paquete para dibujar autómatas
+\usetikzlibrary{positioning}  % Paquete con herramientas para facilitar la ubicación de nodos
+\usetikzlibrary{math}  % Paquete para definir variables
+\usepackage{grafcet}  % Paquete para dibujar gráficos de etapas y transiciones
+\usepackage[simplified]{pgf-umlcd}  % Paquete para dibujar diagramas UML
+\usepackage[algochapter,linesnumbered,vlined,ruled,commentsnumbered]{algorithm2e}  % Paquete para escribir pseudocódigo
+\usepackage{graphicx}  % Paquete para poder usar gráficos
+\usepackage{tabularx}  % Paquete para poder usar tablas
+\usepackage{longtable}
+\usepackage{xcolor}  % Paquete para definir colores
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{listings}  % Paquete para entornos tipo listings
+\usepackage[chapter]{minted}  % Paquete para códigos con formato
+\usepackage{lscape}
+\usepackage{lipsum}  % Paquete para simular párrafos de textos
+% Paquete para habilitar hipervínculos habilitando el cambio de línea
+\PassOptionsToPackage{hyphens}{url}\usepackage[colorlinks=true,linkcolor=blue,urlcolor=gray,citecolor=blue]{hyperref}
+\usepackage[all]{hypcap}  % Paquete para ajustar las referencias a floats por encima de estos
+\usepackage{natbib}  % Paquete mejorado para bibliografía
+\usepackage{mathspec} % Importa el paquete para el uso de fuentes externas
+\usepackage{fancyvrb}
+\usepackage{rotating}
+
+% Establece la fuente Ancizar Serif como la fuente principal
+\setmainfont[Ligatures = TeX, UprightFont = {* Regular}, BoldFont = {* Bold},
+    ItalicFont = {* Italic}, BoldItalicFont = {* Bold Italic}]{Ancizar Serif}
+% Establece la fuente Ancizar Sans como la fuente Sans
+\setsansfont[Ligatures = TeX, UprightFont = {* Regular}, BoldFont = {* Bold},
+    ItalicFont = {* Italic}, BoldItalicFont = {* Bold Italic}]{Ancizar Sans}
+% Establece l afuente JetBrains Mono como la fuente monoespaciada
+\setmonofont[Ligatures = TeX, UprightFont = {* Regular}, BoldFont = {* Bold},
+    ItalicFont = {* Italic}, BoldItalicFont = {* Bold Italic}]{JetBrains Mono}
+
+% ---------- CONFIGURACIÓN DE PÁGINA ----------
+\pagestyle{fancyplain}
+\addtolength{\headwidth}{\marginparwidth}
+\textheight22.5cm \topmargin0cm \textwidth16.5cm
+\oddsidemargin0.5cm \evensidemargin-0.5cm
+
+\fancyfoot{}
+
+\unitlength1mm  % Define la unidad LE para Figuras
+\mathindent1cm  % Define la distancia de las formulas al texto,  fleqn las descentra
+\marginparwidth0cm
+\parindent0cm  % Define la distancia de la primera linea de un parrafo a la margen
+
+% Creación de formas para dibujo
+\tikzstyle{print}=[trapezium, draw, text centered, trapezium left angle=60, trapezium right angle=120, minimum
+height=2em]  % Trapezoide para el diagrama de flujo
+\tikzstyle{conditional}=[diamond, draw, text centered, aspect=3]  % Rombo para el bloque de decisión.
+\tikzstyle{arrow} = [thick,->,>=stealth]
+
+\newcommand{\vect}[1]{\mathrm{\mathbf{#1}}}  % Abreviación de comando para notación de vectores y matrices
+\newcommand{\defeq}{\vcentcolon=}  % Declaración de comando para el símbolo :=
+
+% Document
+\begin{document}
+\begin{figure}[!hp]
+    \caption{GRAFCET de la rutina principal de la calibración periódica de calibradores acústicos.}
+    \label{fig:GRAFCET_principal}
+    \begin{subfigure}[t]{0.48\textwidth}
+        \centering
+        \begin{tikzpicture}[font=\scriptsize]
+            \EtapeInitTransition[0,0]{0}{}{\tiny \texttt{Start}}
+            \MacroEtape[VT0]{M1}
+            \node [right=0.7 of XM1, align=center]{\textit{``Medición preeliminar de} \\ \textit{sensibilidad del
+            micrófono''}};
+            \TransitionRecept[VXM1]{1}{\tiny \texttt{XM1}}
+            \MacroEtape[VT1]{M2}
+            \node [right=0.7 of XM2, align=center]{\textit{``Medición de ruido} \\ \textit{de fondo a 0°''}};
+            \TransitionRecept[VXM2]{2}{\tiny \texttt{XM2}}
+            \MacroEtape[VT2]{M3}
+            \node[right=0.7 of XM3, align=center]{\textit{``Medición de} \\ \textit{magnitudes a 0°''}};
+            \TransitionRecept[VXM3]{4}{\tiny \texttt{XM3}}
+            \EtapeTransition{4}{\tiny $\texttt{RefCalPower} \defeq 0$}
+            {\tiny $\overline{\texttt{RefCalPower}} \cdot \overline{\texttt{CoupledRefCal}} \cdot \texttt{Ok}$}
+            \ActionActiv{X4}
+            \Action{X4}{\tiny $\texttt{CoupledRefCal} \defeq 0$}
+            \ActionEvenement{X4}{\tiny $\downarrow\texttt{RefCalPower}$}
+            \node(linkXM5)[below=0.1 of T4]{M5};
+            \draw[-Straight Barb](T4) -- (linkXM5);
+            \MacroEtape[9,0]{M5}
+            \node [right=0.7 of XM5, align=center]{``\textit{Medición de ruido} \\ \textit{de fondo a 120°''}};
+            \TransitionRecept[VXM5]{5}{\tiny \texttt{XM5}}
+            \MacroEtape[VT5]{M6}
+            \node[right=0.7 of XM6, align=center]{\textit{``Medición de}\\\textit{magnitudes a 120°''}};
+            \TransitionRecept[VXM6]{6}{\tiny \texttt{XM6}}
+            \EtapeTransition{7}{\tiny \texttt{RefCalPower} $\defeq 0$}
+            {\tiny $\overline{\texttt{RefCalPower}} \cdot \overline{\texttt{CoupledRefCal}} \cdot \texttt{Ok}$}
+            \ActionActiv{X7}
+            \Action{X7}{\tiny $\texttt{CoupledRefCal} \defeq 0$}
+            \ActionEvenement{X7}{\tiny $\downarrow\texttt{RefCalPower}$}
+            \MacroEtape[VT7]{M8}
+            \node[right=0.7 of XM8, align=center]{\textit{``Medición de ruido}\\\textit{de fondo a 240°''}};
+            \TransitionRecept[VXM8]{8}{\tiny \texttt{XM8}}
+            \MacroEtape[VT8]{M9}
+            \node[right=0.7 of XM9, align=center]{\textit{``Medición de}\\\textit{magnitudes a 240°°''}};
+            \TransitionRecept[VXM9]{9}{\tiny \texttt{XM9}}
+            \node(linkX10)[below=0.1 of T9]{10};
+            \draw[-Straight Barb](T9) -- (linkX10);
+        \end{tikzpicture}
+    \end{subfigure}
+    \\[-0.7cm]
+    \begin{subfigure}[t]{0.48\textwidth}
+        \centering
+        \begin{tikzpicture}[font=\scriptsize]
+            \EtapeTransition[0,0]{10}{\tiny $\texttt{RefCalPower} \defeq 0$}
+            {\tiny $\overline{\texttt{RefCalPower}} \cdot \overline{\texttt{CoupledRefCal}} \cdot \texttt{Ok}$}
+            \ActionActiv{X10}
+            \Action{X10}{\tiny $\texttt{CoupledRefCal} \defeq 0$}
+            \ActionEvenement{X10}{\tiny $\downarrow\texttt{RefCalPower}$}
+            \MacroEtape[VT10]{M11}
+            \node[right=0.7 of XM11, align=center]{\textit{``Medición de ruido}\\\textit{de fondo a 0°''}};
+            \TransitionRecept[VXM11]{11}{\tiny \texttt{XM11}}
+            \MacroEtape[VT11]{M12}
+            \node[right=0.7 of XM12, align=center]{\textit{``Medición de}\\\textit{magnitudes a 0°''}};
+            \TransitionRecept[VXM12]{11}{\tiny \texttt{XM12}}
+            \EtapeTransition{13}{\tiny \texttt{CusCalPower} $\defeq 0$}
+            {\tiny $\overline{\texttt{CusCalPower}} \cdot \overline{\texttt{CoupledCusCal}} \cdot \texttt{Ok}$}
+            \ActionActiv{X13}
+            \Action{X13}{\tiny $\texttt{CoupledCusCal} \defeq 0$}
+            \ActionEvenement{X13}{\tiny $\downarrow\texttt{CusCalPower}$}
+            \MacroEtape[VT13]{M14}
+            \node[right=0.7 of XM14, align=center]{\textit{``Medición de ruido}\\\textit{de fondo a 120°''}};
+            \TransitionRecept[VXM14]{14}{\tiny \texttt{XM14}}
+            \node(linkXM15)[below=0.1 of T14]{M15};
+            \draw[-Straight Barb](T14) -- (linkXM15);
+            \MacroEtape[9,0]{M15}
+            \node[right=0.7 of XM15, align=center]{\textit{``Medición de}\\\textit{de magnitudes a 120°''}};
+            \TransitionRecept[VXM15]{15}{\tiny \texttt{XM15}}
+            \EtapeTransition{16}{\tiny $\texttt{CusCalPower} \defeq 0$}
+            {\tiny $\overline{\texttt{CusCalPower}} \cdot \overline{\texttt{CoupledCusCal}} \cdot \texttt{Ok}$}
+            \ActionActiv{X16}
+            \Action{X16}{\tiny $\texttt{CoupledCusCal} \defeq 0$}
+            \ActionEvenement{X16}{\tiny $\downarrow\texttt{CusCalPower}$}
+            \MacroEtape[VT16]{M17}
+            \node[right=0.7 of XM17, align=center]{\textit{``Medición de ruido}\\\textit{de fondo a 240°''}};
+            \TransitionRecept[VXM17]{17}{\tiny \texttt{XM17}}
+            \MacroEtape[VT17]{M18}
+            \node[right=0.7 of XM18, align=center]{\textit{``Medición de}\\\textit{de magnitudes a 240°''}};
+            \TransitionRecept[VXM18]{18}{\tiny \texttt{XM18}}
+            \Etape{19}
+            \ActionX{X19}{\tiny $\texttt{CusCalPower} \defeq 0$}{}
+            \ActionActiv{X19}
+            \Action{X19}{\tiny $\texttt{CoupledCusCal} \defeq 0$}
+            \ActionEvenement{X19}{\tiny $\downarrow\texttt{CusCalPower}$}
+        \end{tikzpicture}
+    \end{subfigure}
+\end{figure}
+\end{document}

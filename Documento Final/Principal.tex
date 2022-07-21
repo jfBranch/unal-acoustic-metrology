@@ -46,6 +46,7 @@
 \usepackage{mathspec} % Importa el paquete para el uso de fuentes externas
 \usepackage{fancyvrb}
 \usepackage{rotating}
+\usepackage{gettitlestring}
 
 % Establece la fuente Ancizar Serif como la fuente principal
 \setmainfont[Ligatures = TeX, UprightFont = {* Regular}, BoldFont = {* Bold},
@@ -169,15 +170,16 @@
 \cleardoublepage
 \setlength{\jot}{10pt}  % Espacio interlineal por defecto en el entorno align
 \tableofcontents
+\addcontentsline{toc}{chapter}{Índice general}
 \cleardoublepage
-\addcontentsline{toc}{chapter}{Lista de figuras}  % Incluye la lista de figuras en el índice de contenido
 \listoffigures  % Índice de figuras
+\addcontentsline{toc}{chapter}{Índice de figuras}  % Incluye la lista de figuras en el índice de contenido
 \cleardoublepage
-\addcontentsline{toc}{chapter}{Lista de tablas} % Incluye la lista de tablas en el índice de contenido
 \listoftables % Índice de tablas
-\pagenumbering{arabic}
+\addcontentsline{toc}{chapter}{Índice de cuadros} % Incluye la lista de tablas en el índice de contenido
+\cleardoublepage
 \capstarttrue  % Inicia el caption de los flotantes
-
+\pagenumbering{arabic}
 \include{1_Intro/Intro}
 \include{2_Metodología/Metodología}
 \include{3_Reconocimiento/Reconocimiento}
@@ -186,7 +188,7 @@
 \include{6_Conclusiones/Conclusiones}
 \include{Anexos/Anexos}
 
-\addcontentsline{toc}{chapter}{\numberline{}Bibliografía}
 \bibliographystyle{apalike-es}
 \bibliography{Bibliografía}
+\addcontentsline{toc}{chapter}{\numberline{}Bibliografía}
 \end{document}

@@ -1,0 +1,233 @@
+%! Author = Usuario
+%! Date = 18/07/2022
+
+% Preamble
+\documentclass[12pt,spanish,fleqn,openany,letterpaper,pagesize,hidelinks]{scrbook}
+
+% Packages
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}  % Escribir con acentos sin necesidad de comandos \'{}
+\usepackage{setspace}  % Paquete para el ajuste de espacio entre líneas
+\usepackage{fancyhdr}  % Paquete para el ajuste de formato de página
+\usepackage{epsfig}
+\usepackage{epic}
+\usepackage{eepic}
+\usepackage{amsmath}  % Paquete para diversas herramientas matemáticas
+\usepackage{amssymb}  % Paquete para rotar tablas, figuras, etc.
+\usepackage{mathtools}  % Paquete para el símbolo :=
+\usepackage{kbordermatrix}  % Paquete para matrices con índices de filas y columnas
+\usepackage{upgreek}  % Paquete para letras griegas en roman upright
+\usepackage{threeparttable}
+\usepackage{amscd}
+\usepackage{here}
+\usepackage{nicefrac}  % Paquete para fracciones en diagonal
+\usepackage[binary-units=true,angle-mode=decimal]{siunitx}  % Paquete para unidades en SI
+\sisetup{output-decimal-marker={,}}  % Establece la coma para decimales
+\usepackage{tikz}
+\usepackage{flowchart}  % Paquete con formas predefinidas de diagramas de flujo
+\usetikzlibrary{arrows, arrows.meta}
+\usetikzlibrary{automata}  % Paquete para dibujar autómatas
+\usetikzlibrary{positioning}  % Paquete con herramientas para facilitar la ubicación de nodos
+\usetikzlibrary{math}  % Paquete para definir variables
+\usepackage{grafcet}  % Paquete para dibujar gráficos de etapas y transiciones
+\usepackage[simplified]{pgf-umlcd}  % Paquete para dibujar diagramas UML
+\usepackage[algochapter,linesnumbered,vlined,ruled,commentsnumbered]{algorithm2e}  % Paquete para escribir pseudocódigo
+\usepackage{graphicx}  % Paquete para poder usar gráficos
+\usepackage{tabularx}  % Paquete para poder usar tablas
+\usepackage{longtable}
+\usepackage{xcolor}  % Paquete para definir colores
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{listings}  % Paquete para entornos tipo listings
+\usepackage[chapter]{minted}  % Paquete para códigos con formato
+\usepackage{lscape}
+\usepackage{lipsum}  % Paquete para simular párrafos de textos
+% Paquete para habilitar hipervínculos habilitando el cambio de línea
+\PassOptionsToPackage{hyphens}{url}\usepackage[colorlinks=true,linkcolor=blue,urlcolor=gray,citecolor=blue]{hyperref}
+\usepackage[all]{hypcap}  % Paquete para ajustar las referencias a floats por encima de estos
+\usepackage{natbib}  % Paquete mejorado para bibliografía
+\usepackage{mathspec} % Importa el paquete para el uso de fuentes externas
+\usepackage{fancyvrb}
+\usepackage{rotating}
+
+% Establece la fuente Ancizar Serif como la fuente principal
+\setmainfont[Ligatures = TeX, UprightFont = {* Regular}, BoldFont = {* Bold},
+				ItalicFont = {* Italic}, BoldItalicFont = {* Bold Italic}]{Ancizar Serif}
+% Establece la fuente Ancizar Sans como la fuente Sans
+\setsansfont[Ligatures = TeX, UprightFont = {* Regular}, BoldFont = {* Bold},
+				ItalicFont = {* Italic}, BoldItalicFont = {* Bold Italic}]{Ancizar Sans}
+% Establece l afuente JetBrains Mono como la fuente monoespaciada
+\setmonofont[Ligatures = TeX, UprightFont = {* Regular}, BoldFont = {* Bold},
+				ItalicFont = {* Italic}, BoldItalicFont = {* Bold Italic}]{JetBrains Mono}
+
+% ---------- CONFIGURACIÓN DE PÁGINA ----------
+\pagestyle{fancyplain}
+\addtolength{\headwidth}{\marginparwidth}
+\textheight22.5cm \topmargin0cm \textwidth16.5cm
+\oddsidemargin0.5cm \evensidemargin-0.5cm
+
+\fancyfoot{}
+
+\unitlength1mm  % Define la unidad LE para Figuras
+\mathindent1cm  % Define la distancia de las formulas al texto,  fleqn las descentra
+\marginparwidth0cm
+\parindent0cm  % Define la distancia de la primera linea de un parrafo a la margen
+
+% Creación de formas para dibujo
+\tikzstyle{print}=[trapezium, draw, text centered, trapezium left angle=60, trapezium right angle=120, minimum height=2em]  % Trapezoide para el diagrama de flujo
+\tikzstyle{conditional}=[diamond, draw, text centered, aspect=3]  % Rombo para el bloque de decisión.
+\tikzstyle{arrow} = [thick,->,>=stealth]
+
+% Document
+\begin{document}
+\begin{figure}[!hp]
+    \caption{Diagrama de clases de la aplicación desarrollada para la calibración periódica de calibradores acústicos.}
+    \label{fig:uml_acoustic_calibrators}
+    \centering
+    \begin{tikzpicture}[font=\tiny\ttfamily]
+        \begin{class}[text width=2cm]{QObject}{-4,-11.4}\end{class}
+        \begin{package}{AcousticCalibrations}
+            \begin{class}[text width=8cm]{AcousticCalibratorsPeriodicTester}{0,0}
+                \inherit{QObject}
+                \attribute{+ measurementProgress: pyqtSignal \textit{\guillemotleft class attribute\guillemotright}}
+                \attribute{+ calibrationProgress: pyqtSignal \textit{\guillemotleft class attribute\guillemotright}}
+                \attribute{+ invalidMeasurementValue: pyqtSignal \textit{\guillemotleft class attribute\guillemotright}}
+                \attribute{+ realTimeValues: pyqtSignal \textit{\guillemotleft class attribute\guillemotright}}
+                \attribute{\# acceptanceLimits: pd.DataFrame \textit{\guillemotleft class attribute\guillemotright}}
+                \attribute{\# resource\_manager: pyVisa.ResourceManager \textit{\guillemotleft instance attribute\guillemotright}}
+                \attribute{\# DMM: pyVisa.GPIBInstrument \textit{\guillemotleft instance attribute\guillemotright}}
+                \attribute{\# AA: pyVisa.GPIBInstrument \textit{\guillemotleft instance attribute\guillemotright}}
+                \attribute{\# standard: AcousticCalibrator \textit{\guillemotleft instance attribute\guillemotright}}
+                \attribute{\# microphone: dict \textit{\guillemotleft instance attribute\guillemotright}}
+                \attribute{\# calibration\_consecutive: str \textit{\guillemotleft instance attribute\guillemotright}}
+                \attribute{\# dut: AcousticCalibrator \textit{\guillemotleft instance attribute\guillemotright}}
+                \attribute{\# customer\_info: dict \textit{\guillemotleft instance attribute\guillemotright}}
+                \attribute{\# ambient\_condition\_values: dict \textit{\guillemotleft instance attribute\guillemotright}}
+                \attribute{\# standard\_measurement\_values: list \textit{\guillemotleft instance attribute\guillemotright}}
+                \attribute{\# standard\_noise\_values: pd.DataFrame \textit{\guillemotleft instance attribute\guillemotright}}
+                \attribute{\# dut\_measurement\_values: list \textit{\guillemotleft instance attribute\guillemotright}}
+                \attribute{\# dut\_noise\_values: pd.DataFrame \textit{\guillemotleft instance attribute\guillemotright}}
+                \attribute{\# expanded\_uncertainty: dict \textit{\guillemotleft instance attribute\guillemotright}}
+                \attribute{\# current\_level: str \textit{\guillemotleft instance attribute\guillemotright}}
+
+                \operation{+ run\_main\_sequence() ->\,None \textit{\guillemotleft instance method\guillemotright}}
+                \operation{+ check\_state() ->\,None \textit{\guillemotleft instance method\guillemotright}}
+                \operation{+ set\_current\_level(level: int) ->\,None \textit{\guillemotleft instance method\guillemotright}}
+                \operation{+ set\_standard\_calibrator(standard: AcousticCalibrator) ->\,None \textit{\guillemotleft instance method\guillemotright}}
+                \operation{+ set\_dut(dut: AcousticCalibrator) ->\,None \textit{\guillemotleft instance method\guillemotright}}
+                \operation{+ set\_customer\_info(customer\_info: dict) ->\,None \textit{\guillemotleft instance method\guillemotright}}
+                \operation{+ set\_consecutive(consecutive: str) ->\,None \textit{\guillemotleft instance method\guillemotright}}
+                \operation{+ set\_standards(DMM:dict, AA: dict) ->\,None \textit{\guillemotleft instance method\guillemotright}}
+                \operation{+ measure\_mic\_sensibility() ->\,None \textit{\guillemotleft instance method\guillemotright}}
+                \operation{+ measure\_ambient\_noise() -> float \textit{\guillemotleft instance method\guillemotright}}
+                \operation{+ measure\_quantities(n\_indications: int=30) ->\,None \textit{\guillemotleft instance method\guillemotright}}
+                \operation{+ estimate\_expanded\_uncertainty() ->\,None \textit{\guillemotleft instance method\guillemotright}}
+                \operation{+ report\_ambient\_conditions(temperature:float, humidity:float, pressure: float) ->\,None \textit{\guillemotleft instance method\guillemotright}}
+                \operation{+ set\_stage(stage: int) ->\,None \textit{\guillemotleft instance method\guillemotright}}
+                \operation{+ set\_state(state: int) ->\,None \textit{\guillemotleft instance method\guillemotright}}
+                \operation{+ volt2level(v:float, ref\_lev: tuple) ->\,float \textit{\guillemotleft static method\guillemotright}}
+            \end{class}
+
+            \begin{class}[text width=7cm]{AcousticCalibrator}{8,0}
+                \attribute{\# info: dict \textit{\guillemotleft instance attribute\guillemotright}}
+                \attribute{\# cl: int \textit{\guillemotleft instance attribute\guillemotright}}
+                \attribute{\# nominal\_values: pd.DataFrame \textit{\guillemotleft instance attribute\guillemotright}}
+                \attribute{\# pressure\_influence: float \textit{\guillemotleft instance attribute\guillemotright}}
+                \attribute{\# free\_field\_difference: float \textit{\guillemotleft instance attribute\guillemotright}}
+                \attribute{\# calibration\_results: pd.DataFrame \textit{\guillemotleft instance attribute\guillemotright}}
+
+                \operation{+ get\_ambient\_correction(pressure: float) ->\,float \textit{\guillemotleft instance method\guillemotright}}
+                \operation{+ set\_calibration\_results(level\_results: np.ndarray, freq\_results: np.ndarray, thd\_results: np.ndarray) ->\,None \textit{\guillemotleft instance method\guillemotright}}
+            \end{class}
+
+            \node (ACPTEast')[below=2 of AcousticCalibratorsPeriodicTester.east]{};
+            \node (ACSouth')[left=1 of AcousticCalibrator.south]{};
+            \draw [umlcd style dashed line, <-] (ACSouth'.center) |- node[pos=0.8,below,sloped]{\guillemotleft instantiate\guillemotright} (ACPTEast'.center);
+        \end{package}
+        \begin{class}[text width=8cm]{GUIController}{8.4,-8.5}
+            \attribute{\# bruel4231: AcousticCalibrator \textit{\textit{\guillemotleft class attribute\guillemotright}}}
+            \attribute{\# cal21: AcousticCalibrator \textit{\textit{\guillemotleft class attribute\guillemotright}}}
+            \attribute{\# grass40CE: ditc \textit{\textit{\guillemotleft class attribute\guillemotright}}}
+            \attribute{\# TESTER: AcousticCalibratorsPeriodicTester \textit{\guillemotleft instance attribute\guillemotright}}
+            \attribute{\# gui: AcousticCalibratorsUI \textit{\guillemotleft instance attribute\guillemotright}}
+            \attribute{\# resource\_manager: pyVisa.ResourceManager \textit{\guillemotleft instance attribute\guillemotright}}
+            \attribute{+ standard\_calibrator: AcousticCalibrator \textit{\guillemotleft instance attribute\guillemotright}}
+            \attribute{+ acquired\_values: pd.DataFrame \textit{\guillemotleft instance attribute\guillemotright}}
+            \attribute{+ standard\_averaged\_values: pd.DataFrame \textit{\guillemotleft instance attribute\guillemotright}}
+            \attribute{+ dut\_averaged\_values: pd.DataFrame \textit{\guillemotleft instance attribute\guillemotright}}
+            \attribute{+ save\_standards\_state: bool \textit{\guillemotleft instance attribute\guillemotright}}
+            \attribute{+ save\_DUT\_info\_state: bool \textit{\guillemotleft instance attribute\guillemotright}}
+            \attribute{+ self\_test\_passed: bool \textit{\guillemotleft instance attribute\guillemotright}}
+            \attribute{+ searchStandardWorker: PyQt5.QObject \textit{\guillemotleft instance attribute\guillemotright}}
+            \attribute{+ selfTesterWorker: PyQt5.QObject \textit{\guillemotleft instance attribute\guillemotright}}
+            \attribute{+ calibrationThread: PyQt5.QThread \textit{\guillemotleft instance attribute\guillemotright}}
+
+            \operation{\# connect\_signals() ->\,None \textit{\guillemotleft instance method\guillemotright}}
+            \operation{+ fill\_mic\_info() ->\,None \textit{\guillemotleft instance method\guillemotright}}
+            \operation{+ fill\_standard\_calibrator\_info() ->\,None \textit{\guillemotleft instance method\guillemotright}}
+            \operation{+ save\_standards\_info() ->\,None \textit{\guillemotleft instance method\guillemotright}}
+            \operation{+ save\_dut\_info() ->\,None \textit{\guillemotleft instance method\guillemotright}}
+            \operation{+ self\_test() ->\,None \textit{\guillemotleft instance method\guillemotright}}
+            \operation{+ show\_self\_test\_results(results: tuple) ->\,None \textit{\guillemotleft instance method\guillemotright}}
+            \operation{+ search\_standards() ->\,None \textit{\guillemotleft instance method\guillemotright}}
+            \operation{+ fill\_standards\_info() ->\,None \textit{\guillemotleft instance method\guillemotright}}
+            \operation{+ update\_noise\_values() ->\,None \textit{\guillemotleft instance method\guillemotright}}
+            \operation{+ show\_standard\_noise\_values() ->\,None \textit{\guillemotleft instance method\guillemotright}}
+            \operation{+ show\_dut\_noise\_values() ->\,None \textit{\guillemotleft instance method\guillemotright}}
+            \operation{+ show\_averaged\_standard\_values() ->\,None \textit{\guillemotleft instance method\guillemotright}}
+            \operation{+ show\_averaged\_dut\_values() ->\,None \textit{\guillemotleft instance method\guillemotright}}
+            \operation{+ update\_real\_time\_values() ->\,None \textit{\guillemotleft instance method\guillemotright}}
+            \operation{+ start() ->\,None \textit{\guillemotleft instance method\guillemotright}}
+            \operation{+ pause() ->\,None \textit{\guillemotleft instance method\guillemotright}}
+            \operation{+ sequence\_control() ->\,None \textit{\guillemotleft instance method\guillemotright}}
+            \operation{+ eval\_answer(instruction: PyQt5.QMessageBox) ->\,None \textit{\guillemotleft instance method\guillemotright}}
+            \operation{+ invalid\_measurement(value: float) ->\,None \textit{\guillemotleft instance method\guillemotright}}
+        \end{class}
+%\begin{class}[text width=2cm]{QObject}{-4, -12.5}\end{class}
+        \begin{class}[text width=7cm]{StandardsSearcher}{-1, -12.2}
+            \inherit{QObject}
+            \attribute{+ finished: pyqtSignal \textit{\guillemotleft class attribute\guillemotright}}
+            \attribute{+ progress: pyqtSignal \textit{\guillemotleft class attribute\guillemotright}}
+            \attribute{\# resources\_manager: visa.ResourceManager \textit{\guillemotleft instance attribute \guillemotright}}
+            \attribute{+ DMM\_model: str \textit{\guillemotleft instance attribute\guillemotright}}
+            \attribute{+ AA\_model: str \textit{\guillemotleft instance attribute\guillemotright}}
+            \attribute{+ resources: tuple \textit{\guillemotleft instance attribute \guillemotright}}
+            \attribute{+ data: dict \textit{\guillemotleft instance attribute \guillemotright}}
+            \operation{+ search() ->\,None \textit{\guillemotleft instance method \guillemotright}}
+        \end{class}
+
+        \draw [umlcd style dashed line, <-] (AcousticCalibrator) -- node[pos=0.5,above,sloped]{\guillemotleft instantiate\guillemotright} (GUIController);
+        \node (GUICWest1)[above=2 of GUIController.west, inner sep=0pt, minimum size=0pt]{};
+        \draw [umlcd style dashed line, <-] (AcousticCalibratorsPeriodicTester.south) |- node[pos=0.8,above,sloped]{\guillemotleft instantiate\guillemotright} (GUICWest1);
+        \node(SSNorthEast)[below=0.2 of StandardsSearcher.north east, inner sep=0pt, minimum size=0pt]{};
+        \node (GUICWest2)[right=1.6 of SSNorthEast, inner sep=0pt, minimum size=0pt]{};
+        \draw[umlcd style dashed line, <-](SSNorthEast) -- node[pos=0.5,above,sloped]{\guillemotleft instantiate\guillemotright}(GUICWest2);
+
+        \begin{class}[text width=2cm]{QMainWindow}{6,-18.7}\end{class}
+
+        \begin{class}[text width=7cm]{AcousticCalibratorsUI}{-1,-18}
+            \inherit{QMainWindow}
+            \attribute{\textit{\guillemotleft some instance attributes corresponding to the GUI elements\guillemotright}}
+            \operation{\textit{\guillemotleft a few instance methods for configuring the initial state of the GUI elements\guillemotright}}
+        \end{class}
+
+        \begin{class}[text width=7cm]{SelfTester}{-1, -15.6}
+            \inherit{QObject}
+            \attribute{+ finished: pyqtSignal \textit{\guillemotleft class attribute\guillemotright}}
+            \attribute{+ progress: pyqtSignal \textit{\guillemotleft class attribute\guillemotright}}
+            \attribute{\# DMM: visa.Resource \textit{\guillemotleft instance attribute\guillemotright}}
+            \attribute{\# AA: visa.Resource \textit{\guillemotleft instance attribute\guillemotright}}
+            \operation{+ self\_test() ->\,None \textit{\guillemotleft instance method\guillemotright}}
+        \end{class}
+
+        \node(STNorthEast)[below=0.2 of SelfTester.north east, inner sep=0pt, minimum size=0pt]{};
+        \node(GUICWest3)[right=1.6 of STNorthEast, inner sep=0pt, minimum size=0pt]{};
+        \draw[umlcd style dashed line, <-](STNorthEast) -- node[pos=0.5,above,sloped]{\guillemotleft instantiate\guillemotright} (GUICWest3);
+
+        \node (ACUINorth1)[below=0.2 of AcousticCalibratorsUI.north east, inner sep=0pt, minimum size=0pt]{};
+        \node (GUICWest4)[right=1.6 of ACUINorth1, inner sep=0pt, minimum size=0pt]{};
+        \draw [umlcd style dashed line, <-] (ACUINorth1) -- node[pos=0.5,above,sloped]{\guillemotleft instantiate\guillemotright} (GUICWest4);
+    \end{tikzpicture}
+    \caption*{\footnotesize Fuente: Elaboración propia.}
+\end{figure}
+\end{document}

@@ -10,6 +10,7 @@ Luego, se presenta el fundamento teórico suficiente de los procesos estocástic
 Finalmente, se muestra y discute un ejemplo de un valor de medición obtenido con el método implementado y su correspondiente incertidumbre de medida tipo A\@.
 
 \section*{Consideraciones previas}
+\addcontentsline{toc}{section}{Consideraciones previas}
 El nivel instantáneo ponderado en tiempo y en frecuencia definido en la ecuación~\eqref{eq:time_weighted_level} no es un indicador representativo del nivel de sonidos cuya presión tiene bastante variabilidad, ya que es muy susceptible a las variaciones instantáneas en la presión acústica, por lo que normalmente en mediciones acústicas se evalúa el nivel de sonido promediado en el tiempo o nivel de sonido continuo equivalente, definido en la \mbox{IEC 61672--1}~\citeyearpar{IEC_TC29_2013_1} como
 %
 \begin{equation}
@@ -35,15 +36,16 @@ Esta presión instantánea ponderada en el tiempo no es la misma de la ecuación
 Para calcular un nivel continuo equivalente con ponderación temporal y frecuencial se requiere modificar la ecuación~\eqref{eq:equivalent_level} remplazando $p_X^2(\xi)$ por $p_{XY}^2(t)$; en efecto, queda
 %
 \begin{align}
-    L_{AFeq,T} &= 10\log{\left(\frac{\frac{1}{t_1 - t_2}\,\int_{t_2}^{t_1} p_{XY}^2(t)\,\mathrm{d}t}{p_0^2}\right)}; \nonumber \\
+    L_{XYeq,T} &= 10\log{\left(\frac{\frac{1}{t_1 - t_2}\,\int_{t_2}^{t_1} p_{XY}^2(t)\,\mathrm{d}t}{p_0^2}\right)}; \nonumber \\
     &= 10\log{\left(\frac{\frac{1}{\tau_Y\,\left(t_1 - t_2\right)}\,
     \int_{t_2}^{t_1} \int_{-\infty}^t p_X^2\left(\xi\right)\,
     e^{\nicefrac{-\left(t - \xi\right)}{\tau_Y}}\,\mathrm{d}\xi\,\mathrm{d}t}{p_0^2}\right)}. \label{eq:equivalent_time_weighted_level}
 \end{align}
 
-En la ecuación~\eqref{eq:equivalent_time_weighted_level} se puede concluir que cuanto más tiempo permanezca estable una presión acústica instantánea ponderada en tiempo, el nivel equivalente más se acercará al correspondiente nivel instantáneo ponderado en tiempo, pues tiene mayor efecto en el resultado de la integral.
+De la ecuación~\eqref{eq:equivalent_time_weighted_level} se puede concluir que cuanto más tiempo permanezca estable una presión acústica instantánea ponderada en tiempo, el nivel equivalente más se acercará al correspondiente nivel instantáneo ponderado en tiempo, pues tiene mayor efecto en el resultado de la integral.
 
 \section*{Algoritmo para la creación del modelo de Markov}
+\addcontentsline{toc}{section}{Algoritmo para la creación del modelo de Markov}
 El método propuesto consiste en tomar cada uno de los niveles instantáneos obtenidos como un estado en una cadena de Markov.
 Esta cadena caracteriza los cambios de un nivel a otro, considerando la variabilidad del nivel instantáneo como un proceso estocástico.
 Luego, con la distribución de probabilidad estacionaria se estima el valor esperado en el largo plazo, que lógicamente corresponde al estado (nivel instantáneo) con mayor probabilidad de ocurrir.
@@ -71,6 +73,7 @@ Este es un proceso que se realiza en cada punto de calibración y se resume en e
 \end{algorithm}
 
 \section*{Paso 1: Submuestreo y reconocimiento de cuadros después de la estabilización}
+\addcontentsline{toc}{section}{Paso 1: Submuestreo y reconocimiento de cuadros después de la estabilización}
 \label{sec:downsampling}
 Como el nivel con ponderación temporal \emph{Fast}, que tiene una constante de tiempo $\tau_F = \qty{125}{\ms}$, requiere un tiempo transitorio hasta que el nivel se estabilice después de enviar la señal eléctrica.
 Se determinó experimentalmente un tiempo de $\qty{2}{\s}$.
@@ -87,9 +90,11 @@ Finalmente, se efectúa el reconocimiento de los cuadros submuestreados a partir
 El vector de valores numéricos reconocidos es el arreglo de muestras a partir del cual se conforma la matriz de transición de estados en el paso a continuación.
 
 
-\section{Cadenas de Markov de tiempo discreto}
+\section*{Cadenas de Markov de tiempo discreto}
+\addcontentsline{toc}{section}{Cadenas de Markov de tiempo discreto}
 
 \subsection*{Paso 2: Matriz de probabilidades de transición}
+\addcontentsline{toc}{subsection}{Paso 2: Matriz de probabilidades de transición}
 \label{subsec:transition_matrix}
 Tomando como guía el libro de Robert Dobrow~\citeyearpar{Dobrow2016} y el de John Gubner~\citeyearpar{Gubner2006}, una cadena de Markov es un proceso aleatorio con la propiedad particular de que, dados unos valores del proceso desde el tiempo cero hasta el tiempo actual, la probabilidad condicional del valor del proceso en algún tiempo futuro depende solo del valor actual, es decir, el futuro y el pasado son condicionalmente independientes dado el presente.
 Analíticamente, una cadena de Markov es una secuencia de variables aleatorias $X_0, X_1, \dots$ que toman valores del espacio discreto de estados $\mathcal{S}$ con la propiedad de que
@@ -141,6 +146,7 @@ Teniendo en cuenta este fundamento conceptual, para cada punto de calibración s
 Para este efecto se escribió el método estático del código~\ref{code:build_transition_matrix}.
 
 \subsection*{Paso 3: Distribución de probabilidad estacionaria}
+\addcontentsline{toc}{subsection}{Paso 3: Distribución de probabilidad estacionaria}
 \label{subsec:stationary_distribution}
 Una vez se conforma una matriz con las probabilidades de transición se puede usar álgebra matricial para hacer cálculos con las probabilidades.
 Uno de los más elementales es el cálculo de las probabilidades de transición del estado $i$ al $j$ en $n \ge 1$ pasos, es decir $p_{ij}^{(n)} = P\left(X_n = j \,|\,X_0 = i\right)$, la probabilidad de que en $n$ pasos el proceso visite el estado $j$ dado que ahora está en el estado $i$.
@@ -192,6 +198,7 @@ Para encontrar soluciones para $\boldsymbol{\pi}$ se resuelve el sistema
 Para implementar lo anterior y calcular la distribución límite dada una matriz de transición $\mathbf{P}$ se escribió el método estático del código~\ref{code:limit_dist}.
 
 \subsection*{Paso 5: Valor esperado}
+\addcontentsline{toc}{subsection}{Paso 5: Valor esperado}
 \label{subsec:expected_value}
 
 En un sistema discreto, el valor esperado calculado a partir de la distribución estacionaria es
@@ -232,6 +239,7 @@ def limit_dist(P: np.ndarray) -> float:
 \end{code}
 
 \section*{Paso 4: Completar valores faltantes}
+\addcontentsline{toc}{section}{Paso 4: Completar valores faltantes}
 \label{sec:fill_missing_values}
 Aún cuando el clasificador tiene un buen desempeño y el submuestreo se ha realizado evitando el efecto de solapamiento de valores en la pantalla del sonómetro, puede ocurrir que eventualmente un cuadro capturado coincide con la actualización del valor en pantalla y consecuentemente el clasificador devuelve un resultado incorrecto.
 Para estos casos poco recurrentes, se determinó que el clasificador devolviera un valor \texttt{\small np.nan}.
@@ -282,7 +290,8 @@ Una vez el vector de muestras está completo, se construye una segunda matriz de
     \caption*{\footnotesize Fuente propia.}
 \end{figure}
 
-\section{Ejemplo de resultado de ejecución del método}
+\section*{Ejemplo de resultado de ejecución del método}
+\addcontentsline{toc}{section}{Ejemplo de resultado de ejecución del método}
 Habiendo incluido apropiadamente este método en el desarrollo previo de la aplicación, se obtuvieron los resultados esperados.
 Un ejemplo de una matriz de transición obtenida en la prueba de ponderación frecuencial $Z$ con señales eléctricas a $\qty{63}{\Hz}$ se muestra a continuación.
 %
@@ -311,7 +320,8 @@ Resolviendo el sistema de la ecuación~\eqref{eq:pi_linear_system}, la distribuc
 Finalmente, el valor esperado, redondeado a la misma cantidad de dígitos decimales de la precisión del sonómetro es $\qty{33.2}{\dB}$.
 
 
-\section{Evaluación tipo A de la incertidumbre típica}
+\section*{Evaluación tipo A de la incertidumbre típica}
+\addcontentsline{toc}{section}{Evaluación tipo A de la incertidumbre típica}
 
 De a cuerdo con la guía para la expresión de la incertidumbre de medida~\citep{ISO_TAG4_2008}, los valores de las observaciones individuales $q_k$ difieren en razón de las variaciones aleatorias de las magnitudes de influencia o de efectos aleatorios.
 La varianza experimental de dichas $n$ observaciones está dada por:

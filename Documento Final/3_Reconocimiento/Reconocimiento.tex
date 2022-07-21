@@ -10,6 +10,7 @@ luego, se presenta el fundamento teórico de cada uno de esos pasos.
 Finalmente, se muestran y discuten los resultados de procesamiento de imagen sobre una muestra de un dígito, como también los resultados del clasificador implementado.
 
 \section*{Algoritmo de reconocimiento de caracteres}
+\addcontentsline{toc}{section}{Algoritmo de reconocimiento de caracteres}
 De manera general, la solución propuesta, para el reconocimiento del valor de medición indicado en la pantalla del sonómetro, consta de varios pasos que se presentan en el siguiente algoritmo.
 
 \begin{algorithm}[H]
@@ -25,7 +26,7 @@ De manera general, la solución propuesta, para el reconocimiento del valor de m
     \ForEach{\image $\in$ \images}{
         \textbackslash\textbackslash Las operaciones sobre \image son realizadas \emph{in place}.\;
         \textbf{\hyperref[sec:gaussian_filter]{Paso 1}:} Filtrar \image con filtro gaussiano.\;
-        \textbf{\hyperref[sec:padding]{Paso 2}:} Escalar y hacer \emph{padding} a \image para hacerla de $31 \times 32$ píxeles.\;
+        \textbf{\hyperref[sec:padding]{Paso 2}:} Escalar y hacer \emph{padding} a \image para hacerla de $32 \times 32$ píxeles.\;
         \textbf{\hyperref[sec:segmentation]{Paso 3}:} Segmentar \image determinando el umbral con el método de \citet{Otsu1979}.\;
         \If{\training $=$ False}{
             Detectar contornos y extraer dígitos.\;
@@ -153,6 +154,7 @@ De manera general, la solución propuesta, para el reconocimiento del valor de m
 Concerniente al procesamiento y reconocimiento de imágenes, a continuación se presenta un breve marco de referencia teórico de cada paso del algoritmo~\ref{alg:image_recongnition}.
 
 \section*{Paso 1: Filtro gaussiano}
+\addcontentsline{toc}{section}{Paso 1: Filtro gaussiano}
 \label{sec:gaussian_filter}
 Como se explica en el libro de Robert Szeliski~\citeyearpar{Richard2011}, el filtro gaussiano, también llamado filtro de suavizado o de desenfoque, es una operación local en imágenes bidimensionales, pues se efectúa en vecindarios con un tamaño determinado en píxeles;
 el valor final de un píxel depende de los valores de los píxeles que pertenecen a su correspondiente vecindario y, como en todos los casos de filtros lineales, de una función de ponderación.
@@ -194,6 +196,7 @@ La función de \texttt{\small OpenCV} también permite especificar un tamaño de
 \end{subequations}
 
 \section*{Paso 2: Escalización y \emph{padding}}
+\addcontentsline{toc}{section}{Paso 2: Escalización y \emph{padding}}
 \label{sec:padding}
 Por supuesto, en la práctica, el filtrado requiere que se agreguen píxeles en los bordes de la imagen original, según el tamaño determinado de la ventana;
 a esto se le conoce como \emph{padding} y es una operación que realiza por defecto \texttt{\small OpenCV}, con la que es posible elegir el modo del \emph{padding}.
@@ -235,6 +238,7 @@ Luego sí se añaden los píxeles faltantes al eje de menor dimensión para comp
 \vfill
 
 \section*{Paso 3: Segmentación}
+\addcontentsline{toc}{section}{Paso 3: Segmentación}
 \label{sec:segmentation}
 Existen diferentes técnicas de segmentación: basada en umbrales, en bordes, en regiones, por agrupación o por \emph{matching}.
 Para los propósitos de este trabajo, es suficiente con una umbralización para discriminar los segmentos de la imagen, que corresponderían a los dígitos indicados en la pantalla del sonómetro.
@@ -333,6 +337,7 @@ El umbral óptimo $k^*$ será el máximo valor obtenido de $\sigma_B^2(k)$.
 
 
 \section*{Paso 4: Descriptor local SIFT}
+\addcontentsline{toc}{section}{Paso 4: Descriptor local SIFT}
 \label{sec:sift_descriptor}
 En esta aplicación particular (cuyo funcionamiento se pretende en tiempo real), el objeto de reconocimiento es simple, por lo que no hace falta el sofisticado algoritmo de detección, localización y orientación de puntos característicos de la presentación original del descriptor SIFT propuesto por \citet{Lowe2004}.
 No obstante, la implementación del algoritmo aquí presentada sí tiene en cuenta su propuesta de descriptor local basada en la magnitud y dirección de los gradientes de cada píxel perteneciente a la región alrededor de cada punto característico.
@@ -422,6 +427,7 @@ La normalización se efectúa empleando la norma $L_2$, como se muestra a contin
 \end{subequations}
 
 \section*{Paso 5: Reducción de dimensionalidad por análisis de componentes principales (KPCA)}
+\addcontentsline{toc}{section}{Paso 5: Reducción de dimensionalidad por análisis de componentes principales (KPCA)}
 \label{sec:kpca_reduction}
 Una vez se obtienen los vectores de características de las muestras, conviene un proceso adicional para simplificar el análisis posterior de los datos, mejorar el desempeño en la clasificación, eliminar información redundante o incluso poder obtener representaciones gráficas de los vectores.
 Generalmente, los vectores de características resultan ser de grandes dimensiones, lo que provoca ciertas desventajas como que al aumentar las dimensiones de los vectores el volumen del espacio aumenta exponencialmente y los datos tienden a volverse dispersos, y esto afecta negativamente la clasificación, pues los datos se organizan en áreas correspondientes a grupos con características similares, y finalmente las estrategias comunes de clasificación no son eficaces.
@@ -497,6 +503,7 @@ En este caso, se utilizó uno de base radial como el \emph{kernel} gaussiano que
 \end{equation}
 
 \section*{Paso 6: Clasificador bayesiano normal}
+\addcontentsline{toc}{section}{Paso 6: Clasificador bayesiano normal}
 \label{sec:nb_classifier}
 En la última etapa de un sistema de visión de máquina se encuentra el reconocimiento e interpretación, en la cual se utilizan diversas técnicas.
 Una de las más clásicas es el clasificador paramétrico supervisado basado en la teoría de decisión de Bayes formulada de forma general a continuación.
@@ -616,7 +623,7 @@ La clase de salida nuevamente es la que tenga la mayor probabilidad, es decir:
 \vfill
 
 \section*{Resultados}
-
+\addcontentsline{toc}{section}{Resultados}
 A continuación se presentarán algunos detalles en la implementación de los procesamientos presentados en las secciones anteriores y ejemplos de los resultados.
 Las imágenes del conjunto de entrenamiento y de prueba fueron obtenidas fotografiando la pantalla de un sonómetro marca 01dB, modelo CUBE. Un ejemplo se muestra en la siguiente figura.
 %
@@ -778,7 +785,7 @@ En la figura~\ref{fig:confusion_matrix_bad} se muestra la matriz de confusión p
 
 
 \section*{Discusión}
-
+\addcontentsline{toc}{section}{Discusión}
 Los resultados obtenidos demuestran un funcionamiento satisfactorio en general, tanto del procesamiento de las imágenes como del clasificador.
 Aunque evidentemente es un método simplificado, resulta ser eficaz y eficiente, pues cumple con el objetivo de reconocimiento de caracteres empleando pocos recursos computacionales y cortos tiempos de entrenamiento del clasificador y del procesamiento de las imágenes, lo que permite que el método sea empleado en ordenadores con baja capacidad de procesamiento y en aplicaciones de funcionamiento en tiempo real, como se pretende en este proyecto.
 Aunque el clasificador bayesiano es de las técnicas más sencillas de aprendizaje de máquina, tiene un desempeño aceptable en muchas aplicaciones reales y no requiere una base de datos de entrenamiento demasiado extensa \citepalias{Scikit-learndevelopers2022}.

@@ -1,0 +1,150 @@
+%! Author = Usuario
+%! Date = 18/07/2022
+
+% Preamble
+\documentclass[12pt,spanish,fleqn,openany,letterpaper,pagesize,hidelinks]{scrbook}
+
+% Packages
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}  % Escribir con acentos sin necesidad de comandos \'{}
+\usepackage{setspace}  % Paquete para el ajuste de espacio entre líneas
+\usepackage{fancyhdr}  % Paquete para el ajuste de formato de página
+\usepackage{epsfig}
+\usepackage{epic}
+\usepackage{eepic}
+\usepackage{amsmath}  % Paquete para diversas herramientas matemáticas
+\usepackage{amssymb}  % Paquete para rotar tablas, figuras, etc.
+\usepackage{mathtools}  % Paquete para el símbolo :=
+\usepackage{kbordermatrix}  % Paquete para matrices con índices de filas y columnas
+\usepackage{upgreek}  % Paquete para letras griegas en roman upright
+\usepackage{threeparttable}
+\usepackage{amscd}
+\usepackage{here}
+\usepackage{nicefrac}  % Paquete para fracciones en diagonal
+\usepackage[binary-units=true,angle-mode=decimal]{siunitx}  % Paquete para unidades en SI
+\sisetup{output-decimal-marker={,}}  % Establece la coma para decimales
+\usepackage{tikz}
+\usepackage{flowchart}  % Paquete con formas predefinidas de diagramas de flujo
+\usetikzlibrary{arrows, arrows.meta}
+\usetikzlibrary{automata}  % Paquete para dibujar autómatas
+\usetikzlibrary{positioning}  % Paquete con herramientas para facilitar la ubicación de nodos
+\usetikzlibrary{math}  % Paquete para definir variables
+\usepackage{grafcet}  % Paquete para dibujar gráficos de etapas y transiciones
+\usepackage[simplified]{pgf-umlcd}  % Paquete para dibujar diagramas UML
+\usepackage[algochapter,linesnumbered,vlined,ruled,commentsnumbered]{algorithm2e}  % Paquete para escribir pseudocódigo
+\usepackage{graphicx}  % Paquete para poder usar gráficos
+\usepackage{tabularx}  % Paquete para poder usar tablas
+\usepackage{longtable}
+\usepackage{xcolor}  % Paquete para definir colores
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{listings}  % Paquete para entornos tipo listings
+\usepackage[chapter]{minted}  % Paquete para códigos con formato
+\usepackage{lscape}
+\usepackage{lipsum}  % Paquete para simular párrafos de textos
+% Paquete para habilitar hipervínculos habilitando el cambio de línea
+\PassOptionsToPackage{hyphens}{url}\usepackage[colorlinks=true,linkcolor=blue,urlcolor=gray,citecolor=blue]{hyperref}
+\usepackage[all]{hypcap}  % Paquete para ajustar las referencias a floats por encima de estos
+\usepackage{natbib}  % Paquete mejorado para bibliografía
+\usepackage{mathspec} % Importa el paquete para el uso de fuentes externas
+\usepackage{fancyvrb}
+\usepackage{rotating}
+
+% Establece la fuente Ancizar Serif como la fuente principal
+\setmainfont[Ligatures = TeX, UprightFont = {* Regular}, BoldFont = {* Bold},
+				ItalicFont = {* Italic}, BoldItalicFont = {* Bold Italic}]{Ancizar Serif}
+% Establece la fuente Ancizar Sans como la fuente Sans
+\setsansfont[Ligatures = TeX, UprightFont = {* Regular}, BoldFont = {* Bold},
+				ItalicFont = {* Italic}, BoldItalicFont = {* Bold Italic}]{Ancizar Sans}
+% Establece l afuente JetBrains Mono como la fuente monoespaciada
+\setmonofont[Ligatures = TeX, UprightFont = {* Regular}, BoldFont = {* Bold},
+				ItalicFont = {* Italic}, BoldItalicFont = {* Bold Italic}]{JetBrains Mono}
+
+% ---------- CONFIGURACIÓN DE PÁGINA ----------
+\pagestyle{fancyplain}
+\addtolength{\headwidth}{\marginparwidth}
+\textheight22.5cm \topmargin0cm \textwidth16.5cm
+\oddsidemargin0.5cm \evensidemargin-0.5cm
+
+\fancyfoot{}
+
+\unitlength1mm  % Define la unidad LE para Figuras
+\mathindent1cm  % Define la distancia de las formulas al texto,  fleqn las descentra
+\marginparwidth0cm
+\parindent0cm  % Define la distancia de la primera linea de un parrafo a la margen
+
+% Creación de formas para dibujo
+\tikzstyle{print}=[trapezium, draw, text centered, trapezium left angle=60, trapezium right angle=120, minimum height=2em]  % Trapezoide para el diagrama de flujo
+\tikzstyle{conditional}=[diamond, draw, text centered, aspect=3]  % Rombo para el bloque de decisión.
+\tikzstyle{arrow} = [thick,->,>=stealth]
+
+% Document
+\begin{document}
+\begin{figure}[h]
+    \caption{}
+    \label{fig:acoustic_calibrator_calibration_flowchart}
+    \centering
+    \begin{tikzpicture}[font=\scriptsize, minimum width=2cm, minimum height=0.5cm]
+        \node (start) at (-5, 0) [draw, terminal]{INICIO};
+        \node (process1) [draw, process, align=center, below=0.3cm of start]{Acoplar calibrador \\ acústico patrón};
+        \node (process2) [draw, process, align=center, below=0.3cm of process1]{Verificar calibrador \\ acústico
+        patrón \\ $\mathrm{Acople} = 1$};
+        \node (intersection1) [draw, circle, fill=black, inner sep=0pt, minimum size=2pt, below=0.3cm of process2]{};
+        \node (intersection2) [draw, circle, fill=black, inner sep=0pt, minimum size=2pt, right=2.6cm of
+        intersection1]{};
+        \node (process3) [draw, process, align=center, below=0.3cm of intersection1]{Medir ruido \\ de fondo $(N)$};
+        \node (decision1) [draw, conditional, below=0.3cm of process3]{$N \le L_{\mathrm{spec}} - \qty{30}{\dB}$};
+        \node (process4) [draw, process, align=center,
+            below=0.3cm of decision1]{Medir magnitudes \\ Voltaje, frecuencia y THD+N \\ $\mathrm{Acople\,} += 1$};
+        \node (decision2) [draw, conditional, below=0.3cm of process4]{$\mathrm{Acople} == 4$};
+        \node (process5) [draw, process, align=center, right=1.2cm of decision1]{Desacoplar calibrador \\ patrón,
+            rotarlo y \\ volverlo a acoplar};
+        \node (process6) [draw, process, align=center, below=0.3cm of decision2]{Calcular promedios \\ de magnitudes};
+        \node (ankor1) [below right=0.3cm and 4.1cm of process6]{};
+        \node (ankor2) [right=6.8cm of start]{};
+        \node (process7) [draw, process, align=center,
+            below=0.3cm of ankor2]{Desacoplar calibrador\\ patrón, acoplar \\ calibrador del cliente. \\
+            $\mathrm{Acople} = 1$};
+        \node (intersection3) [draw, circle, fill=black, inner sep=0pt, minimum size=2pt, below=0.3cm of process7]{};
+        \node (intersection4) [draw, circle, fill=black, inner sep=0pt, minimum size=2pt, right=2.6cm of
+        intersection3]{};
+        \node (process8) [draw, process, align=center, below=0.3cm of intersection3]{Medir ruido \\ de fondo $(N)$};
+        \node (decision3) [draw, conditional, below=0.3cm of process8]{$N \le L_{\mathrm{spec}} - \qty{30}{\dB}$};
+        \node (process9) [draw, process, align=center,
+            below=0.3cm of decision3]{Medir magnitudes: \\ Nivel de presión acústica (por \\ comparación),
+            frecuencia y THD+N \\ $\mathrm{Acople\,} += 1$};
+        \node (decision4) [draw, conditional, below=0.3cm of process9]{$\mathrm{Acople} == 4$};
+        \node (process10) [draw, process, align=center, right=1.2cm of decision3]{Desacoplar calibrador \\ del
+        cliente, rotarlo y \\ volverlo a acoplar};
+        \node (process11) [draw, process, align=center, below=0.3cm of decision4]{Calcular promedios \\ de magnitudes};
+        \node (finish) [draw, terminal, below=0.3cm of process11]{FIN};
+
+        \draw [arrow] (start.south) -- (process1);
+        \draw [arrow] (process1) -- (process2);
+        \draw [thick] (process2) -- (intersection1);
+        \draw [arrow] (intersection1) -- (process3);
+        \draw [arrow] (process3) -- (decision1);
+        \draw [arrow] (decision1.south) -- node[at start, right]{Sí} (process4);
+        \draw [arrow] (decision1.east) -| node[at start, above]{No} (intersection2);
+        \draw [arrow] (intersection2) -- (intersection1);
+        \draw [arrow] (process4) -- (decision2);
+        \draw [arrow] (decision2.east) -| node[at start, above]{No}  (process5.south);
+        \draw [arrow] (process5) |- (intersection2);
+        \draw [arrow] (decision2.south) -- node[at start, right]{Sí} (process6);
+        \draw [thick] (process6) |- (ankor1.center);
+        \draw [thick] (ankor1.center) |- (ankor2.center);
+        \draw [arrow] (ankor2.center) -- (process7);
+        \draw [thick] (process7) -- (intersection3);
+        \draw [arrow] (intersection4) -- (intersection3);
+        \draw [arrow] (intersection3) -- (process8);
+        \draw [arrow] (process8) -- (decision3);
+        \draw [arrow] (decision3.east) -| node[at start, above]{No} (intersection4);
+        \draw [arrow] (decision3.south) -- node[at start, right]{Sí} (process9);
+        \draw [arrow] (process9) -- (decision4);
+        \draw [arrow] (decision4.east) -| node[at start, above]{No} (process10);
+        \draw [arrow] (process10) |- (intersection4);
+        \draw [arrow] (decision4.south) -- node[at start, right]{Sí} (process11);
+        \draw [arrow] (process11) -- (finish);
+    \end{tikzpicture}
+\end{figure}
+\end{document}

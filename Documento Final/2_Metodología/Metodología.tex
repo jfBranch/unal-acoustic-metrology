@@ -134,62 +134,7 @@ En la siguiente figura se presenta un diagrama que describe en general el proces
     \caption{Diagrama de flujo general de la calibración periódica de calibradores acústicos.}
     \label{fig:acoustic_calibrator_calibration_flowchart}
     \centering
-    \begin{tikzpicture}[font=\scriptsize, minimum width=2cm, minimum height=0.5cm]
-        \node (start) at (-5, 0) [draw, terminal]{INICIO};
-        \node (process1) [draw, process, align=center, below=0.3cm of start]{Acoplar calibrador \\ acústico patrón};
-        \node (process2) [draw, process, align=center, below=0.3cm of process1]{Verificar calibrador \\ acústico patrón \\ $\mathrm{Acople} = 1$};
-        \node (intersection1) [draw, circle, fill=black, inner sep=0pt, minimum size=2pt, below=0.3cm of process2]{};
-        \node (intersection2) [draw, circle, fill=black, inner sep=0pt, minimum size=2pt, right=2.6cm of intersection1]{};
-        \node (process3) [draw, process, align=center, below=0.3cm of intersection1]{Medir ruido \\ de fondo $(N)$};
-        \node (decision1) [draw, conditional, below=0.3cm of process3]{$N \le L_{\mathrm{spec}} - \qty{30}{\dB}$};
-        \node (process4) [draw, process, align=center,
-            below=0.3cm of decision1]{Medir magnitudes \\ Voltaje, frecuencia y THD+N \\ $\mathrm{Acople\,} += 1$};
-        \node (decision2) [draw, conditional, below=0.3cm of process4]{$\mathrm{Acople} == 4$};
-        \node (process5) [draw, process, align=center, right=1.2cm of decision1]{Desacoplar calibrador \\ patrón, rotarlo y \\ volverlo a acoplar};
-        \node (process6) [draw, process, align=center, below=0.3cm of decision2]{Calcular promedios \\ de magnitudes};
-        \node (ankor1) [below right=0.3cm and 4.1cm of process6]{};
-        \node (ankor2) [right=6.8cm of start]{};
-        \node (process7) [draw, process, align=center,
-            below=0.3cm of ankor2]{Desacoplar calibrador\\ patrón, acoplar \\ calibrador del cliente. \\ $\mathrm{Acople} = 1$};
-        \node (intersection3) [draw, circle, fill=black, inner sep=0pt, minimum size=2pt, below=0.3cm of process7]{};
-        \node (intersection4) [draw, circle, fill=black, inner sep=0pt, minimum size=2pt, right=2.6cm of intersection3]{};
-        \node (process8) [draw, process, align=center, below=0.3cm of intersection3]{Medir ruido \\ de fondo $(N)$};
-        \node (decision3) [draw, conditional, below=0.3cm of process8]{$N \le L_{\mathrm{spec}} - \qty{30}{\dB}$};
-        \node (process9) [draw, process, align=center,
-            below=0.3cm of decision3]{Medir magnitudes: \\ Nivel de presión acústica (por \\ comparación),
-            frecuencia y THD+N \\ $\mathrm{Acople\,} += 1$};
-        \node (decision4) [draw, conditional, below=0.3cm of process9]{$\mathrm{Acople} == 4$};
-        \node (process10) [draw, process, align=center, right=1.2cm of decision3]{Desacoplar calibrador \\ del cliente, rotarlo y \\ volverlo a acoplar};
-        \node (process11) [draw, process, align=center, below=0.3cm of decision4]{Calcular promedios \\ de magnitudes};
-        \node (finish) [draw, terminal, below=0.3cm of process11]{FIN};
-
-        \draw [arrow] (start.south) -- (process1);
-        \draw [arrow] (process1) -- (process2);
-        \draw [thick] (process2) -- (intersection1);
-        \draw [arrow] (intersection1) -- (process3);
-        \draw [arrow] (process3) -- (decision1);
-        \draw [arrow] (decision1.south) -- node[at start, right]{Sí} (process4);
-        \draw [arrow] (decision1.east) -| node[at start, above]{No} (intersection2);
-        \draw [arrow] (intersection2) -- (intersection1);
-        \draw [arrow] (process4) -- (decision2);
-        \draw [arrow] (decision2.east) -| node[at start, above]{No}  (process5.south);
-        \draw [arrow] (process5) |- (intersection2);
-        \draw [arrow] (decision2.south) -- node[at start, right]{Sí} (process6);
-        \draw [thick] (process6) |- (ankor1.center);
-        \draw [thick] (ankor1.center) |- (ankor2.center);
-        \draw [arrow] (ankor2.center) -- (process7);
-        \draw [thick] (process7) -- (intersection3);
-        \draw [arrow] (intersection4) -- (intersection3);
-        \draw [arrow] (intersection3) -- (process8);
-        \draw [arrow] (process8) -- (decision3);
-        \draw [arrow] (decision3.east) -| node[at start, above]{No} (intersection4);
-        \draw [arrow] (decision3.south) -- node[at start, right]{Sí} (process9);
-        \draw [arrow] (process9) -- (decision4);
-        \draw [arrow] (decision4.east) -| node[at start, above]{No} (process10);
-        \draw [arrow] (process10) |- (intersection4);
-        \draw [arrow] (decision4.south) -- node[at start, right]{Sí} (process11);
-        \draw [arrow] (process11) -- (finish);
-    \end{tikzpicture}
+    \includegraphics[width=\textwidth]{2_Metodología/IEC60942Flowchart}
     \caption*{\footnotesize Fuente: Elaboración propia.}
 \end{figure}
 
