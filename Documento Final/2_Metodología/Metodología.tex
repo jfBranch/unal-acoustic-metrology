@@ -19,7 +19,7 @@ De acuerdo con la normativa internacional, un calibrador acústico es un disposi
     \label{fig:bruel_4226}
     \centering
     \includegraphics[width=0.35\textwidth]{2_Metodología/Figs/bruel4226}
-    \caption*{\footnotesize Tomado de \scriptsize
+    \caption*{\footnotesize Imagen tomada de \scriptsize
     \url{https://www.transcat.com/bruel-kjaer-4226-acoustic-calibrator-94-104-and-114db-used}}
 \end{figure}
 
@@ -31,16 +31,16 @@ Como ejemplo, en la figura~\ref{fig:bruel_4226} se muestra un calibrador acústi
     \label{fig:bruel_4231_coupled}
     \centering
     \includegraphics[width=0.45\textwidth]{2_Metodología/Figs/bruel4231coupled}
-    \caption*{\footnotesize Tomado de \scriptsize \url{https://www.bksv.com/en/knowledge/blog/sound/getting-started-sound-level-meter}}
+    \caption*{\footnotesize Imagen tomada de \scriptsize \url{https://www.bksv.com/en/knowledge/blog/sound/getting-started-sound-level-meter}}
 \end{figure}
 %
 Generalmente los calibradores acústicos son empleados para determinar la sensibilidad en campo de presión (típicamente en $\nicefrac{\unit{\mV}}{\unit{\Pa}}$ o en $\unit{\decibel}$ referenciados a $\qty{1}{\V}$) de modelos especificados de micrófonos en configuraciones dadas, pero también es utilizado para verificar o ajustar la sensibilidad de algún dispositivo o sistema de medición acústica.
 Un ejemplo de calibrador acoplado para comprobar la indicación de un sonómetro se muestra en la figura~\ref{fig:bruel_4231_coupled}.
 
 La norma \mbox{IEC 60942}~\citeyearpar{IEC_TC29_2017} establece una clasificación de los calibradores según sus especificaciones (límites de aceptación), de la más a la menos restrictiva: Clase LS (\emph{laboratory standard}), clase 1 o clase 2.
-La comprobación de que cierto modelo de calibrador cumple con todas las especificaciones normalizadas según su clase la realiza una organización independiente acreditada para hacer pruebas de aprobación de modelo de acuerdo con los lineamientos de la \mbox{IEC 60942} (\mbox{Anexo A}~\citeyear{IEC_TC29_2017}).
+La comprobación de que cierto modelo de calibrador cumple con todas las especificaciones normalizadas según su clase la realiza una organización independiente acreditada para hacer pruebas de aprobación de modelo de acuerdo con los lineamientos de la \mbox{IEC 60942} (\mbox{Anexo A},~\citeyear{IEC_TC29_2017}).
 Adicionalmente, un usuario de un calibrador acústico debería calibrar periódicamente su instrumento para garantizar la trazabilidad a los estándares nacionales y la confiabilidad de sus resultados.
-Esta calibración periódica es llevada a cabo por organismos evaluadores de la conformidad acreditados en \mbox{ISO 17025}~\citeyearpar{ISO_CASCO_2017} para realizar los ensayos periódicos de acuerdo con la \mbox{IEC 60942} (\mbox{Anexo B}~\citeyear{IEC_TC29_2017}).
+Esta calibración periódica es llevada a cabo por organismos evaluadores de la conformidad acreditados en \mbox{ISO 17025}~\citeyearpar{ISO_CASCO_2017} para realizar los ensayos periódicos de acuerdo con la \mbox{IEC 60942} (\mbox{Anexo B},~\citeyear{IEC_TC29_2017}).
 \vfill
 
 \begin{figure}[!hp]
@@ -48,7 +48,7 @@ Esta calibración periódica es llevada a cabo por organismos evaluadores de la 
     \label{fig:bruel_2250_set}
     \centering
     \includegraphics[width=\textwidth]{2_Metodología/Figs/bruel2250set}
-    \caption*{\footnotesize Tomado del Manual de Instrucciones \citepalias{Bruel2016}}
+    \caption*{\footnotesize Imagen tomada del Manual de Instrucciones \citepalias{Bruel2016}.}
 \end{figure}
 
 \subsection{Sonómetros integradores}
@@ -61,7 +61,7 @@ Regularmente el preamplificador hace parte del cuerpo del sonómetro, pero no si
 un sonómetro podría estar provisto de cables de extensión que separen el preamplificador de la unidad de procesamiento.
 
 En cuanto al flujo de señal, el micrófono es un transductor electroacústico que transforma la señal acústica en una señal eléctrica.
-La mayoría de los micrófonos empleados en mediciones acústicas son de condensador, y gracias a su construcción es el mejor tipo para garantizar precisión, estabilidad y confiabilidad en los resultados.\ No obstante, la señal eléctrica proporcionada por un micrófono es de baja amplitud (aún con micrófonos de alta gama cuya sensibilidad se encuentra típicamente en el orden de los $50\,\nicefrac{\unit{\mV}}{\unit{\Pa}}$, por lo que se requiere una amplificación para que la unidad de procesamiento manipule la señal en un nivel adecuado, este es el objetivo del preamplificador.
+La mayoría de los micrófonos empleados en mediciones acústicas son de condensador, y gracias a su construcción es el mejor tipo para garantizar precisión, estabilidad y confiabilidad en los resultados.\ No obstante, la señal eléctrica proporcionada por un micrófono es de baja amplitud (aún con micrófonos de alta gama cuya sensibilidad se encuentra típicamente en el orden de los $50\,\nicefrac{\unit{\mV}}{\unit{\Pa}}$), por lo que se requiere una amplificación para que la unidad de procesamiento manipule la señal en un nivel adecuado, este es el objetivo del preamplificador.
 Luego, en la unidad de procesamiento se ejecutan diferentes cálculos a partir de la señal.
 Los mínimos requeridos por la norma internacional \mbox{IEC 61672--1}~\citeyearpar{IEC_TC29_2013_1} y utilizados en este proyecto se detallan a continuación.
 
@@ -94,7 +94,7 @@ Una comparación entre las respuestas en el tiempo de cada ponderación temporal
     \caption*{\footnotesize Tomado de \citepalias{Bruel2021}.}
 \end{figure}
 
-Esta función exponencial obedece a una constante de tiempo especificada que depende de la ponderación temporal elegida, bien sea F (\emph{fast}, $\tau_F = \qty{125}{\ms}$), S (\emph{slow}, $\tau_S = \qty{1}{\s}$) o I (\emph{impulse}, $\tau_I = \qty{35}{\ms}$).
+Esta función exponencial obedece a una constante de tiempo especificada que depende de la ponderación temporal elegida, bien sea $F$ (\emph{fast}, $\tau_F = \qty{125}{\ms}$), $S$ (\emph{slow}, $\tau_S = \qty{1}{\s}$) o $I$ (\emph{impulse}, $\tau_I = \qty{35}{\ms}$).
 Por lo tanto, tal como lo define la norma, para una señal con ponderación $X$, el nivel de sonido con ponderación temporal $Y$ está dado por la siguiente ecuación:
 %
 \begin{equation}
@@ -104,7 +104,7 @@ Por lo tanto, tal como lo define la norma, para una señal con ponderación $X$,
     {p_0^2}\right) \unit{\dB}.
 \end{equation}
 %
-Donde $\tau_Y$ es la constante de tiempo en segundos de la ponderación temporal, $\xi$ es una variable ficticia del tiempo de integración desde un instante de tiempo en el pasado $(-\infty)$ hasta el instante de observación $t$, $p_X\left(\xi\right)$ es la señal de presión acústica instantánea con ponderación frecuencial $X$, y $p_0$ es el valor de referencia de $\qty{20}{\micro\Pa}$.
+Donde $\tau_Y$ es la constante de tiempo en segundos de la ponderación temporal; $\xi$ es una variable ficticia del tiempo de integración desde un instante de tiempo en el pasado $(-\infty)$ hasta el instante de observación $t$; $p_X\left(\xi\right)$ es la señal de presión acústica instantánea con ponderación frecuencial $X$; y, $p_0$ es el valor de referencia de $\qty{20}{\micro\Pa}$.
 
 Consecuentemente, un nivel de sonido, objeto de evaluación en las pruebas aquí implementadas puede ser $L_{AF}$, $L_{AS}$, $L_{CF}$, $L_{CS}$, $L_{ZF}$ o $L_{ZS}$ para las ponderaciones frecuenciales $A$, $C$, o $Z$ y para las ponderaciones temporales \emph{fast} o \emph{slow}.
 El resultado de la medición de nivel de sonido es mostrado directamente en la pantalla del sonómetro o alguna otra herramienta de visualización como una interfaz web.
@@ -123,7 +123,7 @@ De este modo, el sonómetro será ajustado a un nivel de referencia conocido emi
 \section{Métodos normalizados}
 
 Las especificaciones y metodología de calibración de instrumentación acústica y de vibraciones son normalizadas por el comité técnico 29 de la Comisión Electrotécnica Internacional (IEC) en colaboración con la Organización Internacional de Metrología Legal (OIML).
-A continuación, un resumen del proceso de calibración de calibradores acústicos y sonómetros, con especial enfoque en los pasos operativos, más que en las disposiciones preliminares de las normas.
+A continuación, se hará un resumen del proceso de calibración de calibradores acústicos y sonómetros, con especial enfoque en los pasos operativos, más que en las disposiciones preliminares de las normas.
 
 \subsection{Descripción general de la calibración periódica de calibradores acústicos de acuerdo con la \mbox{IEC 60942:2017}}
 \label{subsec:acoustic_calibrators_calibration_description}
@@ -138,7 +138,7 @@ En la siguiente figura se presenta un diagrama que describe en general el proces
     \caption*{\footnotesize Fuente: Elaboración propia.}
 \end{figure}
 
-Tal como se describe en la \mbox{IEC 60942} (\mbox{Anexo B}~\citeyear{IEC_TC29_2017}), el calibrador acústico o pistófono con todos sus accesorios necesarios (como adoptadores o barómetro) debe ser entregado junto con el manual de instrucciones, si este es requerido por el laboratorio de calibración.
+Tal como se describe en la \mbox{IEC 60942} (\mbox{Anexo B},~\citeyear{IEC_TC29_2017}), el calibrador acústico o pistófono con todos sus accesorios necesarios (como adoptadores o barómetro) debe ser entregado junto con el manual de instrucciones, si este es requerido por el laboratorio de calibración.
 Luego, se hace una inspección visual del calibrador acústico, verificando que todos los controles están funcionando y que la fuente de alimentación está operando dentro de los límites especificados en el manual de instrucciones.
 En seguida, se toman en cuenta o se realizan las siguientes secciones.
 
@@ -153,11 +153,11 @@ Cuando es apropiado, la información suministrada en el manual de instrucciones 
 
 \textbf{Nivel de presión sonora}.
 Después de acoplar el calibrador acústico al micrófono, se debe dejar el tiempo de estabilización indicado en el manual de instrucciones.
-Luego, el nivel de presión sonora generado por el calibrador debe ser medido como un promedio de los valores instantáneos obtenidos durante un periodo $t_{\mathrm{op}}$ de entre $\qtylist{20;25}{\s}$ de operación.
+Luego, el nivel de presión sonora generado por el calibrador debe ser medido como un promedio de los valores instantáneos obtenidos durante un periodo (denotado $t_{\mathrm{op}}$) de entre $\qtylist{20;25}{\s}$ de operación.
 
 Para medir el nivel de presión sonora hay propuestos dos métodos en la norma internacional: Usando un micrófono de referencia o usando un calibrador acústico de referencia para comparación.
 En este proyecto se utiliza el segundo, en el que el nivel del calibrador bajo prueba es determinado por comparación contra el nivel generado por un calibrador acústico calibrado cuya trazabilidad metrológica esté establecida.
-Como la señal a analizar es eléctrica, el nivel de presión se determina como una diferencia logarítmica:
+Como la señal a analizar es eléctrica, el nivel de presión se determina como la siguiente diferencia logarítmica:
 \begin{equation}
     \label{eq:spl_from_voltage}
     L = L_{\mathrm{ref}} + 20\,\log\left(\frac{\bar{v}}{\bar{v}_{\mathrm{ref}}}\right).
@@ -274,14 +274,14 @@ Con el voltaje de referencia se calculan los voltajes correspondientes a los niv
 Se utiliza una señal eléctrica continua de $\qty{1}{\kHz}$ con una amplitud tal que produzca una indicación del nivel de referencia en el sonómetro $\left(\text{i.e. } v_{\mathrm{ref}}\right)$  y se siguen los pasos a continuación:
 %
 \begin{description}
-    \item[PFT-1] Registrar el nivel indicado en las ponderaciones frecuenciales $A$, $C$ y $Z$ (según estén disponibles) con el sonómetro ajustado en ponderación temporal $F$ o nivel promediado en el tiempo\footnote{Como en este trabajo se busca reconocer el resultado instantáneo mostrado en pantalla, el nivel elegido preferiblemente es el que tiene ponderación temporal F.}; i.e. $L_{AF}, L_{CF}, L_{ZF}, L_{Aeq}, L_{Ceq}$ o $L_{Zeq}$.
+    \item[PFT-1] Registrar el nivel indicado en las ponderaciones frecuenciales $A$, $C$ y $Z$ (según estén disponibles) con el sonómetro ajustado en ponderación temporal $F$ o nivel promediado en el tiempo\footnote{Como en este trabajo se busca reconocer el resultado instantáneo mostrado en pantalla, el nivel elegido preferiblemente es el que tiene ponderación temporal $F$.}; i.e. $L_{AF}, L_{CF}, L_{ZF}, L_{Aeq}, L_{Ceq}$ o $L_{Zeq}$.
 
-    \item[PFT-2\label{itm:time_frequency_weight_registration}] Registrar el nivel indicado en las ponderaciones temporales F y S, y el nivel promediado en el tiempo\footnote{El nivel promediado en el tiempo sólo sería posible registrarlo automáticamente si este es mostrado en pantalla.} (según estén disponibles) con el sonómetro ajustado en ponderación frecuencial $A$; i.e. $L_{AF}, L_{AS}$ o $L_{Aeq}$.
+    \item[PFT-2\label{itm:time_frequency_weight_registration}] Registrar el nivel indicado en las ponderaciones temporales $F$ y $S$, y el nivel promediado en el tiempo\footnote{El nivel promediado en el tiempo sólo sería posible registrarlo automáticamente si este es mostrado en pantalla.} (según estén disponibles) con el sonómetro ajustado en ponderación frecuencial $A$; i.e. $L_{AF}, L_{AS}$ o $L_{Aeq}$.
 
     \item[PFT-3] Calcular las desviaciones de los niveles ponderados en frecuencia $C$ y $Z$ respecto al ponderado en frecuencia $A$ del paso 1.
     Estas desviaciones no deben superar los límites de aceptación de $\pm\qty{0.2}{\dB}$.
 
-    \item[PFT-4] Calcular las desviaciones del nivel promediado en el tiempo y del nivel con ponderación temporal S, respecto al nivel con ponderación temporal F del paso~\ref{itm:time_frequency_weight_registration}.
+    \item[PFT-4] Calcular las desviaciones del nivel promediado en el tiempo y del nivel con ponderación temporal $S$, respecto al nivel con ponderación temporal $F$ del paso~\ref{itm:time_frequency_weight_registration}.
     Estas desviaciones no deben superar los límites de aceptación de $\pm\qty{0.1}{\dB}$.
 \end{description}
 
@@ -291,7 +291,7 @@ Se utilizan señales eléctricas sinusoidales continuas para todas las ponderaci
 Y se siguen los pasos a continuación:
 %
 \begin{description}
-    \item[PFSE-1] Se ajusta el sonómetro para mostrar niveles de sonido con ponderación temporal F, niveles promediados en el tiempo o niveles de exposición sonora \footnote{Como en este trabajo se busca reconocer el resultado instantáneo mostrado en pantalla, el nivel elegido es preferiblemente el que tiene ponderación temporal F.}.
+    \item[PFSE-1] Se ajusta el sonómetro para mostrar niveles de sonido con ponderación temporal $F$, niveles promediados en el tiempo o niveles de exposición sonora \footnote{Como en este trabajo se busca reconocer el resultado instantáneo mostrado en pantalla, el nivel elegido es preferiblemente el que tiene ponderación temporal $F$.}.
 
     \item[PFSE-2] Se ajusta el sonómetro en el rango de niveles de referencia y se envía una señal de $\qty{1}{\kHz}$ cuya amplitud produzca una indicación en el sonómetro que sea $\qty{45}{\dB}$ menos que el límite superior indicado en el manual de instrucciones para el rango de funcionamiento lineal a $\qty{1}{\kHz}$.
 
@@ -332,7 +332,7 @@ Y se siguen los pasos a continuación:
 \end{description}
 
 \subsubsection{Linealidad de nivel en el rango de niveles de referencia}
-Se utilizan señales eléctricas sinusoidales continuas a una frecuencia de $\qty{8}{\kHz}$ con el sonómetro ajustado en el rango de niveles de referencia, en ponderación frecuencial $A$, y con ponderación temporal F o un nivel promediado en el tiempo, i.e. $L_{AF}$ o $L_{Aeq}$, y se siguen los pasos a continuación:
+Se utilizan señales eléctricas sinusoidales continuas a una frecuencia de $\qty{8}{\kHz}$ con el sonómetro ajustado en el rango de niveles de referencia, en ponderación frecuencial $A$, y con ponderación temporal $F$ o un nivel promediado en el tiempo, i.e. $L_{AF}$ o $L_{Aeq}$, y se siguen los pasos a continuación:
 %
 \begin{description}
     \item[LNRR-1] Comenzar con una señal de entrada cuya amplitud produce el punto de partida para los ensayos de linealidad a $\qty{8}{\kHz}$ especificado en el manual de instrucciones.
@@ -398,9 +398,9 @@ Los instrumentos presentados a continuación fueron elegidos teniendo en cuenta 
                     \item Computador
                     \item Interfaz GPIB Keysight 82357B
                 \end{enumerate}}
-            \textbf{\color{blue} —} Conexión GPIB \\
-            \textbf{\color{orange} —} Conexión Lemo 7 \\
-            \textbf{—} Conexión BNC}};
+            \raggedright\qquad\textbf{\color{blue} —} Conexión GPIB \\
+            \raggedright\qquad\textbf{\color{orange} —} Conexión Lemo 7 \\
+            \raggedright\qquad\textbf{\color{oliva_green} —} Conexión BNC}};
         \end{tikzpicture}
     \end{subfigure}
     \caption*{\footnotesize Fuente: Elaboración propia.}
@@ -449,7 +449,7 @@ A continuación se describen las características de cada instrumento.
     \end{subfigure}
 \end{figure}
 
-Como bien indica la norma \mbox{IEC 60942}~\citeyearpar{IEC_TC29_2017}, uno de los posibles métodos para calibrar calibradores acústicos es por comparación contra un calibrador patrón.\ Ese es el método elegido en este trabajo.
+Como indica la norma \mbox{IEC 60942}~\citeyearpar{IEC_TC29_2017}, uno de los posibles métodos para calibrar calibradores acústicos es por comparación contra un calibrador patrón.\ Ese es el método elegido en este trabajo.
 El calibrador acústico patrón elegido debe ser de las especificaciones más altas posibles, y su elección también determina el alcance de calibración del laboratorio.
 Para este trabajo se emplea el calibrador Brüel \& Kjær 4231 (ver figura~\ref{fig:bruel_4231}), el cual es de clase LS y tiene disponibles dos niveles de presión sonora ($\qtylist{94;114}{\dB}$) a $\qty{1}{\kHz}$.
 La trazabilidad de este calibrador se mantiene directamente con el fabricante.
@@ -458,8 +458,7 @@ El método requiere también un micrófono de referencia con el cuál se pueda t
 Se empleó el micrófono GRAS 40CE (ver figura~\ref{fig:gras_40CE}), el cual es un micrófono de campo libre con una sensibilidad típica de $\num{40}\,\nicefrac{\unit{\mV}}{\unit{\Pa}}$ y cuenta con su certificado de calibración de fábrica, en el que es posible determinar la diferencia entre las respuestas de campo libre y de campo de presión a $\qty{1}{\kHz}$.
 
 La señal eléctrica del micrófono debe ser adecuada antes de medirla, por lo que se usa un preamplificador 01dB PRE22 (ver figura~\ref{fig:PRE22_01dB}).
-Para polarizar el preamplificador se usa un módulo de poder GRAS 12AK, el cual también puede darle mayor ganancia a la señal para mejorar la relación señal a ruido, aplicarle un filtro paso alto para eliminar la interferencia de baja frecuencia y permite hacer el acople de impedancias apropiado para conectar la señal a la entrada de los instrumentos de medición.
-Este módulo se muestra en la figura~\ref{fig:gras_12AK}.
+Para polarizar el preamplificador se usa un módulo de poder GRAS 12AK (mostrado en la figura~\ref{fig:gras_12AK}), el cual también puede darle mayor ganancia a la señal para mejorar la relación señal a ruido, aplicarle un filtro paso alto para eliminar la interferencia de baja frecuencia y permite hacer el acople de impedancias apropiado para conectar la señal a la entrada de los instrumentos de medición.
 
 \begin{figure}[!h]
     \caption{Instrumentos de medición para la calibración periódica de calibradores acústicos.}
@@ -486,7 +485,7 @@ Cabe resaltar que, dependiendo de la escala, no todos los dígitos están dispon
 Este multímetro mantiene su trazabilidad a los patrones nacionales.
 
 En cuanto a la THD+N, podría usarse una interfaz de sonido con un software de análisis en frecuencia, pero establecer su trazabilidad metrológica es poco factible.
-Se requiere un instrumento que igualmente pueda ser calibrado por un laboratorio acreditado para esta magnitud inusual.
+Se requiere un instrumento que igualmente pueda ser calibrado por un laboratorio acreditado para esta magnitud (que es una magnitud bastante inusual).
 Tal es el analizador de audio Keysight U8903B, que cuenta con una resolución de $7$ dígitos, disponibles completamente sólo mediante la interfaz remota.
 Este instrumento cuenta con bastantes prestaciones especializadas para el análisis de audio.
 Entre estas, unas importantes para los propósitos de este trabajo son: Establecer la impedancia de entrada, tipo de entrada (balanceada o no balanceada), desacople DC de la señal de entrada, filtros paso alto o paso bajo para la entrada, frecuencia de muestreo variable y cálculo de estadísticas en tiempo real.
@@ -517,8 +516,8 @@ Ambos instrumentos de Keysight cuentan con la interfaz de comunicación GPIB, me
                     \item Computador
                     \item Interfaz GPIB Keysight 82357B
                 \end{enumerate}}
-            \textbf{\color{blue} —} Conexión GPIB \\
-            \textbf{—} Conexión BNC}};
+            \raggedright\qquad\textbf{\color{blue} —} Conexión GPIB \\
+            \raggedright\qquad\textbf{\color{oliva_green} —} Conexión BNC}};
         \end{tikzpicture}
     \end{subfigure}
     \caption*{\footnotesize Fuente: Elaboración propia.}
@@ -548,11 +547,11 @@ A continuación se describe cada instrumento.
 \end{figure}
 %
 El flujo de señal inicia en el generador de señales.
-En este trabajo se empleó el generador de funciones arbitrarias Keysight 33511B (véase figura~\ref{fig:keysight_33511B}), que tiene excelentes prestaciones como la definición personalizada de formas de onda y un desempeño superior dada su baja distorsión armónica (típicamente $\num{0.04}\%$), amplio ancho de banda e intervalo de voltaje, bajo efecto de \emph{jitter}, su filtro \emph{anti-alias}, su resolución de amplitud de $\qty{16}{\bit}$ y de frecuencia de $\qty{1}{\micro\Hz}$, respuesta en frecuencia plana ($\pm\qty{0.10}{\dB}$ en todo el rango inferior a $\qty{100}{\kHz}$), alta precisión en amplitud ($\pm1\%$ del valor establecido $\pm\qty{1}{\mV}$) y en frecuencia ($\pm\qty{2}{ppm}$ del valor establecido $\pm\qty{15}{\pico\Hz}$).
+En este trabajo se empleó el generador de funciones arbitrarias Keysight 33511B (véase figura~\ref{fig:keysight_33511B}), que tiene significativas prestaciones como la definición personalizada de formas de onda y un desempeño superior dada su baja distorsión armónica (típicamente $\num{0.04}\%$), amplio ancho de banda e intervalo de voltaje, bajo efecto de \emph{jitter}, su filtro \emph{anti-alias}, su resolución de amplitud de $\qty{16}{\bit}$ y de frecuencia de $\qty{1}{\micro\Hz}$, respuesta en frecuencia plana ($\pm\qty{0.10}{\dB}$ en todo el rango inferior a $\qty{100}{\kHz}$), alta precisión en amplitud ($\pm1\%$ del valor establecido $\pm\qty{1}{\mV}$) y en frecuencia ($\pm\qty{2}{ppm}$ del valor establecido $\pm\qty{15}{\pico\Hz}$).
 El generador 33511B también cuenta con la interfaz de comunicación GPIB para su control remoto.
 Este generador cumple la función de patrón de medición, generando señales eléctricas para \emph{simular} los niveles de presión sonora, y mantiene su trazabilidad a los patrones nacionales.
 
-A pesar de que el generador tiene un rango de voltaje AC amplio ($\qty{1}{\mVpp}$ a $\qty{10}{\Vpp}$), para la mayoría de aplicaciones en sonómetros (cuyos micrófonos tienen sensibilidades típicas entre $\qtyrange{40}{50}{\mV}$), con el fin de alcanzar los niveles más altos (cercanos a los $\qty{140}{\dB}$), se requieren voltajes del orden de $\qty{13}{\Vrms}$ aproximadamente, y para los niveles más bajos (cercanos a los $\qty{23}{\dB}$), se requieren voltajes del orden de $\qty{7}{\uVrms}$.
+A pesar de que el generador tiene un rango de voltaje AC amplio ($\qty{1}{\mVpp}$ a $\qty{10}{\Vpp}$), para la mayoría de aplicaciones en sonómetros (cuyos micrófonos tienen sensibilidades típicas entre $\qtylist{40;50}{\mV}$), se requieren voltajes del orden de $\qty{13}{\Vrms}$ aproximadamente, con el fin de alcanzar los niveles más altos (cercanos a los $\qty{140}{\dB}$). Y para los niveles más bajos (cercanos a los $\qty{23}{\dB}$), se requieren voltajes del orden de $\qty{7}{\uVrms}$.
 Por tal motivo se hace necesario un dispositivo adicional que amplifique la señal hasta al menos $\qty{6}{\dB}$ más y que sea capaz de atenuarla hasta al menos $\qty{50}{\dB}$.
 Para esto se usó un \emph{Decade Box} o atenuador programable fabricado por ACOEM, el cual se muestra en la figura~\ref{fig:decade_box}.
 

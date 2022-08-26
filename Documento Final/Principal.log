@@ -1,11 +1,11 @@
-This is XeTeX, Version 3.141592653-2.6-0.999994 (MiKTeX 22.7) (preloaded format=xelatex 2022.7.20)  20 JUL 2022 20:35
+This is XeTeX, Version 3.141592653-2.6-0.999994 (MiKTeX 22.8) (preloaded format=xelatex 2022.8.25)  25 AUG 2022 23:25
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
 **./Principal.tex
 (Principal.tex
 LaTeX2e <2022-06-01> patch level 5
-L3 programming layer <2022-07-04>
+L3 programming layer <2022-08-23>
 (C:\Users\juan_\AppData\Local\Programs\MiKTeX\tex/latex/koma-script\scrbook.cls
 Document Class: scrbook 2022/07/04 v3.37 KOMA-Script document class (book)
 
@@ -175,7 +175,7 @@ LaTeX Font Info:    Trying to load font information for T1+lmr on input line 11
 File: t1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 ))
 (C:\Users\juan_\AppData\Local\Programs\MiKTeX\tex/generic/babel\babel.sty
-Package: babel 2022/06/26 3.77 The Babel package
+Package: babel 2022/07/20 3.78 The Babel package
 \babel@savecnt=\count191
 \U@D=\dimen139
 \l@unhyphenated=\language79
@@ -441,7 +441,7 @@ Package: nicefrac 1998/08/04 v0.9b Nice fractions
 Package: ifthen 2022/04/13 v1.1d Standard LaTeX ifthen package (DPC)
 ))
 (C:\Users\juan_\AppData\Local\Programs\MiKTeX\tex/latex/siunitx\siunitx.sty
-Package: siunitx 2022-06-22 v3.1.4 A comprehensive (SI) units package
+Package: siunitx 2022-08-08 v3.1.6 A comprehensive (SI) units package
 \l__siunitx_angle_tmp_dim=\dimen174
 \l__siunitx_angle_marker_box=\box61
 \l__siunitx_angle_unit_box=\box62
@@ -1236,8 +1236,8 @@ Package: framed 2011/10/22 v 0.96: framed or shaded text with page breaks
 \@float@every@listing=\toks44
 \c@listing=\count377
 )
-runsystem(if not exist _minted-20220720_Proyecto_de_grado mkdir _minted-2022072
-0_Proyecto_de_grado)...executed.
+runsystem(if not exist _minted-20220825_Proyecto_de_grado mkdir _minted-2022082
+5_Proyecto_de_grado)...executed.
 
 
 (C:\Users\juan_\AppData\Local\Programs\MiKTeX\tex/latex/graphics\lscape.sty
@@ -1247,11 +1247,11 @@ Package: lscape 2020/05/28 v3.02 Landscape Pages (DPC)
 (C:\Users\juan_\AppData\Local\Programs\MiKTeX\tex/latex/l3packages/l3keys2e\l3k
 eys2e.sty
 (C:\Users\juan_\AppData\Local\Programs\MiKTeX\tex/latex/l3kernel\expl3.sty
-Package: expl3 2022-07-04 L3 programming layer (loader) 
+Package: expl3 2022-08-23 L3 programming layer (loader) 
 
 (C:\Users\juan_\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3backend-xet
 ex.def
-File: l3backend-xetex.def 2022-07-01 L3 backend support: XeTeX
+File: l3backend-xetex.def 2022-08-23 L3 backend support: XeTeX
 \g__graphics_track_int=\count378
 \l__pdf_internal_box=\box127
 \g__pdf_backend_object_int=\count379
@@ -1577,49 +1577,49 @@ Space,Ligatures
 (fontspec)             \tex_hyphenchar:D \font =-1\scan_stop: 
 
 runsystem(for ^%i in (pygmentize.exe pygmentize.bat pygmentize.cmd) do set > 20
-220720_Proyecto_de_grado.aex <nul: /p x=^%~$PATH:i>> 20220720_Proyecto_de_grado
+220825_Proyecto_de_grado.aex <nul: /p x=^%~$PATH:i>> 20220825_Proyecto_de_grado
 .aex)...executed.
 
-runsystem(del 20220720_Proyecto_de_grado.aex)...executed.
+runsystem(del 20220825_Proyecto_de_grado.aex)...executed.
 
 
-(20220720_Proyecto_de_grado.aux (0_Portada/Portada.aux)
+(20220825_Proyecto_de_grado.aux (0_Portada/Portada.aux)
 LaTeX Info: Redefining \. on input line 25.
 LaTeX Info: Redefining \% on input line 25.
  (1_Intro/Intro.aux)
 (2_Metodología/Metodología.aux) (3_Reconocimiento/Reconocimiento.aux)
 (4_Implementación/Implementación.aux) (5_MC_incertidumbre/MC_incertidumbre.aux)
 (6_Conclusiones/Conclusiones.aux) (Anexos/Anexos.aux))
-\openout1 = `20220720_Proyecto_de_grado.aux'.
+\openout1 = `20220825_Proyecto_de_grado.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 167.
-LaTeX Font Info:    ... okay on input line 167.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 167.
-LaTeX Font Info:    ... okay on input line 167.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 167.
-LaTeX Font Info:    ... okay on input line 167.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 167.
-LaTeX Font Info:    ... okay on input line 167.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 167.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 169.
+LaTeX Font Info:    ... okay on input line 169.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 169.
+LaTeX Font Info:    ... okay on input line 169.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 169.
+LaTeX Font Info:    ... okay on input line 169.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 169.
+LaTeX Font Info:    ... okay on input line 169.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 169.
 LaTeX Font Info:    Trying to load font information for TS1+cmr on input line 1
-67.
+69.
 
 (C:\Users\juan_\AppData\Local\Programs\MiKTeX\tex/latex/base\ts1cmr.fd
 File: ts1cmr.fd 2019/12/16 v2.5j Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 167.
-LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 167.
-LaTeX Font Info:    ... okay on input line 167.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 167.
-LaTeX Font Info:    ... okay on input line 167.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 167.
-LaTeX Font Info:    ... okay on input line 167.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 167.
-LaTeX Font Info:    ... okay on input line 167.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 167.
-LaTeX Font Info:    ... okay on input line 167.
-LaTeX Info: Redefining \. on input line 167.
-LaTeX Info: Redefining \% on input line 167.
+LaTeX Font Info:    ... okay on input line 169.
+LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 169.
+LaTeX Font Info:    ... okay on input line 169.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 169.
+LaTeX Font Info:    ... okay on input line 169.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 169.
+LaTeX Font Info:    ... okay on input line 169.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 169.
+LaTeX Font Info:    ... okay on input line 169.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 169.
+LaTeX Font Info:    ... okay on input line 169.
+LaTeX Info: Redefining \. on input line 169.
+LaTeX Info: Redefining \% on input line 169.
 
 (C:\Users\juan_\AppData\Local\Programs\MiKTeX\tex/latex/translations/dicts\tran
 slations-basic-dictionary-spanish.trsl
@@ -1627,7 +1627,7 @@ File: translations-basic-dictionary-spanish.trsl (spanish translation file `tra
 nslations-basic-dictionary')
 )
 Package translations Info: loading dictionary `translations-basic-dictionary' f
-or `spanish'. on input line 167.
+or `spanish'. on input line 169.
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: hyperref package is loaded.
 Package caption Info: hypcap package is loaded.
@@ -1635,11 +1635,11 @@ Package caption Info: listings package is loaded.
 Package caption Info: rotating package is loaded.
 Package caption Info: End \AtBeginDocument code.
 \c@lstlisting=\count415
-Package hyperref Info: Link coloring ON on input line 167.
- (20220720_Proyecto_de_grado.out)
-(20220720_Proyecto_de_grado.out)
+Package hyperref Info: Link coloring ON on input line 169.
+ (20220825_Proyecto_de_grado.out)
+(20220825_Proyecto_de_grado.out)
 \@outlinefile=\write6
-\openout6 = `20220720_Proyecto_de_grado.out'.
+\openout6 = `20220825_Proyecto_de_grado.out'.
 
 Class scrbook Info: loading recommended package `bookmark'.
 (scrbook)           Using `bookmark' together with `hyperref' is recommended,
@@ -1648,9 +1648,9 @@ Class scrbook Info: loading recommended package `bookmark'.
 (scrbook)           `bookmarkpackage=false' before \begin{document} and
 (scrbook)           you can avoid this message adding:
 (scrbook)             \usepackage{bookmark}
-(scrbook)           before \begin{document} on input line 167.
+(scrbook)           before \begin{document} on input line 169.
 Class scrbook Info: temporary deactivation of babel-spanish quoting  on input l
-ine 167.
+ine 169.
 
 (C:\Users\juan_\AppData\Local\Programs\MiKTeX\tex/latex/bookmark\bookmark.sty
 Package: bookmark 2020-11-06 v1.29 PDF bookmarks (HO)
@@ -1660,7 +1660,7 @@ f
 File: bkm-dvipdfm.def 2020-11-06 v1.29 bookmark driver for dvipdfm (HO)
 \BKM@id=\count416
 ))
-Class scrbook Info: reactivation of babel-spanish quoting  on input line 167.
+Class scrbook Info: reactivation of babel-spanish quoting  on input line 169.
 \openout2 = `0_Portada/Portada.aux'.
 
  (0_Portada/Portada.tex
@@ -1699,7 +1699,7 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 
 ]) [10
 
-] (20220720_Proyecto_de_grado.toc
+] (20220825_Proyecto_de_grado.toc
 Package tocbasic Info: Using my definition of `\numberline' on input line 1.
 Package tocbasic Info: Using my definition of `\numberline' on input line 2.
 LaTeX Info: Redefining \. on input line 3.
@@ -1707,11 +1707,6 @@ LaTeX Info: Redefining \% on input line 3.
 Package tocbasic Info: Using my definition of `\numberline' on input line 4.
 Package tocbasic Info: Using my definition of `\numberline' on input line 5.
 Package tocbasic Info: Using my definition of `\numberline' on input line 6.
-
-Overfull \hbox (0.57596pt too wide) detected at line 6
- [][]
- []
-
 Package tocbasic Info: Using my definition of `\numberline' on input line 7.
 Package tocbasic Info: Using my definition of `\numberline' on input line 8.
 Package tocbasic Info: Using my definition of `\numberline' on input line 9.
@@ -1732,9 +1727,7 @@ Package tocbasic Info: Using my definition of `\numberline' on input line 27.
 Package tocbasic Info: Using my definition of `\numberline' on input line 28.
 Package tocbasic Info: Using my definition of `\numberline' on input line 29.
 Package tocbasic Info: Using my definition of `\numberline' on input line 30.
-[11
-
-
+ [11
 
 
 
@@ -1769,13 +1762,15 @@ Package tocbasic Info: Using my definition of `\numberline' on input line 61.
 Package tocbasic Info: Using my definition of `\numberline' on input line 62.
 Package tocbasic Info: Using my definition of `\numberline' on input line 63.
 Package tocbasic Info: Using my definition of `\numberline' on input line 64.
+Package tocbasic Info: Using my definition of `\numberline' on input line 65.
 )
 \tf@toc=\write7
-\openout7 = `20220720_Proyecto_de_grado.toc'.
+\openout7 = `20220825_Proyecto_de_grado.toc'.
 
-LaTeX Info: Redefining \. on input line 174.
-LaTeX Info: Redefining \% on input line 174.
- [12] (20220720_Proyecto_de_grado.lof
+LaTeX Info: Redefining \. on input line 177.
+LaTeX Info: Redefining \% on input line 177.
+ [12]
+(20220825_Proyecto_de_grado.lof
 LaTeX Info: Redefining \. on input line 1.
 LaTeX Info: Redefining \% on input line 1.
 Package tocbasic Info: Using my definition of `\numberline' on input line 3.
@@ -1805,8 +1800,6 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [13
 
-
-
 ]
 Package tocbasic Info: Using my definition of `\numberline' on input line 27.
 Package tocbasic Info: Using my definition of `\numberline' on input line 29.
@@ -1822,39 +1815,36 @@ Package tocbasic Info: Using my definition of `\numberline' on input line 38.
 Package tocbasic Info: Using my definition of `\numberline' on input line 39.
 Package tocbasic Info: Using my definition of `\numberline' on input line 40.
 Package tocbasic Info: Using my definition of `\numberline' on input line 41.
-Package tocbasic Info: Using my definition of `\numberline' on input line 42.
 Package tocbasic Info: Using my definition of `\numberline' on input line 43.
 Package tocbasic Info: Using my definition of `\numberline' on input line 44.
 Package tocbasic Info: Using my definition of `\numberline' on input line 45.
-Package tocbasic Info: Using my definition of `\numberline' on input line 47.
+Package tocbasic Info: Using my definition of `\numberline' on input line 46.
+Package tocbasic Info: Using my definition of `\numberline' on input line 49.
+Package tocbasic Info: Using my definition of `\numberline' on input line 50.
+
+Underfull \vbox (badness 1577) has occurred while \output is active []
+
+LaTeX Info: Redefining \. on input line 51.
+LaTeX Info: Redefining \% on input line 51.
+ [14]
+Package tocbasic Info: Using my definition of `\numberline' on input line 51.
+Package tocbasic Info: Using my definition of `\numberline' on input line 52.
 )
 \tf@lof=\write8
-\openout8 = `20220720_Proyecto_de_grado.lof'.
+\openout8 = `20220825_Proyecto_de_grado.lof'.
 
+LaTeX Info: Redefining \. on input line 180.
+LaTeX Info: Redefining \% on input line 180.
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-LaTeX Info: Redefining \. on input line 177.
-LaTeX Info: Redefining \% on input line 177.
- [14]
-LaTeX Info: Redefining \. on input line 177.
-LaTeX Info: Redefining \% on input line 177.
-
-[15] [16
-
-
-] (20220720_Proyecto_de_grado.lot
+[15] (20220825_Proyecto_de_grado.lot
 LaTeX Info: Redefining \. on input line 1.
 LaTeX Info: Redefining \% on input line 1.
 Package tocbasic Info: Using my definition of `\numberline' on input line 6.
 )
 \tf@lot=\write9
-\openout9 = `20220720_Proyecto_de_grado.lot'.
+\openout9 = `20220825_Proyecto_de_grado.lot'.
 
- [17
-
-] [18
-
+ [1
 
 ]
 \openout2 = `1_Intro/Intro.aux'.
@@ -1876,22 +1866,22 @@ Class scrbook Warning: \float@addtolists detected!
 (scrbook)              a package that still implements the
 (scrbook)              deprecated \float@addtolist interface.
 
-[1
+[2
 
 
 ]
 File: 1_Intro/AP146Laboratory.png Graphic file (type bmp)
 <1_Intro/AP146Laboratory.png>
-LaTeX Info: Redefining \. on input line 70.
-LaTeX Info: Redefining \% on input line 70.
- [2]
+LaTeX Info: Redefining \. on input line 71.
+LaTeX Info: Redefining \% on input line 71.
+ [3]
 File: 1_Intro/BK3630A.png Graphic file (type bmp)
 <1_Intro/BK3630A.png>
 
 ! Misplaced alignment tab character &.
 \NAT@nm ->{Br{\"{u}}el &
                          Kj{\ae }r}
-l.76 ...tnotesize Tomado de~\cite{BruelKjaer2000}}
+l.77 ...e Imagen tomada de~\cite{BruelKjaer2000}.}
                                                   
 I can't figure out why you would want to use a tab mark
 here. If you just want an ampersand, the remedy is
@@ -1903,7 +1893,7 @@ might try typing `S' now just to see what is salvageable.
 ! Misplaced alignment tab character &.
 \NAT@nm ->{Br{\"{u}}el &
                          Kj{\ae }r}
-l.76 ...tnotesize Tomado de~\cite{BruelKjaer2000}}
+l.77 ...e Imagen tomada de~\cite{BruelKjaer2000}.}
                                                   
 I can't figure out why you would want to use a tab mark
 here. If you just want an ampersand, the remedy is
@@ -1915,23 +1905,23 @@ might try typing `S' now just to see what is salvageable.
 
 Underfull \vbox (badness 1019) has occurred while \output is active []
 
-LaTeX Info: Redefining \. on input line 100.
-LaTeX Info: Redefining \% on input line 100.
- [3]
-LaTeX Info: Redefining \. on input line 129.
-LaTeX Info: Redefining \% on input line 129.
+LaTeX Info: Redefining \. on input line 101.
+LaTeX Info: Redefining \% on input line 101.
+ [4]
+LaTeX Info: Redefining \. on input line 130.
+LaTeX Info: Redefining \% on input line 130.
 
-[4])
-LaTeX Info: Redefining \. on input line 183.
-LaTeX Info: Redefining \% on input line 183.
- [5]
+[5])
+LaTeX Info: Redefining \. on input line 185.
+LaTeX Info: Redefining \% on input line 185.
+ [6]
 \openout2 = `2_Metodología/Metodología.aux'.
 
  (2_Metodología/Metodología.tex
 chapter 2.
 File: 2_Metodología/Figs/bruel4226.jpg Graphic file (type bmp)
 <2_Metodología/Figs/bruel4226.jpg>
-[6
+[7
 
 
 
@@ -1947,10 +1937,10 @@ LaTeX Warning: Float too large for page by 0.13675pt on input line 52.
 
 LaTeX Info: Redefining \. on input line 62.
 LaTeX Info: Redefining \% on input line 62.
-[7]
+[8]
 LaTeX Info: Redefining \. on input line 62.
 LaTeX Info: Redefining \% on input line 62.
- [8]
+ [9]
 File: 2_Metodología/Figs/frequency-weighings.png Graphic file (type bmp)
 <2_Metodología/Figs/frequency-weighings.png>
 
@@ -1958,44 +1948,44 @@ Underfull \vbox (badness 4673) has occurred while \output is active []
 
 LaTeX Info: Redefining \. on input line 78.
 LaTeX Info: Redefining \% on input line 78.
- [9]
+ [10]
 File: 2_Metodología/Figs/time-weightings.png Graphic file (type bmp)
 <2_Metodología/Figs/time-weightings.png>
 LaTeX Info: Redefining \. on input line 108.
 LaTeX Info: Redefining \% on input line 108.
 
-[10]
+[11]
 File: 2_Metodología/IEC60942Flowchart.pdf Graphic file (type pdf)
 <use 2_Metodología/IEC60942Flowchart.pdf>
 LaTeX Info: Redefining \. on input line 140.
 LaTeX Info: Redefining \% on input line 140.
- [11]
+ [12]
 LaTeX Info: Redefining \. on input line 150.
 LaTeX Info: Redefining \% on input line 150.
- [12]
+ [13]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 LaTeX Info: Redefining \. on input line 179.
 LaTeX Info: Redefining \% on input line 179.
- [13]
+ [14]
 LaTeX Info: Redefining \. on input line 247.
 LaTeX Info: Redefining \% on input line 247.
 
-[14]
+[15]
 LaTeX Info: Redefining \. on input line 272.
 LaTeX Info: Redefining \% on input line 272.
- [15]
+ [16]
 LaTeX Info: Redefining \. on input line 297.
 LaTeX Info: Redefining \% on input line 297.
- [16]
+ [17]
 LaTeX Info: Redefining \. on input line 331.
 LaTeX Info: Redefining \% on input line 331.
- [17]
+ [18]
 LaTeX Info: Redefining \. on input line 367.
 LaTeX Info: Redefining \% on input line 367.
- [18]
-File: 2_Metodología/Figs/IEC60942connections.png Graphic file (type bmp)
-<2_Metodología/Figs/IEC60942connections.png>
+ [19]
+File: 2_Metodología/Figs/IEC60942connections.pdf Graphic file (type pdf)
+<use 2_Metodología/Figs/IEC60942connections.pdf>
 
 Overfull \hbox (8.39914pt too wide) in paragraph at lines 404--405
  [][] 
@@ -2017,57 +2007,57 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 LaTeX Info: Redefining \. on input line 456.
 LaTeX Info: Redefining \% on input line 456.
-[19]
+[20]
 LaTeX Info: Redefining \. on input line 459.
 LaTeX Info: Redefining \% on input line 459.
- [20]
+ [21]
 File: 2_Metodología/Figs/keysight34461A.jpg Graphic file (type bmp)
 <2_Metodología/Figs/keysight34461A.jpg>
 
-Overfull \hbox (16.6005pt too wide) in paragraph at lines 469--470
+Overfull \hbox (16.6005pt too wide) in paragraph at lines 468--469
  [][] 
  []
 
 File: 2_Metodología/Figs/keysightU8903B.jpg Graphic file (type bmp)
 <2_Metodología/Figs/keysightU8903B.jpg>
 
-Overfull \hbox (15.19827pt too wide) in paragraph at lines 476--477
+Overfull \hbox (15.19827pt too wide) in paragraph at lines 475--476
  [][] 
  []
 
-LaTeX Info: Redefining \. on input line 494.
-LaTeX Info: Redefining \% on input line 494.
-[21]
-File: 2_Metodología/Figs/IEC61672-3connections.png Graphic file (type bmp)
-<2_Metodología/Figs/IEC61672-3connections.png>
-
-Overfull \hbox (8.39914pt too wide) in paragraph at lines 522--523
- [][] 
- []
-
-LaTeX Info: Redefining \. on input line 530.
-LaTeX Info: Redefining \% on input line 530.
+LaTeX Info: Redefining \. on input line 493.
+LaTeX Info: Redefining \% on input line 493.
 [22]
+File: 2_Metodología/Figs/IEC61672-3connections.pdf Graphic file (type pdf)
+<use 2_Metodología/Figs/IEC61672-3connections.pdf>
+
+Overfull \hbox (8.39914pt too wide) in paragraph at lines 521--522
+ [][] 
+ []
+
+LaTeX Info: Redefining \. on input line 529.
+LaTeX Info: Redefining \% on input line 529.
+[23]
 File: 2_Metodología/Figs/keysight33511B.jpg Graphic file (type bmp)
 <2_Metodología/Figs/keysight33511B.jpg>
 File: 2_Metodología/Figs/decadebox.jpg Graphic file (type bmp)
 <2_Metodología/Figs/decadebox.jpg>
 
-Overfull \hbox (3.53522pt too wide) in paragraph at lines 544--545
+Overfull \hbox (3.53522pt too wide) in paragraph at lines 543--544
  [][] 
  []
 
-LaTeX Info: Redefining \. on input line 564.
-LaTeX Info: Redefining \% on input line 564.
-[23
+LaTeX Info: Redefining \. on input line 563.
+LaTeX Info: Redefining \% on input line 563.
+[24
 
 ]
-LaTeX Info: Redefining \. on input line 595.
-LaTeX Info: Redefining \% on input line 595.
- [24])
-LaTeX Info: Redefining \. on input line 184.
-LaTeX Info: Redefining \% on input line 184.
- [25]
+LaTeX Info: Redefining \. on input line 594.
+LaTeX Info: Redefining \% on input line 594.
+ [25])
+LaTeX Info: Redefining \. on input line 186.
+LaTeX Info: Redefining \% on input line 186.
+ [26]
 \openout2 = `3_Reconocimiento/Reconocimiento.aux'.
 
  (3_Reconocimiento/Reconocimiento.tex
@@ -2141,52 +2131,55 @@ Package relsize Warning: Font size 5.55556pt is too small.
 Package relsize Warning: Font size 5.55556pt is too small.
 (relsize)                Using 6.0pt instead on input line 43.
 
-[26
+[27
 
 
 
 
-] [27]
+]
+LaTeX Info: Redefining \. on input line 195.
+LaTeX Info: Redefining \% on input line 195.
+ [28]
 File: 3_Reconocimiento/Figs/for_padding.jpg Graphic file (type bmp)
 <3_Reconocimiento/Figs/for_padding.jpg>
 File: 3_Reconocimiento/Figs/zero_padding.jpg Graphic file (type bmp)
 <3_Reconocimiento/Figs/zero_padding.jpg>
 File: 3_Reconocimiento/Figs/mirror_padding.jpg Graphic file (type bmp)
 <3_Reconocimiento/Figs/mirror_padding.jpg>
-LaTeX Info: Redefining \. on input line 248.
-LaTeX Info: Redefining \% on input line 248.
- [28] [29]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-LaTeX Info: Redefining \. on input line 337.
-LaTeX Info: Redefining \% on input line 337.
+ [29]
+LaTeX Info: Redefining \. on input line 289.
+LaTeX Info: Redefining \% on input line 289.
  [30]
-[31]
-LaTeX Info: Redefining \. on input line 420.
-LaTeX Info: Redefining \% on input line 420.
- [32] [33]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-LaTeX Info: Redefining \. on input line 489.
-LaTeX Info: Redefining \% on input line 489.
+ [31]
+LaTeX Info: Redefining \. on input line 378.
+LaTeX Info: Redefining \% on input line 378.
+
+[32] [33]
+LaTeX Info: Redefining \. on input line 442.
+LaTeX Info: Redefining \% on input line 442.
  [34]
-Underfull \vbox (badness 3088) has occurred while \output is active []
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [35]
+Underfull \vbox (badness 3088) has occurred while \output is active []
+
+LaTeX Info: Redefining \. on input line 534.
+LaTeX Info: Redefining \% on input line 534.
+ [36]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-LaTeX Info: Redefining \. on input line 580.
-LaTeX Info: Redefining \% on input line 580.
- [36]
+ [37]
 File: 3_reconocimiento/Figs/slm_screen.jpg Graphic file (type bmp)
 <3_reconocimiento/Figs/slm_screen.jpg>
+LaTeX Info: Redefining \. on input line 636.
+LaTeX Info: Redefining \% on input line 636.
 
-[37]
+[38]
 File: 3_Reconocimiento/Figs/keypoints_SIFT.jpg Graphic file (type bmp)
 <3_Reconocimiento/Figs/keypoints_SIFT.jpg>
-LaTeX Info: Redefining \. on input line 650.
-LaTeX Info: Redefining \% on input line 650.
- [38]
+ [39]
 File: 3_Reconocimiento/Figs/train_sample5_original.png Graphic file (type bmp)
 <3_Reconocimiento/Figs/train_sample5_original.png>
 File: 3_Reconocimiento/Figs/train_sample5_filtered.png Graphic file (type bmp)
@@ -2197,7 +2190,9 @@ File: 3_Reconocimiento/Figs/train_sample5_otsu.png Graphic file (type bmp)
 <3_Reconocimiento/Figs/train_sample5_otsu.png>
 File: 3_Reconocimiento/Figs/train_samples_features.png Graphic file (type bmp)
 <3_Reconocimiento/Figs/train_samples_features.png>
- [39]
+LaTeX Info: Redefining \. on input line 694.
+LaTeX Info: Redefining \% on input line 694.
+ [40]
 File: 3_Reconocimiento/Figs/test_sample6_good_original.png Graphic file (type b
 mp)
 <3_Reconocimiento/Figs/test_sample6_good_original.png>
@@ -2252,8 +2247,8 @@ Overfull \hbox (12.75624pt too wide) in paragraph at lines 761--762
  [][] 
  []
 
-File: 3_Reconocimiento/Figs/confusion_matrix_good.png Graphic file (type bmp)
-<3_Reconocimiento/Figs/confusion_matrix_good.png>
+File: 3_Reconocimiento/Figs/confusion_matrix_bad.png Graphic file (type bmp)
+<3_Reconocimiento/Figs/confusion_matrix_bad.png>
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
@@ -2262,17 +2257,18 @@ File: 3_Reconocimiento/Figs/confusion_matrix_good.png Graphic file (type bmp)
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
+[41]
 LaTeX Info: Redefining \. on input line 792.
 LaTeX Info: Redefining \% on input line 792.
-[40] [41]
-LaTeX Info: Redefining \. on input line 792.
-LaTeX Info: Redefining \% on input line 792.
- [42]) [43]
+ [42] [43])
+LaTeX Info: Redefining \. on input line 187.
+LaTeX Info: Redefining \% on input line 187.
+ [44]
 \openout2 = `4_Implementación/Implementación.aux'.
 
  (4_Implementación/Implementación.tex
 chapter 4.
-[44
+[45
 
 
 
@@ -2280,72 +2276,32 @@ chapter 4.
 ]
 File: 4_Implementación/principalGRAFCET.pdf Graphic file (type pdf)
 <use 4_Implementación/principalGRAFCET.pdf>
-
-Missing character: There is no ; in font nullfont!
-Missing character: There is no ; in font nullfont!
-Missing character: There is no ; in font nullfont!
-Missing character: There is no ; in font nullfont!
-Missing character: There is no ; in font nullfont!
-Missing character: There is no ; in font nullfont!
-Missing character: There is no ; in font nullfont!
-Missing character: There is no ; in font nullfont!
-
-Overfull \hbox (2.59418pt too wide) in paragraph at lines 142--143
- [][] 
- []
-
-Missing character: There is no ; in font nullfont!
-Missing character: There is no ; in font nullfont!
-Missing character: There is no ; in font nullfont!
-Missing character: There is no ; in font nullfont!
-Missing character: There is no ; in font nullfont!
-Missing character: There is no ; in font nullfont!
-Missing character: There is no ; in font nullfont!
-Missing character: There is no ; in font nullfont!
-Missing character: There is no ; in font nullfont!
-
-Overfull \hbox (9.87283pt too wide) in paragraph at lines 281--282
- [][] 
- []
-
-LaTeX Info: Redefining \. on input line 286.
-LaTeX Info: Redefining \% on input line 286.
-[45]
-LaTeX Info: Redefining \. on input line 286.
-LaTeX Info: Redefining \% on input line 286.
- [46]
-LaTeX Info: Redefining \. on input line 286.
-LaTeX Info: Redefining \% on input line 286.
- [47]
-LaTeX Info: Redefining \. on input line 286.
-LaTeX Info: Redefining \% on input line 286.
- [48]
-Missing character: There is no ; in font nullfont!
-Missing character: There is no ; in font nullfont!
-LaTeX Info: Redefining \. on input line 356.
-LaTeX Info: Redefining \% on input line 356.
-[49
-
+LaTeX Info: Redefining \. on input line 77.
+LaTeX Info: Redefining \% on input line 77.
+ [46
 
 ]
+LaTeX Info: Redefining \. on input line 77.
+LaTeX Info: Redefining \% on input line 77.
+ [47]
 File: 4_Implementación/IEC60942uml.pdf Graphic file (type pdf)
 <use 4_Implementación/IEC60942uml.pdf>
-LaTeX Info: Redefining \. on input line 412.
-LaTeX Info: Redefining \% on input line 412.
- [50
+LaTeX Info: Redefining \. on input line 133.
+LaTeX Info: Redefining \% on input line 133.
+ [48
 
 ]
-LaTeX Info: Redefining \. on input line 412.
-LaTeX Info: Redefining \% on input line 412.
- [51]
+LaTeX Info: Redefining \. on input line 133.
+LaTeX Info: Redefining \% on input line 133.
+ [49]
 File: 4_Implementación/Figs/calibrator_gui_standards.png Graphic file (type bmp
 )
 <4_Implementación/Figs/calibrator_gui_standards.png>
 File: 4_Implementación/Figs/searchInstruments.png Graphic file (type bmp)
 <4_Implementación/Figs/searchInstruments.png>
-LaTeX Info: Redefining \. on input line 430.
-LaTeX Info: Redefining \% on input line 430.
- [52]
+LaTeX Info: Redefining \. on input line 151.
+LaTeX Info: Redefining \% on input line 151.
+ [50]
 File: 4_Implementación/Figs/test.png Graphic file (type bmp)
 <4_Implementación/Figs/test.png>
 File: 4_Implementación/Figs/calibrator_gui_dut.png Graphic file (type bmp)
@@ -2354,138 +2310,138 @@ File: 4_Implementación/Figs/play.png Graphic file (type bmp)
 <4_Implementación/Figs/play.png>
 File: 4_implementación/Figs/calibrator_gui_results.png Graphic file (type bmp)
 <4_implementación/Figs/calibrator_gui_results.png>
-LaTeX Info: Redefining \. on input line 454.
-LaTeX Info: Redefining \% on input line 454.
- [53]
+LaTeX Info: Redefining \. on input line 175.
+LaTeX Info: Redefining \% on input line 175.
+ [51]
 File: 4_Implementación/Figs/pause.png Graphic file (type bmp)
 <4_Implementación/Figs/pause.png>
 File: 4_Implementación/Figs/play.png Graphic file (type bmp)
 <4_Implementación/Figs/play.png>
-LaTeX Info: Redefining \. on input line 469.
-LaTeX Info: Redefining \% on input line 469.
- [54]
+LaTeX Info: Redefining \. on input line 190.
+LaTeX Info: Redefining \% on input line 190.
+ [52]
 
 Package relsize Warning: Font size 5.55556pt is too small.
-(relsize)                Using 6.0pt instead on input line 475.
-
-
-Package relsize Warning: Font size 5.55556pt is too small.
-(relsize)                Using 6.0pt instead on input line 476.
+(relsize)                Using 6.0pt instead on input line 196.
 
 
 Package relsize Warning: Font size 5.55556pt is too small.
-(relsize)                Using 6.0pt instead on input line 477.
+(relsize)                Using 6.0pt instead on input line 197.
 
 
 Package relsize Warning: Font size 5.55556pt is too small.
-(relsize)                Using 6.0pt instead on input line 478.
+(relsize)                Using 6.0pt instead on input line 198.
 
 
 Package relsize Warning: Font size 5.55556pt is too small.
-(relsize)                Using 6.0pt instead on input line 479.
+(relsize)                Using 6.0pt instead on input line 199.
 
 
 Package relsize Warning: Font size 5.55556pt is too small.
-(relsize)                Using 6.0pt instead on input line 480.
+(relsize)                Using 6.0pt instead on input line 200.
 
 
 Package relsize Warning: Font size 5.55556pt is too small.
-(relsize)                Using 6.0pt instead on input line 481.
+(relsize)                Using 6.0pt instead on input line 201.
 
 
 Package relsize Warning: Font size 5.55556pt is too small.
-(relsize)                Using 6.0pt instead on input line 482.
+(relsize)                Using 6.0pt instead on input line 202.
 
 
 Package relsize Warning: Font size 5.55556pt is too small.
-(relsize)                Using 6.0pt instead on input line 483.
+(relsize)                Using 6.0pt instead on input line 203.
 
 
 Package relsize Warning: Font size 5.55556pt is too small.
-(relsize)                Using 6.0pt instead on input line 484.
+(relsize)                Using 6.0pt instead on input line 204.
 
 
 Package relsize Warning: Font size 5.55556pt is too small.
-(relsize)                Using 6.0pt instead on input line 485.
+(relsize)                Using 6.0pt instead on input line 205.
 
 
 Package relsize Warning: Font size 5.55556pt is too small.
-(relsize)                Using 6.0pt instead on input line 486.
+(relsize)                Using 6.0pt instead on input line 206.
 
 
 Package relsize Warning: Font size 5.55556pt is too small.
-(relsize)                Using 6.0pt instead on input line 487.
+(relsize)                Using 6.0pt instead on input line 207.
+
+
+Package relsize Warning: Font size 5.55556pt is too small.
+(relsize)                Using 6.0pt instead on input line 208.
 
 File: 4_Implementación/IEC61672uml.pdf Graphic file (type pdf)
 <use 4_Implementación/IEC61672uml.pdf>
 
-Underfull \hbox (badness 1005) in paragraph at lines 557--557
+Underfull \hbox (badness 1005) in paragraph at lines 278--278
 \TU/JetBrainsMono(0)/m/n/6 + loggingMsg: pyqtSignal \TU/JetBrainsMono(0)/m/it/6
  «class attribute» 
  []
 
 
-Underfull \hbox (badness 4886) in paragraph at lines 557--557
+Underfull \hbox (badness 4886) in paragraph at lines 278--278
 \TU/JetBrainsMono(0)/m/n/6 + run_flag: bool \TU/JetBrainsMono(0)/m/it/6 «instan
 ce attribute» 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 557--557
+Underfull \hbox (badness 10000) in paragraph at lines 278--278
 \TU/JetBrainsMono(0)/m/n/6 + fps: int \TU/JetBrainsMono(0)/m/it/6 «instance att
 ribute» 
  []
 
 
-Underfull \hbox (badness 1005) in paragraph at lines 567--567
+Underfull \hbox (badness 1005) in paragraph at lines 288--288
 [][]\TU/JetBrainsMono(0)/m/n/6 + videoSaved: pyqtSignal \TU/JetBrainsMono(0)/m/
 it/6 «class attribute» 
  []
 
 
-Underfull \hbox (badness 1005) in paragraph at lines 567--567
+Underfull \hbox (badness 1005) in paragraph at lines 288--288
 \TU/JetBrainsMono(0)/m/n/6 + loggingMsg: pyqtSignal \TU/JetBrainsMono(0)/m/it/6
  «class attribute» 
  []
 
 
-Underfull \hbox (badness 7722) in paragraph at lines 567--567
+Underfull \hbox (badness 7722) in paragraph at lines 288--288
 \TU/JetBrainsMono(0)/m/n/6 + frames: list \TU/JetBrainsMono(0)/m/it/6 «instance
  attribute» 
  []
 
 
-Underfull \hbox (badness 1810) in paragraph at lines 567--567
+Underfull \hbox (badness 1810) in paragraph at lines 288--288
 \TU/JetBrainsMono(0)/m/n/6 + video_writer: cv.VideoWriter \TU/JetBrainsMono(0)/
 m/it/6 «instance 
  []
 
 
-Underfull \hbox (badness 1005) in paragraph at lines 584--584
+Underfull \hbox (badness 1005) in paragraph at lines 305--305
 \TU/JetBrainsMono(0)/m/n/6 + loggingMsg: pyqtSignal \TU/JetBrainsMono(0)/m/it/6
  «class attribute» 
  []
 
 
-Underfull \hbox (badness 1005) in paragraph at lines 584--584
+Underfull \hbox (badness 1005) in paragraph at lines 305--305
 \TU/JetBrainsMono(0)/m/n/6 # frames_queue: Queue \TU/JetBrainsMono(0)/m/it/6 «i
 nstance attribute» 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 584--584
+Underfull \hbox (badness 10000) in paragraph at lines 305--305
 \TU/JetBrainsMono(0)/m/n/6 # stage: int \TU/JetBrainsMono(0)/m/it/6 «instance a
 ttribute» 
  []
 
 
-Underfull \hbox (badness 4886) in paragraph at lines 584--584
+Underfull \hbox (badness 4886) in paragraph at lines 305--305
 \TU/JetBrainsMono(0)/m/n/6 # current_f: int \TU/JetBrainsMono(0)/m/it/6 «instan
 ce attribute» 
  []
 
 
-Underfull \hbox (badness 2096) in paragraph at lines 584--584
+Underfull \hbox (badness 2096) in paragraph at lines 305--305
 \TU/JetBrainsMono(0)/m/n/6 # fweightings: list \TU/JetBrainsMono(0)/m/it/6 «ins
 tance attribute» 
  []
@@ -2493,99 +2449,175 @@ tance attribute»
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-LaTeX Info: Redefining \. on input line 596.
-LaTeX Info: Redefining \% on input line 596.
-[55]
-LaTeX Info: Redefining \. on input line 596.
-LaTeX Info: Redefining \% on input line 596.
- [56]
+LaTeX Info: Redefining \. on input line 317.
+LaTeX Info: Redefining \% on input line 317.
+[53]
+LaTeX Info: Redefining \. on input line 317.
+LaTeX Info: Redefining \% on input line 317.
+ [54]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-LaTeX Info: Redefining \. on input line 601.
-LaTeX Info: Redefining \% on input line 601.
- [57]
+LaTeX Info: Redefining \. on input line 322.
+LaTeX Info: Redefining \% on input line 322.
+ [55]
 File: 4_implementación/Figs/slm_gui_standards.png Graphic file (type bmp)
 <4_implementación/Figs/slm_gui_standards.png>
 File: 4_Implementación/Figs/searchInstruments.png Graphic file (type bmp)
 <4_Implementación/Figs/searchInstruments.png>
 File: 4_Implementación/Figs/test.png Graphic file (type bmp)
 <4_Implementación/Figs/test.png>
-LaTeX Info: Redefining \. on input line 623.
-LaTeX Info: Redefining \% on input line 623.
+LaTeX Info: Redefining \. on input line 344.
+LaTeX Info: Redefining \% on input line 344.
 
-[58]
+[56]
 File: 4_implementación/Figs/slm_gui_dut.png Graphic file (type bmp)
 <4_implementación/Figs/slm_gui_dut.png>
 File: 4_Implementación/Figs/play.png Graphic file (type bmp)
 <4_Implementación/Figs/play.png>
-LaTeX Info: Redefining \. on input line 641.
-LaTeX Info: Redefining \% on input line 641.
- [59]
+LaTeX Info: Redefining \. on input line 362.
+LaTeX Info: Redefining \% on input line 362.
+ [57]
 File: 4_implementación/Figs/slm_gui_results1.png Graphic file (type bmp)
 <4_implementación/Figs/slm_gui_results1.png>
 File: 4_implementación/Figs/slm_gui_results2.png Graphic file (type bmp)
 <4_implementación/Figs/slm_gui_results2.png>
-LaTeX Info: Redefining \. on input line 660.
-LaTeX Info: Redefining \% on input line 660.
- [60
+LaTeX Info: Redefining \. on input line 381.
+LaTeX Info: Redefining \% on input line 381.
+ [58
 
 ]
 File: 4_implementación/Figs/slm_gui_results3.png Graphic file (type bmp)
 <4_implementación/Figs/slm_gui_results3.png>
-LaTeX Info: Redefining \. on input line 676.
-LaTeX Info: Redefining \% on input line 676.
- [61
+LaTeX Info: Redefining \. on input line 397.
+LaTeX Info: Redefining \% on input line 397.
+ [59
 
 ])
 \openout2 = `5_MC_incertidumbre/MC_incertidumbre.aux'.
 
  (5_MC_incertidumbre/MC_incertidumbre.tex
 chapter 5.
-[62
+[60
 
 
 
 
 
-] [63]
+] [61]
+Overfull \hbox (1.49878pt too wide) in paragraph at lines 112--119
+\TU/AncizarSerif(0)/m/n/12 probabilidades de transición del estado $\OML/cmm/m/
+it/12 i$ \TU/AncizarSerif(0)/m/n/12 al $\OML/cmm/m/it/12 j$ \TU/AncizarSerif(0)
+/m/n/12 en $\OML/cmm/m/it/12 n \OMS/cmsy/m/n/12 ^^U \OT1/cmr/m/n/12 1$ \TU/Anci
+zarSerif(0)/m/n/12 pasos, es decir $\OML/cmm/m/it/12 p[] \OT1/cmr/m/n/12 = \OML
+/cmm/m/it/12 P []$\TU/AncizarSerif(0)/m/n/12 ,
+ []
 
-Package relsize Warning: Font size 5.55556pt is too small.
-(relsize)                Using 6.0pt instead on input line 66.
+LaTeX Info: Redefining \. on input line 138.
+LaTeX Info: Redefining \% on input line 138.
+[62]
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
-
-Package relsize Warning: Font size 5.55556pt is too small.
-(relsize)                Using 6.0pt instead on input line 67.
-
-
-Package relsize Warning: Font size 5.55556pt is too small.
-(relsize)                Using 6.0pt instead on input line 68.
-
-
-Package relsize Warning: Font size 5.55556pt is too small.
-(relsize)                Using 6.0pt instead on input line 69.
-
+ [63]
 
 Package relsize Warning: Font size 5.55556pt is too small.
-(relsize)                Using 6.0pt instead on input line 70.
+(relsize)                Using 6.0pt instead on input line 214.
 
 
 Package relsize Warning: Font size 5.55556pt is too small.
-(relsize)                Using 6.0pt instead on input line 71.
+(relsize)                Using 6.0pt instead on input line 215.
 
 
 Package relsize Warning: Font size 5.55556pt is too small.
-(relsize)                Using 6.0pt instead on input line 72.
+(relsize)                Using 6.0pt instead on input line 216.
 
-LaTeX Info: Redefining \. on input line 91.
-LaTeX Info: Redefining \% on input line 91.
+
+Package relsize Warning: Font size 5.55556pt is too small.
+(relsize)                Using 6.0pt instead on input line 217.
+
+LaTeX Info: Redefining \. on input line 233.
+LaTeX Info: Redefining \% on input line 233.
 [64]
+File: 5_MC_incertidumbre/Frames/frame(0).jpg Graphic file (type bmp)
+<5_MC_incertidumbre/Frames/frame(0).jpg>
+File: 5_MC_incertidumbre/Frames/frame(1).jpg Graphic file (type bmp)
+<5_MC_incertidumbre/Frames/frame(1).jpg>
+File: 5_MC_incertidumbre/Frames/frame(2).jpg Graphic file (type bmp)
+<5_MC_incertidumbre/Frames/frame(2).jpg>
+File: 5_MC_incertidumbre/Frames/frame(38).jpg Graphic file (type bmp)
+<5_MC_incertidumbre/Frames/frame(38).jpg>
+File: 5_MC_incertidumbre/Frames/frame(39).jpg Graphic file (type bmp)
+<5_MC_incertidumbre/Frames/frame(39).jpg>
+File: 5_MC_incertidumbre/Frames/frame(40).jpg Graphic file (type bmp)
+<5_MC_incertidumbre/Frames/frame(40).jpg>
+File: 5_MC_incertidumbre/Frames/frame(41).jpg Graphic file (type bmp)
+<5_MC_incertidumbre/Frames/frame(41).jpg>
+File: 5_MC_incertidumbre/Frames/frame(42).jpg Graphic file (type bmp)
+<5_MC_incertidumbre/Frames/frame(42).jpg>
+File: 5_MC_incertidumbre/Frames/frame(43).jpg Graphic file (type bmp)
+<5_MC_incertidumbre/Frames/frame(43).jpg>
+File: 5_MC_incertidumbre/Frames/frame(44).jpg Graphic file (type bmp)
+<5_MC_incertidumbre/Frames/frame(44).jpg>
+File: 5_MC_incertidumbre/Frames/frame(45).jpg Graphic file (type bmp)
+<5_MC_incertidumbre/Frames/frame(45).jpg>
+File: 5_MC_incertidumbre/Frames/frame(46).jpg Graphic file (type bmp)
+<5_MC_incertidumbre/Frames/frame(46).jpg>
+File: 5_MC_incertidumbre/Frames/frame(47).jpg Graphic file (type bmp)
+<5_MC_incertidumbre/Frames/frame(47).jpg>
+File: 5_MC_incertidumbre/Frames/frame(48).jpg Graphic file (type bmp)
+<5_MC_incertidumbre/Frames/frame(48).jpg>
+File: 5_MC_incertidumbre/Frames/frame(49).jpg Graphic file (type bmp)
+<5_MC_incertidumbre/Frames/frame(49).jpg>
+File: 5_MC_incertidumbre/Frames/frame(50).jpg Graphic file (type bmp)
+<5_MC_incertidumbre/Frames/frame(50).jpg>
+File: 5_MC_incertidumbre/Frames/frame(51).jpg Graphic file (type bmp)
+<5_MC_incertidumbre/Frames/frame(51).jpg>
+File: 5_MC_incertidumbre/Frames/frame(97).jpg Graphic file (type bmp)
+<5_MC_incertidumbre/Frames/frame(97).jpg>
+File: 5_MC_incertidumbre/Frames/frame(98).jpg Graphic file (type bmp)
+<5_MC_incertidumbre/Frames/frame(98).jpg>
+File: 5_MC_incertidumbre/Frames/frame(99).jpg Graphic file (type bmp)
+<5_MC_incertidumbre/Frames/frame(99).jpg>
+File: 5_MC_incertidumbre/Frames/frame(100).jpg Graphic file (type bmp)
+<5_MC_incertidumbre/Frames/frame(100).jpg>
+File: 5_MC_incertidumbre/Frames/frame(101).jpg Graphic file (type bmp)
+<5_MC_incertidumbre/Frames/frame(101).jpg>
+File: 5_MC_incertidumbre/Frames/frame(102).jpg Graphic file (type bmp)
+<5_MC_incertidumbre/Frames/frame(102).jpg>
+File: 5_MC_incertidumbre/Frames/frame(103).jpg Graphic file (type bmp)
+<5_MC_incertidumbre/Frames/frame(103).jpg>
+File: 5_MC_incertidumbre/Frames/frame(104).jpg Graphic file (type bmp)
+<5_MC_incertidumbre/Frames/frame(104).jpg>
+File: 5_MC_incertidumbre/Frames/frame(105).jpg Graphic file (type bmp)
+<5_MC_incertidumbre/Frames/frame(105).jpg>
+File: 5_MC_incertidumbre/Frames/frame(106).jpg Graphic file (type bmp)
+<5_MC_incertidumbre/Frames/frame(106).jpg>
+File: 5_MC_incertidumbre/Frames/frame(107).jpg Graphic file (type bmp)
+<5_MC_incertidumbre/Frames/frame(107).jpg>
+File: 5_MC_incertidumbre/Frames/frame(111).jpg Graphic file (type bmp)
+<5_MC_incertidumbre/Frames/frame(111).jpg>
+File: 5_MC_incertidumbre/Frames/frame(112).jpg Graphic file (type bmp)
+<5_MC_incertidumbre/Frames/frame(112).jpg>
+File: 5_MC_incertidumbre/Frames/frame(116).jpg Graphic file (type bmp)
+<5_MC_incertidumbre/Frames/frame(116).jpg>
+File: 5_MC_incertidumbre/Frames/frame(121).jpg Graphic file (type bmp)
+<5_MC_incertidumbre/Frames/frame(121).jpg>
+File: 5_MC_incertidumbre/Frames/frame(161).jpg Graphic file (type bmp)
+<5_MC_incertidumbre/Frames/frame(161).jpg>
+ [65]
+File: 5_MC_incertidumbre/Frames/wrong_frame.jpg Graphic file (type bmp)
+<5_MC_incertidumbre/Frames/wrong_frame.jpg>
+File: 5_MC_incertidumbre/recognizedSamples.png Graphic file (type bmp)
+<5_MC_incertidumbre/recognizedSamples.png>
 Package hyperref Info: bookmark level for unknown listing defaults to 0 on inpu
-t line 115.
-\openout4 = `20220720_Proyecto_de_grado.pyg'.
+t line 335.
+LaTeX Info: Redefining \. on input line 335.
+LaTeX Info: Redefining \% on input line 335.
+ [66]
+\openout4 = `20220825_Proyecto_de_grado.pyg'.
 
- (_minted-20220720_Proyecto_de_grado/stata.pygstyle)
-(_minted-20220720_Proyecto_de_grado/E04429856619BB14A14B655A3A7B061F3D3B72BC295
-E2614A216DC4370C528CB.pygtex
+ (_minted-20220825_Proyecto_de_grado/stata.pygstyle)
+(_minted-20220825_Proyecto_de_grado/E04429856619BB14A14B655A3A7B061F5C7561C95D9
+467C08C40FCC38A98B084.pygtex
 
 Package fontspec Info: Font family 'AncizarSans(1)' created for font 'Ancizar
 (fontspec)             Sans' with options [Ligatures=TeX,Ligatures =
@@ -2626,40 +2658,11 @@ xt;"
 (fontspec)             Italic/OT:script=latn;language=dflt;+onum;+smcp;mapping=
 tex-text;"
 
-) [65]
-Overfull \hbox (1.49878pt too wide) in paragraph at lines 151--154
-\TU/AncizarSerif(0)/m/n/12 probabilidades de transición del estado $\OML/cmm/m/
-it/12 i$ \TU/AncizarSerif(0)/m/n/12 al $\OML/cmm/m/it/12 j$ \TU/AncizarSerif(0)
-/m/n/12 en $\OML/cmm/m/it/12 n \OMS/cmsy/m/n/12 ^^U \OT1/cmr/m/n/12 1$ \TU/Anci
-zarSerif(0)/m/n/12 pasos, es decir $\OML/cmm/m/it/12 p[] \OT1/cmr/m/n/12 = \OML
-/cmm/m/it/12 P []$\TU/AncizarSerif(0)/m/n/12 ,
- []
-
-
-Underfull \vbox (badness 6608) has occurred while \output is active []
-
-LaTeX Info: Redefining \. on input line 173.
-LaTeX Info: Redefining \% on input line 173.
- [66]
-\openout5 = `20220720_Proyecto_de_grado.pyg'.
-
-
-(_minted-20220720_Proyecto_de_grado/CCD86483726B52B516B0F43C56BFAEE63D3B72BC295
-E2614A216DC4370C528CB.pygtex) [67]
-\openout4 = `20220720_Proyecto_de_grado.pyg'.
-
-
-(_minted-20220720_Proyecto_de_grado/743EE1A6AF1CAA19B69E71994F8001233D3B72BC295
-E2614A216DC4370C528CB.pygtex)
-\openout4 = `20220720_Proyecto_de_grado.pyg'.
-
-
-(_minted-20220720_Proyecto_de_grado/D6183C6D38676C12492EE63F37583CF63D3B72BC295
-E2614A216DC4370C528CB.pygtex)
+)
 ! Argument of \language@active@arg> has an extra }.
 <inserted text> 
                 \par 
-l.270 ...ten >=1pt,node distance=6cm,on grid,auto]
+l.358 ...ten >=1pt,node distance=6cm,on grid,auto]
                                                   
 I've run across a `}' that doesn't seem to match anything.
 For example, `\def\a#1{...}' and `\a}' would produce
@@ -2672,7 +2675,7 @@ Runaway argument?
 ! Paragraph ended before \language@active@arg> was complete.
 <to be read again> 
                    \par 
-l.270 ...ten >=1pt,node distance=6cm,on grid,auto]
+l.358 ...ten >=1pt,node distance=6cm,on grid,auto]
                                                   
 I suspect you've forgotten a `}', causing me to apply this
 control sequence to too much text. How can we recover?
@@ -2683,7 +2686,7 @@ shorten
 ! Paragraph ended before \pgfkeys@addpath was complete.
 <to be read again> 
                    \par 
-l.270 ...ten >=1pt,node distance=6cm,on grid,auto]
+l.358 ...ten >=1pt,node distance=6cm,on grid,auto]
                                                   
 I suspect you've forgotten a `}', causing me to apply this
 control sequence to too much text. How can we recover?
@@ -2692,7 +2695,7 @@ My plan is to forget the whole thing and hope for the best.
 ! Missing \endcsname inserted.
 <to be read again> 
                    \scan_stop: 
-l.270 ...ten >=1pt,node distance=6cm,on grid,auto]
+l.358 ...ten >=1pt,node distance=6cm,on grid,auto]
                                                   
 The control sequence marked <to be read again> should
 not appear between \csname and \endcsname.
@@ -2700,7 +2703,7 @@ not appear between \csname and \endcsname.
 ! Missing \endcsname inserted.
 <to be read again> 
                    \scan_stop: 
-l.270 ...ten >=1pt,node distance=6cm,on grid,auto]
+l.358 ...ten >=1pt,node distance=6cm,on grid,auto]
                                                   
 The control sequence marked <to be read again> should
 not appear between \csname and \endcsname.
@@ -2710,7 +2713,7 @@ shorten
 ! Paragraph ended before \pgfkeys@splitter was complete.
 <to be read again> 
                    \par 
-l.270 ...ten >=1pt,node distance=6cm,on grid,auto]
+l.358 ...ten >=1pt,node distance=6cm,on grid,auto]
                                                   
 I suspect you've forgotten a `}', causing me to apply this
 control sequence to too much text. How can we recover?
@@ -2721,7 +2724,7 @@ Missing character: There is no / in font nullfont!
 ! Argument of \language@active@arg> has an extra }.
 <inserted text> 
                 \par 
-l.275         \draw[->, stealth-]
+l.363         \draw[->, stealth-]
                                  
 I've run across a `}' that doesn't seem to match anything.
 For example, `\def\a#1{...}' and `\a}' would produce
@@ -2734,7 +2737,7 @@ Runaway argument?
 ! Paragraph ended before \language@active@arg> was complete.
 <to be read again> 
                    \par 
-l.275         \draw[->, stealth-]
+l.363         \draw[->, stealth-]
                                  
 I suspect you've forgotten a `}', causing me to apply this
 control sequence to too much text. How can we recover?
@@ -2745,7 +2748,7 @@ Runaway argument?
 ! Paragraph ended before \pgfkeys@addpath was complete.
 <to be read again> 
                    \par 
-l.275         \draw[->, stealth-]
+l.363         \draw[->, stealth-]
                                  
 I suspect you've forgotten a `}', causing me to apply this
 control sequence to too much text. How can we recover?
@@ -2754,7 +2757,7 @@ My plan is to forget the whole thing and hope for the best.
 ! Missing \endcsname inserted.
 <to be read again> 
                    \scan_stop: 
-l.275         \draw[->, stealth-]
+l.363         \draw[->, stealth-]
                                  
 The control sequence marked <to be read again> should
 not appear between \csname and \endcsname.
@@ -2762,7 +2765,7 @@ not appear between \csname and \endcsname.
 ! Missing \endcsname inserted.
 <to be read again> 
                    \scan_stop: 
-l.275         \draw[->, stealth-]
+l.363         \draw[->, stealth-]
                                  
 The control sequence marked <to be read again> should
 not appear between \csname and \endcsname.
@@ -2770,7 +2773,7 @@ not appear between \csname and \endcsname.
 ! Missing \endcsname inserted.
 <to be read again> 
                    \scan_stop: 
-l.275         \draw[->, stealth-]
+l.363         \draw[->, stealth-]
                                  
 The control sequence marked <to be read again> should
 not appear between \csname and \endcsname.
@@ -2780,7 +2783,7 @@ Runaway argument?
 ! Paragraph ended before \pgfkeys@splitter was complete.
 <to be read again> 
                    \par 
-l.275         \draw[->, stealth-]
+l.363         \draw[->, stealth-]
                                  
 I suspect you've forgotten a `}', causing me to apply this
 control sequence to too much text. How can we recover?
@@ -2788,23 +2791,25 @@ My plan is to forget the whole thing and hope for the best.
 
 Missing character: There is no / in font nullfont!
 Missing character: There is no / in font nullfont!
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-LaTeX Info: Redefining \. on input line 298.
-LaTeX Info: Redefining \% on input line 298.
-[68]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [69]
-\openout5 = `20220720_Proyecto_de_grado.pyg'.
+[67]
+\openout4 = `20220825_Proyecto_de_grado.pyg'.
 
 
-(_minted-20220720_Proyecto_de_grado/882CD05BF9CC6F10F864F35A805221A23D3B72BC295
-E2614A216DC4370C528CB.pygtex))
-LaTeX Info: Redefining \. on input line 187.
-LaTeX Info: Redefining \% on input line 187.
- [70]
+(_minted-20220825_Proyecto_de_grado/743EE1A6AF1CAA19B69E71994F8001235C7561C95D9
+467C08C40FCC38A98B084.pygtex)
+\openout5 = `20220825_Proyecto_de_grado.pyg'.
+
+
+(_minted-20220825_Proyecto_de_grado/CCD86483726B52B516B0F43C56BFAEE65C7561C95D9
+467C08C40FCC38A98B084.pygtex)
+LaTeX Info: Redefining \. on input line 459.
+LaTeX Info: Redefining \% on input line 459.
+ [68]
+\openout5 = `20220825_Proyecto_de_grado.pyg'.
+
+
+(_minted-20220825_Proyecto_de_grado/882CD05BF9CC6F10F864F35A805221A25C7561C95D9
+467C08C40FCC38A98B084.pygtex)) [69]
 \openout2 = `6_Conclusiones/Conclusiones.aux'.
 
  (6_Conclusiones/Conclusiones.tex
@@ -2812,19 +2817,19 @@ chapter 6.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [71
+ [70
 
 
 
 
 ])
-LaTeX Info: Redefining \. on input line 188.
-LaTeX Info: Redefining \% on input line 188.
+LaTeX Info: Redefining \. on input line 190.
+LaTeX Info: Redefining \% on input line 190.
 
-[72]
-LaTeX Info: Redefining \. on input line 188.
-LaTeX Info: Redefining \% on input line 188.
- [73]
+[71]
+LaTeX Info: Redefining \. on input line 190.
+LaTeX Info: Redefining \% on input line 190.
+ [72]
 \openout2 = `Anexos/Anexos.aux'.
 
  (Anexos/Anexos.tex
@@ -2844,28 +2849,69 @@ Class scrbook Warning: You are using `\begin{appendix}...\end{appendix}'.
 
 chapter A.
 
-(_minted-20220720_Proyecto_de_grado/376ABBC771219BDBF0AEC6849D65ADC0516F5ABB7B7
-9D9927D1D9BD6DC8C912C.pygtex)
-Underfull \vbox (badness 2027) has occurred while \output is active []
+(_minted-20220825_Proyecto_de_grado/376ABBC771219BDBF0AEC6849D65ADC09364C026C40
+3A4476C44F6E2569B10C0.pygtex)
+Underfull \vbox (badness 1960) has occurred while \output is active []
 
- [74
+ [73
 
 
 
 
 ]
-(_minted-20220720_Proyecto_de_grado/335E7376BE654661F46074EA590245DA8DFE2129F6F
-E017B875A989AC5F1284E.pygtex)
-\openout4 = `20220720_Proyecto_de_grado.pyg'.
+(_minted-20220825_Proyecto_de_grado/335E7376BE654661F46074EA590245DA772753313DF
+7E6FF1EF6BE5ABA4B2396.pygtex)
+\openout4 = `20220825_Proyecto_de_grado.pyg'.
 
 
-(_minted-20220720_Proyecto_de_grado/F69EAD47DE9411DA23F381B8201231103D3B72BC295
-E2614A216DC4370C528CB.pygtex)
-\openout4 = `20220720_Proyecto_de_grado.pyg'.
+(_minted-20220825_Proyecto_de_grado/F69EAD47DE9411DA23F381B8201231105C7561C95D9
+467C08C40FCC38A98B084.pygtex)
+\openout4 = `20220825_Proyecto_de_grado.pyg'.
 
 
-(_minted-20220720_Proyecto_de_grado/FD8E064D1B03A71B006480C4AE4B034B3D3B72BC295
-E2614A216DC4370C528CB.pygtex)) [75] (20220720_Proyecto_de_grado.bbl
+(_minted-20220825_Proyecto_de_grado/FD8E064D1B03A71B006480C4AE4B034B5C7561C95D9
+467C08C40FCC38A98B084.pygtex)
+Missing character: There is no ; in font nullfont!
+Missing character: There is no ; in font nullfont!
+Missing character: There is no ; in font nullfont!
+Missing character: There is no ; in font nullfont!
+Missing character: There is no ; in font nullfont!
+Missing character: There is no ; in font nullfont!
+Missing character: There is no ; in font nullfont!
+Missing character: There is no ; in font nullfont!
+
+Overfull \hbox (2.59418pt too wide) in paragraph at lines 163--164
+ [][] 
+ []
+
+Missing character: There is no ; in font nullfont!
+Missing character: There is no ; in font nullfont!
+Missing character: There is no ; in font nullfont!
+Missing character: There is no ; in font nullfont!
+Missing character: There is no ; in font nullfont!
+Missing character: There is no ; in font nullfont!
+Missing character: There is no ; in font nullfont!
+Missing character: There is no ; in font nullfont!
+Missing character: There is no ; in font nullfont!
+
+Overfull \hbox (9.87283pt too wide) in paragraph at lines 302--303
+ [][] 
+ []
+
+LaTeX Info: Redefining \. on input line 307.
+LaTeX Info: Redefining \% on input line 307.
+[74] [75]
+LaTeX Info: Redefining \. on input line 307.
+LaTeX Info: Redefining \% on input line 307.
+ [76] [77]
+Missing character: There is no ; in font nullfont!
+Missing character: There is no ; in font nullfont!
+)
+LaTeX Info: Redefining \. on input line 191.
+LaTeX Info: Redefining \% on input line 191.
+ [78
+
+] (20220825_Proyecto_de_grado.bbl
 ! Misplaced alignment tab character &.
 l.11 {Br{\"{u}}el &
                     Kj{\ae}r} (2000).
@@ -2876,7 +2922,7 @@ up above has ended a previous alignment prematurely,
 you're probably due for more error messages, and you
 might try typing `S' now just to see what is salvageable.
 
-[76
+[79
 
 
 
@@ -2894,9 +2940,9 @@ ith Python.  [][]$[][][][][] [] [] [] [][][][][][] []
  []
 
 )
-LaTeX Info: Redefining \. on input line 194.
-LaTeX Info: Redefining \% on input line 194.
- [77] (20220720_Proyecto_de_grado.aux (0_Portada/Portada.aux)
+LaTeX Info: Redefining \. on input line 196.
+LaTeX Info: Redefining \% on input line 196.
+ [80] (20220825_Proyecto_de_grado.aux (0_Portada/Portada.aux)
 LaTeX Info: Redefining \. on input line 25.
 LaTeX Info: Redefining \% on input line 25.
 
@@ -2904,19 +2950,19 @@ LaTeX Info: Redefining \% on input line 25.
 (3_Reconocimiento/Reconocimiento.aux) (4_Implementación/Implementación.aux)
 (5_MC_incertidumbre/MC_incertidumbre.aux) (6_Conclusiones/Conclusiones.aux)
 (Anexos/Anexos.aux))
-Package rerunfilecheck Info: File `20220720_Proyecto_de_grado.out' has not chan
+Package rerunfilecheck Info: File `20220825_Proyecto_de_grado.out' has not chan
 ged.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
-runsystem(del 20220720_Proyecto_de_grado.pyg)...executed.
+runsystem(del 20220825_Proyecto_de_grado.pyg)...executed.
 
  ) 
 Here is how much of TeX's memory you used:
- 49346 strings out of 410654
- 1087619 string characters out of 2816299
- 2006667 words of memory out of 3000000
- 69492 multiletter control sequences out of 15000+600000
+ 50422 strings out of 410636
+ 1125721 string characters out of 2815794
+ 2031212 words of memory out of 3000000
+ 70552 multiletter control sequences out of 15000+600000
  487794 words of font info for 147 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 108i,21n,109p,10606b,2011s stack positions out of 10000i,1000n,20000p,200000b,80000s
+ 108i,21n,109p,10606b,2119s stack positions out of 10000i,1000n,20000p,200000b,80000s
 
-Output written on 20220720_Proyecto_de_grado.pdf (95 pages).
+Output written on 20220825_Proyecto_de_grado.pdf (95 pages).

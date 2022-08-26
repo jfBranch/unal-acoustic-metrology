@@ -2,7 +2,7 @@
 
 \section{Planteamiento del problema}
 En la actualidad, la creciente contaminación acústica amerita la implementación de redes de monitoreo continuo de ruido
-o mediciones puntuales empleando instrumentos adecuados (entre estos los sonómetros y calibradores acústicos), con el
+o mediciones puntuales empleando instrumentos adecuados (entre estos, los sonómetros y calibradores acústicos), con el
 propósito de cuantizar los niveles de ruido ambiental, de emisión de ruido de fuentes sonoras específicas y de
 exposición sonora, para luego comparar con los niveles máximos permitidos por la normativa nacional e internacional
 relacionada y tomar decisiones al respecto.
@@ -27,7 +27,8 @@ Por su parte, la norma \mbox{IEC 61672--3} describe una serie de pruebas acústi
 sonómetros integradores clase 1 y 2, cuyo propósito es comprobar el funcionamiento del sonómetro en:
 1) La sensibilidad de su micrófono (para lo cual se usa un calibrador acústico calibrado previamente y que esté en
 conformidad con las especificaciones de la \mbox{IEC 60942}).
-2) Las redes de ponderación frecuencial A, C y Z. 3) Las ponderaciones temporales F (\emph{fast}) y S (\emph{slow}).
+2) Las redes de ponderación frecuencial $A$, $C$ y $Z$.
+3) Las ponderaciones temporales $F$ (\emph{fast}) y $S$ (\emph{slow}).
 4) El rango lineal de niveles.
 5) La medición de niveles promediados en el tiempo, niveles de exposición sonora y niveles pico.
 6) La indicación de sobrecarga.
@@ -51,16 +52,16 @@ metrológica) y su costo.
     \label{fig:AP146Laboratory}
     \centering
     \includegraphics[width=0.8\textwidth]{1_Intro/AP146Laboratory}
-    \caption*{\footnotesize Tomado de~\cite{Podgorski2016}}
+    \caption*{\footnotesize Imagen tomada de~\cite{Podgorski2016}}
 \end{figure}
 
 Es común encontrar que las organizaciones fabricantes de sonómetros adicionalmente presten servicios de calibración
 acreditada (e.g.\ Svantek, Brüel \& Kjær y 01dB), por lo que prácticamente también se pueden denominar OEC\@.
 Pero estos OEC en especial, tienen la posibilidad de implementar procedimientos automáticos de calibración sin
 limitaciones, puesto que tienen acceso a los comandos de control específicos de sus modelos de sonómetros.
-Un ejemplo de eso se encuentra en el artículo de~\cite{Podgorski2016}, en el que se hace una descripción del laboratorio
-AP146 en Polonia que pertenece a Svantek y está acreditado por el Centro Polaco de Acreditación (PCA).
-En ese artículo se presenta el desarrollo de un \emph{software} de calibración que han validado, desde el que se envían
+Un ejemplo de eso se encuentra en el artículo de~\cite{Podgorski2016}, que describe el laboratorio
+AP146 en Polonia (que pertenece a Svantek y está acreditado por el Centro Polaco de Acreditación (PCA)).
+En ese artículo se presenta el desarrollo de un \emph{software} de calibración validado, desde el que se envían
 instrucciones a los instrumentos que generan las señales y a los que las miden, también es posible generar
 automáticamente reportes de resultados.
 No obstante, sólo es posible usar este \emph{software} con los sonómetros que fabrica la compañía.
@@ -73,10 +74,10 @@ La figura~\ref{fig:AP146Laboratory} muestra la estación de medición de este la
     \label{fig:BK3630A}
     \centering
     \includegraphics[width=0.8\textwidth]{1_Intro/BK3630A}
-    \caption*{\footnotesize Tomado de~\cite{BruelKjaer2000}}
+    \caption*{\footnotesize Imagen tomada de~\cite{BruelKjaer2000}.}
 \end{figure}
 
-La figura~\ref{fig:BK3630A} muestra el Type 3630-A, uno de los sistemas de calibración más completo y compacto.
+La figura~\ref{fig:BK3630A} muestra el Type 3630-A, uno de los sistemas de calibración más completos y compactos.
 Fue desarrollado por Brüel \& Kjær~\citeyearpar{BruelKjaer2000}, que permite la calibración periódica y la estimación
 de incertidumbre de medida para sonómetros Brüel \& Kjær y también de otras marcas.
 Además, ofrece la posibilidad de calibrar en modo automático (si el sonómetro dispone de una interfaz serial),
@@ -92,16 +93,16 @@ Sin embargo, por defecto, únicamente tiene disponibles los ensayos de acuerdo c
 Los ensayos de acuerdo con la \mbox{IEC 61672--3} están disponibles sólo como complementos que el usuario debe comprar.
 
 \subsection{Sistemas de calibración desarrollados por otras organizaciones}
-Los anteriores sistemas de calibración desarrollados por los fabricantes más prominentes son sofisticados y costosos,
-por lo que los demás OEC, que en su mayoría son organizaciones independientes, deben implementar su propia estación de
+Los anteriores sistemas de calibración desarrollados por los fabricantes más prominentes son sofisticados y costosos.
+Así que los demás OEC, que en su mayoría son organizaciones independientes, deben implementar su propia estación de
 trabajo y desarrollar su propio procedimiento de calibración.
 El hecho que se desconozca la codificación de control del sonómetro propia de cada fabricante sugiere que lo más seguro
 es que este procedimiento sea manual.
 
 Para abordar esta problemática, hay un avance en la automatización del procedimiento de calibración, extendiendo el
 alcance a cualquier sonómetro sin importar su modelo o marca, este es el trabajo realizado por~\cite{Zhong2010},
-en el que desarrollaron un sistema de calibración implementando reconocimiento de imágenes.
-De modo que el resultado es obtenido automáticamente de la indicación en la pantalla del sonómetro, superando así la
+que implementa un sistema de calibración usando reconocimiento de imágenes.
+De este modo, el resultado es obtenido automáticamente de la indicación en la pantalla del sonómetro, superando así la
 limitación más común en los sistemas automáticos de calibración de los fabricantes.
 Tal funcionamiento hace de este un sistema mucho más versátil, con el que igualmente se pueden generar de forma
 automática los reportes con los resultados de calibración.
@@ -115,7 +116,7 @@ respuestas de referencia de los campos, lo que eleva el costo.
 La anterior revisión de sistemas de calibración desarrollados por fabricantes y por otros laboratorios indica que hace
 falta un sistema de calibración de sonómetros actualizado, versátil, y de bajo costo, pero que no comprometa los
 resultados.
-Es en esa vía que se planteó este trabajo y se da cumplimiento a los siguientes objetivos.
+En esa vía que se plantea este trabajo para cumplir los siguientes objetivos.
 
 
 \section{Objetivos}
@@ -157,8 +158,8 @@ para el reconocimiento de los caracteres numéricos que representan los niveles 
 sonómetro.
 En el capítulo cuatro se presenta el GRAFCET del objetivo uno y los detalles de implementación del objetivo dos en las
 aplicaciones desarrolladas en Python.
-En el último capítulo se explican las consideraciones teóricas-experimentales que forman el punto de partida del método
+En el capítulo cinco se explican las consideraciones teóricas-experimentales que forman el punto de partida del método
 del cuarto objetivo.
 Asimismo, se incluye el marco teórico de las cadenas de Markov que son la herramienta esencial del
 método y se expone un resultado de ejemplo.
-Finalmente, se concluye el documento con una revisión del trabajo realizado y sugerencias para desarrollo futuro.
+Finalmente, en el capítulo seis se dan las conclusiones y sugerencias de desarrollo futuro.

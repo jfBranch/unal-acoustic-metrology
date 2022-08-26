@@ -7,11 +7,11 @@
 En esta sección se discute el desarrollo del sistema de reconocimiento de caracteres que será empleado para adquirir automáticamente un valor de medición que sea indicado en la pantalla del sonómetro bajo calibración.
 Primero se introduce un algoritmo general con los pasos de procesamiento y clasificación de las imágenes;
 luego, se presenta el fundamento teórico de cada uno de esos pasos.
-Finalmente, se muestran y discuten los resultados de procesamiento de imagen sobre una muestra de un dígito, como también los resultados del clasificador implementado.
+Finalmente, se muestran y discuten los resultados de procesamiento de imagen sobre una muestra de un dígito, y también los resultados del clasificador implementado.
 
 \section*{Algoritmo de reconocimiento de caracteres}
 \addcontentsline{toc}{section}{Algoritmo de reconocimiento de caracteres}
-De manera general, la solución propuesta, para el reconocimiento del valor de medición indicado en la pantalla del sonómetro, consta de varios pasos que se presentan en el siguiente algoritmo.
+De manera general, la solución propuesta, para el reconocimiento del valor de medición indicado en la pantalla del sonómetro consta de varios pasos que se presentan en el siguiente algoritmo.
 
 \begin{algorithm}[H]
     \caption{Algoritmo del sistema de reconocimiento de imágenes.}
@@ -156,9 +156,9 @@ Concerniente al procesamiento y reconocimiento de imágenes, a continuación se 
 \section*{Paso 1: Filtro gaussiano}
 \addcontentsline{toc}{section}{Paso 1: Filtro gaussiano}
 \label{sec:gaussian_filter}
-Como se explica en el libro de Robert Szeliski~\citeyearpar{Richard2011}, el filtro gaussiano, también llamado filtro de suavizado o de desenfoque, es una operación local en imágenes bidimensionales, pues se efectúa en vecindarios con un tamaño determinado en píxeles;
-el valor final de un píxel depende de los valores de los píxeles que pertenecen a su correspondiente vecindario y, como en todos los casos de filtros lineales, de una función de ponderación.
-Esta operación local viene a ser la de correlación $\left(g = f \otimes h\right)$, que básicamente es la suma ponderada de los píxeles de entrada, que se define como
+Como se explica en el libro de Robert Szeliski~\citeyearpar{Richard2011}, el filtro gaussiano, también llamado filtro de suavizado o de desenfoque, es una operación local en imágenes bidimensionales, pues se efectúa en vecindarios con un tamaño determinado en píxeles.
+El valor final de un píxel depende de los valores de los píxeles que pertenecen a su correspondiente vecindario y, como en todos los casos de filtros lineales, de una función de ponderación.
+Esta operación local viene a ser la de correlación $\left(\text{denotada, } g = f \otimes h\right)$, que básicamente es la suma ponderada de los píxeles de entrada, que se define como
 %
 \begin{equation}
     \label{eq:correlation}
@@ -198,8 +198,8 @@ La función de \texttt{\small OpenCV} también permite especificar un tamaño de
 \section*{Paso 2: Escalización y \emph{padding}}
 \addcontentsline{toc}{section}{Paso 2: Escalización y \emph{padding}}
 \label{sec:padding}
-Por supuesto, en la práctica, el filtrado requiere que se agreguen píxeles en los bordes de la imagen original, según el tamaño determinado de la ventana;
-a esto se le conoce como \emph{padding} y es una operación que realiza por defecto \texttt{\small OpenCV}, con la que es posible elegir el modo del \emph{padding}.
+En la práctica el filtrado requiere que se agreguen píxeles en los bordes de la imagen original, según el tamaño determinado de la ventana.
+A esto se le conoce como \emph{padding} y es una operación que realiza por defecto \texttt{\small OpenCV}, con la que es posible elegir el modo del \emph{padding}.
 Existen diferentes modos de \emph{padding}, de los cuales se describen los siguientes:
 %
 \begin{itemize}
@@ -227,7 +227,7 @@ En la siguiente figura se muestra el resultado de ambos modos de \emph{padding}.
         \includegraphics[width=\textwidth]{3_Reconocimiento/Figs/mirror_padding}
         \caption{\emph{mirror padding}}
     \end{subfigure}
-    \caption*{\footnotesize Tomado de~\citep{Richard2011}.}
+    \caption*{\footnotesize Imágenes tomadas de~\citep{Richard2011}.}
 \end{figure}
 
 El modo \emph{mirror} es utilizado para el filtro gaussiano y el \emph{zero} para adecuar la imagen antes del \hyperref[sec:segmentation]{paso 3} con el fin de completar el tamaño de $32 \times 32$ píxeles requerido para el \hyperref[sec:sift_descriptor]{paso 4}.
@@ -429,9 +429,9 @@ La normalización se efectúa empleando la norma $L_2$, como se muestra a contin
 \section*{Paso 5: Reducción de dimensionalidad por análisis de componentes principales (KPCA)}
 \addcontentsline{toc}{section}{Paso 5: Reducción de dimensionalidad por análisis de componentes principales (KPCA)}
 \label{sec:kpca_reduction}
-Una vez se obtienen los vectores de características de las muestras, conviene un proceso adicional para simplificar el análisis posterior de los datos, mejorar el desempeño en la clasificación, eliminar información redundante o incluso poder obtener representaciones gráficas de los vectores.
+Una vez se obtienen los vectores de características de las muestras, conviene realizar un proceso adicional para simplificar el análisis posterior de los datos, mejorar el desempeño en la clasificación, eliminar información redundante o incluso poder obtener representaciones gráficas de los vectores.
 Generalmente, los vectores de características resultan ser de grandes dimensiones, lo que provoca ciertas desventajas como que al aumentar las dimensiones de los vectores el volumen del espacio aumenta exponencialmente y los datos tienden a volverse dispersos, y esto afecta negativamente la clasificación, pues los datos se organizan en áreas correspondientes a grupos con características similares, y finalmente las estrategias comunes de clasificación no son eficaces.
-Ese efecto llamado "la maldición de la dimensión" puede ser abordado con diferentes métodos, entre estos la reducción de dimensionalidad tomando las componentes principales del grupo de datos usando el truco del \emph{kernel} (KPCA) originalmente propuesto por \citet{Scholkopf1997}.
+Ese efecto llamado ``la maldición de la dimensión'' puede ser abordado con diferentes métodos, entre estos la reducción de dimensionalidad tomando las componentes principales del grupo de datos usando el truco del \emph{kernel} (KPCA) originalmente propuesto por \citet{Scholkopf1997}.
 
 En principio se toma el método de análisis de componentes principales (PCA), en el que básicamente se hace una transformación euclidia al rotar y trasladar los ejes para alcanzar la mayor variabilidad descendentemente en todas las dimensiones.
 En la práctica, se trazan planos de modo que las distancias de los puntos a estos sean las mínimas posibles.
@@ -486,7 +486,7 @@ Ahora, para generar el producto interno de los vectores, se multiplica a ambos l
 %
 Recordando que $\vect{K}_j \defeq  \Phi\left(\vect{x}_i\cdot\Phi\left(\vect{x}_j\right)\right)$.
 
-Finalmente, expresando~\eqref{eq:kpca_internal_product} de forma vectorial y matricial se llega a que el problema de eigenvalores a resolver es:
+Finalmente, expresando~\eqref{eq:kpca_internal_product} de forma vectorial y matricial se llega a que el problema de autovalores a resolver es:
 %
 \begin{equation}
     \ell\,\lambda\,\boldsymbol{\alpha} = \vect{K}\,\boldsymbol{\alpha}.
@@ -648,7 +648,7 @@ Después, se eligen cuatro puntos clave que corresponden a los centros de cada c
 En esos puntos se calcula el descriptor SIFT, no sin previamente haber umbralizado la imagen redimensionada con el método de Otsu.
 De forma tal que queda un vector de características con $512$ valores para cada muestra.
 
-Una breve implementación de este procesamiento se presenta en el código~\ref{code:test_samples_code}, que posteriormente será usado en la aplicación desarrollada para automatizar la calibración de sonómetros.
+Una breve implementación de este procesamiento se presenta en el código del apéndice~\ref{code:test_samples_code}, que posteriormente será usado en la aplicación desarrollada para automatizar la calibración de sonómetros.
 
 En la siguiente figura se muestran los resultados de los pasos 1 al 3 del algoritmo~\ref{alg:image_recongnition} para una muestra de entrenamiento del número $5$.
 %
@@ -773,7 +773,7 @@ En la figura~\ref{fig:confusion_matrix_bad} se muestra la matriz de confusión p
     \caption{Matriz de confusión del clasificador bayesiano propuesto para el conjunto de imágenes tomadas en condiciones no controladas.}
     \label{fig:confusion_matrix_bad}
     \centering
-    \includegraphics[width=0.5\textwidth]{3_Reconocimiento/Figs/confusion_matrix_good}
+    \includegraphics[width=0.5\textwidth]{3_Reconocimiento/Figs/confusion_matrix_bad}
 \end{figure}
 %
 \begin{figure}[h!]

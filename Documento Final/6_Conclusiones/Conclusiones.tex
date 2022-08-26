@@ -4,16 +4,16 @@
 
 \chapter{Conclusiones y recomendaciones}
 \section{Conclusiones}
-En este trabajo se desarrollaron dos aplicaciones de \emph{software} diseñadas, una para realizar la calibración de calibradores
+En este trabajo se desarrollaron dos aplicaciones de \emph{software}: Una para realizar la calibración de calibradores
 acústicos, y otra para sonómetros, de conformidad con los lineamientos del Anexo B de la \mbox{IEC 60942}~\citeyearpar{IEC_TC29_2017}
-y de la \mbox{IEC 61672--3}~\citeyearpar{IEC_TC29_2013_3} respectivamente.
+y de la \mbox{IEC 61672--3}~\citeyearpar{IEC_TC29_2013_3}, respectivamente.
 Estas aplicaciones integran el control de los instrumentos de medición (patrones y auxiliares) que conforman el sistema de
 calibración junto con las secuencias predeterminadas.
 Particularmente, para sonómetros, también se integra el procesamiento de imágenes para el reconocimiento de los valores
 indicados en la pantalla del sonómetro y el modelamiento de la variabilidad de un resultado usando cadenas de Markov.
 
-Dados los resultados obtenidos, las aplicaciones desarrolladas son una utilidad que mejora significativamente los procesos
-de calibración de los laboratorios, ya que reducen el tiempo total de calibración en aproximadamente un $30\%$,
+Dados los resultados obtenidos, las aplicaciones desarrolladas mejoran significativamente los procesos
+de calibración de los laboratorios, reduciendo el tiempo total de calibración en aproximadamente un $30\%$,
 bajan la incertidumbre de medición (al incrementar los grados efectivos de libertad por el mayor número de muestras que
 pueden obtenerse respecto a un proceso manual) y aumentan la robustez del procedimiento (asegurando los resultados contra
 el error humano).
@@ -29,13 +29,13 @@ en la aplicación desarrollada.
 Utilizar estos comandos en las secuencias programadas hace innecesario que el usuario manipule directamente los controles
 físicos de los instrumentos.
 Esto contribuye al aseguramiento contra el error humano y aumenta la precisión de los parámetros de señal, ya que se pueden
-ajustar y obtener todos los dígitos disponibles en el instrumento, lo que no es posible con la interfaz física.
+ajustar y obtener todos los dígitos disponibles en el instrumento (lo que no es posible con la interfaz física).
 
 El método de reconocimiento de imágenes implementado para la calibración de sonómetros siguió la estructura clásica de
 adquisición (captura de fotogramas), preproceso (filtrado, \emph{padding} y escalamiento), segmentación
 (binarización Otsu), extracción de características (descriptor SIFT simplificado), y reconocimiento (clasificador
 bayesiano normal ingenuo).
-Este método diseñado es lo bastante sencillo, pero suficiente para el reconocimiento en tiempo real con una base de datos
+Este sencillo método es suficiente para el reconocimiento en tiempo real con una base de datos
 de entrenamiento relativamente pequeña y con el que se consiguen resultados confiables a un bajo costo computacional.
 
 Finalmente, el modelamiento de la variabilidad de un resultado empleando cadenas de Markov, considerándola como un proceso

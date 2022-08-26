@@ -47,6 +47,7 @@
 \usepackage{fancyvrb}
 \usepackage{rotating}
 \usepackage{gettitlestring}
+\usepackage{color}
 
 % Establece la fuente Ancizar Serif como la fuente principal
 \setmainfont[Ligatures = TeX, UprightFont = {* Regular}, BoldFont = {* Bold},
@@ -117,6 +118,7 @@
 \definecolor{blue_sky}{HTML}{D9F1FA}
 \definecolor{softOrange}{HTML}{FEF7DA}
 \definecolor{soft_red}{HTML}{FFD4DE}
+\definecolor{oliva_green}{HTML}{009900}
 
 \newenvironment{code}{\captionsetup{type=listing, labelfont=bf}\vspace{15pt}}{\vspace{-20pt}}
 % \DeclareFloatingEnvironment[fileext=frm,placement={!hbt},name=Code]{code}
@@ -167,17 +169,17 @@
 \begin{document}
 \pagenumbering{roman}
 \include{0_Portada/Portada}
-\cleardoublepage
+% \cleardoublepage
 \setlength{\jot}{10pt}  % Espacio interlineal por defecto en el entorno align
 \tableofcontents
 \addcontentsline{toc}{chapter}{Índice general}
-\cleardoublepage
+% \cleardoublepage
 \listoffigures  % Índice de figuras
 \addcontentsline{toc}{chapter}{Índice de figuras}  % Incluye la lista de figuras en el índice de contenido
-\cleardoublepage
+% \cleardoublepage
 \listoftables % Índice de tablas
 \addcontentsline{toc}{chapter}{Índice de cuadros} % Incluye la lista de tablas en el índice de contenido
-\cleardoublepage
+% \cleardoublepage
 \capstarttrue  % Inicia el caption de los flotantes
 \pagenumbering{arabic}
 \include{1_Intro/Intro}

@@ -753,7 +753,7 @@ class SoundLevelMeter(object):
                                      'Time Weightings 1 kHz': tw1kHz_df,
                                      'Linearity Reference Range': ref_linearity_df}
         for weighting in [*'ACZ']:
-            self._calibration_results['Electrical Frequency Weightings'].loc[weighting, 'LR_rel'] = np.zeros(9)
+            # self._calibration_results['Electrical Frequency Weightings'].loc[weighting, 'LR_rel'] = np.zeros(9)
             R = np.round(self._electrical_ff_corrections[['Mic [dB]', 'Case [dB]', 'Screen [dB]']].sum(axis=1), 2)
             self._calibration_results['Electrical Frequency Weightings'].loc[weighting, 'R'] = R.values
         self._calibration_results['Frequency Weightings 1 kHz'].loc[:] = np.zeros((3, 3))
@@ -825,11 +825,12 @@ class SoundLevelMeter(object):
         if L_1k != '':
             L = self._calibration_results['Electrical Frequency Weightings'].loc[weighting, 'L']
             L = L.replace('', np.nan, regex=True)
-            L_rel = L.mul(-1).radd(L_1k)
+            L_rel = L.radd(-L_1k)
             LR_rel = self._calibration_results['Electrical Frequency Weightings'].loc[weighting, 'R'].radd(L_rel)
-            LR_rel = LR_rel.replace(np.nan, '', regex=True)
-            self._calibration_results['Electrical Frequency Weightings'].loc[weighting, 'L_rel'] = L_rel
-            self._calibration_results['Electrical Frequency Weightings'].loc[weighting, 'LR_rel'] = LR_rel
+            LR_rel = LR_rel.apply(np.round, True, [1]).replace(np.nan, '', regex=True)
+            L_rel = L_rel.apply(np.round, True, [1]).replace(np.nan, '', regex=True)
+            self._calibration_results['Electrical Frequency Weightings'].loc[weighting, 'L_rel'] = np.array(L_rel)
+            self._calibration_results['Electrical Frequency Weightings'].loc[weighting, 'LR_rel'] = np.array(LR_rel)
 
     def set_ft_weightings_1kHz_result(self, is_freq: bool, result: float, substage: int) -> None:
         """
@@ -863,7 +864,7 @@ class SoundLevelMeter(object):
         self._calibration_results['Linearity Reference Range'].loc[levels[substage], 'L'] = result
         L_ref = self._calibration_results['Linearity Reference Range'].loc[self._lin_start_point, 'L']
         L_rel = L_ref - self._calibration_results['Linearity Reference Range']['L']
-        self._calibration_results['Linearity Reference Range']['L_rel'] = L_rel
+        self._calibration_results['Linearity Reference Range']['L_rel'] = np.array(L_rel.apply(np.round, True, [2]))
 
     # Get methods
     @property
@@ -1019,7 +1020,7 @@ class SLMPeriodicTester(QObject):
     calibrationProgress = pyqtSignal(int)  # Signal for updating the general calibration progress
     realTimeValues = pyqtSignal(tuple)  # Real time values reporting signal
     gainChanged = pyqtSignal(int)  # Sinal for indicating a manual change required on the attenuation of DecadeBox
-    timerStarted = pyqtSignal(bool)  # Signal for indicating the state of a timer related to the frames acquiring
+    timerStarted = pyqtSignal(int)  # Signal for indicating the state of a timer related to the frames acquiring
     loggingMsg = pyqtSignal(tuple)  # Signal for transmitting a logging message.
 
     __ldaModel = LinearDiscriminantAnalysis(n_components=10)  # «class attribute» LDA for dimensionality reduction
@@ -1065,7 +1066,7 @@ class SLMPeriodicTester(QObject):
         """
         This class method reads a set of training images of screen digits, segments them
         by binary Otsu threshold, extracts the features vectors based in SIFT descriptor,
-        reduces de dimensionality, and fits a Gaussian naive Bayes classifier.
+        reduces de dimensionality, and fits a Gaussian naive Bayes classifier
         :param path: Path to the training set of images
         :return: None
         """
@@ -1074,7 +1075,7 @@ class SLMPeriodicTester(QObject):
         y = []  # Classes of training samples
         measurement_progress = 0
         total_steps = len(os.listdir(path)) + 2
-        for img_name in os.listdir(path):  # Read every frames in training set
+        for img_name in os.listdir(path):  # Read every frame in training set
             if ".ini" in img_name:
                 continue
             img = cv.imread(path + "/" + img_name, cv.IMREAD_GRAYSCALE)  # Read frames
@@ -1185,9 +1186,10 @@ class SLMPeriodicTester(QObject):
         """
         while True:
             mutex.lock()
-            if self._calibration_state != 2:
+            if self._calibration_state == 1:
                 mutex.unlock()
                 break
+            self.timerStarted.emit(self._calibration_state)
             mutex.unlock()
             sleep(0.3)  # Check for changes in the calibration state every 0.3 seconds.
 
@@ -1360,7 +1362,7 @@ class SLMPeriodicTester(QObject):
             self._dut.calibration_results['Electrical Frequency Weightings'].iat[9 * (self._calibration_stage - 5) +
                                                                                  self._calibration_substage, 0] = v
             # Starts timer for video capturing
-            self.timerStarted.emit(True)
+            self.timerStarted.emit(1)
             total_time = 0
             # prev_time = time()
             afg_flag = False
@@ -1388,7 +1390,7 @@ class SLMPeriodicTester(QObject):
             #         logging.info(f':APPL:SIN {f},{v}')
             #         self._AFG.write(f':APPL:SIN {f},{v}')  # Send test signal of frequency and voltage required
             #         afg_flag = True
-            self.timerStarted.emit(False)
+            self.timerStarted.emit(0)
             self.loggingMsg.emit((0, f"Comando SCPI enviado vía GPIB: 'OUTP 0'."))
             self._AFG.write('OUTP 0')
             self._calibration_substage += 1
@@ -1418,7 +1420,7 @@ class SLMPeriodicTester(QObject):
                 self._dut.calibration_results['Time Weightings 1 kHz'].loc['F', 'V'] = v
         else:
             self._dut.calibration_results['Time Weightings 1 kHz'].loc[T[self._calibration_substage - 3], 'V'] = v
-        self.timerStarted.emit(True)
+        self.timerStarted.emit(1)
         total_time = 0
         afg_flag = False
         for t in range(1, measuring_time * 10 + 1):
@@ -1431,7 +1433,7 @@ class SLMPeriodicTester(QObject):
                 self.loggingMsg.emit((0, f"Comando SCPI enviado vía GPIB: ':APPL:SIN 1000,{v}'."))
                 self._AFG.write(f':APPL:SIN 1000,{v}')  # Send test signal of frequency and voltage required
                 afg_flag = True
-        self.timerStarted.emit(False)
+        self.timerStarted.emit(0)
         self.loggingMsg.emit((0, f"Comando SCPI enviado vía GPIB: 'OUTP 0'."))
         self._AFG.write('OUTP 0')
         self.measurementProgress.emit(0)
@@ -1471,7 +1473,7 @@ class SLMPeriodicTester(QObject):
                 self.set_state(2)
                 self.check_state()
             # Starts timer for video capturing
-            self.timerStarted.emit(True)
+            self.timerStarted.emit(1)
             total_time = 0
             afg_flag = False
             for t in range(1, measuring_time * 10 + 1):
@@ -1484,7 +1486,7 @@ class SLMPeriodicTester(QObject):
                     self.loggingMsg.emit((0, f"Comando SCPI enviado vía GPIB: ':APPL:SIN 8000,{v}'."))
                     self._AFG.write(f':APPL:SIN 8000,{v}')  # Send test signal of frequency and voltage required
                     afg_flag = True
-            self.timerStarted.emit(False)
+            self.timerStarted.emit(0)
             self._calibration_substage += 1
             sleep(1)
         self.loggingMsg.emit((0, f"Comando SCPI enviado vía GPIB: 'OUTP 0'."))

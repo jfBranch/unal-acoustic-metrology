@@ -1946,8 +1946,8 @@ class GUIController(object):
         self._gui.videoPixmap.setPixmap(qpixmap)  # Updates the QPixmap item with the new frame
         self._gui.videoView.centerOn(self._gui.videoPixmap)  # Force centering on the View
 
-    def capture_frames(self, timer_started: bool) -> None:
-        if timer_started:
+    def capture_frames(self, timer_started: int) -> None:
+        if timer_started == 1:
             mutex.lock()
             roi_top_left = self._gui.roi.rect().topLeft()
             roi_top_left_mapped = self._gui.roi.mapToItem(self._gui.videoPixmap, roi_top_left)
@@ -1958,11 +1958,13 @@ class GUIController(object):
             self.x2 = int(roi_bottom_right_mapped.x())
             self.y2 = int(roi_bottom_right_mapped.y())
             self.frames = []
-            self.timer_started = timer_started
+            self.timer_started = True
             mutex.unlock()
-        elif not timer_started:
+        elif timer_started == 2:
+            self.timer_started = False
+        elif timer_started == 0:
             mutex.lock()
-            self.timer_started = timer_started
+            self.timer_started = False
             mutex.unlock()
             self.print_logging_msg((0, f'Añadiendo {len(self.frames)} cuadros de vídeo a la cola.'))
             self.frames_queue.put(self.frames)
@@ -2213,12 +2215,14 @@ class GUIController(object):
         """
         stage = data[1]
         substage = data[2]
-        model = PandasTableModel(data[0])
         if stage == 5:  # Electric A frequency weighting test
+            model = PandasTableModel(data[0].loc['A'])
             self._gui.aWTableView.setModel(model)
         elif stage == 6:  # Electric C frequency weighting test
+            model = PandasTableModel(data[0].loc['C'])
             self._gui.cWTableView.setModel(model)
         elif stage == 7:  # Electric Z frequency weighting test
+            model = PandasTableModel(data[0].loc['Z'])
             self._gui.zWTableView.setModel(model)
         elif stage == 8:  # Time and frequency weightings at 1 kHz
             if substage == 0:  # LAF
@@ -2236,6 +2240,7 @@ class GUIController(object):
                 self._gui.slowWLevLabel.setText(str(round(data[0].at[['F', 'S', 'eq'][substage - 3], 'L'], 2)))
                 self._gui.slowWRLevLabel.setText(str(round(data[0].at[['F', 'S', 'eq'][substage - 3], 'L_rel'], 2)))
         elif stage == 9:  # Level linearity on the reference level range
+            model = PandasTableModel(data[0])
             self._gui.linearityTableView.setModel(model)
 
     @staticmethod
@@ -2605,24 +2610,20 @@ class ImageProcessingThread(QtCore.QThread):
                 stab_frames = frames[:self._TESTER.elect_stab_time * self.fps, :, :]  # Samples until stabilization
                 self.loggingMsg.emit((0, 'Inicia reconocimiento de cuadros de vídeo del tiempo de estabilización.'))
                 stab_frames = np.array([self._TESTER.read_screen(frame, True) for frame in stab_frames])
+                stab_frames[np.isnan(stab_frames)] = False
                 changed_value_idx = np.where(stab_frames != stab_frames[0])[0][0]  # Frame 0 (first change identified)
                 frames_down_sampled = frames[changed_value_idx:]  # From frame 0 onwards
-                frames_down_sampled = frames_down_sampled[np.arange(0,  # Downsampling video signal
+                frames_down_sampled = frames_down_sampled[np.arange(2,  # Downsampling video signal
                                                                     frames_down_sampled.shape[0],
-                                                                    self.fps // self._TESTER.dut.screen_rate + 4,
+                                                                    self.fps // self._TESTER.dut.screen_rate,
                                                                     dtype=int), :, :]
-                stab_frame = int((self._TESTER.elect_stab_time - changed_value_idx / self.fps)
-                                 * self._TESTER.dut.screen_rate)  # Frame in which the stabilization time has finished
-                frames_down_sampled = frames_down_sampled[stab_frame:, :, :]  # Crops the stabilization time
+                stab_frame_idx = int((self._TESTER.elect_stab_time - (changed_value_idx - 1) / self.fps)
+                                     * self._TESTER.dut.screen_rate)  # Frame in which stabilization time has finished
+                frames_down_sampled = frames_down_sampled[stab_frame_idx:, :, :]  # Crops the stabilization time
                 self.loggingMsg.emit((0, 'Inicia reconocimiento de cuadros de vídeo de la medición.'))
                 samples = np.array([self._TESTER.read_screen(frame, False) for frame in frames_down_sampled])
                 del frames_down_sampled
-                P = self.build_transition_matrix(samples)  # Construction of the states transition matrix
-                PI = self.limit_dist(P)  # Calculates the limit distribution
-                # Complete missing samples using the characterized probabilities
-                samples[0] = P.index[PI.argmax()] if np.isnan(samples[0]) else samples[0]  # If initial state is missing
-                for i in np.where(np.isnan(samples))[0]:  # Filling based on the previous state and the Markov model
-                    samples[i] = P.index[P.loc[samples[i - 1]].argmax()]
+                samples = samples[~np.isnan(samples)]  # Drop of nans
                 P = self.build_transition_matrix(samples)  # Reconstruction of the states transition matrix
                 PI = self.limit_dist(P)  # Recalculates the limit distribution
                 expected_value = np.round(np.sum(np.array(P.index) * PI.T), 1)
